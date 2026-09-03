@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard Zona Limpia — COM</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f1f3f6;color:#111;font-size:14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fin{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.spin{animation:spin .7s linear infinite;display:inline-block}
+.fin{animation:fin .2s ease both}
+a.back-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#94a3b8;text-decoration:none;padding:8px 12px 0}
+a.back-link:hover{color:#475569}
+
+/* ── CONEXIÓN ── */
+#cscreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%)}
+.c-card{background:#fff;border-radius:20px;padding:2.5rem 2rem;max-width:460px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.2);text-align:center}
+.c-logo{width:44px;height:44px;border-radius:12px;background:#15803d;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:20px}
+.c-h1{font-size:20px;font-weight:700;margin-bottom:.4rem;color:#0f172a}
+.c-h2{font-size:13px;color:#64748b;line-height:1.6;margin-bottom:1.25rem}
+.c-status{font-size:12px;color:#64748b;min-height:20px}
+.c-status.err{color:#dc2626;font-weight:600}
+.c-retry{margin-top:1rem;height:36px;padding:0 18px;border-radius:8px;border:none;background:#0f172a;color:#fff;font-size:12px;font-weight:700;cursor:pointer;display:none}
+
+#dscreen{display:none;min-height:100vh;flex-direction:column;background:#f1f3f6}
+.topbar{background:#0f172a;display:flex;align-items:center;justify-content:space-between;padding:.65rem 1.25rem;flex-wrap:wrap;gap:.5rem;position:sticky;top:0;z-index:200}
+.brand{display:flex;align-items:center;gap:9px}
+.brand-ico{width:28px;height:28px;border-radius:7px;background:#15803d;display:flex;align-items:center;justify-content:center;font-size:14px}
+.brand-name{font-size:13px;font-weight:700;color:#fff}
+.brand-file{font-size:10px;color:#64748b;margin-top:1px}
+.nav{display:flex;gap:2px;background:#1e293b;border-radius:8px;padding:3px;flex-wrap:wrap}
+.ntab{height:27px;padding:0 13px;font-size:12px;font-weight:600;border-radius:6px;border:none;background:transparent;color:#64748b;cursor:pointer;white-space:nowrap;transition:all .12s}
+.ntab:hover{color:#fff}
+.ntab.on{background:#fff;color:#0f172a}
+.btn-nw{height:27px;padding:0 10px;font-size:11px;border-radius:6px;border:1px solid #334155;background:transparent;color:#94a3b8;cursor:pointer}
+.btn-nw:hover{background:#1e293b;color:#fff}
+.fbar{background:#fff;border-bottom:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:.55rem 1.25rem}
+.fbar-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8}
+.fbar select,.fbar input[type=date]{height:30px;font-size:12px;padding:0 8px;border-radius:7px;border:1px solid #e2e8f0;background:#f8fafc;color:#0f172a}
+.fbar select{min-width:118px}
+.fbar-sep{width:1px;height:18px;background:#e2e8f0}
+.btn-filt{height:30px;padding:0 12px;font-size:12px;font-weight:700;border-radius:7px;border:none;background:#0f172a;color:#fff;cursor:pointer}
+.btn-filt:hover{background:#1e293b}
+.btn-rst{height:30px;width:30px;border-radius:7px;border:1px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:13px;color:#64748b}
+.btn-rst:hover{background:#f1f5f9}
+.view{display:none}.view.on{display:block;animation:fin .2s ease both}
+.vbody{padding:1rem 1.25rem}
+.krow{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px;margin-bottom:1.25rem}
+.kpi{background:#fff;border-radius:10px;padding:.8rem 1rem;border:1px solid #e2e8f0}
+.kl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;margin-bottom:.35rem}
+.kv{font-size:24px;font-weight:700;color:#0f172a;line-height:1}
+.ks{font-size:11px;color:#94a3b8;margin-top:.2rem}
+.kpi.g .kv{color:#16a34a}.kpi.r .kv{color:#dc2626}.kpi.b .kv{color:#0ea5e9}.kpi.p .kv{color:#7c3aed}.kpi.o .kv{color:#d97706}
+.legrow{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:1rem;align-items:center}
+.leg{display:flex;align-items:center;gap:5px;font-size:12px;color:#475569;font-weight:500}
+.ldot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.lsep{width:1px;height:14px;background:#e2e8f0}
+.chart-card{background:#fff;border-radius:12px;border:1px solid #e2e8f0;padding:1rem;margin-bottom:1rem}
+.chart-title{font-size:12px;font-weight:700;color:#475569;margin-bottom:.875rem;display:flex;align-items:center;justify-content:space-between}
+.chart-title span{font-size:11px;font-weight:400;color:#94a3b8}
+.drow{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.dlbl{font-size:11px;color:#64748b;min-width:64px;flex-shrink:0;white-space:nowrap}
+.dbar{flex:1;height:20px;border-radius:5px;overflow:hidden;display:flex;gap:1px;background:#f1f5f9;cursor:pointer;transition:opacity .12s}
+.dbar:hover{opacity:.82}
+.ds{height:100%}
+.dtot{font-size:11px;color:#94a3b8;min-width:38px;text-align:right;flex-shrink:0}
+.dpct{font-size:10px;color:#dc2626;min-width:36px;text-align:right;flex-shrink:0;font-weight:700}
+.mun-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:1rem}
+.mun-card{background:#fff;border-radius:12px;border:1px solid #e2e8f0;overflow:hidden;cursor:pointer;transition:all .15s}
+.mun-card:hover{border-color:#0ea5e9;box-shadow:0 2px 12px rgba(14,165,233,.12)}
+.mun-card.selected{border-color:#0ea5e9;box-shadow:0 0 0 2px #bae6fd}
+.mun-head{padding:.75rem 1rem;display:flex;align-items:center;justify-content:space-between}
+.mun-name{font-size:15px;font-weight:700}
+.mun-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:5px;background:#f1f5f9;color:#64748b}
+.mun-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #f1f5f9}
+.mun-stat{padding:.6rem .75rem;text-align:center}
+.mun-stat:not(:last-child){border-right:1px solid #f1f5f9}
+.mun-stat-v{font-size:15px;font-weight:700}
+.mun-stat-l{font-size:10px;color:#94a3b8;margin-top:2px;text-transform:uppercase;letter-spacing:.04em}
+.mun-bar{height:5px;background:#f1f5f9;display:flex;gap:1px}
+.mb{height:100%}
+.drill-card{background:#fff;border-radius:12px;border:1px solid #e2e8f0;overflow:hidden;margin-bottom:1rem}
+.drill-head{padding:.625rem 1rem;background:#f8fafc;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between}
+.drill-title{font-size:12px;font-weight:700;color:#475569}
+.btn-back{height:26px;padding:0 10px;font-size:11px;font-weight:600;border-radius:6px;border:1px solid #e2e8f0;background:#fff;color:#64748b;cursor:pointer}
+.btn-back:hover{background:#f1f5f9}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#94a3b8;padding:6px 10px;border-bottom:1px solid #f1f5f9;background:#fafafa;text-align:left;white-space:nowrap}
+td{padding:7px 10px;border-bottom:1px solid #f8f8f8;font-size:12px;color:#0f172a;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr.trow:hover td{background:#f8fafc}
+tr.cr{cursor:pointer}
+.mini-bar{height:6px;border-radius:3px;overflow:hidden;display:flex;gap:1px;min-width:70px;background:#f1f5f9}
+.emp-grid{display:flex;flex-direction:column;gap:8px}
+.emp-card{background:#fff;border-radius:12px;border:1px solid #e2e8f0;overflow:hidden}
+.emp-head{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;cursor:pointer}
+.emp-head:hover{background:#fafafa}
+.emp-hl{display:flex;align-items:center;gap:9px}
+.emp-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;color:#fff}
+.emp-nm{font-size:13px;font-weight:700}
+.emp-mt{font-size:11px;color:#94a3b8;margin-top:1px}
+.emp-hr{display:flex;align-items:center;gap:12px}
+.emp-sv{font-size:14px;font-weight:700}.emp-sl{font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em}
+.emp-chev{font-size:13px;color:#cbd5e1;transition:transform .2s;display:inline-block}
+.emp-chev.open{transform:rotate(180deg)}
+.emp-body{display:none;border-top:1px solid #f1f5f9}
+.emp-body.open{display:block}
+.ttabs{display:flex;border-bottom:1px solid #f1f5f9}
+.ttab{flex:1;padding:.45rem 0;text-align:center;font-size:11px;font-weight:600;color:#94a3b8;cursor:pointer;border-bottom:2px solid transparent}
+.ttab:hover{color:#0ea5e9}
+.ttab.on{color:#0ea5e9;border-bottom-color:#0ea5e9}
+.tc{display:none;padding:.875rem 1rem}.tc.on{display:block}
+.tstats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:.875rem}
+.tstat{background:#f8fafc;border-radius:8px;padding:.55rem .75rem;border:1px solid #f1f5f9}
+.tsl{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2rem}
+.tsv{font-size:17px;font-weight:700;color:#0f172a}
+.tss{font-size:10px;color:#94a3b8;margin-top:.15rem}
+.sbar{height:9px;border-radius:5px;overflow:hidden;display:flex;gap:1px;background:#f1f5f9;margin:.5rem 0 .3rem}
+.sb{height:100%}
+.sbleg{display:flex;flex-wrap:wrap;gap:8px}
+.sbli{display:flex;align-items:center;gap:4px;font-size:11px;color:#475569}
+.tt{position:fixed;background:#0f172a;color:#fff;font-size:11px;padding:7px 11px;border-radius:8px;pointer-events:none;z-index:9999;display:none;line-height:1.6;max-width:220px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+
+/* ── COBERTURA (KPIs 5 col + tabla + drill) ── */
+.kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:1rem}
+.tcard{background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden}
+.tchead{display:flex;align-items:center;justify-content:space-between;padding:.55rem .875rem;background:#f8fafc;border-bottom:1px solid #e2e8f0}
+.tchead-l{font-size:12px;font-weight:700;color:#475569}
+.tchead-r{font-size:11px;color:#94a3b8}
+.ei{font-size:12px;color:#cbd5e1;transition:transform .2s;display:inline-block}
+.ei.open{transform:rotate(180deg)}
+.bst{height:7px;border-radius:4px;overflow:hidden;display:flex;gap:1px;flex:1;min-width:50px;background:#f0f2f5}
+.bs{height:100%}
+.pv{font-size:11px;color:#94a3b8;min-width:32px;text-align:right;flex-shrink:0}
+.chip{display:inline-flex;font-size:10px;padding:2px 8px;border-radius:999px;background:#f0f2f5;color:#666;font-weight:600}
+.detr{display:none}.detr.open{display:table-row}
+.detc{padding:0!important;background:#f8fafc!important}
+.deti{padding:.875rem}
+.cs-hd{display:flex;align-items:center;gap:6px;margin-bottom:.45rem}
+.cs-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.cs-ct{font-size:11px;color:#94a3b8}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(162px,1fr));gap:4px;margin-bottom:.75rem}
+.cgrid:last-child{margin-bottom:0}
+.ci{display:flex;align-items:center;justify-content:space-between;padding:6px 9px;border-radius:7px;background:#fff;border:1px solid #e8eaed}
+.ci.hot{border-color:#f59e0b;background:#fffbeb}
+.cn{font-size:13px;font-weight:700;color:#111}
+.ca{font-size:10px;color:#94a3b8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:82px;margin-top:1px}
+.vb{font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;flex-shrink:0}
+.v0{background:#fef2f2;color:#991b1b}.v1{background:#eff6ff;color:#1e40af}.v2{background:#f0fdf4;color:#166534}.v3{background:#fffbeb;color:#92400e}
+.rb{font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;background:#fef3c7;color:#92400e;margin-left:3px;flex-shrink:0}
+.rec-leg{display:flex;align-items:center;gap:5px;font-size:12px;color:#92400e;font-weight:600}
+.rec-dot{width:14px;height:14px;border-radius:50%;border:3px solid #d97706;flex-shrink:0}
+
+/* ── MAPA ── */
+.btn-map{height:34px;padding:0 16px;font-size:12px;font-weight:700;border-radius:8px;border:none;background:#15803d;color:#fff;cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:1rem}
+.btn-map:hover{background:#166534}
+.mapwrap{display:none;background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.mapwrap.on{display:block}
+.mctrl{background:#f8fafc;border-bottom:1px solid #e2e8f0;display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:.6rem .875rem}
+.modesw{display:flex;gap:2px;background:#e2e8f0;border-radius:7px;padding:2px}
+.modebtn{height:26px;padding:0 11px;font-size:11px;font-weight:700;border-radius:5px;border:none;background:transparent;color:#64748b;cursor:pointer}
+.modebtn.on{background:#fff;color:#0f172a;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.minfo{font-size:11px;color:#94a3b8;margin-left:auto}
+#mel{width:100%;height:560px}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">
+  <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  Centro Operativo
+</a>
+
+<!-- ── CONEXIÓN ── -->
+<div id="cscreen">
+  <div class="c-card">
+    <div class="c-logo">♻️</div>
+    <div class="c-h1">Dashboard Zona Limpia</div>
+    <div class="c-h2">Descargando las bases de Zona Limpia y Reclamos desde GitHub…</div>
+    <div class="c-status" id="c-status"><span class="spin">⏳</span> Conectando…</div>
+    <button class="c-retry" id="c-retry" onclick="initAll()">Reintentar</button>
+  </div>
+</div>
+
+<!-- ── DASHBOARD ── -->
+<div id="dscreen">
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-ico">♻️</div>
+      <div>
+        <div class="brand-name">COM · Zona Limpia</div>
+        <div class="brand-file" id="bfile">—</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="nav">
+        <button class="ntab on" id="nt-res" onclick="swTab('res')">Resumen</button>
+        <button class="ntab" id="nt-mun" onclick="swTab('mun')">Municipios</button>
+        <button class="ntab" id="nt-tra" onclick="swTab('tra')">Transportistas</button>
+        <button class="ntab" id="nt-cov" onclick="swTab('cov')">Análisis de cobertura</button>
+      </div>
+      <button class="btn-nw" onclick="initAll()">↻ Actualizar</button>
+    </div>
+  </div>
+
+  <div class="fbar">
+    <span class="fbar-lbl">Municipio</span>
+    <select id="f-mun"><option value="">Todos</option></select>
+    <span class="fbar-lbl">Circuito</span>
+    <select id="f-circ"><option value="">Todos</option></select>
+    <div class="fbar-sep"></div>
+    <span class="fbar-lbl">Desde</span><input type="date" id="f-d1">
+    <span class="fbar-lbl">Hasta</span><input type="date" id="f-d2">
+    <div class="fbar-sep"></div>
+    <span class="fbar-lbl">Empresa</span>
+    <select id="f-emp"><option value="">Todas</option></select>
+    <div class="fbar-sep"></div>
+    <span class="fbar-lbl">Turno</span>
+    <select id="f-turno"><option value="">Todos</option><option value="Matutino">Matutino</option><option value="Vespertino">Vespertino</option><option value="Nocturno">Nocturno</option></select>
+    <button class="btn-filt" onclick="applyF()">Filtrar</button>
+    <button class="btn-rst" onclick="resetF()">↻</button>
+  </div>
+
+  <!-- RESUMEN -->
+  <div class="view on" id="v-res">
+    <div class="vbody">
+      <div class="krow" id="kpis-res"></div>
+      <div class="legrow">
+        <div class="leg"><div class="ldot" style="background:#16a34a"></div>Intervino (limpió)</div>
+        <div class="leg"><div class="ldot" style="background:#0ea5e9"></div>Ya estaba limpio</div>
+        <div class="leg"><div class="ldot" style="background:#dc2626"></div>No pudo / No encontró</div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Actividad diaria <span>% "no pudo" al costado · hover para detalle</span></div>
+        <div id="daily-chart"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="chart-card"><div class="chart-title">Por municipio</div><div id="mun-chart"></div></div>
+        <div class="chart-card"><div class="chart-title">Por empresa</div><div id="emp-chart"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MUNICIPIOS -->
+  <div class="view" id="v-mun">
+    <div class="vbody">
+      <div class="krow" id="kpis-mun"></div>
+      <div class="legrow">
+        <div class="leg"><div class="ldot" style="background:#16a34a"></div>Intervino</div>
+        <div class="leg"><div class="ldot" style="background:#0ea5e9"></div>Ya limpio</div>
+        <div class="leg"><div class="ldot" style="background:#dc2626"></div>No pudo/encontró</div>
+        <div style="margin-left:auto;font-size:11px;color:#94a3b8">Clic en municipio para ver circuitos</div>
+      </div>
+      <div class="mun-grid" id="mun-grid"></div>
+      <div id="drill-area"></div>
+    </div>
+  </div>
+
+  <!-- TRANSPORTISTAS -->
+  <div class="view" id="v-tra">
+    <div class="vbody">
+      <div class="krow" id="kpis-tra"></div>
+      <div class="legrow">
+        <div class="leg"><div class="ldot" style="background:#16a34a"></div>Intervino</div>
+        <div class="leg"><div class="ldot" style="background:#0ea5e9"></div>Ya limpio</div>
+        <div class="leg"><div class="ldot" style="background:#dc2626"></div>No pudo/encontró</div>
+      </div>
+      <div class="emp-grid" id="emp-grid"></div>
+    </div>
+  </div>
+
+  <!-- ANÁLISIS DE COBERTURA -->
+  <div class="view" id="v-cov">
+    <div class="vbody">
+      <div class="krow" id="kpis-cov"></div>
+      <div class="legrow" id="legend-cov">
+        <div class="leg"><div class="ldot" style="background:#E24B4A"></div>Sin visitas</div>
+        <div class="leg"><div class="ldot" style="background:#378ADD"></div>1 visita</div>
+        <div class="leg"><div class="ldot" style="background:#16a34a"></div>2 visitas</div>
+        <div class="leg"><div class="ldot" style="background:#d97706"></div>3 o más</div>
+      </div>
+      <div class="tcard" style="margin-bottom:1rem">
+        <div class="tchead">
+          <div class="tchead-l">Circuitos</div>
+          <div class="tchead-r" id="cct"></div>
+        </div>
+        <div id="tw-cov"></div>
+      </div>
+      <button class="btn-map" id="btn-vermapa" onclick="toggleMapa()">🗺️ Ver mapa de cobertura</button>
+      <div class="mapwrap" id="mapwrap">
+        <div class="mctrl">
+          <div class="modesw">
+            <button class="modebtn on" id="mm-cobertura" onclick="setMapMode('cobertura')">Cobertura</button>
+            <button class="modebtn" id="mm-estado" onclick="setMapMode('estado')">Estado de última vez</button>
+          </div>
+          <div id="map-legend-dyn" style="display:flex;gap:10px;flex-wrap:wrap"></div>
+          <div class="minfo" id="minfo"></div>
+        </div>
+        <div id="mel"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tt" id="tt"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   CONEXIÓN — CSV alojado en el repositorio de GitHub
+   ══════════════════════════════════════════════════════════════════════
+   Las bases se suben como archivo directo al repo (Add file → Upload
+   files), SIEMPRE con este mismo nombre — así el link nunca cambia y
+   subir de nuevo simplemente reemplaza al anterior:
+     - data/zona-limpia.csv
+     - data/reclamos.csv
+   Antes de subir el CSV exportado, renombralo exactamente así.
+   Sin límite de días: se lee la base completa que hayas subido, tal
+   como funcionaba con la carga manual — acá no hay motor de consultas
+   de por medio, es solo bajar un archivo.
+*/
+const CSV_ZL  = 'https://raw.githubusercontent.com/COM-Centro-Operativo-de-Montevideo/COM/main/data/zona-limpia.csv';
+const CSV_REC = 'https://raw.githubusercontent.com/COM-Centro-Operativo-de-Montevideo/COM/main/data/reclamos.csv';
+
+function fetchCSV(url){
+  // Cache-buster: evita que el CDN de GitHub sirva una copia vieja cacheada
+  const bust=url+(url.includes('?')?'&':'?')+'v='+Date.now();
+  return fetch(bust).then(r=>{
+    if(!r.ok) throw new Error(`No se pudo descargar ${url.split('/').pop()} (HTTP ${r.status}). ¿Está subido con ese nombre exacto?`);
+    return r.text();
+  }).then(text=>new Promise((resolve,reject)=>{
+    Papa.parse(text,{header:true,skipEmptyLines:true,
+      complete:res=>resolve(res.data),
+      error:err=>reject(err)});
+  }));
+}
+function getCol(r,n){const k=Object.keys(r).find(k=>k.toLowerCase()===n.toLowerCase());return k?r[k]:undefined;}
+
+/* ══════════════════════════════════════════════════════════════════════
+   MODELO DE DATOS
+   ══════════════════════════════════════════════════════════════════════ */
+const CC={intervino:'#16a34a',limpio:'#0ea5e9',no_fue:'#dc2626'};
+const CC_GRIS='#94a3b8';
+const CL={intervino:'Intervino',limpio:'Ya limpio',no_fue:'No pudo/encontró'};
+const ECOLS={DG:'#6366f1',ROSADO:'#ec4899',TAYM:'#f59e0b','VOS CON VOZ':'#14b8a6','SALIR ADELANTE':'#8b5cf6',TESSA:'#64748b',EQUIPO:'#06b6d4'};
+const ELST=['DG','ROSADO','VOS CON VOZ','SALIR ADELANTE','TAYM','TESSA','EQUIPO'];
+const TORD=['Matutino','Vespertino','Nocturno'];
+const COLS_COB=['#E24B4A','#378ADD','#16a34a','#d97706'];
+const LBLS_COB=['Sin visitas','1 visita','2 visitas','3 o más'];
+const VBS=['v0','v1','v2','v3'];
+function bi(n){return n===0?0:n===1?1:n===2?2:3}
+
+let PARSED=[],RAW=[],FILT=[],ALL2=[],FILT2=[],UNI={},REC={},hasRec=false;
+let curTab='res',selMun=null,mapMode='cobertura',mapaAbierto=false;
+let mapCov=null,mlayerCov=null;
+
+function getEmp(t){const u=(t||'').toUpperCase();for(const e of ELST)if(u.includes(e))return e;return null;}
+function getTurno(emp,h){
+  if(emp==='DG'){if(h>=4&&h<12)return'Matutino';if(h>=12.5&&h<20)return'Vespertino';if(h>=20.5||h<3.5)return'Nocturno';return null;}
+  if(h>=3.5&&h<11.5)return'Matutino';if(h>=11.5&&h<20)return'Vespertino';return null;
+}
+function classify(inc){
+  if(inc.includes('limpio')&&inc.includes('no intervenido'))return'limpio';
+  if(inc.includes('no se encuentra')||inc.includes('no se pudo'))return'no_fue';
+  return'intervino';
+}
+
+function buildRows(objs){
+  return objs.map(r=>{
+    const fd=getCol(r,'fecha_de_reclamo')||''; if(!fd) return null;
+    const inc=(getCol(r,'incidente')||'').toString().toLowerCase();
+    const noVisitado=inc.includes('no visitado');
+    const fr=getCol(r,'fecha_resuelto')||'';
+    const circ=(getCol(r,'circuito')||'').toString().trim();
+    const mun=circ?circ.replace(/[^A-Za-z]/g,''):(getCol(r,'municipio')||'').toString().trim();
+    const trans=(getCol(r,'transportista')||'').toString().trim();
+    const emp=getEmp(trans);
+    const hora=fr?(new Date(fr).getHours()+(new Date(fr).getMinutes()/60)):null;
+    const turno=(emp&&hora!=null)?getTurno(emp,hora):null;
+    const cont=(getCol(r,'contenedor')||'').toString().trim();
+    return{
+      mun:mun||'?',circ,fecha:String(fd).slice(0,10),
+      noVisitado,cat:noVisitado?null:classify(inc),
+      trans,emp:emp||'Motocarro',turno,
+      cont,dir:(getCol(r,'dirección')||'').toString(),
+      lat:parseFloat(getCol(r,'latitud')),lng:parseFloat(getCol(r,'longitud')),
+      esVisita:!!fr
+    };
+  }).filter(Boolean);
+}
+
+function buildUni(rows){
+  const uni={};
+  rows.forEach(r=>{
+    if(!uni[r.circ])uni[r.circ]={mun:r.mun,conts:{}};
+    if(!uni[r.circ].conts[r.cont])uni[r.circ].conts[r.cont]={lat:0,lng:0,dir:''};
+    const c=uni[r.circ].conts[r.cont];
+    if(!c.lat&&r.lat){c.lat=r.lat;c.lng=r.lng;c.dir=r.dir;}
+  });
+  return uni;
+}
+
+function buildREC(objs){
+  const rec={};
+  objs.forEach(r=>{
+    const circ=(getCol(r,'circuito')||'').toString().trim();
+    const cont=(getCol(r,'contenedor')||'').toString().trim();
+    if(!circ||!cont||cont==='nan')return;
+    if(!rec[circ])rec[circ]={};
+    rec[circ][cont]=(rec[circ][cont]||0)+1;
+  });
+  return rec;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   CARGA INICIAL
+   ══════════════════════════════════════════════════════════════════════ */
+async function initAll(){
+  const st=document.getElementById('c-status');
+  const retry=document.getElementById('c-retry');
+  retry.style.display='none';
+  st.className='c-status'; st.innerHTML='<span class="spin">⏳</span> Descargando las bases desde GitHub…';
+  document.getElementById('cscreen').style.display='flex';
+  document.getElementById('dscreen').style.display='none';
+  try{
+    const[objsZL,objsREC]=await Promise.all([fetchCSV(CSV_ZL),fetchCSV(CSV_REC)]);
+    PARSED=buildRows(objsZL);
+    RAW=PARSED.filter(r=>!r.noVisitado);
+    ALL2=PARSED.filter(r=>r.circ&&r.cont);
+    UNI=buildUni(ALL2);
+    REC=buildREC(objsREC);
+    hasRec=Object.keys(REC).length>0;
+    initFilters();
+    FILT=[...RAW];FILT2=[...ALL2];selMun=null;
+    document.getElementById('bfile').textContent=`GitHub · ${PARSED.length.toLocaleString('es-UY')} filas · actualizado ${hhmm()}`;
+    document.getElementById('cscreen').style.display='none';
+    document.getElementById('dscreen').style.display='flex';
+    render();rCov();
+  }catch(err){
+    st.className='c-status err'; st.textContent='✗ Error: '+err.message;
+    retry.style.display='inline-block';
+  }
+}
+function hhmm(){const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+
+function initFilters(){
+  const muns=[...new Set(RAW.map(r=>r.mun))].sort();
+  const sm=document.getElementById('f-mun');
+  sm.innerHTML='<option value="">Todos</option>';
+  muns.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent='Municipio '+m;sm.appendChild(o)});
+  sm.onchange=()=>{updCirc();autoF();};
+  updCirc();
+  const emps=[...new Set(RAW.map(r=>r.emp).filter(e=>e!=='Motocarro'))].sort();
+  const se=document.getElementById('f-emp');
+  se.innerHTML='<option value="">Todas</option>';
+  emps.forEach(e=>{const o=document.createElement('option');o.value=e;o.textContent=e;se.appendChild(o)});
+  ['f-circ','f-d1','f-d2','f-emp','f-turno'].forEach(id=>{document.getElementById(id).onchange=autoF;});
+  const dates=RAW.map(r=>r.fecha).sort();
+  if(dates.length){document.getElementById('f-d1').value=dates[0];document.getElementById('f-d2').value=dates[dates.length-1];}
+}
+function updCirc(){
+  const mun=document.getElementById('f-mun').value;
+  const circs=[...new Set(RAW.filter(r=>!mun||r.mun===mun).map(r=>r.circ))].sort();
+  const sel=document.getElementById('f-circ');
+  sel.innerHTML='<option value="">Todos</option>';
+  circs.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o)});
+}
+
+function gf(){return{mun:document.getElementById('f-mun').value,circ:document.getElementById('f-circ').value,d1:document.getElementById('f-d1').value,d2:document.getElementById('f-d2').value,emp:document.getElementById('f-emp').value,turno:document.getElementById('f-turno').value}}
+
+function autoF(){
+  const{mun,circ,d1,d2,emp,turno}=gf();
+  FILT=RAW.filter(r=>(!mun||r.mun===mun)&&(!circ||r.circ===circ)&&(!d1||r.fecha>=d1)&&(!d2||r.fecha<=d2)&&(!emp||r.emp===emp)&&(!turno||r.turno===turno));
+  FILT2=ALL2.filter(r=>(!mun||r.mun===mun)&&(!circ||r.circ===circ)&&(!d1||r.fecha>=d1)&&(!d2||r.fecha<=d2));
+  selMun=null;render();rCov();if(mapaAbierto)rMapa();
+}
+function applyF(){autoF()}
+function resetF(){
+  ['f-mun','f-circ','f-emp','f-turno'].forEach(id=>document.getElementById(id).value='');
+  updCirc();
+  const dates=RAW.map(r=>r.fecha).sort();
+  if(dates.length){document.getElementById('f-d1').value=dates[0];document.getElementById('f-d2').value=dates[dates.length-1];}
+  FILT=[...RAW];FILT2=[...ALL2];selMun=null;render();rCov();if(mapaAbierto)rMapa();
+}
+
+function swTab(t){
+  curTab=t;
+  document.querySelectorAll('.ntab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('nt-'+t).classList.add('on');
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.getElementById('v-'+t).classList.add('on');
+  if(t==='cov'&&mapaAbierto)setTimeout(()=>mapCov&&mapCov.invalidateSize(),80);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   TABS 1-3: RESUMEN / MUNICIPIOS / TRANSPORTISTAS (clasificación de visitas)
+   ══════════════════════════════════════════════════════════════════════ */
+function st(rows){
+  const n={intervino:0,limpio:0,no_fue:0};
+  rows.forEach(r=>n[r.cat]++);
+  const total=rows.length;
+  const dias=[...new Set(rows.map(r=>r.fecha))].length;
+  return{total,n,dias,prom:dias?+(total/dias).toFixed(1):0,
+    pi:total?Math.round(n.intervino/total*100):0,
+    pl:total?Math.round(n.limpio/total*100):0,
+    pn:total?Math.round(n.no_fue/total*100):0};
+}
+function grp(arr,k){const m={};arr.forEach(r=>{if(!m[r[k]])m[r[k]]=[];m[r[k]].push(r)});return m}
+function segs(s){return['intervino','limpio','no_fue'].map(c=>s.n[c]?`<div class="sb" style="flex:${s.n[c]};background:${CC[c]}"></div>`:'').join('')}
+function mbar(s){return['intervino','limpio','no_fue'].map(c=>s.n[c]?`<div class="mb" style="flex:${s.n[c]};background:${CC[c]}"></div>`:'').join('')}
+
+function render(){renderResumen();renderMun();renderTra();}
+
+function renderResumen(){
+  const s=st(FILT);
+  const muns=[...new Set(FILT.map(r=>r.mun))].length;
+  document.getElementById('kpis-res').innerHTML=`
+    <div class="kpi"><div class="kl">Municipios</div><div class="kv">${muns}</div><div class="ks">activos</div></div>
+    <div class="kpi"><div class="kl">Total visitas</div><div class="kv">${s.total.toLocaleString()}</div><div class="ks">${s.dias} días</div></div>
+    <div class="kpi g"><div class="kl">Intervino</div><div class="kv">${s.n.intervino.toLocaleString()}</div><div class="ks">${s.pi}%</div></div>
+    <div class="kpi b"><div class="kl">Ya limpio</div><div class="kv">${s.n.limpio.toLocaleString()}</div><div class="ks">${s.pl}%</div></div>
+    <div class="kpi r"><div class="kl">No pudo/encontró</div><div class="kv">${s.n.no_fue.toLocaleString()}</div><div class="ks">${s.pn}%</div></div>
+    <div class="kpi p"><div class="kl">Promedio/día</div><div class="kv">${s.prom.toLocaleString()}</div><div class="ks">visitas</div></div>`;
+  const byDay=grp(FILT,'fecha');const days=Object.keys(byDay).sort();
+  const maxDay=Math.max(...days.map(d=>byDay[d].length),1);
+  let h='';
+  days.forEach(d=>{
+    const dr=byDay[d];const sd=st(dr);const w=Math.round(dr.length/maxDay*100);
+    h+=`<div class="drow"><span class="dlbl">${d.substring(5).replace('-','/')}</span>
+      <div class="dbar" style="max-width:${w}%;min-width:6px" onmouseenter="showTT(event,'<b>${d}</b><br>Total: ${sd.total}<br>Intervino: ${sd.n.intervino} (${sd.pi}%)<br>Ya limpio: ${sd.n.limpio} (${sd.pl}%)<br>No pudo/encontró: ${sd.n.no_fue} (${sd.pn}%)')" onmouseleave="hideTT()">${segs(sd)}</div>
+      <span class="dtot">${sd.total}</span><span class="dpct">${sd.pn}% <span style="font-size:9px">✗</span></span></div>`;
+  });
+  document.getElementById('daily-chart').innerHTML=h;
+  const byMun=grp(FILT,'mun');const munNames=Object.keys(byMun).sort();
+  const maxMun=Math.max(...munNames.map(m=>byMun[m].length),1);
+  document.getElementById('mun-chart').innerHTML=munNames.map(m=>{
+    const sm=st(byMun[m]);const w=Math.round(byMun[m].length/maxMun*100);
+    return`<div class="drow"><span class="dlbl" style="font-weight:700">Mun. ${m}</span>
+      <div class="dbar" style="max-width:${w}%;min-width:6px" onmouseenter="showTT(event,'<b>Municipio ${m}</b><br>Total: ${sm.total}<br>Intervino: ${sm.n.intervino} (${sm.pi}%)<br>No pudo: ${sm.n.no_fue} (${sm.pn}%)')" onmouseleave="hideTT()">${segs(sm)}</div>
+      <span class="dtot">${sm.total}</span></div>`;
+  }).join('');
+  const empRows=FILT.filter(r=>r.emp!=='Motocarro');
+  const byEmp=grp(empRows,'emp');const empNames=Object.keys(byEmp).sort();
+  const maxEmp=Math.max(...empNames.map(e=>byEmp[e].length),1);
+  document.getElementById('emp-chart').innerHTML=empNames.map(e=>{
+    const se=st(byEmp[e]);const w=Math.round(byEmp[e].length/maxEmp*100);const col=ECOLS[e]||'#64748b';
+    return`<div class="drow"><span class="dlbl" style="font-weight:700;color:${col}">${e}</span>
+      <div class="dbar" style="max-width:${w}%;min-width:6px" onmouseenter="showTT(event,'<b>${e}</b><br>Total: ${se.total}<br>Intervino: ${se.n.intervino} (${se.pi}%)<br>No pudo: ${se.n.no_fue} (${se.pn}%)')" onmouseleave="hideTT()">${segs(se)}</div>
+      <span class="dtot">${se.total}</span></div>`;
+  }).join('');
+}
+
+function renderMun(){
+  const byMun=grp(FILT,'mun');const munNames=Object.keys(byMun).sort();const s=st(FILT);
+  document.getElementById('kpis-mun').innerHTML=`
+    <div class="kpi"><div class="kl">Municipios</div><div class="kv">${munNames.length}</div><div class="ks">en selección</div></div>
+    <div class="kpi"><div class="kl">Total visitas</div><div class="kv">${s.total.toLocaleString()}</div><div class="ks">${s.dias} días</div></div>
+    <div class="kpi g"><div class="kl">Intervino</div><div class="kv">${s.n.intervino.toLocaleString()}</div><div class="ks">${s.pi}%</div></div>
+    <div class="kpi b"><div class="kl">Ya limpio</div><div class="kv">${s.n.limpio.toLocaleString()}</div><div class="ks">${s.pl}%</div></div>
+    <div class="kpi r"><div class="kl">No pudo/encontró</div><div class="kv">${s.n.no_fue.toLocaleString()}</div><div class="ks">${s.pn}%</div></div>`;
+  const grid=document.getElementById('mun-grid');grid.innerHTML='';
+  munNames.forEach(mun=>{
+    const rows=byMun[mun];const sm=st(rows);const circs=[...new Set(rows.map(r=>r.circ))].length;
+    const card=document.createElement('div');
+    card.className='mun-card'+(selMun===mun?' selected':'');
+    card.onclick=()=>drillMun(mun,rows);
+    card.innerHTML=`<div class="mun-head"><div class="mun-name">Municipio ${mun}</div><span class="mun-badge">${circs} circuito${circs!==1?'s':''}</span></div>
+      <div class="mun-stats">
+        <div class="mun-stat"><div class="mun-stat-v" style="color:#16a34a">${sm.pi}%</div><div class="mun-stat-l">Intervino</div></div>
+        <div class="mun-stat"><div class="mun-stat-v" style="color:#0ea5e9">${sm.pl}%</div><div class="mun-stat-l">Limpio</div></div>
+        <div class="mun-stat"><div class="mun-stat-v" style="color:#dc2626">${sm.pn}%</div><div class="mun-stat-l">No pudo</div></div>
+      </div><div class="mun-bar">${mbar(sm)}</div>`;
+    grid.appendChild(card);
+  });
+  if(selMun&&byMun[selMun])drillMunRender(selMun,byMun[selMun]);
+  else document.getElementById('drill-area').innerHTML='';
+}
+
+function drillMun(mun,rows){
+  selMun=selMun===mun?null:mun;
+  document.querySelectorAll('.mun-card').forEach(c=>{c.classList.toggle('selected',c.querySelector('.mun-name').textContent==='Municipio '+selMun);});
+  if(!selMun){document.getElementById('drill-area').innerHTML='';return;}
+  drillMunRender(mun,rows);
+  document.getElementById('drill-area').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function drillMunRender(mun,rows){
+  const byCirc=grp(rows,'circ');const circs=Object.keys(byCirc).sort();
+  const byDay=grp(rows,'fecha');const days=Object.keys(byDay).sort();
+  const maxDay=Math.max(...days.map(d=>byDay[d].length),1);
+  let h=`<div class="drill-card"><div class="drill-head"><div class="drill-title">Municipio ${mun} — detalle</div>
+    <button class="btn-back" onclick="drillMun('${mun}',[])">Cerrar</button></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid #f1f5f9">
+      <div style="padding:.875rem 1rem;border-right:1px solid #f1f5f9">
+        <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.625rem">Evolución diaria</div>`;
+  days.forEach(d=>{
+    const dr=byDay[d];const sd=st(dr);const w=Math.round(dr.length/maxDay*100);
+    h+=`<div class="drow"><span class="dlbl">${d.substring(5).replace('-','/')}</span>
+      <div class="dbar" style="max-width:${w}%;min-width:4px" onmouseenter="showTT(event,'<b>${d}</b><br>${sd.total} visitas<br>Intervino ${sd.pi}% · No pudo ${sd.pn}%')" onmouseleave="hideTT()">${segs(sd)}</div>
+      <span class="dtot">${sd.total}</span></div>`;
+  });
+  h+=`</div><div style="padding:.875rem 1rem"><div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.625rem">Por circuito</div>`;
+  const maxC=Math.max(...circs.map(c=>byCirc[c].length),1);
+  circs.forEach(c=>{
+    const sc=st(byCirc[c]);const w=Math.round(byCirc[c].length/maxC*100);
+    h+=`<div class="drow"><span class="dlbl" style="font-weight:700">${c}</span>
+      <div class="dbar" style="max-width:${w}%;min-width:4px" onmouseenter="showTT(event,'<b>${c}</b><br>${sc.total} visitas<br>Intervino ${sc.pi}% · No pudo ${sc.pn}%')" onmouseleave="hideTT()">${segs(sc)}</div>
+      <span class="dtot">${sc.total}</span></div>`;
+  });
+  h+=`</div></div><table><thead><tr><th>Circuito</th><th>Total</th><th>Prom/día</th><th>Distribución</th><th>Intervino</th><th>Ya limpio</th><th>No pudo</th></tr></thead><tbody>`;
+  circs.forEach(c=>{
+    const sc=st(byCirc[c]);
+    const sg=['intervino','limpio','no_fue'].map(cat=>sc.n[cat]?`<div class="sb" style="flex:${sc.n[cat]};background:${CC[cat]}"></div>`:'').join('');
+    h+=`<tr class="trow"><td style="font-weight:700">${c}</td><td>${sc.total}</td><td style="color:#7c3aed;font-weight:700">${sc.prom}</td>
+      <td><div class="mini-bar">${sg}</div></td><td style="color:#16a34a;font-weight:700">${sc.pi}%</td>
+      <td style="color:#0ea5e9;font-weight:700">${sc.pl}%</td><td style="color:#dc2626;font-weight:700">${sc.pn}%</td></tr>`;
+  });
+  h+=`</tbody></table></div>`;
+  document.getElementById('drill-area').innerHTML=h;
+}
+
+function renderTra(){
+  const empRows=FILT.filter(r=>r.emp!=='Motocarro');const se=st(empRows);
+  const emps=[...new Set(empRows.map(r=>r.emp))].length;
+  document.getElementById('kpis-tra').innerHTML=`
+    <div class="kpi p"><div class="kl">Empresas</div><div class="kv">${emps}</div><div class="ks">activas</div></div>
+    <div class="kpi"><div class="kl">Total visitas</div><div class="kv">${se.total.toLocaleString()}</div><div class="ks">${se.dias} días</div></div>
+    <div class="kpi g"><div class="kl">Intervino</div><div class="kv">${se.n.intervino.toLocaleString()}</div><div class="ks">${se.pi}%</div></div>
+    <div class="kpi b"><div class="kl">Ya limpio</div><div class="kv">${se.n.limpio.toLocaleString()}</div><div class="ks">${se.pl}%</div></div>
+    <div class="kpi r"><div class="kl">No pudo/encontró</div><div class="kv">${se.n.no_fue.toLocaleString()}</div><div class="ks">${se.pn}%</div></div>
+    <div class="kpi o"><div class="kl">Prom/día</div><div class="kv">${se.prom}</div><div class="ks">visitas empresa</div></div>`;
+  const byEmp=grp(empRows,'emp');const empNames=Object.keys(byEmp).sort();
+  const grid=document.getElementById('emp-grid');
+  const openState={};
+  grid.querySelectorAll('.emp-card').forEach(c=>{if(c.querySelector('.emp-body.open'))openState[c.dataset.emp]=c.querySelector('.ttab.on')?.dataset.t||null;});
+  grid.innerHTML='';
+  empNames.forEach(emp=>{
+    const rows=byEmp[emp];const s=st(rows);const trans=[...new Set(rows.map(r=>r.trans))];
+    const byTurno=grp(rows,'turno');
+    const turnos=Object.keys(byTurno).filter(t=>TORD.includes(t)).sort((a,b)=>TORD.indexOf(a)-TORD.indexOf(b));
+    const firstT=openState[emp]||turnos[0]||'Matutino';const col=ECOLS[emp]||'#64748b';
+    const card=document.createElement('div');card.className='emp-card';card.dataset.emp=emp;
+    card.innerHTML=`<div class="emp-head" onclick="toggleEmp(this)">
+        <div class="emp-hl"><span class="emp-badge" style="background:${col}">${emp}</span>
+          <div><div class="emp-nm">${emp}</div><div class="emp-mt">${trans.length} unidad${trans.length!==1?'es':''} · ${s.dias} días activos</div></div></div>
+        <div class="emp-hr">
+          <div style="text-align:right"><div class="emp-sv">${s.total.toLocaleString()}</div><div class="emp-sl">visitas</div></div>
+          <div style="text-align:right"><div class="emp-sv" style="color:#16a34a">${s.pi}%</div><div class="emp-sl">intervino</div></div>
+          <div style="text-align:right;margin-right:4px"><div class="emp-sv" style="color:#dc2626">${s.pn}%</div><div class="emp-sl">no pudo</div></div>
+          <span class="emp-chev${openState[emp]?' open':''}">▾</span></div></div>
+      <div class="emp-body${openState[emp]?' open':''}">
+        <div class="ttabs" id="ttabs-${emp}">${turnos.map(t=>`<div class="ttab${t===firstT?' on':''}" data-t="${t}" data-emp="${emp}" onclick="swTurno(this)">${t}</div>`).join('')}</div>
+        ${turnos.map(t=>`<div class="tc${t===firstT?' on':''}" id="tc-${emp}-${t.replace(/ /g,'_')}"></div>`).join('')}</div>`;
+    grid.appendChild(card);
+    turnos.forEach(t=>renderTC(`tc-${emp}-${t.replace(/ /g,'_')}`,byTurno[t]));
+  });
+}
+function toggleEmp(head){head.nextElementSibling.classList.toggle('open');head.querySelector('.emp-chev').classList.toggle('open');}
+function swTurno(el){
+  const emp=el.dataset.emp;
+  document.querySelectorAll(`#ttabs-${emp} .ttab`).forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  document.querySelectorAll(`[id^="tc-${emp}-"]`).forEach(c=>c.classList.remove('on'));
+  document.getElementById(`tc-${emp}-${el.dataset.t.replace(/ /g,'_')}`).classList.add('on');
+}
+function renderTC(elId,rows){
+  const el=document.getElementById(elId);if(!el)return;
+  const s=st(rows);const byDay=grp(rows,'fecha');const days=Object.keys(byDay).sort();
+  const maxDay=Math.max(...days.map(d=>byDay[d].length),1);const sg=segs(s);
+  let h=`<div class="tstats">
+    <div class="tstat"><div class="tsl">Total</div><div class="tsv">${s.total.toLocaleString()}</div><div class="tss">${s.dias} días</div></div>
+    <div class="tstat"><div class="tsl">Prom/día</div><div class="tsv" style="color:#6366f1">${s.prom}</div></div>
+    <div class="tstat"><div class="tsl">Intervino</div><div class="tsv" style="color:#16a34a">${s.pi}%</div><div class="tss">${s.n.intervino}</div></div>
+    <div class="tstat"><div class="tsl">No pudo</div><div class="tsv" style="color:#dc2626">${s.pn}%</div><div class="tss">${s.n.no_fue}</div></div></div>
+  <div style="margin-bottom:.5rem"><div class="sbar">${sg}</div>
+  <div class="sbleg">${['intervino','limpio','no_fue'].map(c=>`<div class="sbli"><div class="ldot" style="background:${CC[c]}"></div>${CL[c]}: ${s.n[c]} (${s.total?Math.round(s.n[c]/s.total*100):0}%)</div>`).join('')}</div></div>
+  <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.375rem">Actividad diaria</div>`;
+  days.forEach(d=>{
+    const dr=byDay[d];const sd=st(dr);const w=Math.round(dr.length/maxDay*100);
+    h+=`<div class="drow"><span class="dlbl">${d.substring(5).replace('-','/')}</span>
+      <div class="dbar" style="max-width:${w}%;min-width:4px" onmouseenter="showTT(event,'<b>${d}</b><br>${sd.total} visitas<br>Intervino ${sd.pi}% · No pudo ${sd.pn}%')" onmouseleave="hideTT()">${segs(sd)}</div>
+      <span class="dtot">${sd.total}</span></div>`;
+  });
+  el.innerHTML=h;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   ANÁLISIS DE COBERTURA (universo de contenedores + cruce con Reclamos)
+   ══════════════════════════════════════════════════════════════════════ */
+function cVis(data){
+  const v={};
+  data.forEach(r=>{
+    if(!v[r.circ])v[r.circ]={};
+    if(!v[r.circ][r.cont])v[r.circ][r.cont]=0;
+    if(r.esVisita)v[r.circ][r.cont]++;
+  });
+  return v;
+}
+function gAC(){
+  const{mun,circ}=gf();
+  return Object.keys(UNI).filter(c=>(!mun||UNI[c].mun===mun)&&(!circ||c===circ)).sort();
+}
+function getTopRec(circ,n){
+  if(!hasRec||!REC[circ])return new Set();
+  const pairs=Object.entries(REC[circ]).sort((a,b)=>b[1]-a[1]);
+  return new Set(pairs.slice(0,n).map(p=>p[0]));
+}
+
+function rCov(){
+  const vis=cVis(FILT2);const circs=gAC();
+  let tc=0,at=0,tv=0,tr=0;const bt=[0,0,0,0];
+  circs.forEach(c=>{
+    Object.keys(UNI[c].conts).forEach(id=>{
+      tc++;const v=(vis[c]&&vis[c][id])||0;
+      if(v>0)at++;tv+=v;bt[bi(v)]++;
+    });
+    if(hasRec&&REC[c])Object.values(REC[c]).forEach(n=>tr+=n);
+  });
+  const pct=tc?Math.round(at/tc*100):0;
+  const segsC=bt.map((n,i)=>n?`<div class="cseg" style="flex:${n};background:${COLS_COB[i]}"></div>`:'').join('');
+  document.getElementById('kpis-cov').innerHTML=`
+    <div class="kpi"><div class="kl">Circuitos</div><div class="kv">${circs.length}</div><div class="ks">en selección</div></div>
+    <div class="kpi"><div class="kl">Contenedores</div><div class="kv">${tc.toLocaleString()}</div><div class="ks">universo total</div></div>
+    <div class="kpi g"><div class="kl">Atendidos</div><div class="kv">${at.toLocaleString()}</div><div class="ks">${pct}% cobertura</div></div>
+    <div class="kpi r"><div class="kl">Sin atender</div><div class="kv">${(tc-at).toLocaleString()}</div><div class="ks">${tc?100-pct:0}% pendiente</div></div>
+    ${hasRec?`<div class="kpi o"><div class="kl">Reclamos</div><div class="kv">${tr.toLocaleString()}</div><div class="ks">en período</div></div>`
+    :`<div class="kpi"><div class="kl">Visitas totales</div><div class="kv">${tv.toLocaleString()}</div><div class="ks">en el período</div></div>`}`;
+  document.getElementById('cct').textContent=circs.length+' circuito'+(circs.length!==1?'s':'');
+  if(!circs.length){document.getElementById('tw-cov').innerHTML='<div style="padding:1.5rem;text-align:center;font-size:13px;color:#94a3b8">Sin datos.</div>';return;}
+  let h=`<table><colgroup><col style="width:82px"><col style="width:76px"><col style="width:50px"><col>${hasRec?'<col style="width:72px">':''}<col style="width:32px"></colgroup>
+  <thead><tr><th>Circuito</th><th>Municipio</th><th>Cont.</th><th>Distribución</th>${hasRec?'<th>Reclamos</th>':''}<th></th></tr></thead><tbody>`;
+  circs.forEach(c=>{
+    const ids=Object.keys(UNI[c].conts);const tot=ids.length;const b=[0,0,0,0];
+    ids.forEach(id=>{const v=(vis[c]&&vis[c][id])||0;b[bi(v)]++;});
+    const cp=tot?Math.round((tot-b[0])/tot*100):0;
+    const sg=b.map((n,i)=>n?`<div class="bs" style="flex:${n};background:${COLS_COB[i]}"></div>`:'').join('');
+    const recTotal=hasRec&&REC[c]?Object.values(REC[c]).reduce((a,x)=>a+x,0):0;
+    const recCell=hasRec?`<td style="font-size:12px;color:#d97706;font-weight:700">${recTotal>0?recTotal:'—'}</td>`:'';
+    h+=`<tr class="trow cr" onclick="tDet('${c}',this)">
+      <td><span style="font-weight:700">${c}</span></td>
+      <td><span class="chip">Mun.${UNI[c].mun}</span></td>
+      <td style="font-weight:700;color:#888">${tot}</td>
+      <td><div style="display:flex;align-items:center;gap:7px"><div class="bst">${sg}</div><span class="pv">${cp}%</span></div></td>
+      ${recCell}<td style="text-align:center"><span class="ei">▾</span></td></tr>
+      <tr class="detr" id="dr-${c}"><td colspan="${hasRec?6:5}" class="detc"><div class="deti" id="di-${c}"></div></td></tr>`;
+  });
+  h+='</tbody></table>';
+  document.getElementById('tw-cov').innerHTML=h;
+  window._V=vis;
+}
+
+function tDet(c,row){
+  const dr=document.getElementById('dr-'+c);const ic=row.querySelector('.ei');
+  if(!dr.classList.contains('open')){dr.classList.add('open');ic.classList.add('open');bDet(c,window._V);}
+  else{dr.classList.remove('open');ic.classList.remove('open');}
+}
+function bDet(c,vis){
+  const ids=Object.keys(UNI[c].conts).sort((a,b)=>parseInt(a)-parseInt(b));
+  const topRec=getTopRec(c,3);
+  const bk={0:[],1:[],2:[],3:[]};
+  ids.forEach(id=>{const v=(vis[c]&&vis[c][id])||0;bk[bi(v)].push({id,v,dir:UNI[c].conts[id].dir,hot:topRec.has(id)});});
+  let h=`<div style="font-size:11px;color:#94a3b8;margin-bottom:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em">${ids.length} contenedores · circuito ${c}</div>`;
+  if(hasRec){h+=`<div style="font-size:11px;color:#d97706;font-weight:700;margin-bottom:.625rem;display:flex;align-items:center;gap:5px"><div class="rec-dot"></div>Resaltados: top 3 más reclamados</div>`;}
+  [0,1,2,3].forEach(b=>{
+    const items=bk[b];if(!items.length)return;
+    h+=`<div class="cs-hd"><div class="ldot" style="background:${COLS_COB[b]};width:8px;height:8px;border-radius:50%;flex-shrink:0"></div><span class="cs-lbl" style="color:${COLS_COB[b]}">${LBLS_COB[b]}</span><span class="cs-ct">— ${items.length} contenedor${items.length!==1?'es':''}</span></div><div class="cgrid">`;
+    items.forEach(it=>{
+      const rc=hasRec&&REC[c]&&REC[c][it.id]?REC[c][it.id]:0;
+      h+=`<div class="ci${it.hot?' hot':''}"><div><div class="cn">#${it.id}${it.hot?'<span style="font-size:9px;background:#f59e0b;color:#fff;border-radius:3px;padding:1px 4px;margin-left:4px;vertical-align:middle">TOP</span>':''}</div>
+          ${it.dir?`<div class="ca" title="${it.dir}">${it.dir}</div>`:''}</div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px"><span class="vb ${VBS[b]}">${it.v} vis</span>${rc>0?`<span class="rb">⚠ ${rc}</span>`:''}</div></div>`;
+    });
+    h+='</div>';
+  });
+  document.getElementById('di-'+c).innerHTML=h;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   MAPA (dos modos: Cobertura / Estado de última vez)
+   ══════════════════════════════════════════════════════════════════════ */
+function toggleMapa(){
+  mapaAbierto=!mapaAbierto;
+  document.getElementById('mapwrap').classList.toggle('on',mapaAbierto);
+  document.getElementById('btn-vermapa').textContent=mapaAbierto?'🗺️ Ocultar mapa':'🗺️ Ver mapa de cobertura';
+  if(mapaAbierto){
+    if(!mapCov){
+      mapCov=L.map('mel');
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(mapCov);
+      mlayerCov=L.layerGroup().addTo(mapCov);
+    }
+    setTimeout(()=>{mapCov.invalidateSize();rMapa();},80);
+  }
+}
+function setMapMode(m){
+  mapMode=m;
+  document.getElementById('mm-cobertura').classList.toggle('on',m==='cobertura');
+  document.getElementById('mm-estado').classList.toggle('on',m==='estado');
+  rMapa();
+}
+function legendDyn(){
+  const el=document.getElementById('map-legend-dyn');
+  if(mapMode==='cobertura'){
+    el.innerHTML=LBLS_COB.map((l,i)=>`<div class="leg"><div class="ldot" style="background:${COLS_COB[i]}"></div>${l}</div>`).join('')+
+      (hasRec?`<div class="lsep"></div><div class="rec-leg"><div class="rec-dot"></div>Más reclamado</div>`:'');
+  } else {
+    el.innerHTML=`<div class="leg"><div class="ldot" style="background:${CC.intervino}"></div>Intervino</div>
+      <div class="leg"><div class="ldot" style="background:${CC.limpio}"></div>Ya limpio</div>
+      <div class="leg"><div class="ldot" style="background:${CC.no_fue}"></div>No pudo/encontró</div>
+      <div class="leg"><div class="ldot" style="background:${CC_GRIS}"></div>Sin datos en el período</div>`;
+  }
+}
+function rMapa(){
+  if(!mapCov)return;
+  mapCov.invalidateSize(); // evita encuadres incorrectos si el contenedor cambió de tamaño/scroll
+  legendDyn();
+  if(mapMode==='cobertura')rMapCobertura();else rMapEstado();
+}
+function rMapCobertura(){
+  mlayerCov.clearLayers();
+  const vis=cVis(FILT2);const circs=gAC();const pts=[];let shown=0;
+  circs.forEach(c=>{
+    const topRec=getTopRec(c,3);
+    Object.entries(UNI[c].conts).forEach(([id,info])=>{
+      if(!info.lat||!info.lng)return;
+      const v=(vis[c]&&vis[c][id])||0;
+      const rc=hasRec&&REC[c]&&REC[c][id]?REC[c][id]:0;
+      const hot=topRec.has(id);
+      const mk=L.circleMarker([info.lat,info.lng],{radius:hot?8:6,fillColor:COLS_COB[bi(v)],color:hot?'#f59e0b':'rgba(255,255,255,.6)',weight:hot?3:1.5,fillOpacity:.9});
+      if(hot)L.circleMarker([info.lat,info.lng],{radius:14,fillColor:'transparent',color:'#f59e0b',weight:2,fillOpacity:0,dashArray:'4 3'}).addTo(mlayerCov);
+      mk.bindPopup(`<b>Cont. #${id}</b> · ${c}${info.dir?'<br><span style="font-size:11px;color:#666">'+info.dir+'</span>':''}<br><b>Visitas ZL:</b> ${v}${rc>0?`<br><b style="color:#d97706">Reclamos:</b> ${rc}`:''}`).addTo(mlayerCov);
+      pts.push([info.lat,info.lng]);shown++;
+    });
+  });
+  document.getElementById('minfo').textContent=shown.toLocaleString()+' contenedores';
+  if(pts.length)mapCov.fitBounds(L.latLngBounds(pts),{padding:[28,28]});else mapCov.setView([-34.9,-56.16],13);
+}
+function rMapEstado(){
+  mlayerCov.clearLayers();
+  const last={};
+  FILT2.forEach(r=>{
+    const key=r.circ+'|||'+r.cont;
+    if(!last[key]||r.fecha>last[key].fecha)last[key]=r;
+  });
+  const circs=gAC();const pts=[];let shown=0;
+  circs.forEach(c=>{
+    Object.entries(UNI[c].conts).forEach(([id,info])=>{
+      if(!info.lat||!info.lng)return;
+      const row=last[c+'|||'+id];
+      let color=CC_GRIS,label='Sin datos en el período';
+      if(row&&!row.noVisitado&&row.cat){color=CC[row.cat];label=CL[row.cat];}
+      const mk=L.circleMarker([info.lat,info.lng],{radius:6,fillColor:color,color:'rgba(255,255,255,.6)',weight:1.5,fillOpacity:.9});
+      mk.bindPopup(`<b>Cont. #${id}</b> · ${c}${info.dir?'<br><span style="font-size:11px;color:#666">'+info.dir+'</span>':''}<br><b>Última vez:</b> ${row?row.fecha.split('-').reverse().join('/'):'—'}<br><b>Estado:</b> ${label}`).addTo(mlayerCov);
+      pts.push([info.lat,info.lng]);shown++;
+    });
+  });
+  document.getElementById('minfo').textContent=shown.toLocaleString()+' contenedores';
+  if(pts.length)mapCov.fitBounds(L.latLngBounds(pts),{padding:[28,28]});else mapCov.setView([-34.9,-56.16],13);
+}
+
+/* ── tooltip ── */
+const ttEl=document.getElementById('tt');
+function showTT(e,html){ttEl.innerHTML=html;ttEl.style.display='block'}
+function hideTT(){ttEl.style.display='none'}
+document.addEventListener('mousemove',e=>{if(ttEl.style.display==='none')return;ttEl.style.left=(e.clientX+14)+'px';ttEl.style.top=(e.clientY-6)+'px'});
+
+/* ── arranque automático ── */
+initAll();
+</script>
+</body>
+</html>

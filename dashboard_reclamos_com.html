@@ -1,0 +1,2326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard Reclamos — COM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F6F3;
+  --surface:#FFFFFF;
+  --surface2:#F0EEE9;
+  --border:#E2DED6;
+  --border2:#D0CBCB;
+  --text:#1A1714;
+  --text2:#6B6560;
+  --text3:#9E9890;
+  --blue:#185FA5;
+  --blue-bg:#E6F1FB;
+  --blue-border:#B5D4F4;
+  --teal:#0F6E56;
+  --teal-bg:#E1F5EE;
+  --teal-border:#9FE1CB;
+  --amber:#854F0B;
+  --amber-bg:#FAEEDA;
+  --amber-border:#FAC775;
+  --red:#A32D2D;
+  --red-bg:#FCEBEB;
+  --red-border:#F7C1C1;
+  --gray:#5F5E5A;
+  --gray-bg:#F1EFE8;
+  --radius:10px;
+  --radius-lg:14px;
+  --shadow:0 1px 3px rgba(0,0,0,.07),0 4px 12px rgba(0,0,0,.05);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
+.page{max-width:980px;margin:0 auto;padding:2rem 1.5rem}
+
+/* Header */
+.page-header{display:flex;align-items:center;gap:14px;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.header-badge{width:42px;height:42px;border-radius:var(--radius);background:var(--blue-bg);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.header-badge svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:1.75}
+.header-title{font-size:19px;font-weight:600;letter-spacing:-.3px;color:var(--text)}
+.header-sub{font-size:12px;color:var(--text3);margin-top:2px;font-family:'DM Mono',monospace}
+.header-file-tag{margin-left:auto;display:flex;align-items:center;gap:7px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:500;background:var(--teal-bg);border:1px solid var(--teal-border);color:var(--teal);font-family:'DM Mono',monospace;cursor:pointer;transition:opacity .15s}
+.header-file-tag:hover{opacity:.75}
+.back-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);text-decoration:none;font-family:'DM Mono',monospace;margin-bottom:.75rem;transition:color .15s}
+.back-link:hover{color:var(--text2)}
+.back-link svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* Upload */
+.upload-zone{border:2px dashed var(--border2);border-radius:var(--radius-lg);padding:3.5rem 2rem;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface);position:relative}
+.upload-zone:hover,.upload-zone.drag{background:var(--blue-bg);border-color:var(--blue)}
+.upload-icon{font-size:36px;margin-bottom:12px;opacity:.5}
+.upload-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px}
+.upload-sub{font-size:12px;color:var(--text3);margin-bottom:1.25rem}
+.upload-sub span{font-family:'DM Mono',monospace;background:var(--surface2);padding:2px 7px;border-radius:5px;font-size:11px;margin:0 2px}
+.btn-upload{display:inline-flex;align-items:center;gap:7px;padding:9px 22px;border-radius:8px;background:var(--blue);color:#fff;font-size:13px;font-weight:500;border:none;cursor:pointer;transition:background .15s;font-family:'DM Sans',sans-serif}
+.btn-upload:hover{background:#0C447C}
+.file-status{margin-top:1rem;display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid}
+.file-status.ok{background:var(--teal-bg);border-color:var(--teal-border);color:var(--teal)}
+.file-status.err{background:var(--red-bg);border-color:var(--red-border);color:var(--red)}
+
+/* Filter panel */
+.filter-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem;box-shadow:var(--shadow-sm)}
+.panel-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:1rem;font-family:'DM Mono',monospace}
+.filter-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.ctrl{display:flex;flex-direction:column;gap:4px}
+.ctrl label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text2)}
+.ctrl input[type=date],.ctrl select{height:36px;padding:0 10px;font-size:13px;border:1px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;font-family:'DM Sans',sans-serif;transition:border-color .15s}
+.ctrl input[type=date]:focus,.ctrl select:focus{border-color:var(--blue);background:#fff}
+.divider-v{width:1px;height:36px;background:var(--border);align-self:flex-end}
+.btn-toggle{height:36px;padding:0 14px;font-size:12px;font-weight:500;border:1px solid var(--border2);border-radius:8px;background:var(--surface);color:var(--text2);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.btn-toggle:hover{background:var(--surface2)}
+.btn-toggle.active{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue)}
+
+/* Mode toggle */
+.toggles-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:1rem}
+.mode-group{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:9px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.mode-btn{height:34px;padding:0 18px;font-size:12px;font-weight:500;border:none;background:transparent;color:var(--text2);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.mode-btn.active{background:var(--blue);color:#fff}
+.btn-cats{height:34px;padding:0 14px;font-size:12px;font-weight:500;border:1px solid var(--border2);border-radius:8px;background:var(--surface);color:var(--text2);cursor:pointer;transition:all .15s;margin-left:auto;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px}
+.btn-cats:hover{background:var(--surface2);border-color:var(--border2)}
+.btn-cats svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* Cat chips */
+.cat-panel{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:1rem}
+.cat-panel-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--text3);margin-bottom:10px;font-family:'DM Mono',monospace}
+.cat-chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11px;padding:4px 11px;border-radius:12px;cursor:pointer;border:1px solid var(--border2);background:var(--surface);color:var(--text2);transition:all .15s;font-family:'DM Sans',sans-serif;font-weight:500}
+.chip:hover{border-color:var(--blue-border)}
+.chip.on{background:var(--blue-bg);color:var(--blue);border-color:var(--blue-border)}
+
+/* Period label */
+.period-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-size:12px;color:var(--text2);margin-bottom:1.25rem;font-family:'DM Mono',monospace}
+.period-tag strong{color:var(--text);font-weight:600}
+
+/* KPI Cards */
+.kpi-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:1.25rem}
+.kpi-card{border-radius:var(--radius-lg);padding:1.25rem 1.5rem;border:1px solid}
+.kpi-card.blue{background:var(--blue-bg);border-color:var(--blue-border)}
+.kpi-card.teal{background:var(--teal-bg);border-color:var(--teal-border)}
+.kpi-card.amber{background:var(--amber-bg);border-color:var(--amber-border)}
+.kpi-card.gray{background:var(--gray-bg);border-color:var(--border2)}
+.kpi-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:.5rem;font-family:'DM Mono',monospace}
+.kpi-card.blue .kpi-label{color:var(--blue)}
+.kpi-card.teal .kpi-label{color:var(--teal)}
+.kpi-card.amber .kpi-label{color:var(--amber)}
+.kpi-card.gray .kpi-label{color:var(--gray)}
+.kpi-val{font-size:36px;font-weight:600;line-height:1;letter-spacing:-1px;font-family:'DM Mono',monospace}
+.kpi-card.blue .kpi-val{color:#0C447C}
+.kpi-card.teal .kpi-val{color:#085041}
+.kpi-card.amber .kpi-val{color:#633806}
+.kpi-card.gray .kpi-val{color:#2C2C2A}
+.kpi-desc{font-size:11px;margin-top:.35rem;opacity:.75}
+.kpi-card.blue .kpi-desc{color:var(--blue)}
+.kpi-card.teal .kpi-desc{color:var(--teal)}
+.kpi-card.amber .kpi-desc{color:var(--amber)}
+.kpi-card.gray .kpi-desc{color:var(--gray)}
+
+/* Section cards */
+.section-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem;box-shadow:var(--shadow-sm)}
+.sec-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:.875rem;border-bottom:1px solid var(--border)}
+.sec-title{font-size:13px;font-weight:600;color:var(--text)}
+.sec-sub{font-size:11px;color:var(--text3);margin-top:3px}
+.badge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--surface2);color:var(--text2);border:1px solid var(--border);white-space:nowrap;font-family:'DM Mono',monospace;font-weight:500}
+
+/* Distribution bars */
+.bars{display:flex;flex-direction:column;gap:14px}
+.bar-item{display:grid;grid-template-columns:170px 1fr 64px;align-items:center;gap:14px}
+.bi-label{font-size:12px;color:var(--text2);text-align:right;line-height:1.3;font-weight:500}
+.bi-track{height:10px;border-radius:6px;background:var(--surface2);overflow:hidden}
+.bi-fill{height:100%;border-radius:6px;transition:width .55s cubic-bezier(.4,0,.2,1)}
+.bi-nums{text-align:right}
+.bi-count{font-size:13px;font-weight:600;color:var(--text);font-family:'DM Mono',monospace}
+.bi-pct{font-size:10px;color:var(--text3);margin-top:1px;font-family:'DM Mono',monospace}
+
+/* Action buttons */
+.action-row{display:flex;gap:10px;flex-wrap:wrap;margin:1.25rem 0}
+.btn-action{height:36px;padding:0 18px;font-size:12px;font-weight:500;border:1px solid var(--blue-border);border-radius:8px;background:var(--surface);color:var(--blue);cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:7px;font-family:'DM Sans',sans-serif}
+.btn-action:hover{background:var(--blue-bg)}
+.btn-action svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* Table */
+.tbl-wrap{overflow-x:auto}
+.export-row{display:flex;justify-content:flex-end;margin-bottom:.75rem}
+.btn-export{height:30px;padding:0 14px;font-size:11px;font-weight:500;border:1px solid var(--border2);border-radius:6px;background:var(--surface);color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;transition:background .15s}
+.btn-export:hover{background:var(--surface2)}
+.btn-export svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{padding:8px 10px;text-align:right;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);border-bottom:1px solid var(--border);white-space:nowrap;font-family:'DM Mono',monospace}
+thead th:first-child{text-align:left}
+tbody td{padding:8px 10px;border-bottom:1px solid var(--surface2);text-align:right;font-family:'DM Mono',monospace;font-size:12px}
+tbody td:first-child{text-align:left;font-weight:600;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px}
+tbody tr:hover{background:var(--surface2)}
+.td-ok{color:#085041;font-weight:600}
+.td-warn{color:#D85A30;font-weight:700}
+
+/* Charts */
+canvas{max-width:100%;display:block}
+.chart-warn{font-size:11px;color:var(--amber);background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:6px;padding:5px 10px;display:inline-flex;align-items:center;gap:6px;margin-top:.75rem;font-weight:500}
+.chart-warn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:1rem}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2)}
+.legend-dot{width:10px;height:10px;border-radius:2px}
+.legend-line{width:18px;height:3px;border-radius:2px}
+
+/* Info bar */
+.info-bar{font-size:11px;color:var(--text3);padding:.5rem 0;font-family:'DM Mono',monospace}
+
+/* Municipio chips */
+.mun-chips-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border)}
+.mun-chip{font-size:11px;padding:5px 13px;border-radius:12px;cursor:pointer;border:1.5px solid var(--border2);background:var(--surface);color:var(--text2);transition:all .15s;font-family:'DM Sans',sans-serif;font-weight:500}
+.mun-chip:hover{border-color:var(--blue-border)}
+.mun-chip.on{color:#fff;border-color:transparent}
+
+/* MAP OVERLAY */
+#map-view{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:1000;flex-direction:column}
+#map-view.open{display:flex}
+.map-topbar{display:flex;align-items:center;gap:12px;padding:.875rem 1.25rem;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap;box-shadow:var(--shadow-sm)}
+.map-topbar-title{display:flex;align-items:center;gap:10px;flex:1;min-width:160px}
+.map-topbar-title h2{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-.2px}
+.map-filter-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.map-filter-row input[type=date]{height:32px;padding:0 10px;font-size:12px;border:1px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;font-family:'DM Sans',sans-serif;transition:border-color .15s}
+.map-filter-row input[type=date]:focus{border-color:var(--blue)}
+.btn-map-sm{height:32px;padding:0 12px;font-size:12px;font-weight:500;border:1px solid var(--border2);border-radius:8px;background:var(--surface);color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.btn-map-sm:hover{background:var(--surface2)}
+.btn-map-sm.active{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue)}
+.btn-map-apply{height:32px;padding:0 16px;font-size:12px;font-weight:600;border:none;border-radius:8px;background:var(--blue);color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s}
+.btn-map-apply:hover{background:#0C447C}
+.btn-map-close{height:32px;padding:0 14px;font-size:12px;font-weight:500;border:1px solid var(--border2);border-radius:8px;background:var(--surface);color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;transition:background .15s}
+.btn-map-close:hover{background:var(--red-bg);border-color:var(--red-border);color:var(--red)}
+.map-legend-bar{display:flex;gap:12px;align-items:center;padding:.6rem 1.25rem;background:var(--surface2);border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap}
+.map-leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);cursor:pointer;user-select:none;font-weight:500;transition:opacity .15s}
+.map-leg-item:hover{opacity:.75}
+.map-leg-item.off{opacity:.35;text-decoration:line-through}
+.map-leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;border:1.5px solid rgba(255,255,255,.5)}
+.map-stats-bar{display:flex;gap:16px;padding:.5rem 1.25rem;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap;font-family:'DM Mono',monospace}
+.map-stat{font-size:12px;color:var(--text2)}
+.map-stat strong{color:var(--text);font-weight:600}
+/* Horarios panel */
+.horarios-panel{background:var(--surface);border-bottom:1px solid var(--border);padding:.875rem 1.25rem;flex-shrink:0}
+.hp-grid{display:flex;flex-wrap:wrap;gap:1.25rem;margin-bottom:.75rem}
+.hp-bloque{padding-left:.875rem;border-left:3px solid}
+.hp-bloque-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:.6rem;font-family:'DM Mono',monospace}
+.hp-row{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end}
+.hp-ctrl{display:flex;flex-direction:column;gap:3px}
+.hp-ctrl label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;font-family:'DM Mono',monospace}
+.hp-ctrl input[type=time],.hp-ctrl select{height:30px;font-size:12px;border:1px solid var(--border2);border-radius:7px;padding:0 8px;background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;outline:none}
+.hp-ctrl input[type=date]{height:30px;font-size:12px;border:1px solid var(--border2);border-radius:7px;padding:0 8px;background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;outline:none}
+.btn-hp-clear{height:30px;padding:0 10px;font-size:11px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--text3);cursor:pointer;align-self:flex-end;font-family:'DM Sans',sans-serif;transition:background .15s}
+.btn-hp-clear:hover{background:var(--surface2)}
+#leaflet-map{flex:1;width:100%;min-height:0}
+/* Popup */
+.leaflet-popup-content{font-size:12px;line-height:1.65;min-width:220px;font-family:'DM Sans',system-ui,sans-serif}
+.pop-title{font-weight:700;font-size:13px;margin-bottom:6px;color:var(--text,#1A1714)}
+.pop-cat{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600;margin-bottom:8px}
+.pop-cat.c24{background:#E1F5EE;color:#085041}
+.pop-cat.cmas{background:#FFF8E1;color:#7A5000}
+.pop-cat.sin{background:#FCEBEB;color:#791F1F}
+.pop-row{display:flex;gap:6px;margin-bottom:3px}
+.pop-lbl{color:#888;min-width:90px;flex-shrink:0;font-size:11px}
+.pop-val{color:#111;font-weight:500;font-size:12px}
+.pop-rep{margin-top:7px;padding-top:7px;border-top:1px solid #eee;font-size:11px;color:#666}
+
+@media(max-width:640px){
+  .kpi-row{grid-template-columns:1fr 1fr}
+  .bar-item{grid-template-columns:120px 1fr 50px}
+}
+
+/* Transportistas tabs */
+.ttab-group{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border)}
+.ttab{height:32px;padding:0 16px;font-size:12px;font-weight:500;border:1.5px solid var(--border2);border-radius:20px;background:var(--surface);color:var(--text2);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.ttab:hover{background:var(--surface2);border-color:var(--border2)}
+.ttab.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.ttab.on.teal{background:var(--teal);border-color:var(--teal)}
+.ttab.on.amber{background:#C47A1E;border-color:#C47A1E}
+.ttab.on.gray{background:var(--gray);border-color:var(--gray)}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+</head>
+<body>
+<div class="page">
+
+  <a class="back-link" href="index.html">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Centro Operativo
+  </a>
+  <div class="page-header">
+    <div class="header-badge">
+      <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+    </div>
+    <div>
+      <div class="header-title">Dashboard de Reclamos</div>
+      <div class="header-sub">Centro Operativo de Montevideo — COM</div>
+    </div>
+    <div id="header-file-tag" class="header-file-tag" style="display:none" onclick="resetDash()">
+      <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span id="header-file-name"></span>
+      <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;opacity:.6"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+    </div>
+  </div>
+
+  <!-- CONEXIÓN A GOOGLE SHEETS (reemplaza la carga manual de archivo) -->
+  <div id="step-upload">
+    <div class="upload-zone" id="drop-zone" style="cursor:default">
+      <div class="upload-icon">🔗</div>
+      <div class="upload-title">Base de reclamos conectada a Google Sheets</div>
+      <div class="upload-sub">Se actualiza una vez por día · muestra datos hasta <span>ayer</span> inclusive</div>
+      <button class="btn-upload" id="btn-generar" onclick="fetchFromSheets()">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+        Generar dashboard
+      </button>
+      <div id="file-info"></div>
+    </div>
+  </div>
+
+  <!-- FILTER -->
+  <div id="step-filter" style="display:none;margin-top:1.5rem">
+    <div class="filter-panel">
+      <div class="panel-label">Período de análisis</div>
+      <div class="filter-row">
+        <div class="ctrl">
+          <label id="lbl-f1">Desde</label>
+          <input type="date" id="fecha1">
+        </div>
+        <div id="f2wrap" style="display:none" class="ctrl">
+          <label>Hasta</label>
+          <input type="date" id="fecha2">
+        </div>
+        <div style="align-self:flex-end">
+          <button class="btn-toggle" id="btn-rango" onclick="toggleRange()">Rango de fechas</button>
+        </div>
+        <div class="ctrl">
+          <label>Transportista</label>
+          <select id="f-transp">
+            <option value="all">Todos</option>
+            <option value="empresa">Solo empresas</option>
+            <option value="fideicomiso">Solo fideicomiso</option>
+            <option value="moto">Solo motocarros</option>
+          </select>
+        </div>
+        <div style="align-self:flex-end;margin-left:auto">
+          <button class="btn-upload" onclick="aplicar()" style="height:36px;padding:0 22px;font-size:13px">Generar dashboard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="step-dashboard" style="display:none">
+
+    <div id="period-tag" class="period-tag"></div>
+
+    <div class="toggles-row">
+      <div class="mode-group">
+        <button class="mode-btn active" id="mode-todos" onclick="setMode('todos')">Todos los reclamos</button>
+        <button class="mode-btn" id="mode-unicos" onclick="setMode('unicos')">Solo únicos</button>
+      </div>
+      <button class="btn-cats" id="btn-cats" onclick="toggleCats()">
+        <svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        Categorías
+      </button>
+    </div>
+
+    <div id="cat-panel" style="display:none" class="cat-panel">
+      <div class="cat-panel-label">Categorías activas</div>
+      <div class="cat-chips" id="cat-chips"></div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi-card blue">
+        <div class="kpi-label" id="lbl-kpi-ing">Ingresados</div>
+        <div class="kpi-val" id="kpi-ing">—</div>
+        <div class="kpi-desc">por fecha de reclamo</div>
+      </div>
+      <div class="kpi-card teal">
+        <div class="kpi-label" id="lbl-kpi-res">Resueltos</div>
+        <div class="kpi-val" id="kpi-res">—</div>
+        <div class="kpi-desc">por fecha de resolución</div>
+      </div>
+      <div class="kpi-card amber">
+        <div class="kpi-label">% ≤ 24h</div>
+        <div class="kpi-val" id="kpi-p24">—</div>
+        <div class="kpi-desc">sobre total ingresados</div>
+      </div>
+      <div class="kpi-card gray">
+        <div class="kpi-label">Sin resolver</div>
+        <div class="kpi-val" id="kpi-sin">—</div>
+        <div class="kpi-desc">estado abierto</div>
+      </div>
+      <div class="kpi-card blue">
+        <div class="kpi-label">Prom. resolución</div>
+        <div class="kpi-val" id="kpi-prom-h">—</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+          <span style="font-size:11px;color:var(--blue);opacity:.75">excl. &gt;</span>
+          <input type="number" id="umbral-dias-res" value="30" min="1" max="365"
+            style="width:48px;height:22px;padding:0 5px;font-size:11px;border:1px solid var(--blue-border);border-radius:5px;background:var(--blue-bg);color:var(--blue);text-align:center;font-family:'DM Mono',monospace"
+            oninput="renderDashboard()">
+          <span style="font-size:11px;color:var(--blue);opacity:.75">días</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="sec-header">
+        <div>
+          <div class="sec-title" id="lbl-dist">Distribución por tiempo de resolución</div>
+          <div class="sec-sub">Basado en reclamos ingresados en el período</div>
+        </div>
+        <div class="badge" id="dist-badge"></div>
+      </div>
+      <div class="bars" id="bars-container"></div>
+    </div>
+
+    <div class="action-row">
+      <button class="btn-action" id="btn-charts" style="display:none" onclick="toggleCharts()">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Ver evolución diaria
+      </button>
+      <button class="btn-action" onclick="toggleMunicipio()">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Por municipio
+      </button>
+      <button class="btn-action" onclick="abrirMapa()">
+        <svg viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        Ver mapa
+      </button>
+      <button class="btn-action" onclick="toggleTransportistas()">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Ver transportistas
+      </button>
+      <button class="btn-action" onclick="toggleReclamos()">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Reclamos por motocarro
+      </button>
+    </div>
+
+    <!-- Municipio -->
+    <div id="municipio-section" style="display:none;margin-bottom:1rem">
+      <div class="section-card">
+        <div class="sec-header">
+          <div>
+            <div class="sec-title">Resumen por municipio</div>
+            <div class="sec-sub" id="mun-sub"></div>
+          </div>
+          <div class="badge" id="mun-badge"></div>
+        </div>
+        <div class="tbl-wrap">
+          <div class="export-row">
+            <button class="btn-export" id="btn-export">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Exportar CSV
+            </button>
+          </div>
+          <table><thead id="mun-thead"></thead><tbody id="mun-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- Municipio charts -->
+      <div class="section-card" style="margin-top:0">
+        <div class="sec-header">
+          <div>
+            <div class="sec-title">Evolución diaria por municipio</div>
+            <div class="sec-sub">Seleccioná uno o más municipios para comparar</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <button class="btn-export" id="btn-mun-todos" onclick="selMunTodos()" style="padding:0 12px">Todos</button>
+            <button class="btn-export" id="btn-mun-ninguno" onclick="selMunNinguno()" style="padding:0 12px">Ninguno</button>
+          </div>
+        </div>
+        <div class="mun-chips-row" id="mun-chips-row"></div>
+        <div id="mun-charts-wrap">
+          <div style="margin-bottom:1rem">
+            <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:.75rem">Ingresados por día</div>
+            <div style="position:relative;height:220px"><canvas id="chart-mun-ing"></canvas></div>
+            <div class="legend" id="legend-mun-ing" style="margin-top:.75rem"></div>
+          </div>
+          <div style="padding-top:1rem;border-top:1px solid var(--border);margin-bottom:.5rem">
+            <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:.75rem">% Resueltos en ≤24h por día de ingreso</div>
+            <div style="position:relative;height:220px"><canvas id="chart-mun-pct"></canvas></div>
+            <div class="legend" id="legend-mun-pct" style="margin-top:.75rem"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div id="charts-section" style="display:none">
+      <div class="section-card" style="margin-bottom:1rem">
+        <div class="sec-header">
+          <div>
+            <div class="sec-title">Reclamos resueltos por día</div>
+            <div class="sec-sub">Cantidad cuya fecha de resolución cae en cada día</div>
+          </div>
+        </div>
+        <canvas id="chart-resueltos" height="90"></canvas>
+      </div>
+      <div class="section-card" style="margin-bottom:1rem">
+        <div class="sec-header">
+          <div>
+            <div class="sec-title">% Resueltos en ≤24h por día de ingreso</div>
+            <div class="sec-sub">Sobre el total de reclamos ingresados ese día</div>
+          </div>
+        </div>
+        <canvas id="chart-pct24" height="90"></canvas>
+        <div id="warn-pct24"></div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-line" style="background:#1D9E75"></div>% en ≤24h (eje izq.)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:rgba(24,95,165,.35)"></div>Ingresados ese día (eje der.)</div>
+        </div>
+      </div>
+      <div class="section-card" id="chart-unicos-section" style="display:none;margin-bottom:1rem">
+        <div class="sec-header">
+          <div>
+            <div class="sec-title">Ingresos únicos vs resueltos únicos por día</div>
+            <div class="sec-sub">Comparación de volumen operativo neto</div>
+          </div>
+        </div>
+        <canvas id="chart-unicos" height="90"></canvas>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:rgba(24,95,165,.6)"></div>Ingresados únicos</div>
+          <div class="legend-item"><div class="legend-dot" style="background:rgba(29,158,117,.6)"></div>Resueltos únicos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transportistas -->
+    <div id="transp-section" style="display:none;margin-bottom:1rem">
+      <div class="section-card">
+        <div class="sec-header">
+          <div>
+            <div class="sec-title">Asistencia de transportistas</div>
+            <div class="sec-sub" id="transp-sub">Transportistas con al menos N reclamos únicos resueltos por día</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:8px">
+              <label style="font-size:12px;font-weight:600;color:var(--text2);white-space:nowrap">Mín. reclamos únicos</label>
+              <input type="number" id="transp-umbral" value="1" min="1" max="999"
+                style="width:64px;height:32px;padding:0 8px;font-size:13px;border:1px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);text-align:center;font-family:'DM Mono',monospace"
+                oninput="renderTransportistas()">
+            </div>
+            <div class="badge" id="transp-badge"></div>
+          </div>
+        </div>
+
+        <!-- Tipo tabs -->
+        <div class="ttab-group">
+          <button class="ttab on"  id="ttab-todos"     onclick="setTranspTab('todos')">Todos</button>
+          <button class="ttab"     id="ttab-moto"      onclick="setTranspTab('moto')">🛵 Motocarros</button>
+          <button class="ttab"     id="ttab-empresa"   onclick="setTranspTab('empresa')">🚛 Empresas</button>
+          <button class="ttab"     id="ttab-fid"       onclick="setTranspTab('fideicomiso')">🏛 Fideicomiso</button>
+          <button class="ttab"     id="ttab-operativo" onclick="setTranspTab('operativo')">⚙️ Operativos</button>
+        </div>
+
+        <!-- KPI asistencia -->
+        <div id="transp-kpis" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.5rem"></div>
+
+        <!-- Chart asistencia diaria -->
+        <div id="transp-chart-wrap" style="display:none;margin-bottom:1.5rem">
+          <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:.75rem">Transportistas que asistieron por día</div>
+          <div style="position:relative;height:220px"><canvas id="chart-transp-asist"></canvas></div>
+          <div class="legend" id="legend-transp" style="margin-top:.75rem"></div>
+        </div>
+
+        <!-- Tabla detalle -->
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:.75rem" id="transp-tbl-title">Detalle por transportista</div>
+          <div class="export-row">
+            <button class="btn-export" id="btn-export-transp">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Exportar CSV
+            </button>
+          </div>
+          <div class="tbl-wrap">
+            <table><thead id="transp-thead"></thead><tbody id="transp-tbody"></tbody></table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reclamos por motocarro -->
+    <div id="reclamos-section" style="display:none;margin-bottom:1rem">
+
+      <div class="section-card" style="margin-bottom:1rem">
+        <div class="sec-header">
+          <div>
+            <div class="sec-title">Promedio de reclamos por motocarro</div>
+            <div class="sec-sub">Reclamos únicos resueltos por día · solo motocarros</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:7px">
+              <label style="font-size:12px;font-weight:600;color:var(--text2);white-space:nowrap">Mín. reclamos/día</label>
+              <input type="number" id="rec-umbral-rec" value="1" min="1" max="999"
+                style="width:60px;height:32px;padding:0 8px;font-size:13px;border:1px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);text-align:center;font-family:'DM Mono',monospace"
+                oninput="renderReclamos()">
+            </div>
+            <div style="width:1px;height:24px;background:var(--border)"></div>
+            <div style="display:flex;align-items:center;gap:7px">
+              <label style="font-size:12px;font-weight:600;color:var(--text2);white-space:nowrap">Mín. días asistidos</label>
+              <input type="number" id="rec-umbral-dias" value="5" min="1" max="999"
+                style="width:60px;height:32px;padding:0 8px;font-size:13px;border:1px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);text-align:center;font-family:'DM Mono',monospace"
+                oninput="renderReclamos()">
+            </div>
+            <div class="badge" id="rec-badge-ind"></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.25rem" id="rec-kpis"></div>
+        <div class="export-row">
+          <button class="btn-export" id="btn-export-rec-ind">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Exportar CSV
+          </button>
+        </div>
+        <div class="tbl-wrap">
+          <table><thead id="rec-ind-thead"></thead><tbody id="rec-ind-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="sec-header">
+          <div>
+            <div class="sec-title">Promedio de reclamos por municipio</div>
+            <div class="sec-sub" id="rec-muni-sub">Días donde el motocarro hizo ≥80% de sus reclamos en ese municipio</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:7px">
+              <label style="font-size:12px;font-weight:600;color:var(--text2);white-space:nowrap">% mín. en municipio</label>
+              <input type="number" id="rec-pct-muni" value="80" min="50" max="100"
+                style="width:60px;height:32px;padding:0 8px;font-size:13px;border:1px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);text-align:center;font-family:'DM Mono',monospace"
+                oninput="renderReclamos()">
+              <span style="font-size:12px;color:var(--text3)">%</span>
+            </div>
+            <div class="badge" id="rec-badge-muni"></div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table><thead id="rec-muni-thead"></thead><tbody id="rec-muni-tbody"></tbody></table>
+        </div>
+        <div style="margin-top:.75rem;font-size:11px;color:var(--text3)" id="rec-muni-excl"></div>
+      </div>
+
+      <!-- Panel 3: Franjas horarias -->
+      <div class="section-card" style="margin-top:1rem">
+        <div class="sec-header">
+          <div>
+            <div class="sec-title">Distribución por franja horaria</div>
+            <div class="sec-sub">Promedio de reclamos únicos resueltos por motocarro activo en cada hora · solo motocarros</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:7px">
+              <label style="font-size:12px;font-weight:600;color:var(--text2);white-space:nowrap">Mín. motos activos</label>
+              <input type="number" id="rec-umbral-motos-h" value="2" min="1" max="50"
+                style="width:56px;height:32px;padding:0 8px;font-size:13px;border:1px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);text-align:center;font-family:'DM Mono',monospace"
+                oninput="renderReclamos()">
+            </div>
+            <div class="badge" id="rec-badge-franjas"></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.5rem" id="rec-franjas-kpis"></div>
+        <div style="position:relative;height:260px;margin-bottom:1rem">
+          <canvas id="chart-franjas-hora" role="img" aria-label="Distribución por franja horaria de reclamos por motocarro"></canvas>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:1rem" id="rec-franjas-excl"></div>
+        <div class="tbl-wrap">
+          <table><thead id="rec-franjas-thead"></thead><tbody id="rec-franjas-tbody"></tbody></table>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="info-bar" id="info-bar"></div>
+  </div>
+</div>
+
+
+<!-- MAP OVERLAY -->
+<div id="map-view">
+  <div class="map-topbar">
+    <div class="map-topbar-title">
+      <div class="header-badge" style="width:34px;height:34px">
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--blue);fill:none;stroke-width:1.75"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+      </div>
+      <h2>Mapa de reclamos</h2>
+    </div>
+    <div class="map-filter-row">
+      <input type="date" id="map-f1">
+      <div id="map-f2wrap" style="display:none"><input type="date" id="map-f2"></div>
+      <button class="btn-map-sm" id="btn-map-rango" onclick="toggleMapRange()">Rango</button>
+      <button class="btn-map-apply" onclick="renderMapa()">Aplicar</button>
+      <button class="btn-map-sm" onclick="toggleHorarios()" style="display:flex;align-items:center;gap:5px">
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Horarios
+      </button>
+      <button class="btn-map-close" onclick="cerrarMapa()">
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Cerrar
+      </button>
+    </div>
+  </div>
+  <div id="horarios-panel" class="horarios-panel" style="display:none">
+    <div class="hp-grid">
+
+      <div class="hp-bloque" style="border-color:#1D9E75">
+        <div class="hp-bloque-title" style="color:#1D9E75">Resueltos ≤ 24h</div>
+        <div class="hp-row" style="margin-bottom:6px">
+          <div class="hp-ctrl"><label>Ingreso — desde</label><input type="time" id="c24-ing-desde"></div>
+          <div class="hp-ctrl"><label>Ingreso — hasta</label><input type="time" id="c24-ing-hasta"></div>
+        </div>
+        <div class="hp-row">
+          <div class="hp-ctrl"><label>Resolución — desde</label><input type="time" id="c24-res-desde"></div>
+          <div class="hp-ctrl"><label>Resolución — hasta</label><input type="time" id="c24-res-hasta"></div>
+          <button class="btn-hp-clear" onclick="clearHora('c24')">✕</button>
+        </div>
+      </div>
+
+      <div class="hp-bloque" style="border-color:#EF9F27">
+        <div class="hp-bloque-title" style="color:#854F0B">Resueltos &gt; 24h</div>
+        <div class="hp-row" style="margin-bottom:6px">
+          <div class="hp-ctrl"><label>Ingreso — desde</label><input type="time" id="cmas-ing-desde"></div>
+          <div class="hp-ctrl"><label>Ingreso — hasta</label><input type="time" id="cmas-ing-hasta"></div>
+        </div>
+        <div class="hp-row">
+          <div class="hp-ctrl"><label>Resolución — desde</label><input type="time" id="cmas-res-desde"></div>
+          <div class="hp-ctrl"><label>Resolución — hasta</label><input type="time" id="cmas-res-hasta"></div>
+          <button class="btn-hp-clear" onclick="clearHora('cmas')">✕</button>
+        </div>
+      </div>
+
+      <div class="hp-bloque" style="border-color:#D85A30">
+        <div class="hp-bloque-title" style="color:#A32D2D">Sin resolver</div>
+        <div class="hp-row">
+          <div class="hp-ctrl"><label>Ingreso — desde</label><input type="time" id="sin-ing-desde"></div>
+          <div class="hp-ctrl"><label>Ingreso — hasta</label><input type="time" id="sin-ing-hasta"></div>
+          <button class="btn-hp-clear" onclick="clearHora('sin')">✕</button>
+        </div>
+      </div>
+
+    </div>
+    <button class="btn-map-apply" onclick="renderMapa()" style="height:30px;padding:0 18px;font-size:12px">Aplicar filtros</button>
+  </div>
+  <div class="map-legend-bar">
+    <div class="map-leg-item" id="tog-c24" onclick="toggleMapCat('c24')"><div class="map-leg-dot" style="background:#1D9E75"></div>Resuelto en ≤ 24h</div>
+    <div class="map-leg-item" id="tog-cmas" onclick="toggleMapCat('cmas')"><div class="map-leg-dot" style="background:#EF9F27"></div>Resuelto en &gt; 24h</div>
+    <div class="map-leg-item" id="tog-sin" onclick="toggleMapCat('sin')"><div class="map-leg-dot" style="background:#D85A30"></div>Sin resolver</div>
+  </div>
+  <div class="map-stats-bar" id="map-stats-bar"></div>
+  <div id="leaflet-map"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const EMPRESAS=['DG','TESSA','EQUIPO','SALIR ADELANTE','ROSADO','TAYM','VOS CON VOZ'];
+const EMPRESAS_EXACTAS=['Pendiente-097','Región Zona Limpia-090','EMPRESA ISMAEL & LOURDES-036','VOLUMINOSO 1 - SA-1033','VOLUMINOSO 2 - SA-1034','VOLUMINOSO 3 - SA-1035','VOLUMINOSO 4 - SA-1036','VOLUMINOSO 5 - SA-1037','VOLUMINOSO 6 - SA-1038'];
+const FIDEICOMISO_EXACTAS=['CAP-017'];
+const OPERATIVOS_EXACTAS=['Limpio-099','Repetido-000','Playas-092','En proceso-093','-','Derivado-095','Pala-089','Agenda - No confirmó fecha-094','Agenda - Cancelado-9999','Hecho-098'];
+const MUNI_MAP={A:'Municipio A',B:'Municipio B',C:'Municipio C',CH:'Municipio CH',D:'Municipio D',E:'Municipio E',F:'Municipio F',G:'Municipio G','-':'Sin municipio'};
+const DEFAULT_CATS=new Set(['Basura fuera del contenedor','Bolsas ABC','Contenedor - Basural','Contenedor desbordado','Limpieza espacio público','Papeleras','Residuos esparcidos','Residuos reciclables','Voluminosos','Voluminosos - Escombro','Voluminosos - Poda']);
+const BAR_COLORS=['#1D9E75','#185FA5','#EF9F27','#D85A30','#888780'];
+const BAR_LABELS=['Resueltos en ≤ 24h','Resueltos 24h – 48h','Resueltos 48h – 72h','Resueltos > 72h','Sin resolver'];
+
+let allData=[], isRange=false, chartRes=null, chartPct=null, chartUnicos=null;
+let globalDatos=[], globalDesde=null, globalHasta=null;
+let currentMode='todos', activeCats=new Set(DEFAULT_CATS);
+let lastMuns=[], lastMunMap={};
+
+function isFideicomiso(t){
+  if(!t)return false;
+  const s=String(t).trim();
+  return FIDEICOMISO_EXACTAS.includes(s);
+}
+function isOperativo(t){
+  if(!t)return false;
+  const s=String(t).trim();
+  return OPERATIVOS_EXACTAS.includes(s);
+}
+function isEmpresa(t){
+  if(!t)return false;
+  if(isFideicomiso(t))return false;
+  const s=String(t).trim();
+  if(EMPRESAS_EXACTAS.includes(s))return true;
+  const u=s.toUpperCase();
+  return EMPRESAS.some(e=>u.includes(e));
+}
+function esRepetido(r){return String(getCol(r,'repetido')||'').toLowerCase().trim()==='true';}
+function esValido(r){
+  const t=(getCol(r,'tipo_de_reclamo')||'').trim().toUpperCase();
+  return t==='VALIDO'||t==='NOVALIDOATENDIDO';
+}
+function enCat(r){
+  const inc=getCol(r,'incidente')||'';
+  return activeCats.has(inc);
+}
+function enTransp(r){
+  const sel=document.getElementById('f-transp').value;
+  if(sel==='all')return true;
+  const t=getCol(r,'transportista');
+  if(sel==='fideicomiso')return isFideicomiso(t);
+  if(sel==='empresa')return isEmpresa(t);
+  if(sel==='moto')return !isEmpresa(t)&&!isFideicomiso(t);
+  return true;
+}
+function parseDate(v){
+  if(!v)return null;
+  if(v instanceof Date)return isNaN(v)?null:v;
+  if(typeof v==='number'){
+    // Excel serial to local time: avoid UTC by extracting parts
+    const totalDays=v-25569;
+    const ms=Math.round(totalDays*86400*1000);
+    const d=new Date(ms);
+    // Convert UTC date to local by creating with explicit local parts
+    const local=new Date(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),
+      d.getUTCHours(),d.getUTCMinutes(),d.getUTCSeconds());
+    return isNaN(local)?null:local;
+  }
+  const s=String(v).trim();
+  const m1=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[T\s](\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
+  if(m1){const[,dd,mm,yyyy,hh='0',mn='0',ss='0']=m1;return new Date(+yyyy,+mm-1,+dd,+hh,+mn,+ss);}
+  const m2=s.match(/^(\d{4})-(\d{2})-(\d{2})(?:[T\s](\d{2}):(\d{2})(?::(\d{2}))?)?/);
+  if(m2){const[,yyyy,mm,dd,hh='0',mn='0',ss='0']=m2;return new Date(+yyyy,+mm-1,+dd,+hh,+mn,+ss);}
+  const d=new Date(s);return isNaN(d)?null:d;
+}
+function dayStart(d){const x=new Date(d);x.setHours(0,0,0,0);return x;}
+function dayEnd(d){const x=new Date(d);x.setHours(23,59,59,999);return x;}
+function toKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function diffH(a,b){return(b-a)/3600000;}
+function getCol(r,n){const k=Object.keys(r).find(k=>k.toLowerCase()===n.toLowerCase());return k?r[k]:undefined;}
+function fmt(s){if(!s)return'';const[y,m,d]=s.split('-');return`${d}/${m}/${y}`;}
+function dateRange(desde,hasta){
+  const days=[];let cur=new Date(desde);
+  while(cur<=hasta){days.push(toKey(cur));cur=new Date(cur.getTime()+86400000);}
+  return days;
+}
+function getMuni(r){
+  const raw=String(getCol(r,'municipio')||'-').trim();
+  return MUNI_MAP[raw]||('Municipio '+raw);
+}
+function distBucket(r){
+  const fRec=parseDate(getCol(r,'fecha_de_reclamo'));
+  const fRes=parseDate(getCol(r,'fecha_resuelto'));
+  const est=(getCol(r,'estado')||'').toLowerCase();
+  const isResuelto=est==='cerrado'||est==='resuelto'||est==='closed';
+  if(isResuelto&&!fRes)return 0;
+  if(!fRes)return 4;
+  if(!fRec)return 4;
+  const h=diffH(fRec,fRes);
+  if(h<=24)return 0;
+  if(h<=48)return 1;
+  if(h<=72)return 2;
+  return 3;
+}
+
+// ── Conexión a Google Sheets ────────────────────────────────────────────────
+// Cómo configurar:
+//  1. Abrí la Google Sheet con la base de reclamos (tiene que tener las mismas
+//     columnas que usaba el Excel: id, municipio, circuito, fecha_de_reclamo,
+//     id_del_padre, estado, repetido, fecha_resuelto, incidente, tipo_de_reclamo,
+//     dirección, latitud, longitud, transportista).
+//  2. Compartila como "Cualquier persona con el enlace puede ver".
+//  3. De la URL (https://docs.google.com/spreadsheets/d/ESTE_ID/edit#gid=ESTE_GID)
+//     copiá el ID y el gid de la pestaña con los datos, y pegalos abajo.
+const SHEET_ID  = '1A0ZUX1dLPIwiHO5tLYb2eTnGRMb6L96Fz7bI52tlbiI';
+const SHEET_GID = '671381980';
+
+function loadGvizJsonp(){
+  return new Promise((resolve,reject)=>{
+    const cbName='_gvizCb_'+Date.now();
+    window[cbName]=function(resp){
+      delete window[cbName];
+      const s=document.getElementById('_gvizScript');
+      if(s)s.remove();
+      if(resp&&resp.status==='ok'&&resp.table){
+        resolve(resp.table);
+      } else {
+        reject(new Error('La planilla no devolvió datos. Verificá que sea pública ("Cualquier persona con el enlace puede ver").'));
+      }
+    };
+    const timer=setTimeout(()=>{
+      if(window[cbName]){
+        delete window[cbName];
+        const s=document.getElementById('_gvizScript');
+        if(s)s.remove();
+        reject(new Error('Tiempo de espera agotado. Verificá tu conexión a internet.'));
+      }
+    },20000);
+    const old=document.getElementById('_gvizScript');
+    if(old)old.remove();
+    const script=document.createElement('script');
+    script.id='_gvizScript';
+    script.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:${cbName}&gid=${SHEET_GID}`;
+    script.onerror=()=>{
+      clearTimeout(timer);
+      delete window[cbName];
+      reject(new Error('No se pudo cargar el script de Google Sheets. Revisá el SHEET_ID.'));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+function gvizCellValue(cell,col){
+  if(!cell||cell.v===null||cell.v===undefined)return '';
+  const vStr=typeof cell.v==='string'?cell.v:'';
+  if((col.type==='date'||col.type==='datetime')&&vStr){
+    const m=vStr.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
+    if(m){
+      const[,y,mo,d,h='0',mi='0',s='0']=m;
+      const pad=n=>String(n).padStart(2,'0');
+      // String ISO "YYYY-MM-DDTHH:MM:SS" (mo viene 0-indexado desde gviz, +1 para el mes real).
+      // Se devuelve como texto, no Date, porque el resto del dashboard (parseDate, rawDateStr,
+      // horaFromRaw y el slice(0,10) de más abajo) espera exactamente este formato de string.
+      return `${y}-${pad(+mo+1)}-${pad(d)}T${pad(h)}:${pad(mi)}:${pad(s)}`;
+    }
+  }
+  return cell.v;
+}
+
+function gvizTableToObjects(table){
+  const cols=table.cols||[];
+  const headers=cols.map(c=>String(c.label||c.id||'').trim());
+  const dataRows=table.rows||[];
+  return dataRows.map(row=>{
+    const cells=row.c||[];
+    const obj={};
+    headers.forEach((h,i)=>{
+      if(!h)return;
+      obj[h]=gvizCellValue(cells[i],cols[i]||{});
+    });
+    return obj;
+  });
+}
+
+function ayerStr(){
+  const d=new Date();
+  d.setDate(d.getDate()-1);
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+async function fetchFromSheets(){
+  const btn=document.getElementById('btn-generar');
+  const fi=document.getElementById('file-info');
+  if(SHEET_ID==='PEGAR_AQUI_EL_ID_DE_LA_GOOGLE_SHEET'){
+    fi.innerHTML='<div class="file-status err">⚠ Falta configurar el SHEET_ID — buscá esa constante cerca del final del código.</div>';
+    return;
+  }
+  btn.disabled=true;btn.style.opacity='.55';
+  fi.innerHTML='<div class="file-status ok">⏳ Conectando con Google Sheets…</div>';
+  try{
+    const table=await loadGvizJsonp();
+    const data=gvizTableToObjects(table);
+    allData=data.filter(r=>esValido(r));
+    const cols=Object.keys(data[0]||{}).map(x=>x.toLowerCase());
+    const miss=['fecha_de_reclamo','fecha_resuelto','incidente','tipo_de_reclamo','municipio','repetido'].filter(c=>!cols.includes(c));
+    if(miss.length){
+      fi.innerHTML=`<div class="file-status err">⚠ Columnas no encontradas en la Sheet: ${miss.join(', ')}</div>`;
+      return;
+    }
+    // Tope "a día vencido": nunca mostrar más allá de ayer, aunque la hoja tenga algo de hoy
+    const ayer=ayerStr();
+    const allDates=allData.map(r=>String(getCol(r,'fecha_de_reclamo')||'').slice(0,10)).filter(d=>d.length===10).sort();
+    document.getElementById('fecha1').max=ayer;
+    document.getElementById('fecha2').max=ayer;
+    if(allDates.length){
+      document.getElementById('fecha1').value=allDates[0];
+      document.getElementById('fecha2').value=allDates[allDates.length-1]>ayer?ayer:allDates[allDates.length-1];
+      if(!isRange){toggleRange();} // toggleRange() ya invierte isRange (false→true) — asignarlo antes lo revertía a false
+    }
+    // Build cat chips from present cats
+    const presentCats=[...new Set(allData.map(r=>getCol(r,'incidente')||'').filter(Boolean))].sort();
+    activeCats=new Set(presentCats.filter(c=>DEFAULT_CATS.has(c)));
+    buildCatChips(presentCats);
+    const ahora=new Date();
+    const hhmm=String(ahora.getHours()).padStart(2,'0')+':'+String(ahora.getMinutes()).padStart(2,'0');
+    fi.innerHTML=`<div class="file-status ok">✓ ${allData.length.toLocaleString('es-UY')} registros válidos · datos hasta ${fmt(allDates[allDates.length-1]||ayer)}</div>`;
+    document.getElementById('header-file-name').textContent='Google Sheets · actualizado '+hhmm;
+    document.getElementById('header-file-tag').style.display='flex';
+    document.getElementById('step-filter').style.display='block';
+    aplicar(); // Renderiza de una con el período completo — evita el segundo clic en "Generar dashboard"
+  } catch(err){
+    fi.innerHTML=`<div class="file-status err">✗ Error: ${err.message}</div>`;
+  } finally {
+    btn.disabled=false;btn.style.opacity='';
+  }
+}
+
+function buildCatChips(cats){
+  const grid=document.getElementById('cat-chips');
+  grid.innerHTML='';
+  cats.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='chip'+(activeCats.has(c)?' on':'');
+    b.textContent=c;
+    b.onclick=()=>{
+      if(activeCats.has(c))activeCats.delete(c);
+      else activeCats.add(c);
+      b.classList.toggle('on',activeCats.has(c));
+      if(globalDatos.length)renderDashboard();
+    };
+    grid.appendChild(b);
+  });
+}
+
+function toggleRange(){
+  isRange=!isRange;
+  document.getElementById('f2wrap').style.display=isRange?'flex':'none';
+  document.getElementById('btn-rango').classList.toggle('active',isRange);
+  document.getElementById('lbl-f1').textContent=isRange?'Desde':'Fecha';
+}
+
+function setMode(mode){
+  currentMode=mode;
+  document.getElementById('mode-todos').classList.toggle('active',mode==='todos');
+  document.getElementById('mode-unicos').classList.toggle('active',mode==='unicos');
+  const uc=document.getElementById('chart-unicos-section');
+  if(uc)uc.style.display=mode==='unicos'&&document.getElementById('charts-section').style.display!=='none'?'block':'none';
+  if(globalDatos.length)renderDashboard();
+}
+
+function toggleCats(){
+  const p=document.getElementById('cat-panel');
+  p.style.display=p.style.display==='none'?'block':'none';
+}
+
+function filtrar(lista){
+  return currentMode==='unicos'?lista.filter(r=>!esRepetido(r)):lista;
+}
+
+function aplicar(){
+  const f1=document.getElementById('fecha1').value;
+  if(!f1){alert('Seleccioná una fecha.');return;}
+  globalDesde=dayStart(new Date(f1+'T00:00:00'));
+  const f2=document.getElementById('fecha2').value;
+  globalHasta=isRange&&f2?dayEnd(new Date(f2+'T00:00:00')):dayEnd(new Date(f1+'T00:00:00'));
+  globalDatos=allData;
+  const periodoTxt=isRange&&f2&&f1!==f2?`${fmt(f1)} — ${fmt(f2)}`:fmt(f1);
+  document.getElementById('period-tag').innerHTML=`<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> <strong>${periodoTxt}</strong>`;
+  const multiDia=isRange&&f2&&f1!==f2;
+  document.getElementById('btn-charts').style.display=multiDia?'inline-flex':'none';
+  document.getElementById('charts-section').style.display='none';
+  document.getElementById('municipio-section').style.display='none';
+  document.getElementById('step-dashboard').style.display='block';
+  document.getElementById('step-dashboard').scrollIntoView({behavior:'smooth',block:'start'});
+  renderDashboard();
+}
+
+function getFiltered(){
+  return globalDatos.filter(r=>enCat(r)&&enTransp(r));
+}
+
+function renderDashboard(){
+  const modo=currentMode;
+  const todos=getFiltered();
+  const ingTodos=todos.filter(r=>{const f=parseDate(getCol(r,'fecha_de_reclamo'));return f&&f>=globalDesde&&f<=globalHasta;});
+  const resTodos=todos.filter(r=>{const f=parseDate(getCol(r,'fecha_resuelto'));return f&&f>=globalDesde&&f<=globalHasta;});
+  const ingresados=filtrar(ingTodos);
+  const resueltos=filtrar(resTodos);
+  const labelSuffix=modo==='unicos'?' únicos':'';
+  document.getElementById('lbl-kpi-ing').textContent='Ingresados'+labelSuffix;
+  document.getElementById('lbl-kpi-res').textContent='Resueltos'+labelSuffix;
+  document.getElementById('lbl-dist').textContent='Distribución por tiempo de resolución'+labelSuffix;
+  document.getElementById('kpi-ing').textContent=ingresados.length.toLocaleString('es-UY');
+  document.getElementById('kpi-res').textContent=resueltos.length.toLocaleString('es-UY');
+
+  const buckets=[0,0,0,0,0];
+  for(const r of ingresados)buckets[distBucket(r)]++;
+  const total=ingresados.length||1;
+  const pct24=Math.round(buckets[0]/total*100);
+  document.getElementById('kpi-p24').textContent=pct24+'%';
+  document.getElementById('kpi-sin').textContent=buckets[4].toLocaleString('es-UY');
+  document.getElementById('dist-badge').textContent=ingresados.length.toLocaleString('es-UY')+' reclamos';
+  // Promedio horas resolución — sobre ingresados, excluir negativos y >N días (configurable)
+  const diasMaxEl=document.getElementById('umbral-dias-res');
+  const horasMax=(diasMaxEl?Math.max(1,parseInt(diasMaxEl.value)||30):30)*24;
+  let horasSum=0,horasCount=0;
+  ingresados.forEach(r=>{
+    const fRec=parseDate(getCol(r,'fecha_de_reclamo'));
+    const fRes=parseDate(getCol(r,'fecha_resuelto'));
+    if(fRec&&fRes){const h=(fRes-fRec)/3600000;if(h>=0&&h<=horasMax){horasSum+=h;horasCount++;}}
+  });
+  const promHEl=document.getElementById('kpi-prom-h');
+  if(promHEl) promHEl.textContent=horasCount>0?(horasSum/horasCount).toFixed(1)+'h':'—';
+
+  const maxB=Math.max(...buckets,1);
+  document.getElementById('bars-container').innerHTML=BAR_LABELS.map((lbl,i)=>{
+    const pct=Math.round(buckets[i]/total*100);
+    const w=Math.round(buckets[i]/maxB*100);
+    return`<div class="bar-item">
+      <div class="bi-label">${lbl}</div>
+      <div class="bi-track"><div class="bi-fill" style="width:${w}%;background:${BAR_COLORS[i]}"></div></div>
+      <div class="bi-nums"><div class="bi-count">${buckets[i].toLocaleString('es-UY')}</div><div class="bi-pct">${pct}%</div></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('info-bar').textContent=`Mostrando ${ingresados.length.toLocaleString('es-UY')} reclamos ingresados · ${activeCats.size} categorías · modo: ${modo}`;
+  if(document.getElementById('transp-section').style.display!=='none')renderTransportistas();
+  if(document.getElementById('reclamos-section').style.display!=='none')renderReclamos();
+
+  if(document.getElementById('municipio-section').style.display!=='none')renderMunicipio();
+  if(document.getElementById('charts-section').style.display!=='none')renderCharts();
+}
+
+function toggleMunicipio(){
+  const sec=document.getElementById('municipio-section');
+  if(sec.style.display!=='none'){sec.style.display='none';return;}
+  renderMunicipio();
+  sec.style.display='block';
+  sec.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// Paleta de colores para municipios (hasta 9)
+const MUN_PALETTE=['#185FA5','#1D9E75','#EF9F27','#D85A30','#7B5EA7','#D44C8C','#2AAFCF','#5E8C31','#888780'];
+let selectedMuns=new Set();
+let chartMunIng=null, chartMunPct=null;
+
+function renderMunicipio(){
+  const todos=getFiltered();
+  const ingresados=filtrar(todos.filter(r=>{const f=parseDate(getCol(r,'fecha_de_reclamo'));return f&&f>=globalDesde&&f<=globalHasta;}));
+  const resueltos=filtrar(todos.filter(r=>{const f=parseDate(getCol(r,'fecha_resuelto'));return f&&f>=globalDesde&&f<=globalHasta;}));
+  const munMap={};
+  for(const r of ingresados){
+    const m=getMuni(r);
+    if(!munMap[m])munMap[m]={ing:0,en24:0,en48:0,en72:0,mas72:0,sinRes:0,res:0,horasSum:0,horasCount:0};
+    munMap[m].ing++;
+    const b=distBucket(r);
+    if(b===0)munMap[m].en24++;
+    else if(b===1)munMap[m].en48++;
+    else if(b===2)munMap[m].en72++;
+    else if(b===3)munMap[m].mas72++;
+    else munMap[m].sinRes++;
+    // Average resolution hours — exclude negatives and >N días (uses same dynamic threshold)
+    const fRec=parseDate(getCol(r,'fecha_de_reclamo'));
+    const fRes=parseDate(getCol(r,'fecha_resuelto'));
+    if(fRec&&fRes){
+      const h=(fRes-fRec)/3600000;
+      const hMaxMuni=(()=>{const el=document.getElementById('umbral-dias-res');return(el?Math.max(1,parseInt(el.value)||30):30)*24;})();
+      if(h>=0&&h<=hMaxMuni){munMap[m].horasSum+=h;munMap[m].horasCount++;}
+    }
+  }
+  for(const r of resueltos){
+    const m=getMuni(r);
+    if(!munMap[m])munMap[m]={ing:0,en24:0,en48:0,en72:0,mas72:0,sinRes:0,res:0,horasSum:0,horasCount:0};
+    munMap[m].res++;
+  }
+  const muns=Object.keys(munMap).sort();
+  lastMuns=muns;lastMunMap=munMap;
+  const modo=currentMode;
+  document.getElementById('mun-badge').textContent=muns.length+' municipios';
+  document.getElementById('mun-sub').textContent='Mismos filtros del período'+(modo==='unicos'?' (únicos)':'');
+  document.getElementById('btn-export').onclick=()=>exportCSV(muns,munMap);
+  document.getElementById('mun-thead').innerHTML=`<tr>
+    <th style="text-align:left">Municipio</th>
+    <th>Ingresados</th><th>Resueltos</th>
+    <th>≤24h</th><th>≤24h %</th>
+    <th>24–48h</th><th>48–72h</th><th>>72h</th><th>Sin resolver</th>
+    <th>Prom. resolución</th>
+  </tr>`;
+  document.getElementById('mun-tbody').innerHTML=muns.map(m=>{
+    const d=munMap[m];
+    const pct24=d.ing>0?Math.round(d.en24/d.ing*100):0;
+    const pctSin=d.ing>0?Math.round(d.sinRes/d.ing*100):0;
+    const sinCls=pctSin>20?'td-warn':'';
+    const promH=d.horasCount>0?(d.horasSum/d.horasCount).toFixed(1)+'h':'—';
+    return`<tr>
+      <td>${m}</td><td>${d.ing.toLocaleString('es-UY')}</td><td>${d.res.toLocaleString('es-UY')}</td>
+      <td class="td-ok">${d.en24.toLocaleString('es-UY')}</td>
+      <td class="td-ok">${pct24}%</td>
+      <td>${d.en48.toLocaleString('es-UY')}</td><td>${d.en72.toLocaleString('es-UY')}</td><td>${d.mas72.toLocaleString('es-UY')}</td>
+      <td class="${sinCls}">${d.sinRes.toLocaleString('es-UY')}</td>
+      <td style="font-family:'DM Mono',monospace;color:var(--text2)">${promH}</td>
+    </tr>`;
+  }).join('');
+
+  // Build mun chips — keep existing selection if still valid, else select all
+  const validSel=new Set([...selectedMuns].filter(m=>muns.includes(m)));
+  selectedMuns=validSel.size>0?validSel:new Set(muns);
+  buildMunChips(muns);
+  renderMunCharts(muns);
+}
+
+function buildMunChips(muns){
+  const row=document.getElementById('mun-chips-row');
+  row.innerHTML='';
+  muns.forEach((m,i)=>{
+    const color=MUN_PALETTE[i%MUN_PALETTE.length];
+    const btn=document.createElement('button');
+    btn.className='mun-chip'+(selectedMuns.has(m)?' on':'');
+    btn.textContent=m;
+    if(selectedMuns.has(m)) btn.style.background=color;
+    btn.dataset.mun=m;
+    btn.dataset.color=color;
+    btn.onclick=()=>{
+      if(selectedMuns.has(m)){
+        if(selectedMuns.size===1) return; // keep at least one
+        selectedMuns.delete(m);
+        btn.classList.remove('on');
+        btn.style.background='';
+      } else {
+        selectedMuns.add(m);
+        btn.classList.add('on');
+        btn.style.background=color;
+      }
+      renderMunCharts([...document.querySelectorAll('.mun-chip')].map(b=>b.dataset.mun));
+    };
+    row.appendChild(btn);
+  });
+}
+
+function selMunTodos(){
+  const btns=document.querySelectorAll('.mun-chip');
+  btns.forEach(b=>{
+    selectedMuns.add(b.dataset.mun);
+    b.classList.add('on');
+    b.style.background=b.dataset.color;
+  });
+  const allMuns=[...btns].map(b=>b.dataset.mun);
+  renderMunCharts(allMuns);
+}
+
+function selMunNinguno(){
+  const btns=document.querySelectorAll('.mun-chip');
+  // Keep only first selected
+  let kept=false;
+  btns.forEach(b=>{
+    if(!kept){selectedMuns=new Set([b.dataset.mun]);b.classList.add('on');b.style.background=b.dataset.color;kept=true;}
+    else{selectedMuns.delete(b.dataset.mun);b.classList.remove('on');b.style.background='';}
+  });
+  const allMuns=[...btns].map(b=>b.dataset.mun);
+  renderMunCharts(allMuns);
+}
+
+function renderMunCharts(allMuns){
+  const f1=document.getElementById('fecha1').value;
+  const f2=document.getElementById('fecha2').value||f1;
+  const desde=dayStart(new Date(f1+'T00:00:00'));
+  const hasta=dayEnd(new Date(f2+'T00:00:00'));
+  const days=dateRange(desde,hasta);
+  const labels=days.map(d=>fmt(d));
+  const gridC='rgba(0,0,0,.05)',tickC='#9E9890';
+  const activeMuns=allMuns.filter(m=>selectedMuns.has(m));
+
+  const base=getFiltered().filter(r=>currentMode==='todos'||!esRepetido(r));
+
+  // Build per-mun daily data
+  const munDayIng={}, munDay24={}, munDayTotal={};
+  activeMuns.forEach(m=>{munDayIng[m]={};munDay24[m]={};munDayTotal[m]={};days.forEach(d=>{munDayIng[m][d]=0;munDay24[m][d]=0;munDayTotal[m][d]=0;});});
+
+  base.forEach(r=>{
+    const m=getMuni(r);
+    if(!selectedMuns.has(m)) return;
+    const fRec=parseDate(getCol(r,'fecha_de_reclamo'));
+    if(!fRec) return;
+    const k=toKey(fRec);
+    if(!munDayIng[m]||!munDayIng[m].hasOwnProperty(k)) return;
+    munDayIng[m][k]++;
+    munDayTotal[m][k]++;
+    if(distBucket(r)===0) munDay24[m][k]++;
+  });
+
+  // Chart 1 — Ingresados por día por municipio
+  const ingDatasets=activeMuns.map((m,i)=>{
+    const color=MUN_PALETTE[allMuns.indexOf(m)%MUN_PALETTE.length];
+    return{label:m,data:days.map(d=>munDayIng[m][d]),borderColor:color,backgroundColor:color+'22',pointBackgroundColor:color,pointRadius:3,pointHoverRadius:5,tension:.3,fill:false,borderWidth:2};
+  });
+
+  if(chartMunIng) chartMunIng.destroy();
+  chartMunIng=new Chart(document.getElementById('chart-mun-ing'),{
+    type:'line',
+    data:{labels,datasets:ingDatasets},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toLocaleString('es-UY')}`}}},
+      scales:{x:{grid:{color:gridC},ticks:{color:tickC,font:{size:11},maxRotation:45,autoSkip:true,maxTicksLimit:20}},
+              y:{grid:{color:gridC},ticks:{color:tickC,font:{size:11},callback:v=>v.toLocaleString('es-UY')},beginAtZero:true}}}
+  });
+
+  // Chart 2 — % ≤24h por municipio
+  const pctDatasets=activeMuns.map((m,i)=>{
+    const color=MUN_PALETTE[allMuns.indexOf(m)%MUN_PALETTE.length];
+    const pctData=days.map(d=>{const t=munDayTotal[m][d];return t>0?Math.round(munDay24[m][d]/t*100):null;});
+    return{label:m,data:pctData,borderColor:color,backgroundColor:'transparent',pointBackgroundColor:color,pointRadius:3,pointHoverRadius:5,tension:.3,fill:false,borderWidth:2,spanGaps:true};
+  });
+
+  if(chartMunPct) chartMunPct.destroy();
+  chartMunPct=new Chart(document.getElementById('chart-mun-pct'),{
+    type:'line',
+    data:{labels,datasets:pctDatasets},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>c.parsed.y!==null?`${c.dataset.label}: ${c.parsed.y}%`:`${c.dataset.label}: sin datos`}}},
+      scales:{x:{grid:{color:gridC},ticks:{color:tickC,font:{size:11},maxRotation:45,autoSkip:true,maxTicksLimit:20}},
+              y:{grid:{color:gridC},ticks:{color:tickC,font:{size:11},callback:v=>v+'%'},min:0,max:100}}}
+  });
+
+  // Legends
+  ['ing','pct'].forEach(type=>{
+    const el=document.getElementById('legend-mun-'+type);
+    el.innerHTML=activeMuns.map(m=>{
+      const color=MUN_PALETTE[allMuns.indexOf(m)%MUN_PALETTE.length];
+      return`<div class="legend-item"><div class="legend-dot" style="background:${color};border-radius:50%;width:10px;height:10px"></div>${m}</div>`;
+    }).join('');
+  });
+}
+
+function exportCSV(muns,munMap){
+  const h=['Municipio','Ingresados','Resueltos','≤24h','≤24h %','24-48h','48-72h','>72h','Sin resolver','Prom. resolución (h)'];
+  const rows=muns.map(m=>{
+    const d=munMap[m];
+    const pct24=d.ing>0?Math.round(d.en24/d.ing*100):0;
+    const ph=d.horasCount>0?(d.horasSum/d.horasCount).toFixed(1):'';return[m,d.ing,d.res,d.en24,pct24+'%',d.en48,d.en72,d.mas72,d.sinRes,ph];
+  });
+  const csv=[h,...rows].map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='reclamos_por_municipio.csv';a.click();
+  URL.revokeObjectURL(url);
+}
+
+function toggleCharts(){
+  const sec=document.getElementById('charts-section');
+  if(sec.style.display!=='none'){sec.style.display='none';return;}
+  renderCharts();
+  sec.style.display='block';
+  document.getElementById('chart-unicos-section').style.display=currentMode==='unicos'?'block':'none';
+  sec.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function renderCharts(){
+  const f1=document.getElementById('fecha1').value;
+  const f2=document.getElementById('fecha2').value||f1;
+  const desde=dayStart(new Date(f1+'T00:00:00'));
+  const hasta=dayEnd(new Date(f2+'T00:00:00'));
+  const days=dateRange(desde,hasta);
+  const today=toKey(new Date());
+  const lastDay=days[days.length-1];
+  const lastIsToday=lastDay>=today;
+  const modo=currentMode;
+  const base=getFiltered().filter(r=>modo==='todos'||!esRepetido(r));
+
+  const resByDay={};days.forEach(d=>resByDay[d]=0);
+  base.forEach(r=>{
+    const f=parseDate(getCol(r,'fecha_resuelto'));if(!f)return;
+    const k=toKey(f);if(resByDay.hasOwnProperty(k))resByDay[k]++;
+  });
+
+  const ing24ByDay={};days.forEach(d=>ing24ByDay[d]={total:0,en24:0});
+  base.forEach(r=>{
+    const fRec=parseDate(getCol(r,'fecha_de_reclamo'));if(!fRec)return;
+    const k=toKey(fRec);if(!ing24ByDay.hasOwnProperty(k))return;
+    ing24ByDay[k].total++;
+    const fRes=parseDate(getCol(r,'fecha_resuelto'));
+    const est=(getCol(r,'estado')||'').toLowerCase();
+    const isRes=est==='cerrado'||est==='resuelto'||est==='closed';
+    if((isRes&&!fRes)||(fRes&&diffH(fRec,fRes)<=24))ing24ByDay[k].en24++;
+  });
+
+  const labels=days.map(d=>fmt(d));
+  const resVals=days.map(d=>resByDay[d]);
+  const pct24Vals=days.map(d=>{const{total,en24}=ing24ByDay[d];return total>0?Math.round(en24/total*100):null;});
+  const ingVals=days.map(d=>ing24ByDay[d].total);
+  const ptColors=days.map((_,i)=>lastIsToday&&i===days.length-1?'#EF9F27':'#1D9E75');
+  const gridC='rgba(0,0,0,.05)',tickC='#9E9890';
+
+  if(chartRes)chartRes.destroy();
+  chartRes=new Chart(document.getElementById('chart-resueltos'),{
+    type:'bar',
+    data:{labels,datasets:[{label:'Resueltos',data:resVals,backgroundColor:'rgba(29,158,117,.7)',borderRadius:4,borderSkipped:false}]},
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y.toLocaleString('es-UY')} resueltos`}}},
+      scales:{x:{grid:{color:gridC},ticks:{color:tickC,font:{size:11},maxRotation:45}},y:{grid:{color:gridC},ticks:{color:tickC,font:{size:11},stepSize:1,callback:v=>v.toLocaleString('es-UY')},beginAtZero:true}}}
+  });
+
+  if(chartPct)chartPct.destroy();
+  document.getElementById('warn-pct24').innerHTML=lastIsToday
+    ?`<div class="chart-warn"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> El último día (${fmt(lastDay)}) puede estar incompleto.</div>`:'';
+  chartPct=new Chart(document.getElementById('chart-pct24'),{
+    type:'bar',
+    data:{labels,datasets:[
+      {label:'Ingresados',data:ingVals,backgroundColor:'rgba(24,95,165,.12)',borderColor:'rgba(24,95,165,.25)',borderWidth:1,borderRadius:4,borderSkipped:false,yAxisID:'y-ing',order:2},
+      {label:'% en ≤24h',data:pct24Vals,type:'line',borderColor:'#1D9E75',backgroundColor:'transparent',pointBackgroundColor:ptColors,pointRadius:4,pointHoverRadius:6,tension:.35,fill:false,spanGaps:true,yAxisID:'y-pct',order:1}
+    ]},
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label==='% en ≤24h'?(c.parsed.y!==null?`${c.parsed.y}% en ≤24h`:'Sin datos'):`${c.parsed.y.toLocaleString('es-UY')} ingresados`}}},
+      scales:{x:{grid:{color:gridC},ticks:{color:tickC,font:{size:11},maxRotation:45}},
+        'y-ing':{position:'right',grid:{display:false},ticks:{color:tickC,font:{size:11},callback:v=>v.toLocaleString('es-UY')},beginAtZero:true,title:{display:true,text:'Ingresados',color:tickC,font:{size:10}}},
+        'y-pct':{position:'left',grid:{color:gridC},ticks:{color:tickC,font:{size:11},callback:v=>`${v}%`},min:0,max:100,title:{display:true,text:'% ≤24h',color:tickC,font:{size:10}}}}}
+  });
+
+  if(chartUnicos)chartUnicos.destroy();
+  if(modo==='unicos'){
+    const ingU={};days.forEach(d=>ingU[d]=0);
+    const resU={};days.forEach(d=>resU[d]=0);
+    getFiltered().filter(r=>!esRepetido(r)).forEach(r=>{
+      const fRec=parseDate(getCol(r,'fecha_de_reclamo'));
+      if(fRec){const k=toKey(fRec);if(ingU.hasOwnProperty(k))ingU[k]++;}
+      const fRes=parseDate(getCol(r,'fecha_resuelto'));
+      if(fRes){const k=toKey(fRes);if(resU.hasOwnProperty(k))resU[k]++;}
+    });
+    chartUnicos=new Chart(document.getElementById('chart-unicos'),{
+      type:'bar',
+      data:{labels,datasets:[
+        {label:'Ingresados únicos',data:days.map(d=>ingU[d]),backgroundColor:'rgba(24,95,165,.55)',borderRadius:4,borderSkipped:false},
+        {label:'Resueltos únicos',data:days.map(d=>resU[d]),backgroundColor:'rgba(29,158,117,.55)',borderRadius:4,borderSkipped:false}
+      ]},
+      options:{responsive:true,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},
+        scales:{x:{grid:{color:gridC},ticks:{color:tickC,font:{size:11},maxRotation:45}},y:{grid:{color:gridC},ticks:{color:tickC,font:{size:11},stepSize:1,callback:v=>v.toLocaleString('es-UY')},beginAtZero:true}}}
+    });
+  }
+}
+
+// =====================
+// TRANSPORTISTAS
+// =====================
+let transpTab = 'todos';
+let chartTranspAsist = null;
+
+function clasifTransp(t) {
+  if (!t || t === '(sin asignar)' || t.trim() === '') return 'motocarro';
+  const s = String(t).trim();
+  if (OPERATIVOS_EXACTAS.includes(s)) return 'operativo';
+  if (FIDEICOMISO_EXACTAS.includes(s)) return 'fideicomiso';
+  if (EMPRESAS_EXACTAS.includes(s)) return 'empresa';
+  const u = s.toUpperCase();
+  if (EMPRESAS.some(e => u.includes(e))) return 'empresa';
+  return 'motocarro';
+}
+
+function toggleTransportistas() {
+  const sec = document.getElementById('transp-section');
+  if (sec.style.display !== 'none') { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  renderTransportistas();
+  sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function setTranspTab(tab) {
+  transpTab = tab;
+  ['todos','moto','empresa','fideicomiso','operativo'].forEach(t => {
+    const el = document.getElementById('ttab-' + t);
+    if (!el) return;
+    el.classList.toggle('on', t === tab);
+    // Color accent per type
+    el.classList.remove('teal','amber','gray');
+    if (t === tab) {
+      if (t === 'empresa')    el.classList.add('teal');
+      if (t === 'fideicomiso') el.classList.add('amber');
+      if (t === 'operativo')  el.classList.add('gray');
+    }
+  });
+  renderTransportistas();
+}
+
+function renderTransportistas() {
+  const sec = document.getElementById('transp-section');
+  if (!sec || sec.style.display === 'none') return;
+
+  const umbralEl = document.getElementById('transp-umbral');
+  const umbral = Math.max(1, parseInt(umbralEl.value) || 1);
+
+  const f1 = document.getElementById('fecha1').value;
+  const f2 = document.getElementById('fecha2').value || f1;
+  const desde = dayStart(new Date(f1 + 'T00:00:00'));
+  const hasta  = dayEnd(new Date(f2 + 'T00:00:00'));
+  const days   = dateRange(desde, hasta);
+  const multiDia = days.length > 1;
+
+  // Base: reclamos únicos (sin repetidos), con filtros activos de categoría
+  // Asistencia = días en que el transportista RESOLVIÓ reclamos en el período
+  // Se busca por fecha_resuelto, no por fecha_de_reclamo
+  const base = globalDatos.filter(r => enCat(r) && !esRepetido(r));
+  const resPeriodo = base.filter(r => {
+    const f = parseDate(getCol(r, 'fecha_resuelto'));
+    return f && f >= desde && f <= hasta;
+  });
+
+  // Build per-transportista per-day counts (by fecha_resuelto)
+  const transpDayMap = {}; // { transp: { day: count } }
+  resPeriodo.forEach(r => {
+    const t = String(getCol(r, 'transportista') || '').trim() || '(sin asignar)';
+    const f = parseDate(getCol(r, 'fecha_resuelto'));
+    if (!f) return;
+    const k = toKey(f);
+    if (!transpDayMap[t]) transpDayMap[t] = {};
+    transpDayMap[t][k] = (transpDayMap[t][k] || 0) + 1;
+  });
+
+  // Summary per transportista
+  const transpSummary = {};
+  Object.entries(transpDayMap).forEach(([t, dayMap]) => {
+    const diasAsist  = Object.values(dayMap).filter(n => n >= umbral).length;
+    const totalAsist = Object.entries(dayMap).filter(([,n]) => n >= umbral).reduce((a,[,n]) => a + n, 0);
+    const totalRec   = Object.values(dayMap).reduce((a, b) => a + b, 0);
+    transpSummary[t] = { diasAsist, totalAsist, totalRec, dayMap, clasif: clasifTransp(t) };
+  });
+
+  // Tab filter
+  const TABS = { todos: null, moto: 'motocarro', empresa: 'empresa', fideicomiso: 'fideicomiso', operativo: 'operativo' };
+  const tabClasif = TABS[transpTab];
+  const filtered = Object.keys(transpSummary).filter(t => {
+    if (transpSummary[t].diasAsist === 0) return false;
+    if (tabClasif === null) return true;
+    return transpSummary[t].clasif === tabClasif;
+  });
+
+  // Badge
+  document.getElementById('transp-badge').textContent = filtered.length + ' transportistas · umbral ' + umbral;
+  document.getElementById('transp-sub').textContent   = 'Transportistas con al menos ' + umbral + ' reclamo' + (umbral > 1 ? 's' : '') + ' único' + (umbral > 1 ? 's' : '') + ' por día';
+
+  // KPI cards
+  const clasifMeta = {
+    motocarro:   { label: 'Motocarros',   color: 'blue'  },
+    empresa:     { label: 'Empresas',     color: 'teal'  },
+    fideicomiso: { label: 'Fideicomiso',  color: 'amber' },
+    operativo:   { label: 'Operativos',   color: 'gray'  },
+  };
+  let kpiHtml = '';
+  if (transpTab === 'todos') {
+    ['motocarro','empresa','fideicomiso','operativo'].forEach(c => {
+      const n = filtered.filter(t => transpSummary[t].clasif === c).length;
+      const m = clasifMeta[c];
+      kpiHtml += `<div class="kpi-card ${m.color}">
+        <div class="kpi-label">${m.label}</div>
+        <div class="kpi-val">${n}</div>
+        <div class="kpi-desc">transportistas activos</div>
+      </div>`;
+    });
+  } else {
+    const n         = filtered.length;
+    const totalDias = filtered.reduce((a, t) => a + transpSummary[t].diasAsist, 0);
+    const totalRec  = filtered.reduce((a, t) => a + transpSummary[t].totalAsist, 0);
+    const m = clasifMeta[tabClasif];
+    kpiHtml = `
+      <div class="kpi-card ${m.color}">
+        <div class="kpi-label">Activos</div>
+        <div class="kpi-val">${n}</div>
+        <div class="kpi-desc">transportistas</div>
+      </div>
+      <div class="kpi-card teal">
+        <div class="kpi-label">Días-asistencia</div>
+        <div class="kpi-val">${totalDias.toLocaleString('es-UY')}</div>
+        <div class="kpi-desc">suma de días activos</div>
+      </div>
+      <div class="kpi-card gray">
+        <div class="kpi-label">Reclamos</div>
+        <div class="kpi-val">${totalRec.toLocaleString('es-UY')}</div>
+        <div class="kpi-desc">en días con ≥${umbral}</div>
+      </div>`;
+  }
+  document.getElementById('transp-kpis').innerHTML = kpiHtml;
+
+  // Chart
+  const chartWrap = document.getElementById('transp-chart-wrap');
+  if (multiDia) {
+    chartWrap.style.display = 'block';
+    const gridC = 'rgba(0,0,0,.05)', tickC = '#9E9890';
+    const labels = days.map(d => fmt(d));
+    const palette = { motocarro: '#185FA5', empresa: '#1D9E75', fideicomiso: '#EF9F27', operativo: '#888780' };
+    let datasets = [];
+
+    if (transpTab === 'todos') {
+      ['motocarro','empresa','fideicomiso','operativo'].forEach(c => {
+        const data = days.map(d =>
+          Object.keys(transpSummary).filter(t =>
+            transpSummary[t].clasif === c && (transpSummary[t].dayMap[d] || 0) >= umbral
+          ).length
+        );
+        datasets.push({ label: clasifMeta[c].label, data, backgroundColor: palette[c] + 'CC', borderRadius: 3, borderSkipped: false });
+      });
+    } else {
+      const data = days.map(d => filtered.filter(t => (transpSummary[t].dayMap[d] || 0) >= umbral).length);
+      datasets.push({ label: clasifMeta[tabClasif].label, data, backgroundColor: palette[tabClasif] + 'CC', borderRadius: 3, borderSkipped: false });
+    }
+
+    if (chartTranspAsist) chartTranspAsist.destroy();
+    chartTranspAsist = new Chart(document.getElementById('chart-transp-asist'), {
+      type: 'bar',
+      data: { labels, datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } },
+        scales: {
+          x: { stacked: transpTab === 'todos', grid: { color: gridC }, ticks: { color: tickC, font: { size: 11 }, maxRotation: 45, autoSkip: true, maxTicksLimit: 20 } },
+          y: { stacked: transpTab === 'todos', grid: { color: gridC }, ticks: { color: tickC, font: { size: 11 }, stepSize: 1 }, beginAtZero: true, title: { display: true, text: 'Transportistas', color: tickC, font: { size: 11 } } }
+        }
+      }
+    });
+
+    const legEl = document.getElementById('legend-transp');
+    if (transpTab === 'todos') {
+      legEl.innerHTML = ['motocarro','empresa','fideicomiso','operativo'].map(c =>
+        `<div class="legend-item"><div class="legend-dot" style="background:${palette[c]}"></div>${clasifMeta[c].label}</div>`
+      ).join('');
+    } else { legEl.innerHTML = ''; }
+  } else {
+    chartWrap.style.display = 'none';
+  }
+
+  // Table
+  const sorted = [...filtered].sort((a, b) => transpSummary[b].totalAsist - transpSummary[a].totalAsist);
+  const showDayCols = multiDia && days.length <= 14;
+  const tipoBadge = { motocarro: '🛵', empresa: '🚛', fideicomiso: '🏛', operativo: '⚙️' };
+
+  document.getElementById('transp-thead').innerHTML = `<tr>
+    <th style="text-align:left">Transportista</th>
+    <th style="text-align:left">Tipo</th>
+    ${multiDia ? '<th>Días asistidos</th>' : ''}
+    <th>Total reclamos</th>
+    ${showDayCols ? days.map(d => `<th>${fmt(d).slice(0,5)}</th>`).join('') : ''}
+  </tr>`;
+
+  document.getElementById('transp-tbody').innerHTML = sorted.map(t => {
+    const s = transpSummary[t];
+    return `<tr>
+      <td>${t}</td>
+      <td style="font-size:11px">${tipoBadge[s.clasif] || ''} ${s.clasif}</td>
+      ${multiDia ? `<td>${s.diasAsist}/${days.length}</td>` : ''}
+      <td>${s.totalAsist.toLocaleString('es-UY')}</td>
+      ${showDayCols ? days.map(d => {
+        const n = s.dayMap[d] || 0;
+        const ok = n >= umbral;
+        return `<td style="color:${ok ? 'var(--teal)' : 'var(--text3)'};font-weight:${ok ? 600 : 400}">${n || '—'}</td>`;
+      }).join('') : ''}
+    </tr>`;
+  }).join('');
+
+  document.getElementById('btn-export-transp').onclick = () => exportTranspCSV(sorted, transpSummary, days, multiDia, umbral);
+}
+
+function exportTranspCSV(sorted, summary, days, multiDia, umbral) {
+  const h = ['Transportista','Tipo',
+    ...(multiDia ? ['Días asistidos'] : []),
+    'Total reclamos',
+    ...(multiDia && days.length <= 14 ? days.map(d => fmt(d)) : [])
+  ];
+  const rows = sorted.map(t => {
+    const s = summary[t];
+    return [t, s.clasif,
+      ...(multiDia ? [`${s.diasAsist}/${days.length}`] : []),
+      s.totalAsist,
+      ...(multiDia && days.length <= 14 ? days.map(d => s.dayMap[d] || 0) : [])
+    ];
+  });
+  const csv = [h, ...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'asistencia_transportistas.csv'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+
+// =====================
+// RECLAMOS POR MOTOCARRO
+// =====================
+
+function toggleReclamos(){
+  const sec = document.getElementById('reclamos-section');
+  if(sec.style.display !== 'none'){ sec.style.display='none'; return; }
+  sec.style.display = 'block';
+  renderReclamos();
+  sec.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function renderReclamos(){
+  const sec = document.getElementById('reclamos-section');
+  if(!sec || sec.style.display === 'none') return;
+
+  const umbralRec  = Math.max(1, parseInt(document.getElementById('rec-umbral-rec').value)||1);
+  const umbralDias = Math.max(1, parseInt(document.getElementById('rec-umbral-dias').value)||5);
+  const pctMuni    = Math.max(50, Math.min(100, parseInt(document.getElementById('rec-pct-muni').value)||80)) / 100;
+
+  const f1    = document.getElementById('fecha1').value;
+  const f2    = document.getElementById('fecha2').value || f1;
+  const desde = dayStart(new Date(f1+'T00:00:00'));
+  const hasta  = dayEnd(new Date(f2+'T00:00:00'));
+
+  // Base: motocarros, únicos, con fecha_resuelto en período
+  const base = globalDatos.filter(r => {
+    if(clasifTransp(getCol(r,'transportista')) !== 'motocarro') return false;
+    if(esRepetido(r)) return false;
+    const f = parseDate(getCol(r,'fecha_resuelto'));
+    return f && f >= desde && f <= hasta;
+  });
+
+  if(!base.length){
+    document.getElementById('rec-kpis').innerHTML = '<div style="font-size:13px;color:var(--text3);padding:1rem 0">Sin datos en el período seleccionado</div>';
+    return;
+  }
+
+  // --- PANEL 1: Promedio individual ---
+  // Group by transportista+día
+  const tdMap = {}; // { transp: { dia: count } }
+  base.forEach(r => {
+    const t = String(getCol(r,'transportista')||'').trim();
+    const f = parseDate(getCol(r,'fecha_resuelto'));
+    if(!f) return;
+    const k = toKey(f);
+    if(!tdMap[t]) tdMap[t] = {};
+    tdMap[t][k] = (tdMap[t][k]||0) + 1;
+  });
+
+  // Summary per transportista — only count days where reclamos >= umbralRec
+  const indStats = [];
+  Object.entries(tdMap).forEach(([t, dayMap]) => {
+    const diasValidos = Object.entries(dayMap).filter(([,n]) => n >= umbralRec);
+    if(!diasValidos.length) return;
+    const dias   = diasValidos.length;
+    const vals   = diasValidos.map(([,n])=>n);
+    const total  = vals.reduce((a,b)=>a+b,0);
+    const prom   = total/dias;
+    const max    = Math.max(...vals);
+    const min    = Math.min(...vals);
+    indStats.push({ t, dias, total, prom, max, min });
+  });
+
+  const validos = indStats.filter(s => s.dias >= umbralDias).sort((a,b) => b.prom - a.prom);
+  const excl    = indStats.length - validos.length;
+  const totalDias = indStats.reduce((a,s)=>a+s.dias,0);
+  const promGeneral = validos.length ? validos.reduce((a,s)=>a+s.prom,0)/validos.length : 0;
+
+  document.getElementById('rec-badge-ind').textContent = validos.length + ' motocarros · mín ' + umbralRec + ' rec/día · mín ' + umbralDias + ' días';
+
+  // KPIs
+  document.getElementById('rec-kpis').innerHTML = `
+    <div class="kpi-card blue">
+      <div class="kpi-label">Promedio general</div>
+      <div class="kpi-val">${promGeneral.toFixed(1)}</div>
+      <div class="kpi-desc">reclamos únicos / día</div>
+    </div>
+    <div class="kpi-card teal">
+      <div class="kpi-label">Motocarros válidos</div>
+      <div class="kpi-val">${validos.length}</div>
+      <div class="kpi-desc">${excl} excluidos por <${umbralDias} días</div>
+    </div>
+    <div class="kpi-card amber">
+      <div class="kpi-label">Top performer</div>
+      <div class="kpi-val">${validos.length ? validos[0].prom.toFixed(1) : '—'}</div>
+      <div class="kpi-desc">${validos.length ? validos[0].t.split('-')[0].trim() : ''}</div>
+    </div>
+    <div class="kpi-card gray">
+      <div class="kpi-label">Total reclamos</div>
+      <div class="kpi-val">${base.length.toLocaleString('es-UY')}</div>
+      <div class="kpi-desc">en el período</div>
+    </div>`;
+
+  // Tabla individual
+  const totalDiasP = Object.keys(
+    base.reduce((a,r)=>{ const f=parseDate(getCol(r,'fecha_resuelto')); if(f) a[toKey(f)]=1; return a; },{})
+  ).length;
+
+  document.getElementById('rec-ind-thead').innerHTML = `<tr>
+    <th style="text-align:left">Transportista</th>
+    <th>Días asistidos</th>
+    <th>Prom. reclamos/día</th>
+    <th>Máx. día</th>
+    <th>Mín. día</th>
+    <th>Total reclamos</th>
+  </tr>`;
+
+  document.getElementById('rec-ind-tbody').innerHTML = validos.map((s,i) => {
+    const pctDias = Math.round(s.dias/totalDiasP*100);
+    return `<tr>
+      <td>${s.t}</td>
+      <td>${s.dias}/${totalDiasP} <span style="color:var(--text3);font-size:11px">(${pctDias}%)</span></td>
+      <td style="font-weight:600;color:${i<3?'var(--teal)':'var(--text)'}">${s.prom.toFixed(1)}</td>
+      <td style="color:var(--text2)">${s.max}</td>
+      <td style="color:var(--text3)">${s.min}</td>
+      <td>${s.total.toLocaleString('es-UY')}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('btn-export-rec-ind').onclick = () => {
+    const h = ['Transportista','Días asistidos','Días período','Prom reclamos/día','Máx día','Mín día','Total'];
+    const rows = validos.map(s=>[s.t,s.dias,totalDiasP,s.prom.toFixed(1),s.max,s.min,s.total]);
+    exportGenericCSV(h,rows,'promedio_reclamos_motocarros.csv');
+  };
+
+  // Panel 3: Franjas horarias
+  const umbralMotosH = Math.max(1, parseInt(document.getElementById('rec-umbral-motos-h').value)||2);
+  renderFranjas(base, umbralMotosH);
+
+  // --- PANEL 2: Por municipio ---
+  // Group by transportista+día+municipio — apply umbralRec filter
+  const tdmMap = {}; // { transp+dia: { municipio: count } }
+  base.forEach(r => {
+    const t   = String(getCol(r,'transportista')||'').trim();
+    const f   = parseDate(getCol(r,'fecha_resuelto'));
+    const mun = String(getCol(r,'municipio')||'').trim();
+    if(!f||!mun) return;
+    const key = t+'|'+toKey(f);
+    if(!tdmMap[key]) tdmMap[key] = { t, dia: toKey(f), munis:{} };
+    tdmMap[key].munis[mun] = (tdmMap[key].munis[mun]||0)+1;
+  });
+
+  // For each transp/day find principal municipio and pct
+  const munDayData = []; // { mun, count } where pct >= threshold
+  let totalDays=0, discardedDays=0;
+  Object.values(tdmMap).forEach(({t, dia, munis}) => {
+    totalDays++;
+    const sorted = Object.entries(munis).sort((a,b)=>b[1]-a[1]);
+    const total  = sorted.reduce((a,[,n])=>a+n,0);
+    const [munPrinc, countPrinc] = sorted[0];
+    const pct = countPrinc/total;
+    if(pct < pctMuni){ discardedDays++; return; }
+    if(countPrinc < umbralRec){ discardedDays++; return; }
+    munDayData.push({ mun: munPrinc, count: countPrinc });
+  });
+
+  // Días del período (calendario)
+  const diasPeriodo = Math.round((hasta - desde) / 86400000) + 1;
+
+  // Aggregate by municipio
+  const munAgg = {};
+  munDayData.forEach(({mun, count}) => {
+    if(!munAgg[mun]) munAgg[mun] = { dias:0, total:0 };
+    munAgg[mun].dias++;
+    munAgg[mun].total += count;
+  });
+
+  const munRows = Object.entries(munAgg).map(([mun, d]) => ({
+    mun, nombre: MUNI_MAP[mun]||('Municipio '+mun),
+    dias: d.dias, total: d.total, prom: d.total/d.dias,
+    motosPorDia: d.dias / diasPeriodo
+  })).sort((a,b)=>{
+    const order = ['A','B','C','CH','D','E','F','G'];
+    const ia = order.indexOf(a.mun); const ib = order.indexOf(b.mun);
+    if(ia===-1&&ib===-1) return a.nombre.localeCompare(b.nombre);
+    if(ia===-1) return 1; if(ib===-1) return -1;
+    return ia-ib;
+  });
+
+  const pctDiscard = totalDays>0 ? Math.round(discardedDays/totalDays*100) : 0;
+  document.getElementById('rec-badge-muni').textContent = munRows.length + ' municipios';
+  document.getElementById('rec-muni-sub').textContent   = `Días donde el motocarro hizo ≥${Math.round(pctMuni*100)}% de sus reclamos en ese municipio`;
+  document.getElementById('rec-muni-excl').textContent  = `Días descartados por mezcla de municipios: ${discardedDays.toLocaleString('es-UY')} de ${totalDays.toLocaleString('es-UY')} (${pctDiscard}%)`;
+
+  const maxProm = Math.max(...munRows.map(r=>r.prom));
+  const minProm = Math.min(...munRows.map(r=>r.prom));
+  document.getElementById('rec-muni-thead').innerHTML = `<tr>
+    <th style="text-align:left">Municipio</th>
+    <th>Días analizados</th>
+    <th>Motos/día promedio</th>
+    <th>Prom. reclamos/día</th>
+    <th>Total reclamos</th>
+    <th style="text-align:left;width:180px">vs. promedio general</th>
+  </tr>`;
+
+  const promTodosLosBarrios = munRows.reduce((a,r)=>a+r.prom,0)/munRows.length;
+
+  document.getElementById('rec-muni-tbody').innerHTML = munRows.map(r => {
+    const w     = Math.round(r.prom/maxProm*100);
+    const color = r.prom >= maxProm*0.85 ? '#1D9E75' : r.prom <= maxProm*0.55 ? '#D85A30' : '#378ADD';
+    const vsGeneral = Math.round((r.prom/promTodosLosBarrios - 1)*100);
+    const vsStr = (vsGeneral>=0?'+':'')+vsGeneral+'%';
+    const vsColor = vsGeneral>=0?'var(--teal)':'var(--red)';
+    return `<tr>
+      <td style="font-weight:600">${r.nombre}</td>
+      <td style="color:var(--text2)">${r.dias.toLocaleString('es-UY')}</td>
+      <td style="font-weight:600;color:var(--text)">${r.motosPorDia.toFixed(1)}</td>
+      <td style="font-weight:600;color:${color}">${r.prom.toFixed(1)}</td>
+      <td style="color:var(--text2)">${r.total.toLocaleString('es-UY')}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="flex:1;height:8px;background:var(--surface2);border-radius:4px;overflow:hidden">
+            <div style="width:${w}%;height:100%;background:${color};border-radius:4px;transition:width .3s"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:${vsColor};width:36px;text-align:right">${vsStr}</span>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function exportGenericCSV(headers, rows, filename){
+  const csv = [headers,...rows].map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a'); a.href=url; a.download=filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+
+// =====================
+// FRANJAS HORARIAS
+// =====================
+let chartFranjas = null;
+
+function renderFranjas(base, umbralMotosH) {
+  // Group by dia+hora+transportista
+  const dhtMap = {}; // { 'dia|hora': { transp: count } }
+  base.forEach(r => {
+    const rawRes = getCol(r,'fecha_resuelto');
+    if(!rawRes && rawRes !== 0) return;
+    // Always use parseDate which returns LOCAL time via new Date(y,m,d,h,min,s)
+    // This is safe because parseDate uses constructor with explicit parts (local)
+    // NOT new Date(isoString) which would be UTC
+    const f = parseDate(rawRes);
+    if(!f) return;
+    const dia  = toKey(f);
+    // For strings: extract hora directly from raw to be safe
+    let hora;
+    if(typeof rawRes === 'string'){
+      const s = rawRes.trim();
+      // Match "YYYY-MM-DD HH:MM" or "YYYY-MM-DDTHH:MM"
+      const m = s.match(/^\d{4}-\d{2}-\d{2}[T\s](\d{2}):/);
+      hora = m ? parseInt(m[1]) : f.getHours();
+    } else {
+      // Number (Excel serial): parseDate already converts correctly to local
+      hora = f.getHours();
+    }
+    if(isNaN(hora)||hora<0||hora>23) return;
+    const t    = String(getCol(r,'transportista')||'').trim() || '(sin asignar)';
+    const key  = dia+'|'+hora;
+    if(!dhtMap[key]) dhtMap[key] = { dia, hora, motos:{} };
+    dhtMap[key].motos[t] = (dhtMap[key].motos[t]||0) + 1;
+  });
+
+  // Per dia+hora: total reclamos y n motos
+  const dhStats = Object.values(dhtMap).map(({dia, hora, motos}) => ({
+    dia, hora,
+    total: Object.values(motos).reduce((a,b)=>a+b,0),
+    nMotos: Object.keys(motos).length,
+    ratio: Object.values(motos).reduce((a,b)=>a+b,0) / Object.keys(motos).length
+  }));
+
+  // Aggregate by hora — promedio del ratio sobre días, solo dias con nMotos >= umbral
+  const byHora = {};
+  for(let h=0; h<24; h++) byHora[h] = { ratios:[], nMotosArr:[], totalRec:0, diasActivos:0 };
+  dhStats.forEach(({hora, ratio, nMotos, total}) => {
+    byHora[hora].ratios.push(ratio);
+    byHora[hora].nMotosArr.push(nMotos);
+    byHora[hora].totalRec += total;
+    byHora[hora].diasActivos++;
+  });
+
+  // Build rows filtering by umbralMotosH on AVERAGE motos
+  const rows = [];
+  let excluidas = 0;
+  for(let h=0; h<24; h++) {
+    const d = byHora[h];
+    if(!d.ratios.length){ excluidas++; continue; }
+    const promMotos = d.nMotosArr.reduce((a,b)=>a+b,0)/d.nMotosArr.length;
+    if(promMotos < umbralMotosH){ excluidas++; continue; }
+    const promRatio = d.ratios.reduce((a,b)=>a+b,0)/d.ratios.length;
+    rows.push({
+      hora: h,
+      label: String(h).padStart(2,'0')+':00–'+String(h).padStart(2,'0')+':59',
+      promRatio: Math.round(promRatio*100)/100,
+      promMotos: Math.round(promMotos*10)/10,
+      diasActivos: d.diasActivos,
+      totalRec: d.totalRec
+    });
+  }
+
+  const maxRatio = rows.length ? Math.max(...rows.map(r=>r.promRatio)) : 1;
+  const horasPico = rows.filter(r=>r.promRatio >= maxRatio*0.95);
+
+  // Badge
+  document.getElementById('rec-badge-franjas').textContent =
+    rows.length + ' franjas · mín ' + umbralMotosH + ' motos';
+
+  // KPIs
+  document.getElementById('rec-franjas-kpis').innerHTML = rows.length ? `
+    <div class="kpi-card blue">
+      <div class="kpi-label">Franja pico</div>
+      <div class="kpi-val">${String(horasPico[0].hora).padStart(2,'0')}h</div>
+      <div class="kpi-desc">${horasPico[0].promRatio.toFixed(2)} rec/moto</div>
+    </div>
+    <div class="kpi-card teal">
+      <div class="kpi-label">Franjas activas</div>
+      <div class="kpi-val">${rows.length}</div>
+      <div class="kpi-desc">${excluidas} excluidas por <${umbralMotosH} motos</div>
+    </div>
+    <div class="kpi-card amber">
+      <div class="kpi-label">Hora más motos</div>
+      <div class="kpi-val">${String(rows.reduce((a,b)=>a.promMotos>b.promMotos?a:b).hora).padStart(2,'0')}h</div>
+      <div class="kpi-desc">${rows.reduce((a,b)=>a.promMotos>b.promMotos?a:b).promMotos.toFixed(1)} motos promedio</div>
+    </div>` : '<div style="color:var(--text3);font-size:13px;padding:1rem 0">Sin datos suficientes</div>';
+
+  document.getElementById('rec-franjas-excl').textContent =
+    excluidas + ' franjas excluidas por tener menos de ' + umbralMotosH + ' motocarros activos en promedio';
+
+  // Chart
+  const labels   = rows.map(r => r.label.slice(0,5));
+  const dataRatio = rows.map(r => r.promRatio);
+  const dataMotos = rows.map(r => r.promMotos);
+  const barColors = rows.map(r => {
+    if(r.promRatio >= maxRatio*0.9) return '#1D9E75';
+    if(r.promRatio >= maxRatio*0.7) return '#378ADD';
+    return '#B0C8E8';
+  });
+  const gridC = 'rgba(0,0,0,.05)', tickC = '#9E9890';
+
+  if(chartFranjas) chartFranjas.destroy();
+  chartFranjas = new Chart(document.getElementById('chart-franjas-hora'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Rec/moto promedio',
+          data: dataRatio,
+          backgroundColor: barColors,
+          borderRadius: 4,
+          borderSkipped: false,
+          yAxisID: 'y'
+        },
+        {
+          label: 'Motos activos promedio',
+          data: dataMotos,
+          type: 'line',
+          borderColor: '#EF9F27',
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          borderDash: [5,3],
+          pointRadius: 3,
+          pointBackgroundColor: '#EF9F27',
+          tension: 0.3,
+          yAxisID: 'y2'
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          mode: 'index', intersect: false,
+          callbacks: {
+            label: ctx => ctx.datasetIndex===0
+              ? '  Rec/moto: ' + ctx.parsed.y.toFixed(2)
+              : '  Motos activos: ' + ctx.parsed.y.toFixed(1)
+          }
+        }
+      },
+      scales: {
+        x: { grid:{color:gridC}, ticks:{color:tickC,font:{size:11},maxRotation:45} },
+        y: {
+          grid:{color:gridC},
+          ticks:{color:tickC,font:{size:11},callback:v=>v.toFixed(1)},
+          title:{display:true,text:'Rec/moto promedio',color:tickC,font:{size:11}},
+          beginAtZero: true
+        },
+        y2: {
+          position:'right', grid:{display:false},
+          ticks:{color:'#EF9F27',font:{size:11},callback:v=>v.toFixed(0)},
+          title:{display:true,text:'Motos activos',color:'#EF9F27',font:{size:11}},
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  // Table
+  document.getElementById('rec-franjas-thead').innerHTML = `<tr>
+    <th style="text-align:left">Franja</th>
+    <th>Motos activos (prom.)</th>
+    <th>Rec/moto promedio</th>
+    <th>Días con actividad</th>
+    <th>Total reclamos período</th>
+    <th style="text-align:left;width:160px">Intensidad</th>
+  </tr>`;
+
+  document.getElementById('rec-franjas-tbody').innerHTML = rows.map(r => {
+    const w     = Math.round(r.promRatio/maxRatio*100);
+    const color = r.promRatio >= maxRatio*0.9 ? '#1D9E75'
+                : r.promRatio >= maxRatio*0.7 ? '#378ADD' : '#B0C8E8';
+    return `<tr>
+      <td style="font-weight:600;font-family:'DM Mono',monospace">${r.label}</td>
+      <td>${r.promMotos.toFixed(1)}</td>
+      <td style="font-weight:600;color:${color}">${r.promRatio.toFixed(2)}</td>
+      <td style="color:var(--text2)">${r.diasActivos}</td>
+      <td style="color:var(--text2)">${r.totalRec.toLocaleString('es-UY')}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:6px">
+          <div style="flex:1;height:8px;background:var(--surface2);border-radius:4px;overflow:hidden">
+            <div style="width:${w}%;height:100%;background:${color};border-radius:4px"></div>
+          </div>
+          <span style="font-size:11px;color:var(--text3);width:28px;text-align:right">${w}%</span>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function resetDash(){
+  allData=[];globalDatos=[];evolChart=null;
+  [chartRes,chartPct,chartUnicos].forEach(c=>{if(c)c.destroy();});
+  chartRes=chartPct=chartUnicos=null;
+  document.getElementById('step-upload').style.display='block';
+  document.getElementById('step-filter').style.display='none';
+  document.getElementById('step-dashboard').style.display='none';
+  document.getElementById('header-file-tag').style.display='none';
+  document.getElementById('file-info').innerHTML='';
+}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+// MAP STATE
+let leafletMap=null, markersLayer=null, mapRangeActive=false, allMarkers=[];
+const catVisible={c24:true,cmas:true,sin:true};
+const MAP_COLORS={c24:'#1D9E75',cmas:'#EF9F27',sin:'#D85A30'};
+
+// Tope de rango del mapa: máximo 3 días (día elegido + 2 más). El mapa pinta un
+// marcador por reclamo — con un mes entero son decenas de miles de puntos y se
+// traba el navegador. El resto del dashboard (KPIs, gráficos, tabla) no tiene
+// este límite, solo el mapa.
+const MAP_MAX_DIAS=3;
+function mapMaxHasta(f1){
+  const d=new Date(f1+'T00:00:00');
+  d.setDate(d.getDate()+(MAP_MAX_DIAS-1));
+  return toKey(d);
+}
+
+function catReclamo(r){
+  const fRec=parseDate(getCol(r,'fecha_de_reclamo'));
+  const fRes=parseDate(getCol(r,'fecha_resuelto'));
+  const est=(getCol(r,'estado')||'').toLowerCase();
+  const isResuelto=est==='cerrado'||est==='resuelto'||est==='closed';
+  if(isResuelto&&!fRes) return 'c24';
+  if(!fRes) return 'sin';
+  return diffH(fRec,fRes)<=24?'c24':'cmas';
+}
+
+function rawDateStr(v){
+  // Convert any date value to a local-time display string without UTC conversion
+  if(!v&&v!==0) return null;
+  if(typeof v==='string'){
+    const s=v.trim();
+    if(!s||s==='nan'||s==='null') return null;
+    // Already formatted string YYYY-MM-DD HH:MM:SS
+    const m=s.match(/^(\d{4})-(\d{2})-(\d{2})[T\s](\d{2}):(\d{2})/);
+    if(m) return `${m[3]}/${m[2]}/${m[1]} ${m[4]}:${m[5]}`;
+    return s;
+  }
+  if(typeof v==='number'){
+    // Excel serial date → local JS Date using parseDate (which uses new Date(y,m,d,h,min,s) — local)
+    const d=parseDate(v);
+    if(!d) return null;
+    return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+  }
+  if(v instanceof Date&&!isNaN(v)){
+    return String(v.getDate()).padStart(2,'0')+'/'+String(v.getMonth()+1).padStart(2,'0')+'/'+v.getFullYear()+' '+String(v.getHours()).padStart(2,'0')+':'+String(v.getMinutes()).padStart(2,'0');
+  }
+  return null;
+}
+function fmtDT(v){
+  return rawDateStr(v)||'—';
+}
+
+function abrirMapa(){
+  document.getElementById('map-view').classList.add('open');
+  const f1=document.getElementById('fecha1').value;
+  const f2=document.getElementById('fecha2').value;
+  document.getElementById('map-f1').value=f1;
+  const mapF2el=document.getElementById('map-f2');
+  const tope=f1?mapMaxHasta(f1):null;
+  if(tope)mapF2el.max=tope;
+  if(isRange&&f2){
+    mapF2el.value=(tope&&f2>tope)?tope:f2;
+    document.getElementById('map-f2wrap').style.display='inline-block';
+    document.getElementById('btn-map-rango').classList.add('active');
+    mapRangeActive=true;
+  }
+  if(!leafletMap){
+    leafletMap=L.map('leaflet-map').setView([-34.9011,-56.1645],12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(leafletMap);
+    markersLayer=L.layerGroup().addTo(leafletMap);
+  } else {
+    setTimeout(()=>leafletMap.invalidateSize(),100);
+  }
+  renderMapa();
+}
+
+function cerrarMapa(){
+  document.getElementById('map-view').classList.remove('open');
+}
+
+function toggleMapRange(){
+  mapRangeActive=!mapRangeActive;
+  document.getElementById('map-f2wrap').style.display=mapRangeActive?'inline-block':'none';
+  document.getElementById('btn-map-rango').classList.toggle('active',mapRangeActive);
+  if(mapRangeActive){
+    const f1=document.getElementById('map-f1').value;
+    if(f1)document.getElementById('map-f2').max=mapMaxHasta(f1);
+  }
+}
+
+// Si cambian la fecha "desde" del mapa a mano, el "hasta" no puede quedar a más de
+// MAP_MAX_DIAS días de distancia.
+document.getElementById('map-f1').addEventListener('change',()=>{
+  const f1=document.getElementById('map-f1').value;
+  if(!f1)return;
+  const f2el=document.getElementById('map-f2');
+  const tope=mapMaxHasta(f1);
+  f2el.max=tope;
+  if(f2el.value&&f2el.value>tope)f2el.value=tope;
+});
+
+function toggleMapCat(cat){
+  catVisible[cat]=!catVisible[cat];
+  const el=document.getElementById('tog-'+cat);
+  el.classList.toggle('off',!catVisible[cat]);
+  allMarkers.forEach(m=>{
+    if(m.cat===cat){
+      if(catVisible[cat]) m.marker.addTo(markersLayer);
+      else markersLayer.removeLayer(m.marker);
+    }
+  });
+}
+
+function toggleHorarios(){
+  const p=document.getElementById('horarios-panel');
+  p.style.display=p.style.display==='none'?'block':'none';
+}
+
+
+
+function clearHora(cat){
+  ['ing-desde','ing-hasta','res-desde','res-hasta'].forEach(s=>{
+    const el=document.getElementById(cat+'-'+s);
+    if(el) el.value='';
+  });
+  renderMapa();
+}
+
+function horaFromRaw(v){
+  // Extract HH:MM from raw CSV string without any timezone conversion
+  if(!v) return null;
+  const s=String(v).trim();
+  const m=s.match(/[T\s](\d{2}):(\d{2})/);
+  if(m) return parseInt(m[1])*60+parseInt(m[2]);
+  // Fallback: numeric Excel serial via parseDate (local time)
+  if(typeof v==='number'){const d=parseDate(v);if(d)return d.getHours()*60+d.getMinutes();}
+  return null;
+}
+
+function horaOk(rawVal, desde, hasta){
+  const hhmm=horaFromRaw(rawVal);
+  if(hhmm===null) return false;
+  const dMin=desde?parseInt(desde.split(':')[0])*60+parseInt(desde.split(':')[1]):0;
+  const hMin=hasta?parseInt(hasta.split(':')[0])*60+parseInt(hasta.split(':')[1]):1439;
+  return hhmm>=dMin&&hhmm<=hMin;
+}
+
+function getHoraFiltro(cat){
+  const g=id=>{ const el=document.getElementById(cat+'-'+id); return el?el.value:''; };
+  return{
+    ingDesde: g('ing-desde'),
+    ingHasta: g('ing-hasta'),
+    resDesde: cat!=='sin'?g('res-desde'):'',
+    resHasta: cat!=='sin'?g('res-hasta'):''
+  };
+}
+
+function renderMapa(){
+  const f1=document.getElementById('map-f1').value;
+  if(!f1){alert('Seleccioná una fecha.');return;}
+  const desde=dayStart(new Date(f1+'T00:00:00'));
+  const f2v=document.getElementById('map-f2').value;
+  let hasta=mapRangeActive&&f2v?dayEnd(new Date(f2v+'T00:00:00')):dayEnd(new Date(f1+'T00:00:00'));
+
+  // Tope defensivo de MAP_MAX_DIAS días (evita miles de marcadores y que se cuelgue el navegador)
+  const topeHasta=dayEnd(new Date(desde.getTime()+(MAP_MAX_DIAS-1)*86400000));
+  if(hasta>topeHasta){
+    hasta=topeHasta;
+    const f2clamp=toKey(topeHasta);
+    document.getElementById('map-f2').value=f2clamp;
+    document.getElementById('map-f2').max=f2clamp;
+    alert(`El mapa muestra como máximo ${MAP_MAX_DIAS} días de rango (para no sobrecargar el navegador). Se ajustó el "hasta" a ${fmt(f2clamp)}.`);
+  }
+
+  // Índice de repetidos asociados por id padre
+  const hijosCount={};
+  allData.forEach(r=>{
+    const padre=String(getCol(r,'id_del_padre')||'').trim();
+    if(padre&&padre!==''&&padre!=='undefined'&&padre!=='null')
+      hijosCount[padre]=(hijosCount[padre]||0)+1;
+  });
+
+  const puntos=allData.filter(r=>{
+    const f=parseDate(getCol(r,'fecha_de_reclamo'));
+    return f&&f>=desde&&f<=hasta;
+  });
+
+  markersLayer.clearLayers();
+  allMarkers=[];
+  ['c24','cmas','sin'].forEach(c=>{
+    catVisible[c]=true;
+    const el=document.getElementById('tog-'+c);
+    if(el) el.classList.remove('off');
+  });
+
+  const cnt={c24:0,cmas:0,sin:0};
+
+  puntos.forEach(r=>{
+    const lat=parseFloat(getCol(r,'latitud'));
+    const lng=parseFloat(getCol(r,'longitud'));
+    if(isNaN(lat)||isNaN(lng)) return;
+
+    const cat=catReclamo(r);
+    const fRec=parseDate(getCol(r,'fecha_de_reclamo'));
+    const fRes=parseDate(getCol(r,'fecha_resuelto'));
+    const fRecRaw=getCol(r,'fecha_de_reclamo');
+    const fResRaw=getCol(r,'fecha_resuelto');
+
+    // Filtro horario por categoría — ingreso y resolución independientes
+    const hf=getHoraFiltro(cat);
+    // Filtro hora ingreso
+    if(hf.ingDesde||hf.ingHasta){
+      if(!fRecRaw) return;
+      if(!horaOk(fRecRaw,hf.ingDesde,hf.ingHasta)) return;
+    }
+    // Filtro hora resolución (solo para resueltos)
+    if((hf.resDesde||hf.resHasta)&&cat!=='sin'){
+      if(!fResRaw) return; // sin fecha resolución → excluir si se filtra por resolución
+      if(!horaOk(fResRaw,hf.resDesde,hf.resHasta)) return;
+    }
+
+    cnt[cat]++;
+    const id=String(getCol(r,'id')||'').trim();
+    const nHijos=hijosCount[id]||0;
+    const incidente=getCol(r,'incidente')||'—';
+    const municipio=getMuni(r);
+    const circuito=getCol(r,'circuito')||'—';
+    const rep=esRepetido(r)?'Sí':'No';
+    const transportista=getCol(r,'transportista')||'—';
+    const catLabel=cat==='c24'?'Resuelto en ≤ 24h':cat==='cmas'?'Resuelto en > 24h':'Sin resolver';
+
+    const marker=L.circleMarker([lat,lng],{
+      radius:7,
+      fillColor:MAP_COLORS[cat],
+      color:'#fff',
+      weight:1.5,
+      opacity:1,
+      fillOpacity:.85
+    });
+
+    marker.bindPopup(`<div>
+      <div class="pop-title">#${id} — ${incidente}</div>
+      <span class="pop-cat ${cat}">${catLabel}</span>
+      <div class="pop-row"><span class="pop-lbl">Municipio</span><span class="pop-val">${municipio}</span></div>
+      <div class="pop-row"><span class="pop-lbl">Circuito</span><span class="pop-val">${circuito}</span></div>
+      <div class="pop-row"><span class="pop-lbl">Transportista</span><span class="pop-val">${transportista}</span></div>
+      <div class="pop-row"><span class="pop-lbl">Ingreso</span><span class="pop-val">${fmtDT(fRecRaw)}</span></div>
+      <div class="pop-row"><span class="pop-lbl">Resolución</span><span class="pop-val">${fmtDT(fResRaw)}</span></div>
+      <div class="pop-row"><span class="pop-lbl">Repetido</span><span class="pop-val">${rep}</span></div>
+      <div class="pop-rep">Repetidos asociados: <strong>${nHijos}</strong></div>
+    </div>`,{maxWidth:280});
+
+    allMarkers.push({cat,marker});
+    markersLayer.addLayer(marker);
+  });
+
+  const total=cnt.c24+cnt.cmas+cnt.sin;
+  document.getElementById('map-stats-bar').innerHTML=
+    `<div class="map-stat">Total: <strong>${total.toLocaleString('es-UY')}</strong></div>`+
+    `<div class="map-stat" style="color:#1D9E75">≤ 24h: <strong>${cnt.c24.toLocaleString('es-UY')}</strong></div>`+
+    `<div class="map-stat" style="color:#854F0B">&gt; 24h: <strong>${cnt.cmas.toLocaleString('es-UY')}</strong></div>`+
+    `<div class="map-stat" style="color:#A32D2D">Sin resolver: <strong>${cnt.sin.toLocaleString('es-UY')}</strong></div>`;
+
+  if(total>0) leafletMap.invalidateSize();
+}
+
+// Auto-carga al abrir la página — evita el clic extra de "Generar dashboard"
+fetchFromSheets();
+</script>
+</body>
+</html>
