@@ -267,7 +267,7 @@ canvas{max-width:100%;display:block}
   <div id="step-upload">
     <div class="upload-zone" id="drop-zone" style="cursor:default">
       <div class="upload-icon">🔗</div>
-      <div class="upload-title">Base de reclamos conectada a Google Sheets</div>
+      <div class="upload-title">Base de reclamos conectada a GitHub</div>
       <div class="upload-sub">Se actualiza una vez por día · muestra datos hasta <span>ayer</span> inclusive</div>
       <button class="btn-upload" id="btn-generar" onclick="fetchFromSheets()">
         <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
@@ -710,7 +710,7 @@ canvas{max-width:100%;display:block}
   <div id="leaflet-map"></div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 const EMPRESAS=['DG','TESSA','EQUIPO','SALIR ADELANTE','ROSADO','TAYM','VOS CON VOZ'];
@@ -813,83 +813,23 @@ function distBucket(r){
   return 3;
 }
 
-// ── Conexión a Google Sheets ────────────────────────────────────────────────
-// Cómo configurar:
-//  1. Abrí la Google Sheet con la base de reclamos (tiene que tener las mismas
-//     columnas que usaba el Excel: id, municipio, circuito, fecha_de_reclamo,
-//     id_del_padre, estado, repetido, fecha_resuelto, incidente, tipo_de_reclamo,
-//     dirección, latitud, longitud, transportista).
-//  2. Compartila como "Cualquier persona con el enlace puede ver".
-//  3. De la URL (https://docs.google.com/spreadsheets/d/ESTE_ID/edit#gid=ESTE_GID)
-//     copiá el ID y el gid de la pestaña con los datos, y pegalos abajo.
-const SHEET_ID  = '1A0ZUX1dLPIwiHO5tLYb2eTnGRMb6L96Fz7bI52tlbiI';
-const SHEET_GID = '671381980';
+// ── Conexión — CSV alojado en el repositorio de GitHub ──────────────────────
+// Lee el mismo data/reclamos.csv que ya subís todos los días para el
+// dashboard de Zona Limpia — no hay que subir ni actualizar nada más.
+// Sin motor de consultas de por medio: es solo bajar el archivo y parsearlo
+// con PapaParse, igual que la carga manual de siempre.
+const CSV_REC = 'https://raw.githubusercontent.com/COM-Datos/Dashboard/main/data/reclamos.csv';
 
-function loadGvizJsonp(){
-  return new Promise((resolve,reject)=>{
-    const cbName='_gvizCb_'+Date.now();
-    window[cbName]=function(resp){
-      delete window[cbName];
-      const s=document.getElementById('_gvizScript');
-      if(s)s.remove();
-      if(resp&&resp.status==='ok'&&resp.table){
-        resolve(resp.table);
-      } else {
-        reject(new Error('La planilla no devolvió datos. Verificá que sea pública ("Cualquier persona con el enlace puede ver").'));
-      }
-    };
-    const timer=setTimeout(()=>{
-      if(window[cbName]){
-        delete window[cbName];
-        const s=document.getElementById('_gvizScript');
-        if(s)s.remove();
-        reject(new Error('Tiempo de espera agotado. Verificá tu conexión a internet.'));
-      }
-    },20000);
-    const old=document.getElementById('_gvizScript');
-    if(old)old.remove();
-    const script=document.createElement('script');
-    script.id='_gvizScript';
-    script.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:${cbName}&gid=${SHEET_GID}`;
-    script.onerror=()=>{
-      clearTimeout(timer);
-      delete window[cbName];
-      reject(new Error('No se pudo cargar el script de Google Sheets. Revisá el SHEET_ID.'));
-    };
-    document.head.appendChild(script);
-  });
-}
-
-function gvizCellValue(cell,col){
-  if(!cell||cell.v===null||cell.v===undefined)return '';
-  const vStr=typeof cell.v==='string'?cell.v:'';
-  if((col.type==='date'||col.type==='datetime')&&vStr){
-    const m=vStr.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
-    if(m){
-      const[,y,mo,d,h='0',mi='0',s='0']=m;
-      const pad=n=>String(n).padStart(2,'0');
-      // String ISO "YYYY-MM-DDTHH:MM:SS" (mo viene 0-indexado desde gviz, +1 para el mes real).
-      // Se devuelve como texto, no Date, porque el resto del dashboard (parseDate, rawDateStr,
-      // horaFromRaw y el slice(0,10) de más abajo) espera exactamente este formato de string.
-      return `${y}-${pad(+mo+1)}-${pad(d)}T${pad(h)}:${pad(mi)}:${pad(s)}`;
-    }
-  }
-  return cell.v;
-}
-
-function gvizTableToObjects(table){
-  const cols=table.cols||[];
-  const headers=cols.map(c=>String(c.label||c.id||'').trim());
-  const dataRows=table.rows||[];
-  return dataRows.map(row=>{
-    const cells=row.c||[];
-    const obj={};
-    headers.forEach((h,i)=>{
-      if(!h)return;
-      obj[h]=gvizCellValue(cells[i],cols[i]||{});
-    });
-    return obj;
-  });
+function fetchCSV(url){
+  const bust=url+(url.includes('?')?'&':'?')+'v='+Date.now();
+  return fetch(bust).then(r=>{
+    if(!r.ok) throw new Error(`No se pudo descargar ${url.split('/').pop()} (HTTP ${r.status}). ¿Está subido con ese nombre exacto?`);
+    return r.text();
+  }).then(text=>new Promise((resolve,reject)=>{
+    Papa.parse(text,{header:true,skipEmptyLines:true,
+      complete:res=>resolve(res.data),
+      error:err=>reject(err)});
+  }));
 }
 
 function ayerStr(){
@@ -901,15 +841,10 @@ function ayerStr(){
 async function fetchFromSheets(){
   const btn=document.getElementById('btn-generar');
   const fi=document.getElementById('file-info');
-  if(SHEET_ID==='PEGAR_AQUI_EL_ID_DE_LA_GOOGLE_SHEET'){
-    fi.innerHTML='<div class="file-status err">⚠ Falta configurar el SHEET_ID — buscá esa constante cerca del final del código.</div>';
-    return;
-  }
   btn.disabled=true;btn.style.opacity='.55';
-  fi.innerHTML='<div class="file-status ok">⏳ Conectando con Google Sheets…</div>';
+  fi.innerHTML='<div class="file-status ok">⏳ Descargando la base desde GitHub…</div>';
   try{
-    const table=await loadGvizJsonp();
-    const data=gvizTableToObjects(table);
+    const data=await fetchCSV(CSV_REC);
     allData=data.filter(r=>esValido(r));
     const cols=Object.keys(data[0]||{}).map(x=>x.toLowerCase());
     const miss=['fecha_de_reclamo','fecha_resuelto','incidente','tipo_de_reclamo','municipio','repetido'].filter(c=>!cols.includes(c));
@@ -934,7 +869,7 @@ async function fetchFromSheets(){
     const ahora=new Date();
     const hhmm=String(ahora.getHours()).padStart(2,'0')+':'+String(ahora.getMinutes()).padStart(2,'0');
     fi.innerHTML=`<div class="file-status ok">✓ ${allData.length.toLocaleString('es-UY')} registros válidos · datos hasta ${fmt(allDates[allDates.length-1]||ayer)}</div>`;
-    document.getElementById('header-file-name').textContent='Google Sheets · actualizado '+hhmm;
+    document.getElementById('header-file-name').textContent='GitHub · actualizado '+hhmm;
     document.getElementById('header-file-tag').style.display='flex';
     document.getElementById('step-filter').style.display='block';
     aplicar(); // Renderiza de una con el período completo — evita el segundo clic en "Generar dashboard"
