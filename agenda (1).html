@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard Agenda · Centro Operativo de Montevideo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f5f7;
+  --surface:#ffffff;
+  --ink:#111827;
+  --navy:#0f2444;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+  --blue:#2563eb;
+  --green:#16a34a;
+  --red:#ef4444;
+  --orange:#f97316;
+  --yellow:#eab308;
+  --teal:#0d9488;
+  --sky:#7dd3fc;
+  --shadow:0 1px 3px rgba(16,24,40,.08), 0 1px 2px rgba(16,24,40,.04);
+  --radius:12px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px;line-height:1.5;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 24px 64px}
+
+/* ---------- encabezado ---------- */
+.topbar{
+  background:linear-gradient(100deg,#0b1a33 0%,#132c52 55%,#1b3f74 100%);
+  color:#fff;padding:20px 0 26px;
+}
+.topbar .inner{max-width:1180px;margin:0 auto;padding:0 24px}
+.back{
+  display:inline-flex;align-items:center;gap:8px;
+  color:#c7d5ea;text-decoration:none;font-size:14.5px;font-weight:500;
+  padding:4px 2px;border-radius:6px;
+}
+.back:hover{color:#fff}
+.back svg{width:15px;height:15px}
+.titlerow{display:flex;align-items:center;gap:14px;margin-top:10px}
+.titlerow .ico{
+  font-size:30px;line-height:1;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.3));
+}
+.titlerow h1{margin:0;font-size:31px;font-weight:800;letter-spacing:-.02em}
+
+/* ---------- secciones ---------- */
+section{margin-top:38px}
+section:first-of-type{margin-top:10px}
+h2.sec{
+  margin:0 0 16px;font-size:28px;font-weight:800;
+  color:var(--navy);letter-spacing:-.025em;
+  display:flex;align-items:baseline;gap:12px;
+  padding-bottom:10px;border-bottom:2px solid var(--navy);
+}
+h2.sec .n{
+  font-size:15px;font-weight:800;color:#fff;background:var(--navy);
+  width:28px;height:28px;flex:none;border-radius:8px;
+  display:inline-flex;align-items:center;justify-content:center;
+  transform:translateY(-3px);
+}
+.nested{
+  margin-left:4px;padding-left:22px;
+  border-left:2px solid #dfe3e9;
+}
+.nested > section{margin-top:30px}
+h3.sub{
+  margin:0 0 12px;font-size:17px;font-weight:700;
+  color:#374151;letter-spacing:-.01em;
+  display:flex;align-items:baseline;gap:9px;
+}
+h3.sub .n{
+  font-size:13px;font-weight:700;color:var(--blue);
+  font-variant-numeric:tabular-nums;
+}
+.card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+}
+
+/* ---------- tabla situación actual ---------- */
+.tablewrap{overflow:auto;border-radius:var(--radius)}
+table.grid{border-collapse:separate;border-spacing:0;width:100%;min-width:720px}
+table.grid th{
+  background:#f8fafc;color:var(--navy);
+  font-size:12.5px;font-weight:700;text-align:center;
+  padding:10px 8px;border-bottom:1px solid var(--line);
+  line-height:1.25;
+}
+table.grid td{
+  padding:5px;border-bottom:1px solid #f1f2f4;vertical-align:middle;
+}
+table.grid tbody tr:hover td{background:#fbfcfe}
+table.grid tbody tr:last-child td{border-bottom:none}
+td.muni{text-align:center;white-space:nowrap;padding:5px 10px}
+td.muni b{display:block;font-size:17px;font-weight:800;color:var(--navy);line-height:1.1}
+td.muni span{display:block;font-size:12px;color:var(--muted);font-weight:500}
+.cell{
+  border-radius:8px;padding:6px 9px 7px;min-width:104px;
+  border:1px solid transparent;
+}
+.cell .date{display:block;font-size:11.5px;font-weight:600;opacity:.75}
+.cell .row{display:flex;align-items:baseline;gap:5px}
+.cell .pct{font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+.cell .cupos{font-size:12px;font-weight:500;opacity:.8}
+.cell .bar{display:block;height:3px;border-radius:2px;background:rgba(17,24,39,.1);margin-top:4px;overflow:hidden}
+.cell .bar i{display:block;height:100%;border-radius:2px;background:currentColor;opacity:.65}
+.lv0{background:#eef7f0;border-color:#d3e9d9;color:#14703c}
+.lv1{background:#fdf6e3;border-color:#f2e4bd;color:#8a6100}
+.lv2{background:#fdeede;border-color:#f6dcc0;color:#9a4b13}
+.lv3{background:#fde9e7;border-color:#f7d4d0;color:#9b241c}
+.cell.void{background:#f4f5f7;border-color:#edeef1;color:#b6bbc3;min-width:104px;text-align:center;padding:16px 9px;font-size:14px}
+
+/* ---------- filtros ---------- */
+.filters{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 22px;padding:18px 20px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.02em;text-transform:uppercase}
+input[type=date],select{
+  font-family:inherit;font-size:15px;color:var(--ink);font-weight:500;
+  background:#fff;border:1px solid #d1d5db;border-radius:8px;
+  padding:9px 11px;min-height:42px;min-width:160px;
+}
+input[type=date]:hover,select:hover{border-color:#9ca3af}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* ---------- kpis ---------- */
+.kpis{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:16px}
+.kpi{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 18px 15px;min-width:180px;flex:0 1 auto;
+  border-top:3px solid var(--blue);
+}
+.kpi.g{border-top-color:var(--green)}
+.kpi.r{border-top-color:var(--red)}
+.kpi.o{border-top-color:var(--orange)}
+.kpi.t{border-top-color:var(--teal)}
+.kpi .k-label{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kpi .k-val{display:block;font-size:32px;font-weight:800;letter-spacing:-.03em;line-height:1.2;font-variant-numeric:tabular-nums}
+.kpi .k-foot{display:block;font-size:12.5px;color:var(--muted)}
+
+/* ---------- gráficas ---------- */
+.chartbox{padding:16px 18px 8px}
+.chart-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-bottom:6px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;font-weight:500}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.swatch{width:11px;height:11px;border-radius:3px;flex:none}
+.grain{margin-left:auto;font-size:12.5px;color:var(--muted)}
+svg{display:block;width:100%;height:auto}
+.bar-r{transition:opacity .12s}
+.chartbox:hover .bar-r{opacity:.5}
+.chartbox .barg:hover .bar-r{opacity:1}
+.axis{fill:var(--muted);font-size:12.5px;font-weight:500}
+.grid-l{stroke:#eef0f3;stroke-width:1}
+.zero{stroke:#d7dbe0;stroke-width:1}
+.empty{padding:36px 8px;color:var(--muted);text-align:center}
+
+@media (max-width:680px){
+  .wrap{padding:20px 16px 48px}
+  .topbar .inner{padding:0 16px}
+  .titlerow h1{font-size:24px}
+  .kpi{flex:1 1 45%;min-width:0;padding:12px 14px}
+  .kpi .k-val{font-size:26px}
+  }
+@media print{ body{background:#fff} }
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="inner">
+    <!-- ajustar el href según dónde quede el índice del sitio -->
+    <a class="back" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Centro Operativo
+    </a>
+    <div class="titlerow">
+      <span class="ico" aria-hidden="true">📅</span>
+      <h1>Dashboard Agenda</h1>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- SITUACIÓN ACTUAL -->
+  <section>
+    <h2 class="sec"><span class="n">1</span>Situación actual</h2>
+    <div class="card">
+      <div class="tablewrap">
+        <table class="grid" id="t-actual">
+          <thead>
+            <tr>
+              <th scope="col">Municipio</th>
+              <th scope="col">Próxima<br>intervención</th>
+              <th scope="col">Segunda<br>intervención</th>
+              <th scope="col">Tercera<br>intervención</th>
+              <th scope="col">Cuarta<br>intervención</th>
+              <th scope="col">Quinta<br>intervención</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERÍODO DE ANÁLISIS -->
+  <section>
+    <h2 class="sec"><span class="n">2</span>Período de análisis</h2>
+    <div class="card filters" role="group" aria-label="Período de análisis">
+      <div class="field">
+        <label for="f-desde">Desde</label>
+        <input type="date" id="f-desde">
+      </div>
+      <div class="field">
+        <label for="f-hasta">Hasta</label>
+        <input type="date" id="f-hasta">
+      </div>
+      <div class="field">
+        <label for="f-muni">Municipio</label>
+        <select id="f-muni"></select>
+      </div>
+    </div>
+
+    <div class="nested">
+
+    <!-- 2.1 SERVICIOS REALIZADOS -->
+    <section>
+      <h3 class="sub"><span class="n">2.1</span>Servicios realizados</h3>
+    <div class="kpis">
+      <div class="kpi"><span class="k-label">Total</span><span class="k-val" id="k1-total">–</span><span class="k-foot" id="k1-total-f"></span></div>
+      <div class="kpi t"><span class="k-label">Promedio día</span><span class="k-val" id="k1-prom">–</span><span class="k-foot" id="k1-prom-f"></span></div>
+      <div class="kpi r"><span class="k-label">De los cuales, no atienden</span><span class="k-val" id="k1-noat">–</span><span class="k-foot" id="k1-noat-f"></span></div>
+    </div>
+    <div class="card chartbox">
+      <div class="chart-top">
+        <div class="legend" id="l1"></div>
+        <div class="grain" id="g1"></div>
+      </div>
+      <div id="c1"></div>
+    </div>
+  </section>
+
+    <!-- 2.2 TRANSPORTISTAS UTILIZADOS -->
+    <section>
+      <h3 class="sub"><span class="n">2.2</span>Transportistas utilizados</h3>
+    <div class="kpis">
+      <div class="kpi"><span class="k-label">Total turnos</span><span class="k-val" id="k2-total">–</span><span class="k-foot" id="k2-total-f"></span></div>
+      <div class="kpi t"><span class="k-label">Promedio día</span><span class="k-val" id="k2-prom">–</span><span class="k-foot" id="k2-prom-f"></span></div>
+    </div>
+    <div class="card chartbox">
+      <div class="chart-top">
+        <div class="legend" id="l2"></div>
+        <div class="grain" id="g2"></div>
+      </div>
+      <div id="c2"></div>
+    </div>
+  </section>
+
+    <!-- 2.3 DESCARGAS -->
+    <section>
+      <h3 class="sub"><span class="n">2.3</span>Descargas</h3>
+    <div class="kpis">
+      <div class="kpi"><span class="k-label">Total</span><span class="k-val" id="k3-total">–</span><span class="k-foot" id="k3-total-f"></span></div>
+      <div class="kpi t"><span class="k-label">Promedio día</span><span class="k-val" id="k3-prom">–</span><span class="k-foot" id="k3-prom-f"></span></div>
+    </div>
+    <div class="card chartbox">
+      <div class="chart-top">
+        <div class="legend" id="l3"></div>
+        <div class="grain" id="g3"></div>
+      </div>
+      <div id="c3"></div>
+    </div>
+    </section>
+
+    </div><!-- /.nested -->
+  </section>
+
+</main>
+
+<script>
+/* ==========================================================================
+   1. DATOS
+   --------------------------------------------------------------------------
+   a) SITUACION: la tabla de "Situación actual", cargada a mano tal cual la
+      planilla. Para actualizarla se edita este objeto (o se reemplaza por un
+      fetch a un JSON/CSV generado por el sistema).
+   b) getRows(): las tres secciones de abajo. Hoy devuelve datos de ejemplo
+      determinísticos (la misma fecha da siempre el mismo número, así los
+      filtros se comportan de verdad). Para pasar a datos reales alcanza con
+      reemplazar esta función, sin tocar nada más:
+
+        async function getRows(desde, hasta, muni){
+          const r = await fetch(`/datos/agenda.json?desde=${desde}&hasta=${hasta}`);
+          return (await r.json()).filter(x => muni==="todos" || x.municipio===muni);
+        }
+   ========================================================================== */
+
+/* Cada municipio tiene una cantidad fija de cupos por intervención (redondeada
+   hacia arriba a partir de la próxima intervención). El % de la tabla se
+   calcula solo: asignados / cupos. */
+const SITUACION = {
+  filas: [
+    {muni:"CH", dia:"Lunes",     cupos:190, celdas:[{f:"07/09/2026",a:178}, {f:"14/09/2026",a:48}]},
+    {muni:"A",  dia:"Martes",    cupos:120, celdas:[{f:"08/09/2026",a:112}, {f:"15/09/2026",a:58}]},
+    {muni:"D",  dia:"Martes",    cupos:90,  celdas:[{f:"08/09/2026",a:87},  {f:"15/09/2026",a:29}]},
+    {muni:"E",  dia:"Miércoles", cupos:160, celdas:[{f:"09/09/2026",a:107}, {f:"16/09/2026",a:5}]},
+    {muni:"G",  dia:"Jueves",    cupos:100, celdas:[{f:"03/09/2026",a:98},  {f:"10/09/2026",a:78}]},
+    {muni:"F",  dia:"Jueves",    cupos:80,  celdas:[{f:"03/09/2026",a:74},  {f:"10/09/2026",a:8}]},
+    {muni:"B",  dia:"Viernes",   cupos:200, celdas:[{f:"04/09/2026",a:189}, {f:"11/09/2026",a:155}, {f:"18/09/2026",a:13}]},
+    {muni:"C",  dia:"Sábado",    cupos:170, celdas:[{f:"05/09/2026",a:163}, {f:"12/09/2026",a:35}]}
+  ],
+  columnas: 5
+};
+
+const MUNICIPIOS = ["A","B","C","CH","D","E","F","G"];
+const LOCALES = ["Descarga norte","Descarga centro","Descarga oeste","Descarga este"];
+
+const COLOR = {
+  atendidos:"#2563eb", noAtendidos:"#ef4444",
+  camion:"#0f4c81", motocarro:"#60a5fa",
+  locales:["#0d9488","#2563eb","#38bdf8","#a7d8ef"]
+};
+
+function seed(str){
+  let h = 2166136261;
+  for (let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h,16777619); }
+  return ((h>>>0) % 100000) / 100000;
+}
+function pick(a,b,s){ return Math.round(a + (b-a)*s); }
+
+function rowFor(fecha, muni){
+  const dow = new Date(fecha+"T12:00:00").getDay();
+  const factor = dow===0 ? 0 : dow===6 ? 0.45 : 1;
+  const escala = {A:1,B:1.15,C:1,CH:.8,D:1.2,E:.9,F:1.1,G:1}[muni] || 1;
+  const realizados  = Math.round(pick(26,74,seed(fecha+muni+"srv")) * factor * escala);
+  const noAtendidos = Math.round(realizados * (0.06 + 0.09*seed(fecha+muni+"noat")));
+  const camion      = Math.round(pick(3,8, seed(fecha+muni+"cam")) * factor * escala);
+  const motocarro   = Math.round(pick(1,5, seed(fecha+muni+"moto")) * factor * escala);
+  const totalDesc   = Math.round(camion*2.2 + motocarro*1.4);
+  const pesos = LOCALES.map((l,i)=> 0.4 + seed(fecha+muni+l+i));
+  const suma = pesos.reduce((a,b)=>a+b,0);
+  const descargas = {};
+  let acc = 0;
+  LOCALES.forEach((l,i)=>{
+    const v = i===LOCALES.length-1 ? Math.max(0,totalDesc-acc) : Math.round(totalDesc*pesos[i]/suma);
+    descargas[l] = v; acc += v;
+  });
+  return {fecha, municipio:muni, realizados, noAtendidos, camion, motocarro, descargas};
+}
+
+function getRows(desde, hasta, muni){
+  const out = [];
+  const d = new Date(desde+"T12:00:00"), h = new Date(hasta+"T12:00:00");
+  if (isNaN(d) || isNaN(h) || d>h) return out;
+  const munis = muni==="todos" ? MUNICIPIOS : [muni];
+  for (let c=new Date(d); c<=h; c.setDate(c.getDate()+1)){
+    const f = iso(c);
+    munis.forEach(m => out.push(rowFor(f,m)));
+  }
+  return out;
+}
+
+/* ==========================================================================
+   2. UTILIDADES
+   ========================================================================== */
+const $ = s => document.querySelector(s);
+const nf = new Intl.NumberFormat("es-UY");
+const nf1 = new Intl.NumberFormat("es-UY",{minimumFractionDigits:1,maximumFractionDigits:1});
+const fmt = n => nf.format(n);
+const fmt1 = n => nf1.format(n);
+function iso(d){
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function fechaCorta(d){ return d.toLocaleDateString("es-UY",{day:"2-digit",month:"short"}).replace(".",""); }
+function fechaLarga(d){ return d.toLocaleDateString("es-UY",{day:"numeric",month:"long",year:"numeric"}); }
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+/* ==========================================================================
+   3. TABLA DE SITUACIÓN ACTUAL
+   ========================================================================== */
+function nivel(p){ return p<=25 ? 0 : p<=45 ? 1 : p<=70 ? 2 : 3; }
+
+function renderSituacion(){
+  const tb = $("#t-actual tbody");
+  tb.innerHTML = SITUACION.filas.map(fila=>{
+    let tds = `<td class="muni"><b>${esc(fila.muni)}</b><span>${esc(fila.dia)}</span></td>`;
+    for (let i=0;i<SITUACION.columnas;i++){
+      const c = fila.celdas[i];
+      if (!c){ tds += `<td><div class="cell void">—</div></td>`; continue; }
+      const p = Math.round(c.a / fila.cupos * 100);
+      tds += `<td><div class="cell lv${nivel(p)}">
+        <span class="date">${esc(c.f)}</span>
+        <span class="row"><span class="pct">${p}%</span><span class="cupos">${fmt(c.a)} / ${fmt(fila.cupos)} cupos</span></span>
+        <span class="bar"><i style="width:${Math.min(100,p)}%"></i></span>
+      </div></td>`;
+    }
+    return `<tr>${tds}</tr>`;
+  }).join("");
+}
+
+/* ==========================================================================
+   4. BARRAS APILADAS (SVG, sin librerías)
+   ========================================================================== */
+function stackedBars(el, buckets, series){
+  if (!buckets.length){
+    el.innerHTML = '<p class="empty">No hay datos en el período elegido. Probá ampliar las fechas.</p>';
+    return;
+  }
+  const totals = buckets.map(b => series.reduce((a,s)=>a+(b.v[s.key]||0),0));
+  if (!totals.some(t=>t>0)){
+    el.innerHTML = '<p class="empty">Sin actividad registrada en el período elegido.</p>';
+    return;
+  }
+  const W=1000, H=300, ml=54, mr=8, mt=12, mb=40;
+  const iw = W-ml-mr, ih = H-mt-mb;
+  const max = Math.max(1, ...totals);
+  const step = niceStep(max);
+  const top = Math.ceil(max/step)*step;
+  const y = v => mt + ih - (v/top)*ih;
+  const gap = iw/buckets.length;
+  const bw = Math.min(56, gap*0.66);
+
+  let g = "";
+  for (let v=0; v<=top; v+=step){
+    g += `<line class="${v===0?'zero':'grid-l'}" x1="${ml}" y1="${y(v).toFixed(1)}" x2="${W-mr}" y2="${y(v).toFixed(1)}"/>`
+       + `<text class="axis" x="${ml-9}" y="${(y(v)+4).toFixed(1)}" text-anchor="end">${fmt(v)}</text>`;
+  }
+
+  const paso = Math.ceil(buckets.length/14);
+  buckets.forEach((b,i)=>{
+    const x = ml + gap*i + (gap-bw)/2;
+    let acc = 0, rects = "";
+    series.forEach(s=>{
+      const v = b.v[s.key]||0;
+      if (v<=0) return;
+      const h = (v/top)*ih;
+      rects += `<rect class="bar-r" x="${x.toFixed(1)}" y="${y(acc+v).toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1,h).toFixed(1)}" fill="${s.color}" rx="1.5"/>`;
+      acc += v;
+    });
+    const det = series.filter(s=>(b.v[s.key]||0)>0).map(s=>`${s.label}: ${fmt(b.v[s.key])}`).join(" · ");
+    g += `<g class="barg"><title>${esc(b.label)} — total ${fmt(totals[i])}${det?" ("+esc(det)+")":""}</title>${rects}`
+       + `<rect x="${(ml+gap*i).toFixed(1)}" y="${mt}" width="${gap.toFixed(1)}" height="${ih}" fill="transparent"/></g>`;
+    if (i%paso===0 || buckets.length<=14){
+      g += `<text class="axis" x="${(x+bw/2).toFixed(1)}" y="${H-mb+20}" text-anchor="middle">${esc(b.short)}</text>`;
+    }
+  });
+
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfica de barras apiladas">${g}</svg>`;
+}
+function niceStep(max){
+  const raw = max/5;
+  const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const s = [1,2,2.5,5,10].map(m=>m*mag).find(v=>v>=raw) || mag*10;
+  return Math.max(1, Math.round(s));
+}
+function legend(el, series){
+  el.innerHTML = series.map(s=>`<span><i class="swatch" style="background:${s.color}"></i>${esc(s.label)}</span>`).join("");
+}
+
+/* ==========================================================================
+   5. AGRUPACIÓN POR DÍA / SEMANA / MES
+   ========================================================================== */
+function agrupar(rows, desde, hasta){
+  const dias = Math.round((new Date(hasta) - new Date(desde))/86400000)+1;
+  const modo = dias<=45 ? "dia" : dias<=210 ? "semana" : "mes";
+  const map = new Map();
+  rows.forEach(r=>{
+    const d = new Date(r.fecha+"T12:00:00");
+    let key, label, short;
+    if (modo==="dia"){
+      key = r.fecha; label = fechaLarga(d); short = fechaCorta(d);
+    } else if (modo==="semana"){
+      const l = new Date(d); l.setDate(l.getDate() - ((l.getDay()+6)%7));
+      key = iso(l); label = "Semana del "+fechaLarga(l); short = fechaCorta(l);
+    } else {
+      key = r.fecha.slice(0,7);
+      label = d.toLocaleDateString("es-UY",{month:"long",year:"numeric"});
+      short = d.toLocaleDateString("es-UY",{month:"short"}).replace(".","")+" "+String(d.getFullYear()).slice(2);
+    }
+    if (!map.has(key)) map.set(key,{key,label,short,v:{}});
+    const b = map.get(key).v;
+    b.realizados  = (b.realizados||0) + r.realizados;
+    b.noAtendidos = (b.noAtendidos||0) + r.noAtendidos;
+    b.camion      = (b.camion||0) + r.camion;
+    b.motocarro   = (b.motocarro||0) + r.motocarro;
+    LOCALES.forEach(l => b[l] = (b[l]||0) + (r.descargas[l]||0));
+  });
+  return {modo, dias, buckets:[...map.values()].sort((a,b)=>a.key<b.key?-1:1)};
+}
+
+/* ==========================================================================
+   6. RENDER DE LAS SECCIONES FILTRADAS
+   ========================================================================== */
+function render(){
+  const desde = $("#f-desde").value, hasta = $("#f-hasta").value, muni = $("#f-muni").value;
+  if (!desde || !hasta) return;
+  if (desde > hasta){ $("#f-hasta").value = desde; return render(); }
+
+  const rows = getRows(desde, hasta, muni);
+  const {modo, dias, buckets} = agrupar(rows, desde, hasta);
+  const nombreModo = {dia:"por día", semana:"por semana", mes:"por mes"}[modo];
+  const diasHabiles = new Set(rows.filter(r=>r.realizados>0).map(r=>r.fecha)).size || 1;
+
+  const sum = k => rows.reduce((a,r)=>a+r[k],0);
+
+  /* servicios realizados */
+  const realizados = sum("realizados"), noAt = sum("noAtendidos");
+  $("#k1-total").textContent = fmt(realizados);
+  $("#k1-total-f").textContent = `en ${diasHabiles} días con servicio`;
+  $("#k1-prom").textContent = fmt1(realizados/diasHabiles);
+  $("#k1-prom-f").textContent = "promedio de días con servicio";
+  $("#k1-noat").textContent = fmt(noAt);
+  $("#k1-noat-f").textContent = realizados ? nf1.format(noAt/realizados*100)+"% del total" : "";
+  const s1 = [
+    {key:"realizados", label:"Atendidos", color:COLOR.atendidos},
+    {key:"noAtendidos", label:"No atienden", color:COLOR.noAtendidos}
+  ];
+  legend($("#l1"), s1); $("#g1").textContent = "Agrupado "+nombreModo;
+  stackedBars($("#c1"), buckets, s1);
+
+  /* transportistas */
+  const camion = sum("camion"), moto = sum("motocarro"), turnos = camion+moto;
+  $("#k2-total").textContent = fmt(turnos);
+  $("#k2-total-f").textContent = `${fmt(camion)} camión · ${fmt(moto)} motocarro`;
+  $("#k2-prom").textContent = fmt1(turnos/diasHabiles);
+  $("#k2-prom-f").textContent = "turnos por día con servicio";
+  const s2 = [
+    {key:"camion", label:"Camión", color:COLOR.camion},
+    {key:"motocarro", label:"Motocarro", color:COLOR.motocarro}
+  ];
+  legend($("#l2"), s2); $("#g2").textContent = "Agrupado "+nombreModo;
+  stackedBars($("#c2"), buckets, s2);
+
+  /* descargas */
+  const porLocal = {};
+  LOCALES.forEach(l => porLocal[l] = rows.reduce((a,r)=>a+(r.descargas[l]||0),0));
+  const desc = Object.values(porLocal).reduce((a,b)=>a+b,0);
+  const masUsado = Object.entries(porLocal).sort((a,b)=>b[1]-a[1])[0];
+  $("#k3-total").textContent = fmt(desc);
+  $("#k3-total-f").textContent = masUsado && desc ? `más usado: ${masUsado[0].toLowerCase()}` : "";
+  $("#k3-prom").textContent = fmt1(desc/diasHabiles);
+  $("#k3-prom-f").textContent = "descargas por día con servicio";
+  const s3 = LOCALES.map((l,i)=>({key:l, label:l, color:COLOR.locales[i%COLOR.locales.length]}));
+  legend($("#l3"), s3); $("#g3").textContent = "Agrupado "+nombreModo;
+  stackedBars($("#c3"), buckets, s3);
+}
+
+/* ==========================================================================
+   7. ARRANQUE
+   ========================================================================== */
+/* rango inicial: últimos 30 días */
+function rangoInicial(dias){
+  const hasta = new Date();
+  const desde = new Date(); desde.setDate(desde.getDate()-(dias-1));
+  $("#f-desde").value = iso(desde);
+  $("#f-hasta").value = iso(hasta);
+}
+
+$("#f-muni").innerHTML = '<option value="todos">Todos</option>' +
+  MUNICIPIOS.map(m=>`<option value="${m}">Municipio ${m}</option>`).join("");
+
+["#f-desde","#f-hasta","#f-muni"].forEach(s=>{
+  $(s).addEventListener("change", render);
+});
+
+renderSituacion();
+rangoInicial(30);
+render();
+</script>
+</body>
+</html>
