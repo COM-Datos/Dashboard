@@ -481,9 +481,11 @@ function buildUni(rows){
   const uni={};
   rows.forEach(r=>{
     if(!uni[r.circ])uni[r.circ]={mun:r.mun,conts:{}};
-    if(!uni[r.circ].conts[r.cont])uni[r.circ].conts[r.cont]={lat:0,lng:0,dir:''};
+    if(!uni[r.circ].conts[r.cont])uni[r.circ].conts[r.cont]={lat:0,lng:0,dir:'',coordOperativa:false};
     const c=uni[r.circ].conts[r.cont];
-    if(!c.lat&&r.lat){c.lat=r.lat;c.lng=r.lng;c.dir=r.dir;}
+    if(r.lat&&(!c.lat||(!r.noVisitado&&!c.coordOperativa))){
+      c.lat=r.lat;c.lng=r.lng;c.dir=r.dir;c.coordOperativa=!r.noVisitado;
+    }
   });
   return uni;
 }
@@ -795,7 +797,7 @@ function cVis(data){
   data.forEach(r=>{
     if(!v[r.circ])v[r.circ]={};
     if(!v[r.circ][r.cont])v[r.circ][r.cont]=0;
-    if(r.esVisita)v[r.circ][r.cont]++;
+    if(!r.noVisitado&&r.esVisita)v[r.circ][r.cont]++;
   });
   return v;
 }
@@ -941,6 +943,7 @@ function rMapEstado(){
   mlayerCov.clearLayers();
   const last={};
   FILT2.forEach(r=>{
+    if(r.noVisitado||!r.cat)return;
     const key=r.circ+'|||'+r.cont;
     if(!last[key]||r.fecha>last[key].fecha)last[key]=r;
   });
@@ -950,7 +953,7 @@ function rMapEstado(){
       if(!info.lat||!info.lng)return;
       const row=last[c+'|||'+id];
       let color=CC_GRIS,label='Sin datos en el período';
-      if(row&&!row.noVisitado&&row.cat){color=CC[row.cat];label=CL[row.cat];}
+      if(row){color=CC[row.cat];label=CL[row.cat];}
       const mk=L.circleMarker([info.lat,info.lng],{radius:6,fillColor:color,color:'rgba(255,255,255,.6)',weight:1.5,fillOpacity:.9});
       mk.bindPopup(`<b>Cont. #${id}</b> · ${c}${info.dir?'<br><span style="font-size:11px;color:#666">'+info.dir+'</span>':''}<br><b>Última vez:</b> ${row?row.fecha.split('-').reverse().join('/'):'—'}<br><b>Estado:</b> ${label}`).addTo(mlayerCov);
       pts.push([info.lat,info.lng]);shown++;
