@@ -4,28 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Generador de Dashboard — Asistencia Transportistas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; }
 
+  /* Header — mismo degradé, tipografía y altura compacta que el resto de los dashboards del COM */
   header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #16213e 55%, #1b3f74 100%);
     color: white;
-    padding: 24px 32px;
+    min-height: 64px;
+    padding: 10px 24px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    gap: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     flex-wrap: wrap;
   }
-  .header-left { display:flex; align-items:center; gap:16px; }
-  header .logo { font-size: 2rem; }
-  header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.5px; }
-  header p { font-size: 0.85rem; opacity: 0.7; margin-top: 2px; }
-  .back-link{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;color:rgba(255,255,255,.55);text-decoration:none;transition:color .15s}
+  header .logo { font-size: 1.4rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,.3)); }
+  header h1 { font-family: var(--com-font); font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; }
+  header p { font-size: 0.7rem; opacity: 0.7; margin-top: 1px; }
+  .back-link{display:inline-flex;align-items:center;gap:5px;font-size:.75rem;color:#c7d5ea;text-decoration:none;transition:color .15s;flex-shrink:0}
   .back-link:hover{color:#fff}
   .back-link svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2}
 
@@ -39,6 +42,8 @@
     color: white;
     border-radius: 10px;
     padding: 9px 18px;
+    margin: 0;
+    font-family: inherit;
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
@@ -47,11 +52,11 @@
     text-decoration: none;
   }
   .btn-header-action:hover { background: rgba(255,255,255,0.25); border-color: white; }
-  .header-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-left: auto; }
 
   /* Connect screen */
   #uploadScreen {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -191,18 +196,16 @@
     background: white;
     border-radius: 14px;
     padding: 20px 18px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    border-top: 4px solid;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: box-shadow 0.2s;
   }
-  .kpi-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
-  .kpi-card.green  { border-color: #22c55e; }
-  .kpi-card.red    { border-color: #ef4444; }
-  .kpi-card.orange { border-color: #f97316; }
-  .kpi-card.yellow { border-color: #eab308; }
-  .kpi-card.gray   { border-color: #6b7280; }
-  .kpi-card.blue   { border-color: #3b82f6; }
-  .kpi-card.purple { border-color: #a855f7; }
+  /* El color va en el valor, no en un borde de la tarjeta — mismo criterio que el resto de dashboards */
+  .kpi-card.green  .kpi-value { color: #16a34a; }
+  .kpi-card.red    .kpi-value { color: #dc2626; }
+  .kpi-card.orange .kpi-value { color: #ea580c; }
+  .kpi-card.yellow .kpi-value { color: #ca8a04; }
+  .kpi-card.gray   .kpi-value { color: #1a1a2e; }
+  .kpi-card.blue   .kpi-value { color: #2563eb; }
+  .kpi-card.purple .kpi-value { color: #9333ea; }
   .kpi-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: #6b7280; margin-bottom: 6px; }
   .kpi-value { font-size: 2rem; font-weight: 800; color: #1a1a2e; line-height: 1; }
   .kpi-sub { font-size: 0.78rem; color: #9ca3af; margin-top: 4px; }
@@ -396,29 +399,93 @@
   .day-cell:hover::after { content: attr(data-tip); position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); background: #1a1a2e; color: white; padding: 5px 9px; border-radius: 6px; font-size: .7rem; white-space: nowrap; z-index: 10; pointer-events: none; }
   .persona-obs { margin-top: 14px; }
   @media(max-width:900px) { .charts-row-2 { grid-template-columns: 1fr; } .persona-charts-row { grid-template-columns: 1fr; } .persona-mini-kpis { grid-template-columns: repeat(3,1fr); } }
-  @media(max-width:600px) {
-    header { padding: 16px; }
-    header h1 { font-size: 1.1rem; }
+
+  .chart-card,
+  .charts-row-2 > *,
+  .charts-row-3 > *,
+  .ranking-row > *,
+  .servicio-evol-wrap { min-width: 0; }
+  .chart-card canvas,
+  .servicio-evol-wrap canvas { max-width: 100%; }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     MÓVIL — a partir de acá, todo pensado para usarse con el dedo en una
+     pantalla angosta, no solo "que entre sin desbordar". Los criterios:
+     - Nada de grillas de 5-7 columnas (quedan ilegibles) — máximo 2.
+     - Los controles de filtro se apilan en una columna, cada uno a lo ancho
+       (más fácil de tocar que una fila con 6 cosas apretadas).
+     - Los botones/inputs con al menos ~40px de alto (tamaño cómodo de tocar).
+     - La tabla de detalle sigue con scroll horizontal (convertirla en
+       tarjetas es un trabajo aparte) pero con una pista visual de que se
+       puede deslizar, para que no parezca que faltan columnas.
+     ══════════════════════════════════════════════════════════════════════ */
+  @media(max-width:640px) {
+    header { padding: 10px 16px; }
+    .back-link { display: none; }
+    header h1 { font-size: 1rem; }
+    header p { font-size: .68rem; }
+    .header-actions { width: 100%; }
+    .btn-header-action { flex: 1 1 auto; justify-content: center; padding: 11px 14px; }
     .container { padding: 14px 10px; }
-    .upload-card { padding: 32px 20px; }
+
+    .upload-card { padding: 28px 20px; }
+    .date-filter-row { grid-template-columns: 1fr; }
+
+    .kpi-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
+    .kpi-card { padding: 14px 12px; }
+    .kpi-value { font-size: 1.6rem; }
+
+    .filtered-kpis { grid-template-columns: repeat(2,1fr); gap: 8px; }
+    .persona-mini-kpis { grid-template-columns: repeat(2,1fr); }
+
+    .servicio-detail { grid-template-columns: 1fr; }
+
+    /* filtros: una columna, cada control a lo ancho y con más alto para el dedo */
+    .table-header { flex-direction: column; align-items: stretch; }
+    .filters { flex-direction: column; align-items: stretch; gap: 8px; }
+    .filters > * { width: 100%; }
+    .search-wrap, .search-wrap input { width: 100%; }
+    .date-range-wrap { display: grid; grid-template-columns: auto 1fr; gap: 6px 8px; align-items: center; width: 100%; }
+    select, input[type=text], input[type=date] { min-height: 40px; font-size: .88rem; width: 100%; }
+    .btn-excel { min-height: 40px; justify-content: center; }
+    .results-count { text-align: center; }
+
+    .rank-search-wrap { flex-wrap: wrap; }
+    .rank-search-input { min-height: 40px; flex: 1 1 100%; }
+    .rank-search-clear { min-height: 38px; }
+
+    .persona-input-row { flex-direction: column; align-items: stretch; }
+    .persona-input-row input[type=text] { min-width: 0; min-height: 42px; }
+    .persona-header { justify-content: flex-start; }
+    .persona-pct { margin-left: 0; }
+
+    /* pista de que la tabla se puede deslizar hacia el costado */
+    .table-wrap { position: relative; }
+    .table-wrap::after {
+      content: "◀ deslizá para ver más ▶"; display: block; text-align: center;
+      font-size: .68rem; color: #9ca3af; padding: 6px 0 0;
+    }
+    .pagination .page-btn { min-height: 38px; min-width: 38px; }
   }
 </style>
+<link rel="stylesheet" href="assets/dashboard-common.css">
 </head>
-<body>
+<body class="page-transportistas">
 
 <header>
-  <div class="header-left">
-    <div class="logo">🚛</div>
-    <div>
-      <a class="back-link" href="index.html" style="margin-bottom:3px">
-        <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-        Centro Operativo
-      </a>
-      <h1>Asistencia de Transportistas</h1>
-      <p id="headerSub">Conectado a Google Sheets · Dashboard en tiempo real</p>
-    </div>
+  <a class="back-link com-back-link" href="index.html">
+    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Volver al menú principal
+  </a>
+  <div class="logo">🚛</div>
+  <div>
+    <h1>Dashboard de Transportistas</h1>
+    <p id="headerSub">Centro Operativo de Montevideo — COM</p>
   </div>
   <div class="header-actions">
+    <button type="button" class="btn-header-action" onclick="volverAlGenerador()">
+      📅 Cambiar período
+    </button>
     <label class="btn-header-action" id="btnHeaderUpload" style="display:none">
       📂 Cargar archivo
       <input type="file" id="fileInputHeader" accept=".xlsx,.xls" style="display:none">
@@ -429,28 +496,20 @@
 <!-- Connect Screen -->
 <div id="uploadScreen">
   <div class="upload-card">
-    <div class="upload-icon">📊</div>
-    <h2>Dashboard de Asistencia</h2>
-    <p>Los datos se obtienen directamente desde la planilla de Google Sheets. Presioná <strong>Generar</strong> para cargar el dashboard actualizado.</p>
-
-    <div class="sheets-badge">
-      <span class="sheets-badge-icon">📋</span>
-      <div>
-        <div class="sheets-badge-label">Fuente de datos</div>
-        <div class="sheets-badge-name">Asistencia Transportistas · Google Sheets</div>
-      </div>
-    </div>
+    <div class="upload-icon">📅</div>
+    <h2>Elegí el período</h2>
+    <p>Ajustá las fechas y generá el dashboard actualizado, o usá un archivo de respaldo.</p>
 
     <!-- Filtro de fechas -->
     <div class="date-filter">
       <div class="date-filter-title">📅 Filtrar por período</div>
       <div class="date-filter-row">
         <div class="date-filter-group">
-          <label>Desde</label>
+          <label for="genFilterFrom">Desde</label>
           <input type="date" id="genFilterFrom">
         </div>
         <div class="date-filter-group">
-          <label>Hasta</label>
+          <label for="genFilterTo">Hasta</label>
           <input type="date" id="genFilterTo">
         </div>
       </div>
@@ -460,10 +519,13 @@
     </div>
 
     <button class="btn-browse" id="btnGenerar" onclick="fetchFromSheets()">
-      🔄 Generar Dashboard
+      Cargar información
     </button>
 
-    <div class="upload-hint">Datos obtenidos en tiempo real desde Google Sheets</div>
+    <div class="upload-alt">
+      <div class="upload-alt-text">Si la carga automática no está disponible:</div>
+      <button class="upload-alt-link" type="button" onclick="if(validateGeneratorRange())document.getElementById('fileInputLocal').click()">Elegir archivo de respaldo</button>
+    </div>
     <input type="file" id="fileInputLocal" accept=".xlsx,.xls" style="display:none">
 
     <div id="errorMsg"></div>
@@ -471,9 +533,11 @@
 </div>
 
 <!-- Loading -->
-<div id="loadingScreen">
-  <div class="spinner"></div>
-  <p id="loadingMsg">Obteniendo datos desde Google Sheets...</p>
+<div id="loadingScreen" class="com-loading-view" role="status" aria-live="polite">
+  <div class="com-loading-content">
+    <div class="com-spinner" aria-hidden="true"></div>
+    <p id="loadingMsg" class="com-loading-message">Cargando información…</p>
+  </div>
 </div>
 
 <!-- Dashboard -->
@@ -607,18 +671,19 @@
         <div class="filters">
           <div class="search-wrap">
             <span class="search-icon">🔍</span>
-            <input type="text" id="searchInput" placeholder="Buscar transportista...">
+            <input type="text" id="searchInput" aria-label="Buscar transportista" placeholder="Buscar transportista...">
           </div>
           <div class="date-range-wrap">
             <span style="font-size:.8rem;color:#6b7280;white-space:nowrap">Desde</span>
-            <input type="date" id="filterFechaDesde" title="Desde">
+            <input type="date" id="filterFechaDesde" aria-label="Fecha desde" title="Desde">
             <span style="font-size:.8rem;color:#6b7280;white-space:nowrap">Hasta</span>
-            <input type="date" id="filterFechaHasta" title="Hasta">
+            <input type="date" id="filterFechaHasta" aria-label="Fecha hasta" title="Hasta">
           </div>
-          <select id="filterMuni"><option value="">Todos los municipios</option></select>
-          <select id="filterTarea"><option value="">Todas las tareas</option></select>
-          <select id="filterEstado"><option value="">Todos los estados</option></select>
+          <select id="filterMuni" aria-label="Filtrar por municipio"><option value="">Todos los municipios</option></select>
+          <select id="filterTarea" aria-label="Filtrar por tarea"><option value="">Todas las tareas</option></select>
+          <select id="filterEstado" aria-label="Filtrar por estado"><option value="">Todos los estados</option></select>
           <span class="results-count" id="resultsCount"></span>
+          <button class="com-retry-button" id="btnClearFilters" type="button">Restablecer</button>
           <button class="btn-excel" id="btnExcel" onclick="exportExcel()">⬇ Excel</button>
         </div>
       </div>
@@ -642,6 +707,9 @@
 <script>
 // ── Chart instances (for destroy on reload) ────────────────────────────────
 let chartInstances = {};
+const TRANSPORT_SESSION_KEY='com.transportistas.filters';
+function readTransportState(){try{return JSON.parse(sessionStorage.getItem(TRANSPORT_SESSION_KEY)||'null')}catch(_){sessionStorage.removeItem(TRANSPORT_SESSION_KEY);return null}}
+function saveTransportState(){sessionStorage.setItem(TRANSPORT_SESSION_KEY,JSON.stringify(Object.fromEntries(['searchInput','filterFechaDesde','filterFechaHasta','filterMuni','filterTarea','filterEstado','personaInput'].map(id=>[id,document.getElementById(id)?.value||'']))))}
 
 // ── Google Sheets connection ───────────────────────────────────────────────
 const SHEET_ID = '1noCdHYoJq69xMhrHW8Gpxa_elP1j3KffG6zPPghmXTw';
@@ -719,14 +787,13 @@ function gvizTableToRows(table) {
           const year = +m[1];
           if (year <= 1900) {
             // Es hora pura → devolver como array [h, m, s] para que formatTime lo maneje
-            if (i >= 6 && i <= 9) console.log(`[gviz col${i}] tiempo puro → [${m[4]},${m[5]},${m[6]}] desde "${vStr}"`);
+            // (antes esto tenía un console.log por cada fila/columna — con el historial
+            // completo de asistencia son miles de filas y llegaba a saturar la consola
+            // del navegador, dejándolo sin responder)
             return [+m[4], +m[5], +m[6], 0];
           }
           // Es fecha+hora real
           return new Date(year, +m[2], +m[3], +m[4], +m[5], +m[6]);
-        } else {
-          // El regex no matcheó — loguear para diagnóstico
-          if (i >= 6 && i <= 9) console.warn(`[gviz col${i}] datetime sin match: "${vStr}"`);
         }
       }
 
@@ -747,6 +814,16 @@ function gvizTableToRows(table) {
 
 
 // ── Filtro de fecha (se aplica antes de processData) ──────────────────────
+function validateGeneratorRange() {
+  const from = document.getElementById('genFilterFrom').value;
+  const toEl = document.getElementById('genFilterTo');
+  const to = toEl.value;
+  toEl.min = from || '';
+  toEl.setCustomValidity(from && to && from > to ? 'La fecha Desde no puede ser posterior a Hasta.' : '');
+  if (!toEl.checkValidity()) { toEl.reportValidity(); return false; }
+  return true;
+}
+
 function applyDateFilter(rows) {
   const fromVal = document.getElementById('genFilterFrom').value; // 'YYYY-MM-DD' o ''
   const toVal   = document.getElementById('genFilterTo').value;
@@ -794,7 +871,8 @@ function buildFilename() {
 }
 
 async function fetchFromSheets() {
-  showLoading('Obteniendo datos desde Google Sheets...');
+  if (!validateGeneratorRange()) return;
+  showLoading('Cargando información…');
   try {
     // Método 1: JSONP — funciona desde file://, webview, y cualquier contexto
     const table = await loadGvizJsonp();
@@ -807,7 +885,7 @@ async function fetchFromSheets() {
   } catch(err) {
     // Si JSONP falla, intentar fetch como fallback (funciona en servidores HTTP normales)
     try {
-      showLoading('Intentando conexión alternativa...');
+      showLoading('Cargando información…');
       const urls = [
         `https://docs.google.com/spreadsheets/d/${SHEET_ID}/pub?output=csv&gid=0`,
         `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`,
@@ -828,15 +906,8 @@ async function fetchFromSheets() {
       const processed = processData(rows, fname, false);
       renderDashboard(processed, fname);
     } catch(err2) {
-      const errEl = document.getElementById('errorMsg');
-      errEl.style.display = 'block';
-      errEl.innerHTML =
-        '⚠️ No se pudo conectar con Google Sheets.<br>' +
-        '<span style="font-size:.8rem;color:#7f1d1d;line-height:1.5">' +
-        'Alternativa: en Google Sheets andá a <b>Archivo → Descargar → CSV</b>, ' +
-        'y subí ese archivo con el botón <b>"Cargar Excel"</b> de abajo.</span>';
-      document.getElementById('uploadScreen').style.display = 'flex';
-      document.getElementById('loadingScreen').style.display = 'none';
+      console.error('No se pudo cargar Transportistas:',err,err2);
+      showError('No se pudo cargar la información. Reintentá o elegí un archivo de respaldo.');
     }
   }
 }
@@ -848,6 +919,7 @@ document.getElementById('fileInputHeader').addEventListener('change', e => handl
 // ── Local file handler ─────────────────────────────────────────────────────
 function handleFile(file) {
   if (!file) return;
+  if (!validateGeneratorRange()) return;
   if (!file.name.match(/\.xlsx?$/i)) {
     showError('El archivo debe ser .xlsx o .xls');
     return;
@@ -889,16 +961,15 @@ function downloadDashboard(d, filename) {
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;color:#1a1a2e}
-  header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 60%,#0f3460 100%);color:#fff;padding:24px 32px;display:flex;align-items:center;gap:16px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+  header{background:linear-gradient(135deg,#0f172a 0%,#16213e 55%,#1b3f74 100%);color:#fff;padding:24px 32px;display:flex;align-items:center;gap:16px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
   header .logo{font-size:2rem}
-  header h1{font-size:1.5rem;font-weight:700}
+  header h1{font-size:1.6rem;font-weight:800}
   header p{font-size:.85rem;opacity:.7;margin-top:2px}
   .container{max-width:1400px;margin:0 auto;padding:24px 20px}
   .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:28px}
-  .kpi-card{background:#fff;border-radius:14px;padding:20px 18px;box-shadow:0 2px 8px rgba(0,0,0,.07);border-top:4px solid;transition:transform .2s,box-shadow .2s}
-  .kpi-card:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.12)}
-  .kpi-card.green{border-color:#22c55e}.kpi-card.red{border-color:#ef4444}.kpi-card.orange{border-color:#f97316}
-  .kpi-card.yellow{border-color:#eab308}.kpi-card.gray{border-color:#6b7280}.kpi-card.blue{border-color:#3b82f6}
+  .kpi-card{background:#fff;border-radius:14px;padding:20px 18px;box-shadow:0 2px 8px rgba(0,0,0,.07);transition:box-shadow .2s}
+  .kpi-card.green .kpi-value{color:#16a34a}.kpi-card.red .kpi-value{color:#dc2626}.kpi-card.orange .kpi-value{color:#ea580c}
+  .kpi-card.yellow .kpi-value{color:#ca8a04}.kpi-card.gray .kpi-value{color:#1a1a2e}.kpi-card.blue .kpi-value{color:#2563eb}
   .kpi-label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:#6b7280;margin-bottom:6px}
   .kpi-value{font-size:2rem;font-weight:800;color:#1a1a2e;line-height:1}
   .kpi-sub{font-size:.78rem;color:#9ca3af;margin-top:4px}
@@ -965,6 +1036,7 @@ function downloadDashboard(d, filename) {
   .day-cell:hover::after{content:attr(data-tip);position:absolute;bottom:36px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:5px 9px;border-radius:6px;font-size:.7rem;white-space:nowrap;z-index:10;pointer-events:none}
   .persona-obs{margin-top:14px}
   @media(max-width:900px){.charts-row-2{grid-template-columns:1fr}.persona-charts-row{grid-template-columns:1fr}.persona-mini-kpis{grid-template-columns:repeat(3,1fr)}}
+  .chart-card,.charts-row-2>*,.charts-row-3>*,.ranking-row>*,.servicio-evol-wrap{min-width:0}.chart-card canvas,.servicio-evol-wrap canvas{max-width:100%}
   @media(max-width:600px){header{padding:16px}header h1{font-size:1.1rem}.container{padding:14px 10px}}
 </style>
 </head>
@@ -1140,6 +1212,7 @@ const inpDesde=document.getElementById('filterFechaDesde'),inpHasta=document.get
 ['RECLAMOS','BOLSONES','AGENDA','TAREAS ESPECIALES'].forEach(t=>selT.innerHTML+=\`<option value="\${t}">\${t}</option>\`);
 function applyFilters(){
   const q=srch.value.toLowerCase().trim(),from=inpDesde.value,to=inpHasta.value,mu=selM.value,es=selE.value;
+  inpHasta.min=from||'';inpHasta.setCustomValidity(from&&to&&from>to?'La fecha Desde no puede ser posterior a Hasta.':'');if(!inpHasta.checkValidity()){inpHasta.reportValidity();return;}
   filtered=records.filter(r=>{
     if(q&&!r.Transportista.toLowerCase().includes(q)&&!r.Tarea.toLowerCase().includes(q))return false;
     if(mu&&r.Municipio!==mu)return false;
@@ -1531,10 +1604,6 @@ function renderDashboard(d, filename) {
   Object.values(chartInstances).forEach(c => c.destroy());
   chartInstances = {};
 
-  // Update header
-  document.getElementById('headerSub').textContent =
-    (d.periodoLabel || filename.replace(/\.xlsx?$/i,'')) + ' · Dashboard de seguimiento';
-
   // Mostrar barra de período filtrado (si el usuario eligió fechas)
   const fromVal = document.getElementById('genFilterFrom')?.value || '';
   const toVal   = document.getElementById('genFilterTo')?.value   || '';
@@ -1563,6 +1632,8 @@ function renderDashboard(d, filename) {
   document.getElementById('searchInput').value = '';
   document.getElementById('filterFechaDesde').value = '';
   document.getElementById('filterFechaHasta').value = '';
+  document.getElementById('filterFechaHasta').min = '';
+  document.getElementById('filterFechaHasta').setCustomValidity('');
 
   // Show dashboard
   document.getElementById('uploadScreen').style.display = 'none';
@@ -1895,6 +1966,13 @@ function renderDashboard(d, filename) {
   document.getElementById('searchInput').value = '';
   document.getElementById('filterFechaDesde').value = '';
   document.getElementById('filterFechaHasta').value = '';
+  const savedTransportState=readTransportState();
+  if(savedTransportState){
+    ['searchInput','filterFechaDesde','filterFechaHasta','filterMuni','filterTarea','filterEstado'].forEach(id=>{
+      const el=document.getElementById(id),value=savedTransportState[id]||'';
+      if(el.tagName!=='SELECT'||[...el.options].some(o=>o.value===value))el.value=value;
+    });
+  }
 
   // applyFilters lee por ID en cada llamada — así nunca queda atado a un elemento viejo
   function applyFilters() {
@@ -1904,6 +1982,11 @@ function renderDashboard(d, filename) {
     const mu   = document.getElementById('filterMuni').value;
     const ta   = document.getElementById('filterTarea').value;
     const es   = document.getElementById('filterEstado').value;
+    const hastaEl = document.getElementById('filterFechaHasta');
+    hastaEl.min = from || '';
+    hastaEl.setCustomValidity(from && to && from > to ? 'La fecha Desde no puede ser posterior a Hasta.' : '');
+    if (!hastaEl.checkValidity()) { hastaEl.reportValidity(); return; }
+    saveTransportState();
     filtered = records.filter(r => {
       if (q  && !r.Transportista.toLowerCase().includes(q) && !r.Tarea.toLowerCase().includes(q)) return false;
       if (mu && r.Municipio !== mu) return false;
@@ -2126,7 +2209,12 @@ function renderDashboard(d, filename) {
     const n = this.value.trim();
     if (personaIndex[n]) showPersona(n);
     else document.getElementById('personaCard').style.display = 'none';
+    saveTransportState();
   };
+  if(savedTransportState?.personaInput&&personaIndex[savedTransportState.personaInput]){
+    document.getElementById('personaInput').value=savedTransportState.personaInput;
+    showPersona(savedTransportState.personaInput);
+  }
 
   // Registrar listeners usando oninput/onchange (se sobreescribe en cada carga)
   document.getElementById('searchInput').oninput       = applyFilters;
@@ -2135,8 +2223,15 @@ function renderDashboard(d, filename) {
   document.getElementById('filterMuni').onchange       = applyFilters;
   document.getElementById('filterTarea').onchange      = applyFilters;
   document.getElementById('filterEstado').onchange     = applyFilters;
+  document.getElementById('btnClearFilters').onclick = function(){
+    sessionStorage.removeItem(TRANSPORT_SESSION_KEY);
+    ['searchInput','filterFechaDesde','filterFechaHasta','filterMuni','filterTarea','filterEstado'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('filterFechaHasta').min='';
+    document.getElementById('filterFechaHasta').setCustomValidity('');
+    applyFilters();
+  };
 
-  renderTable();
+  applyFilters();
 }
 
 // ── Navegación ─────────────────────────────────────────────────────────────
@@ -2144,7 +2239,6 @@ function volverAlGenerador() {
   document.getElementById('dashboard').style.display = 'none';
   document.getElementById('uploadScreen').style.display = 'flex';
   document.getElementById('loadingScreen').style.display = 'none';
-  document.getElementById('headerSub').textContent = 'Conectado a Google Sheets · Dashboard en tiempo real';
   // Destruir charts para liberar memoria
   Object.values(chartInstances).forEach(c => c.destroy());
   chartInstances = {};
@@ -2168,7 +2262,22 @@ function showError(msg) {
   err.textContent = '⚠️ ' + msg;
 }
 
+// Por defecto mostramos los últimos 3 meses respecto a hoy (mismo criterio que
+// Reclamos y Zona Limpia), en vez de todo el historial disponible desde marzo.
+// El usuario puede ampliar o mover el período con "Cambiar período".
+function setDefaultPeriodIfEmpty() {
+  const desdeEl = document.getElementById('genFilterFrom');
+  const hastaEl = document.getElementById('genFilterTo');
+  if (desdeEl.value || hastaEl.value) return; // ya hay un período elegido, no lo pisamos
+  const fmt = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  const hasta = new Date(); hasta.setDate(hasta.getDate() - 1); // a día vencido
+  const desde = new Date(hasta); desde.setMonth(desde.getMonth() - 3);
+  desdeEl.value = fmt(desde);
+  hastaEl.value = fmt(hasta);
+}
+
 // Auto-carga al abrir la página — evita el clic extra de "Generar"
+setDefaultPeriodIfEmpty();
 fetchFromSheets();
 </script>
 </body>

@@ -41,23 +41,24 @@ body{
 
 /* ---------- encabezado ---------- */
 .topbar{
-  background:linear-gradient(100deg,#0b1a33 0%,#132c52 55%,#1b3f74 100%);
-  color:#fff;padding:20px 0 26px;
+  /* Mismo degradé, tipografía y altura compacta que el resto de los dashboards del COM */
+  background:linear-gradient(135deg,#0f172a 0%,#16213e 55%,#1b3f74 100%);
+  color:#fff;
 }
-.topbar .inner{max-width:1180px;margin:0 auto;padding:0 24px}
+.topbar .inner{min-height:64px;padding:10px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .back{
-  display:inline-flex;align-items:center;gap:8px;
-  color:#c7d5ea;text-decoration:none;font-size:14.5px;font-weight:500;
-  padding:4px 2px;border-radius:6px;
+  display:inline-flex;align-items:center;gap:6px;
+  color:#c7d5ea;text-decoration:none;font-size:12px;font-weight:500;
+  flex-shrink:0;
 }
 .back:hover{color:#fff}
-.back svg{width:15px;height:15px}
-.titlerow{display:flex;align-items:center;gap:14px;margin-top:10px}
+.back svg{width:12px;height:12px}
+.titlerow{display:flex;align-items:center;gap:10px;margin-top:0}
 .titlerow .ico{
-  font-size:30px;line-height:1;
+  font-size:20px;line-height:1;
   filter:drop-shadow(0 2px 4px rgba(0,0,0,.3));
 }
-.titlerow h1{margin:0;font-size:31px;font-weight:800;letter-spacing:-.02em}
+.titlerow h1{margin:0;font-size:17px;font-weight:800;letter-spacing:-.02em}
 
 /* ---------- secciones ---------- */
 section{margin-top:var(--gap-sec)}
@@ -270,27 +271,30 @@ svg{display:block;width:100%;height:auto}
 
 @media (max-width:680px){
   .wrap{padding:0 16px 48px}
-  .topbar .inner{padding:0 16px}
-  .titlerow h1{font-size:24px}
+  .topbar .inner{padding:10px 16px}
   .kpi{flex:1 1 45%;min-width:0;padding:12px 14px}
   .kpi .k-val{font-size:26px}
   }
 @media print{ body{background:#fff} }
 @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>
+<link rel="stylesheet" href="assets/dashboard-common.css">
 </head>
-<body>
+<body class="page-agenda">
 
 <header class="topbar">
   <div class="inner">
     <!-- ajustar el href según dónde quede el índice del sitio -->
-    <a class="back" href="index.html">
+    <a class="back com-back-link" href="index.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Centro Operativo
+      Volver al menú principal
     </a>
     <div class="titlerow">
       <span class="ico" aria-hidden="true">📅</span>
-      <h1>Dashboard Agenda</h1>
+      <div>
+        <h1>Dashboard de Agenda</h1>
+        <p>Centro Operativo de Montevideo — COM</p>
+      </div>
     </div>
   </div>
 </header>
@@ -298,8 +302,11 @@ svg{display:block;width:100%;height:auto}
 <main class="wrap">
 
   <!-- mientras se cargan los datos se muestra sólo esto -->
-  <div class="loader" id="loader" role="status" aria-label="Cargando datos">
-    <span class="spin"></span>
+  <div class="loader" id="loader" role="status" aria-label="Cargando información">
+    <div class="com-loading-content">
+      <span class="com-spinner" aria-hidden="true"></span>
+      <span class="com-loading-message">Cargando información…</span>
+    </div>
   </div>
 
   <!-- avisos: oculto salvo que falle la carga o los cupos estén vencidos -->
@@ -352,7 +359,9 @@ svg{display:block;width:100%;height:auto}
         <label for="f-muni">Municipio</label>
         <select id="f-muni"></select>
       </div>
+      <button type="button" class="com-retry-button" id="agenda-reset">Restablecer</button>
     </div>
+    <p class="com-range-error" id="range-error" role="alert">La fecha Desde no puede ser posterior a Hasta.</p>
 
     <div class="nested">
 
@@ -806,8 +815,7 @@ async function cargarCupos(){
     const table = await loadGvizJsonp(CONFIG.cuposSheetId, CONFIG.cuposGid);
     return cuposDesdeFilas(gvizToFilas(table, ENCABEZADO_CUPOS));
   } catch(e){
-    DATOS.avisoCupos = "No se pudo leer CDA2.0 en vivo (" + (e.message || e)
-      + "). La tabla está armada con la copia de <code>cupos.json</code>, que puede estar vieja.";
+    DATOS.avisoCupos = "No se pudo actualizar esta información. Se intentó usar la última copia disponible.";
   }
   return JSON.parse(await traerTexto(CONFIG.cupos));
 }
@@ -817,8 +825,7 @@ async function cargarDescargas(){
   try {
     return descargasDesdeFilas(gvizToFilas(await loadGvizJsonp(CONFIG.descargasSheetId, CONFIG.descargasGid)));
   } catch(e){
-    DATOS.avisoDescargas = "No se pudo leer el registro de descargas en vivo (" + (e.message || e)
-      + "). Se está usando la copia de <code>descargas.csv</code>, que puede estar vieja.";
+    DATOS.avisoDescargas = "No se pudo actualizar esta información. Se intentó usar la última copia disponible.";
   }
   return descargasDesdeCSV(await traerTexto(CONFIG.descargas));
 }
@@ -846,7 +853,7 @@ async function cargar(){
   } else {
     DATOS.cupos = {fuente:"(cupos no disponibles)", jornadas:[]};
     if (!DATOS.avisoCupos){
-      DATOS.avisoCupos = "No se pudo leer ningún cupo (" + (rCupos.reason?.message || rCupos.reason) + ").";
+      DATOS.avisoCupos = "La información de cupos no está disponible temporalmente.";
     }
   }
 
@@ -855,7 +862,7 @@ async function cargar(){
   } else {
     DATOS.descargas = [];
     if (!DATOS.avisoDescargas){
-      DATOS.avisoDescargas = "No se pudieron leer las descargas (" + (rDescargas.reason?.message || rDescargas.reason) + ").";
+      DATOS.avisoDescargas = "La información de descargas no está disponible temporalmente.";
     }
   }
 }
@@ -975,12 +982,10 @@ function renderAtencion(){
 function renderAviso(hayJornadas){
   const el = $("#datasrc");
   const avisos = [];
-  if (DATOS.avisoCupos) avisos.push('<span><b>Cupos desactualizados:</b> ' + DATOS.avisoCupos + '</span>');
-  if (DATOS.avisoDescargas) avisos.push('<span><b>Descargas desactualizadas:</b> ' + DATOS.avisoDescargas + '</span>');
+  if (DATOS.avisoCupos) avisos.push('<span><b>Cupos:</b> ' + DATOS.avisoCupos + '</span>');
+  if (DATOS.avisoDescargas) avisos.push('<span><b>Descargas:</b> ' + DATOS.avisoDescargas + '</span>');
   if (!hayJornadas){
-    avisos.push('<span><b>Cupos vencidos:</b> ninguna jornada con cupos es de hoy en adelante,'
-      + ' así que la tabla de Situación actual quedó vacía. Hay que habilitar cupos nuevos en'
-      + ' CDA2.0 · CamionCupoProyectado.</span>');
+    avisos.push('<span><b>Sin jornadas próximas:</b> no hay cupos vigentes desde hoy en adelante.</span>');
   }
   if (!avisos.length){ el.className = "datasrc"; el.innerHTML = ""; return; }
   el.className = "datasrc show";
@@ -988,13 +993,13 @@ function renderAviso(hayJornadas){
 }
 
 function renderEstadoError(msg){
+  console.error("No se pudo cargar Agenda:", msg);
   const el = $("#datasrc");
   el.className = "datasrc show";
-  el.innerHTML = '<span><b>No se pudieron cargar los datos:</b> '+esc(msg)+'</span>'
-    + '<span class="sep">|</span>'
-    + '<span>Si abriste el archivo con doble clic, el navegador bloquea la lectura de archivos locales.'
-    + ' Levantá el servidor con <code>servir.bat</code>, o cargá el CSV a mano:</span>'
-    + '<button type="button" id="btn-pick">Elegir CSV…</button>';
+  el.innerHTML = '<span><b>No se pudo cargar la información.</b> Reintentá o elegí un archivo de respaldo.</span>'
+    + '<button type="button" id="btn-retry-agenda">Reintentar</button>'
+    + '<button type="button" id="btn-pick">Elegir archivo…</button>';
+  $("#btn-retry-agenda").addEventListener("click", ()=> location.reload());
   $("#btn-pick").addEventListener("click", ()=> $("#picker").click());
 }
 
@@ -1337,6 +1342,34 @@ function barrasDiarias(el, tip, dias, series, prom){
 /* ==========================================================================
    RENDER DE LAS SECCIONES FILTRADAS
    ========================================================================== */
+const AGENDA_SESSION_KEY="com.agenda.filters";
+
+function validateAgendaRange(){
+  const desdeEl=$("#f-desde"), hastaEl=$("#f-hasta"), error=$("#range-error");
+  const invalid=Boolean(desdeEl.value&&hastaEl.value&&desdeEl.value>hastaEl.value);
+  hastaEl.setCustomValidity(invalid?"La fecha Desde no puede ser posterior a Hasta.":"");
+  desdeEl.setAttribute("aria-invalid",String(invalid));
+  hastaEl.setAttribute("aria-invalid",String(invalid));
+  error.classList.toggle("show",invalid);
+  return !invalid;
+}
+
+function saveAgendaState(){
+  sessionStorage.setItem(AGENDA_SESSION_KEY,JSON.stringify({
+    desde:$("#f-desde").value,hasta:$("#f-hasta").value,muni:$("#f-muni").value
+  }));
+}
+
+function restoreAgendaState(){
+  try{
+    const state=JSON.parse(sessionStorage.getItem(AGENDA_SESSION_KEY)||"null");
+    if(!state)return;
+    if(state.desde)$("#f-desde").value=state.desde;
+    if(state.hasta)$("#f-hasta").value=state.hasta;
+    if([...$("#f-muni").options].some(o=>o.value===state.muni))$("#f-muni").value=state.muni;
+  }catch(_){ sessionStorage.removeItem(AGENDA_SESSION_KEY); }
+}
+
 function render(){
   const tope = ayer();
   /* hacia atrás se puede elegir lo que sea; hacia adelante el tope es ayer,
@@ -1346,7 +1379,8 @@ function render(){
 
   const desde = $("#f-desde").value, hasta = $("#f-hasta").value, muni = $("#f-muni").value;
   if (!desde || !hasta) return;
-  if (desde > hasta){ $("#f-hasta").value = desde; return render(); }
+  if (!validateAgendaRange()) return;
+  saveAgendaState();
 
   /* 3.1 servicios realizados */
   const dias1 = serviciosPorDia(desde, hasta, muni);
@@ -1426,8 +1460,17 @@ $("#f-muni").innerHTML = '<option value="todos">Todos</option>' +
   $(s).addEventListener("change", render);
 });
 
+$("#agenda-reset").addEventListener("click",()=>{
+  sessionStorage.removeItem(AGENDA_SESSION_KEY);
+  rangoInicial(30);
+  $("#f-muni").value="todos";
+  validateAgendaRange();
+  render();
+});
+
 document.body.classList.add("cargando");
 rangoInicial(30);
+restoreAgendaState();
 cargar().then(arrancar).catch(e=>{
   document.body.classList.remove("cargando");
   renderEstadoError(e.message || String(e));
