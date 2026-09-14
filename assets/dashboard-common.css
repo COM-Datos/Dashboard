@@ -127,6 +127,15 @@ body input[type="date"][aria-invalid="true"] {
   box-shadow: 0 0 0 2px rgba(220, 38, 38, .12);
 }
 
+.com-available-period {
+  margin: -6px 0 14px;
+  color: var(--com-text-muted, #667085);
+  font-family: var(--com-font);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
 @keyframes com-spin {
   to { transform: rotate(360deg); }
 }
@@ -1113,6 +1122,194 @@ select:disabled {
   .page-zona-limpia #cscreen .com-loading-view,
   .page-tareas #initialLoading,
   .page-agenda .loader {
+    padding: 28px 20px;
+  }
+}
+
+/* Bolsones: integración con la estructura visual compartida del producto. */
+body.page-bolsones {
+  background: var(--com-bg);
+  color: var(--com-text);
+  font-family: var(--com-font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.page-bolsones button,
+.page-bolsones input,
+.page-bolsones select {
+  font-family: inherit;
+}
+
+.page-bolsones .topbar {
+  padding: 0;
+  background: linear-gradient(135deg, #0f172a 0%, #16213e 55%, #1b3f74 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+}
+
+.page-bolsones .topbar .inner {
+  min-height: 64px;
+  max-width: none;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-bolsones .com-back-link {
+  min-height: 36px;
+  padding: 0 8px;
+  color: #c7d5ea;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.page-bolsones .titlerow {
+  margin: 0;
+  gap: 10px;
+}
+
+.page-bolsones .titlerow .ico {
+  color: #fff;
+  font-family: "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-size: 22px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .18));
+}
+
+.page-bolsones .titlerow h1 {
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+}
+
+.page-bolsones .titlerow p {
+  margin: 1px 0 0;
+  color: #c7d5ea;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.3;
+  opacity: .7;
+}
+
+.page-bolsones .wrap {
+  max-width: 1320px;
+  padding: 0 24px 48px;
+}
+
+.page-bolsones section {
+  margin-top: 30px;
+}
+
+.page-bolsones h2.sec {
+  margin: 0 0 14px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--com-border);
+  color: var(--com-text);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+
+.page-bolsones h3.sub {
+  color: var(--com-text);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.page-bolsones .card,
+.page-bolsones .kpi {
+  border: 1px solid var(--com-border);
+  border-radius: var(--com-radius-card);
+  box-shadow: var(--com-shadow);
+}
+
+.page-bolsones .filters {
+  gap: 12px;
+  padding: 14px 16px;
+}
+
+.page-bolsones .field label,
+.page-bolsones .k-label {
+  color: var(--com-text-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.page-bolsones input[type="date"],
+.page-bolsones select {
+  min-height: 38px;
+  padding: 7px 10px;
+  border: 1px solid var(--com-border);
+  border-radius: var(--com-radius-control);
+  font-size: 13px;
+}
+
+.page-bolsones .kpis {
+  gap: 10px;
+}
+
+.page-bolsones .kpi {
+  min-width: 160px;
+  padding: 12px 15px;
+}
+
+.page-bolsones .k-val {
+  font-size: 28px;
+}
+
+.page-bolsones .loader {
+  position: fixed;
+  inset: 64px 0 0;
+  z-index: 10;
+  min-height: 0;
+  margin: 0;
+  padding: 40px max(24px, calc((100vw - 1200px) / 2 + 24px));
+  align-items: flex-start;
+  justify-content: flex-start;
+  background: #f7f6f3;
+}
+
+.page-bolsones .loader .com-loading-content {
+  max-width: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  text-align: left;
+}
+
+.page-bolsones .loader .com-loading-message {
+  margin: 0;
+  color: #182230;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@media (max-width: 700px) {
+  .page-bolsones .topbar .inner {
+    padding: 10px 14px;
+  }
+
+  .page-bolsones .wrap {
+    padding: 0 12px 36px;
+  }
+
+  .page-bolsones section {
+    margin-top: 22px;
+  }
+
+  .page-bolsones h2.sec {
+    font-size: 20px;
+  }
+
+  .page-bolsones .loader {
     padding: 28px 20px;
   }
 }

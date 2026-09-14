@@ -314,7 +314,8 @@ svg{display:block;width:100%;height:auto}
 
   <!-- 1 · DATOS DEL AÑO -->
   <section>
-    <h2 class="sec"><span class="n">1</span><span id="at-titulo">Datos 2026</span></h2>
+    <h2 class="sec"><span class="n">1</span><span id="at-titulo">Resumen del período disponible</span></h2>
+    <p class="com-available-period" id="at-periodo">Período disponible: —</p>
     <div class="card atencion">
       <p class="at-label">Promedio de días de atención por municipio</p>
       <div class="at-grid" id="at-grid"></div>
@@ -952,18 +953,18 @@ function renderSituacion(){
    1. PROMEDIO DE ATENCIÓN POR MUNICIPIO
    --------------------------------------------------------------------------
    Días entre fecha_de_reclamo y fecha_de_agenda, promediados por municipio
-   sobre todo el año. Entran sólo las agendas atendidas por un transportista
+   sobre todo el período disponible. Entran sólo las agendas atendidas por un transportista
    real —camión o motocarro— así que quedan afuera las canceladas, las que no
    confirmaron fecha, las repetidas y el resto de los estados falsos, con el
    mismo criterio que usa 3.1.
    ========================================================================== */
-function atencionPorMunicipio(anio){
+function atencionPorMunicipio(){
   const acc = new Map();
   for (const r of DATOS.reclamos){
     if (!esServicio(r)) continue;
     const rec = (r.fecha_de_reclamo  || "").slice(0,10);
     const age = (r.fecha_de_agenda   || "").slice(0,10);
-    if (!rec || !age || age.slice(0,4) !== anio) continue;
+    if (!rec || !age) continue;
     const d = Math.round((new Date(age+"T12:00:00") - new Date(rec+"T12:00:00")) / 86400000);
     if (d < 0) continue;                  // agenda anterior al reclamo: dato roto
     const mu = (r.municipio || "").trim();
@@ -975,13 +976,18 @@ function atencionPorMunicipio(anio){
 }
 
 function renderAtencion(){
-  const anio = CONFIG.anio;
-  $("#at-titulo").textContent = "Datos " + anio;
-  const acc = atencionPorMunicipio(anio);
+  $("#at-titulo").textContent = "Resumen del período disponible";
+  const cobertura = DATOS.cobertura.ingresados;
+  $("#at-periodo").textContent = cobertura
+    ? "Período disponible: " + fechaLarga(new Date(cobertura.desde+"T12:00:00"))
+      + " al " + fechaLarga(new Date(cobertura.hasta+"T12:00:00"))
+    : "Período disponible: sin fechas válidas";
+  const acc = atencionPorMunicipio();
   $("#at-grid").innerHTML = CONFIG.municipios.map(({muni, dia})=>{
     const a = acc.get(muni);
     const hay = a && a.n > 0;
-    const tip = hay ? fmt(a.n)+" agendas atendidas en "+anio : "sin agendas atendidas en "+anio;
+    const tip = hay ? fmt(a.n)+" agendas atendidas en el período disponible"
+                    : "sin agendas atendidas en el período disponible";
     return '<div class="at-item" title="'+esc("Municipio "+muni+" · "+dia+" · "+tip)+'">'
          +   '<b>'+esc(muni)+'</b><span class="d">'+esc(dia)+'</span>'
          +   '<span class="v">'+(hay ? fmt(Math.round(a.suma / a.n)) : "—")+'</span>'

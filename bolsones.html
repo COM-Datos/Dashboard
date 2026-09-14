@@ -733,11 +733,12 @@
       </div>
     </div>
 
-    <section aria-labelledby="titulo-datos-2026">
-      <h2 class="sec" id="titulo-datos-2026">
+    <section aria-labelledby="titulo-resumen-disponible">
+      <h2 class="sec" id="titulo-resumen-disponible">
         <span class="n" aria-hidden="true">1</span>
-        <span>Datos 2026</span>
+        <span>Resumen del período disponible</span>
       </h2>
+      <p class="com-available-period" id="resumen-periodo">Período disponible: —</p>
 
       <div class="card cumplimiento" id="cumplimiento">
         <div class="cum-grid" id="cum-grid" aria-live="polite" hidden>
@@ -1224,6 +1225,20 @@
 
     function numero(valor) {
       return FORMATO_NUMERO.format(valor);
+    }
+
+    function textoPeriodoDisponible(registros) {
+      const fechas = registros
+        .map(registro => (registro.fecha_de_solicitud || "").slice(0, 10))
+        .filter(fecha => /^\d{4}-\d{2}-\d{2}$/.test(fecha))
+        .sort();
+      if (!fechas.length) return "Período disponible: sin fechas válidas";
+      const mostrar = fecha => new Date(fecha + "T12:00:00").toLocaleDateString("es-UY", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+      return `Período disponible: ${mostrar(fechas[0])} al ${mostrar(fechas[fechas.length - 1])}`;
     }
 
     function iso(fecha) {
@@ -1768,6 +1783,7 @@
 
     function renderDatos(registros) {
       REGISTROS = registros;
+      $("#resumen-periodo").textContent = textoPeriodoDisponible(registros);
       const cumplimiento = cumplimientoIntervencion(registros);
 
       if (cumplimiento.total > 0) {
