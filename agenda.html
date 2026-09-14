@@ -365,9 +365,22 @@ svg{display:block;width:100%;height:auto}
 
     <div class="nested">
 
-    <!-- 3.1 SERVICIOS REALIZADOS -->
+    <!-- 3.1 SOLICITUDES INGRESADAS -->
     <section>
-      <h3 class="sub"><span class="n">3.1</span>Servicios realizados</h3>
+      <h3 class="sub"><span class="n">3.1</span>Solicitudes ingresadas</h3>
+    <div class="kpis">
+      <div class="kpi p"><span class="k-label">Total</span><span class="k-val" id="ki-total">–</span></div>
+      <div class="kpi avg"><span class="k-label">Promedio día</span><span class="k-val" id="ki-prom">–</span></div>
+    </div>
+    <div class="card chartbox">
+      <div id="ci"></div>
+      <div class="tip" id="tipi" role="tooltip"></div>
+    </div>
+  </section>
+
+    <!-- 3.2 SERVICIOS REALIZADOS -->
+    <section>
+      <h3 class="sub"><span class="n">3.2</span>Servicios realizados</h3>
     <div class="kpis">
       <div class="kpi"><span class="k-label">Total</span><span class="k-val" id="k1-total">–</span></div>
       <div class="kpi t"><span class="k-label">Promedio día</span><span class="k-val" id="k1-prom">–</span></div>
@@ -378,9 +391,9 @@ svg{display:block;width:100%;height:auto}
     </div>
   </section>
 
-    <!-- 3.2 CAMIONES UTILIZADOS -->
+    <!-- 3.3 CAMIONES UTILIZADOS -->
     <section>
-      <h3 class="sub"><span class="n">3.2</span>Camiones utilizados</h3>
+      <h3 class="sub"><span class="n">3.3</span>Camiones utilizados</h3>
     <div class="kpis">
       <div class="kpi"><span class="k-label">Total turnos</span><span class="k-val" id="k2-total">–</span></div>
       <div class="kpi t"><span class="k-label">Promedio día</span><span class="k-val" id="k2-prom">–</span></div>
@@ -391,9 +404,9 @@ svg{display:block;width:100%;height:auto}
     </div>
   </section>
 
-    <!-- 3.3 DESCARGAS -->
+    <!-- 3.4 DESCARGAS -->
     <section>
-      <h3 class="sub"><span class="n">3.3</span>Descargas</h3>
+      <h3 class="sub"><span class="n">3.4</span>Descargas</h3>
     <div class="kpis">
       <div class="kpi"><span class="k-label">Total</span><span class="k-val" id="k3-total">–</span></div>
       <div class="kpi t"><span class="k-label">Promedio día</span><span class="k-val" id="k3-prom">–</span></div>
@@ -704,13 +717,14 @@ function descargasDesdeFilas(filas){
    CARGA DE DATOS
    ========================================================================== */
 const DATOS = { reclamos: [], cupos: null, descargas: [],
-                cobertura: {resueltos:null, agendas:null, descargas:null},
+                cobertura: {ingresados:null, resueltos:null, agendas:null, descargas:null},
                 avisoCupos: "", avisoDescargas: "" };
 
 /* hasta dónde llega cada fuente. Se calcula una vez por carga, no en cada
    render, porque recorre las 17 mil filas de la base. */
 function calcularCobertura(){
   DATOS.cobertura = {
+    ingresados: coberturaDe(DATOS.reclamos.map(r => (r.fecha_de_reclamo || "").slice(0,10))),
     resueltos: coberturaDe(DATOS.reclamos.map(r => (r.fecha_resuelto  || "").slice(0,10))),
     agendas:   coberturaDe(DATOS.reclamos.map(r => (r.fecha_de_agenda || "").slice(0,10))),
     descargas: coberturaDe(DATOS.descargas.map(d => d.fecha))
@@ -1026,8 +1040,9 @@ $("#picker").addEventListener("change", async e=>{
    ========================================================================== */
 /* colores de cada sección */
 const COLOR = {
-  servicios:"#2563eb",                       // 3.1
-  camion:"#0d9488", motocarro:"#7dd3fc",     // 3.2
+  ingresos:"#6366f1",
+  servicios:"#2563eb",
+  camion:"#0d9488", motocarro:"#7dd3fc",
   locales:["#0d9488","#2563eb","#38bdf8","#a7d8ef"]
 };
 
@@ -1049,6 +1064,12 @@ function esServicio(r){
   if (CONFIG.cancelado.tipoDeReclamo.includes((r.tipo_de_reclamo || "").trim())) return false;
   const n = norm(t);
   return !CONFIG.noEsServicioClaves.some(k => n.includes(k));
+}
+
+/* Una solicitud cuenta al ingresar aunque después no confirme fecha o se
+   repita. Sólo se excluyen las canceladas y las clasificadas como NOVALIDO. */
+function esIngreso(r){
+  return !esCancelada(r) && (r.tipo_de_reclamo || "").trim() !== "NOVALIDO";
 }
 
 /* ayer: el último día que se puede elegir, porque el día de hoy todavía
@@ -1101,6 +1122,12 @@ function promedioPorDia(total, dias, muni){
   return n ? total / n : 0;
 }
 
+/* Para ingresos cuentan todos los días calendario que cubre la fuente. */
+function promedioPorDiaCalendario(total, dias){
+  const n = dias.filter(d => !d.sinDatos).length;
+  return n ? total / n : 0;
+}
+
 /* true si esa fecha es feriado, por MM-DD o por fecha completa */
 function esFeriado(f){
   return CONFIG.feriados.includes(f.slice(5)) || CONFIG.feriados.includes(f);
@@ -1124,7 +1151,21 @@ function diasDelRango(desde, hasta){
   return {dias, idx};
 }
 
-/* 3.1 — agendas resueltas por día */
+/* 3.1 — solicitudes ingresadas por día */
+function ingresosPorDia(desde, hasta, muni){
+  const {dias, idx} = diasDelRango(desde, hasta);
+  for (const r of DATOS.reclamos){
+    const f = (r.fecha_de_reclamo || "").slice(0,10);
+    if (!idx.has(f)) continue;
+    if (muni !== "todos" && (r.municipio || "").trim() !== muni) continue;
+    if (!esIngreso(r)) continue;
+    const v = dias[idx.get(f)].v;
+    v.total = (v.total || 0) + 1;
+  }
+  return marcarSinDatos(dias, DATOS.cobertura.ingresados);
+}
+
+/* 3.2 — agendas resueltas por día */
 function serviciosPorDia(desde, hasta, muni){
   const {dias, idx} = diasDelRango(desde, hasta);
   for (const r of DATOS.reclamos){
@@ -1382,7 +1423,17 @@ function render(){
   if (!validateAgendaRange()) return;
   saveAgendaState();
 
-  /* 3.1 servicios realizados */
+  /* 3.1 solicitudes ingresadas */
+  const diasI = ingresosPorDia(desde, hasta, muni);
+  const totalI = diasI.reduce((a,d)=>a+(d.v.total||0), 0);
+  const promI = promedioPorDiaCalendario(totalI, diasI);
+  $("#ki-total").textContent = fmt(totalI);
+  $("#ki-prom").textContent = fmt(Math.round(promI));
+  barrasDiarias($("#ci"), $("#tipi"), diasI,
+    [{key:"total", label:"Solicitudes", color:COLOR.ingresos}],
+    {valor:promI, texto:fmt(Math.round(promI))});
+
+  /* 3.2 servicios realizados */
   const dias1 = serviciosPorDia(desde, hasta, muni);
   const total1 = dias1.reduce((a,d)=>a+(d.v.total||0), 0);
   const prom1 = promedioPorDia(total1, dias1, muni);
