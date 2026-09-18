@@ -1389,7 +1389,7 @@ function barrasDiarias(el, tip, dias, series, prom){
 /* ==========================================================================
    RENDER DE LAS SECCIONES FILTRADAS
    ========================================================================== */
-const AGENDA_SESSION_KEY="com.agenda.filters";
+const AGENDA_SESSION_KEY="com.agenda.filters.v2";
 
 function validateAgendaRange(){
   const desdeEl=$("#f-desde"), hastaEl=$("#f-hasta"), error=$("#range-error");
@@ -1410,11 +1410,12 @@ function saveAgendaState(){
 function restoreAgendaState(){
   try{
     const state=JSON.parse(sessionStorage.getItem(AGENDA_SESSION_KEY)||"null");
-    if(!state)return;
+    if(!state)return false;
     if(state.desde)$("#f-desde").value=state.desde;
     if(state.hasta)$("#f-hasta").value=state.hasta;
     if([...$("#f-muni").options].some(o=>o.value===state.muni))$("#f-muni").value=state.muni;
-  }catch(_){ sessionStorage.removeItem(AGENDA_SESSION_KEY); }
+    return true;
+  }catch(_){ sessionStorage.removeItem(AGENDA_SESSION_KEY); return false; }
 }
 
 function render(){
@@ -1490,20 +1491,22 @@ function render(){
 /* ==========================================================================
    ARRANQUE
    ========================================================================== */
-/* el rango arranca en los últimos N días cerrados: termina ayer, no hoy */
-function rangoInicial(dias){
-  const hasta = new Date(); hasta.setDate(hasta.getDate()-1);
-  const desde = new Date(hasta); desde.setDate(desde.getDate()-(dias-1));
-  $("#f-desde").value = iso(desde);
-  $("#f-hasta").value = iso(hasta);
-  /* el selector de fecha no deja ir más allá de ayer */
-  $("#f-desde").max = iso(hasta);
-  $("#f-hasta").max = iso(hasta);
+/* El rango inicial usa toda la ventana real de la base, no un número fijo de días. */
+function rangoDisponible(){
+  const cobertura=DATOS.cobertura.ingresados;
+  if(!cobertura)return;
+  const desde=$("#f-desde"),hasta=$("#f-hasta");
+  desde.min=cobertura.desde;desde.max=cobertura.hasta;
+  hasta.min=cobertura.desde;hasta.max=cobertura.hasta;
+  desde.value=cobertura.desde;
+  hasta.value=cobertura.hasta;
 }
 
 function arrancar(){
   document.body.classList.remove("cargando");
   calcularCobertura();
+  rangoDisponible();
+  restoreAgendaState();
   renderAtencion();
   const hayJornadas = renderSituacion();
   renderAviso(hayJornadas);
@@ -1519,15 +1522,13 @@ $("#f-muni").innerHTML = '<option value="todos">Todos</option>' +
 
 $("#agenda-reset").addEventListener("click",()=>{
   sessionStorage.removeItem(AGENDA_SESSION_KEY);
-  rangoInicial(30);
+  rangoDisponible();
   $("#f-muni").value="todos";
   validateAgendaRange();
   render();
 });
 
 document.body.classList.add("cargando");
-rangoInicial(30);
-restoreAgendaState();
 cargar().then(arrancar).catch(e=>{
   document.body.classList.remove("cargando");
   renderEstadoError(e.message || String(e));

@@ -46,8 +46,11 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f1f3f6;color:#11
 .btn-nw:hover{background:#1e293b;color:#fff}
 .fbar{background:#fff;border-bottom:1px solid #e2e8f0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:.55rem 1.25rem}
 .fbar-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8}
+.fbar-lbl.is-disabled{opacity:.45}
 .fbar select,.fbar input[type=date]{height:30px;font-size:12px;padding:0 8px;border-radius:7px;border:1px solid #e2e8f0;background:#f8fafc;color:#0f172a}
 .fbar select{min-width:118px}
+.fbar select:disabled{opacity:.5;cursor:not-allowed}
+.fbar-note{font-size:11px;color:#64748b;background:#f1f5f9;border-radius:7px;padding:6px 9px}
 .fbar-sep{width:1px;height:18px;background:#e2e8f0}
 .btn-filt{height:30px;padding:0 12px;font-size:12px;font-weight:700;border-radius:7px;border:none;background:#0f172a;color:#fff;cursor:pointer}
 .btn-filt:hover{background:#1e293b}
@@ -193,6 +196,7 @@ tr.cr{cursor:pointer}
   .fbar{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:center;padding:.75rem 1rem}
   .fbar-sep{display:none}
   .fbar select,.fbar input[type=date]{width:100%;min-width:0;height:40px}
+  .fbar-note{grid-column:1/-1}
   .btn-rst{grid-column:1/-1;width:100%;height:40px}
   .summary-toolbar,.map-view-head{align-items:stretch;flex-direction:column}
   .summary-map-action{width:100%}
@@ -267,11 +271,14 @@ tr.cr{cursor:pointer}
     <label class="fbar-lbl" for="f-d1">Desde</label><input type="date" id="f-d1">
     <label class="fbar-lbl" for="f-d2">Hasta</label><input type="date" id="f-d2">
     <div class="fbar-sep"></div>
-    <label class="fbar-lbl" for="f-emp">Empresa</label>
+    <label class="fbar-lbl" id="lbl-f-emp" for="f-emp">Empresa</label>
     <select id="f-emp"><option value="">Todas</option></select>
+    <label class="fbar-lbl" id="lbl-f-unidad" for="f-unidad">Unidad</label>
+    <select id="f-unidad"><option value="">Todas</option></select>
     <div class="fbar-sep"></div>
-    <label class="fbar-lbl" for="f-turno">Turno</label>
+    <label class="fbar-lbl" id="lbl-f-turno" for="f-turno">Turno</label>
     <select id="f-turno"><option value="">Todos</option><option value="Matutino">Matutino</option><option value="Vespertino">Vespertino</option><option value="Nocturno">Nocturno</option></select>
+    <span class="fbar-note" id="cov-filter-note" hidden>La cobertura se calcula por territorio y período; empresa, unidad y turno no aplican en esta vista.</span>
     <button class="btn-rst com-icon-button" type="button" aria-label="Restablecer filtros" title="Restablecer filtros" onclick="resetF()">↻</button>
   </div>
   <p class="com-range-error" id="zl-range-error" role="alert">La fecha Desde no puede ser posterior a Hasta.</p>
@@ -411,8 +418,8 @@ function getCol(r,n){const k=Object.keys(r).find(k=>k.toLowerCase()===n.toLowerC
 const CC={intervino:'#16a34a',limpio:'#0ea5e9',no_fue:'#dc2626'};
 const CC_GRIS='#94a3b8';
 const CL={intervino:'Intervino',limpio:'Ya limpio',no_fue:'No pudo/encontró'};
-const ECOLS={DG:'#6366f1',ROSADO:'#ec4899',TAYM:'#f59e0b','VOS CON VOZ':'#14b8a6','SALIR ADELANTE':'#8b5cf6',TESSA:'#64748b',EQUIPO:'#06b6d4'};
-const ELST=['DG','ROSADO','VOS CON VOZ','SALIR ADELANTE','TAYM','TESSA','EQUIPO'];
+const ECOLS={DG:'#6366f1',ROSADO:'#ec4899',TAYM:'#f59e0b','VOS CON VOZ':'#14b8a6','SALIR ADELANTE':'#8b5cf6',TESSA:'#64748b',EQUIPO:'#06b6d4',DINALI:'#0f766e'};
+const ELST=['DG','ROSADO','VOS CON VOZ','SALIR ADELANTE','TAYM','TESSA','EQUIPO','DINALI'];
 const TORD=['Matutino','Vespertino','Nocturno'];
 const COLS_COB=['#E24B4A','#378ADD','#16a34a','#d97706'];
 const LBLS_COB=['Sin visitas','1 visita','2 visitas','3 o más'];
@@ -434,7 +441,7 @@ function restoreZLState(){
     if(!state)return;
     const setIfValid=(id,value)=>{const el=document.getElementById(id);if([...el.options].some(o=>o.value===value))el.value=value||''};
     setIfValid('f-mun',state.mun);updCirc();setIfValid('f-circ',state.circ);
-    setIfValid('f-emp',state.emp);setIfValid('f-turno',state.turno);
+    setIfValid('f-emp',state.emp);updUnidad();setIfValid('f-unidad',state.unidad);setIfValid('f-turno',state.turno);
     if(state.d1)document.getElementById('f-d1').value=state.d1;
     if(state.d2)document.getElementById('f-d2').value=state.d2;
     if(['res','mun','tra','cov','map'].includes(state.tab))curTab=state.tab;
@@ -469,7 +476,7 @@ function buildRows(objs){
     return{
       mun:mun||'?',circ,fecha:String(fd).slice(0,10),
       noVisitado,cat:noVisitado?null:classify(inc),
-      trans,emp:emp||'Motocarro',turno,
+      trans,emp:emp||'Motocarro',tipoUnidad:emp==='DINALI'?'Motocarro':(emp?'Camión':'Motocarro'),turno,
       cont,dir:(getCol(r,'dirección')||'').toString(),
       lat:parseFloat(getCol(r,'latitud')),lng:parseFloat(getCol(r,'longitud')),
       esVisita:!!fr
@@ -556,7 +563,9 @@ function initFilters(){
   const se=document.getElementById('f-emp');
   se.innerHTML='<option value="">Todas</option>';
   emps.forEach(e=>{const o=document.createElement('option');o.value=e;o.textContent=e;se.appendChild(o)});
-  ['f-circ','f-d1','f-d2','f-emp','f-turno'].forEach(id=>{document.getElementById(id).onchange=autoF;});
+  se.onchange=()=>{updUnidad();autoF();};
+  updUnidad();
+  ['f-circ','f-d1','f-d2','f-unidad','f-turno'].forEach(id=>{document.getElementById(id).onchange=autoF;});
   const dates=RAW.map(r=>r.fecha).sort();
   if(dates.length){document.getElementById('f-d1').value=dates[0];document.getElementById('f-d2').value=dates[dates.length-1];}
   document.getElementById('f-d2').min=document.getElementById('f-d1').value||'';
@@ -570,10 +579,20 @@ function updCirc(){
   circs.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o)});
 }
 
-function gf(){return{mun:document.getElementById('f-mun').value,circ:document.getElementById('f-circ').value,d1:document.getElementById('f-d1').value,d2:document.getElementById('f-d2').value,emp:document.getElementById('f-emp').value,turno:document.getElementById('f-turno').value}}
+function updUnidad(){
+  const emp=document.getElementById('f-emp').value;
+  const sel=document.getElementById('f-unidad');
+  const actual=sel.value;
+  const unidades=[...new Set(RAW.filter(r=>r.emp!=='Motocarro'&&(!emp||r.emp===emp)).map(r=>r.trans).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es',{numeric:true}));
+  sel.innerHTML='<option value="">Todas</option>';
+  unidades.forEach(u=>{const o=document.createElement('option');o.value=u;o.textContent=u;sel.appendChild(o)});
+  if(unidades.includes(actual))sel.value=actual;
+}
+
+function gf(){return{mun:document.getElementById('f-mun').value,circ:document.getElementById('f-circ').value,d1:document.getElementById('f-d1').value,d2:document.getElementById('f-d2').value,emp:document.getElementById('f-emp').value,unidad:document.getElementById('f-unidad').value,turno:document.getElementById('f-turno').value}}
 
 function autoF(){
-  const{mun,circ,d1,d2,emp,turno}=gf();
+  const{mun,circ,d1,d2,emp,unidad,turno}=gf();
   const hasta=document.getElementById('f-d2');
   hasta.min=d1||'';
   const invalid=Boolean(d1&&d2&&d1>d2);
@@ -582,14 +601,15 @@ function autoF(){
   hasta.setAttribute('aria-invalid',String(invalid));
   document.getElementById('zl-range-error').classList.toggle('show',invalid);
   if(invalid)return;
-  FILT=RAW.filter(r=>(!mun||r.mun===mun)&&(!circ||r.circ===circ)&&(!d1||r.fecha>=d1)&&(!d2||r.fecha<=d2)&&(!emp||r.emp===emp)&&(!turno||r.turno===turno));
+  FILT=RAW.filter(r=>(!mun||r.mun===mun)&&(!circ||r.circ===circ)&&(!d1||r.fecha>=d1)&&(!d2||r.fecha<=d2)&&(!emp||r.emp===emp)&&(!unidad||r.trans===unidad)&&(!turno||r.turno===turno));
   FILT2=ALL2.filter(r=>(!mun||r.mun===mun)&&(!circ||r.circ===circ)&&(!d1||r.fecha>=d1)&&(!d2||r.fecha<=d2));
   selMun=null;saveZLState();render();rCov();if(mapaAbierto)rMapa();
 }
 function resetF(){
   sessionStorage.removeItem(ZL_SESSION_KEY);
-  ['f-mun','f-circ','f-emp','f-turno'].forEach(id=>document.getElementById(id).value='');
+  ['f-mun','f-circ','f-emp','f-unidad','f-turno'].forEach(id=>document.getElementById(id).value='');
   updCirc();
+  updUnidad();
   const dates=RAW.map(r=>r.fecha).sort();
   if(dates.length){document.getElementById('f-d1').value=dates[0];document.getElementById('f-d2').value=dates[dates.length-1];}
   document.getElementById('f-d2').min=document.getElementById('f-d1').value||'';
@@ -604,6 +624,12 @@ function swTab(t){
   document.getElementById('nt-'+t).setAttribute('aria-selected','true');
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
   document.getElementById('v-'+t).classList.add('on');
+  const esCobertura=t==='cov';
+  ['emp','unidad','turno'].forEach(nombre=>{
+    document.getElementById('f-'+nombre).disabled=esCobertura;
+    document.getElementById('lbl-f-'+nombre).classList.toggle('is-disabled',esCobertura);
+  });
+  document.getElementById('cov-filter-note').hidden=!esCobertura;
   saveZLState();
   if(t==='map')ensureMap();
 }

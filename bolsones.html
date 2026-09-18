@@ -1227,18 +1227,23 @@
       return FORMATO_NUMERO.format(valor);
     }
 
-    function textoPeriodoDisponible(registros) {
+    function obtenerPeriodoDisponible(registros) {
       const fechas = registros
         .map(registro => (registro.fecha_de_solicitud || "").slice(0, 10))
         .filter(fecha => /^\d{4}-\d{2}-\d{2}$/.test(fecha))
         .sort();
-      if (!fechas.length) return "Período disponible: sin fechas válidas";
+      return fechas.length ? { desde: fechas[0], hasta: fechas[fechas.length - 1] } : null;
+    }
+
+    function textoPeriodoDisponible(registros) {
+      const periodo = obtenerPeriodoDisponible(registros);
+      if (!periodo) return "Período disponible: sin fechas válidas";
       const mostrar = fecha => new Date(fecha + "T12:00:00").toLocaleDateString("es-UY", {
         day: "numeric",
         month: "long",
         year: "numeric"
       });
-      return `Período disponible: ${mostrar(fechas[0])} al ${mostrar(fechas[fechas.length - 1])}`;
+      return `Período disponible: ${mostrar(periodo.desde)} al ${mostrar(periodo.hasta)}`;
     }
 
     function iso(fecha) {
@@ -1247,17 +1252,17 @@
         + String(fecha.getDate()).padStart(2, "0");
     }
 
-    /* El período inicial abarca los últimos 30 días completos y termina ayer. */
-    function rangoInicial(dias) {
-      const hasta = new Date();
-      hasta.setDate(hasta.getDate() - 1);
-      const desde = new Date(hasta);
-      desde.setDate(desde.getDate() - (dias - 1));
-
-      $("#f-desde").value = iso(desde);
-      $("#f-hasta").value = iso(hasta);
-      $("#f-desde").max = iso(hasta);
-      $("#f-hasta").max = iso(hasta);
+    function aplicarPeriodoDisponible(registros) {
+      const periodo = obtenerPeriodoDisponible(registros);
+      if (!periodo) return;
+      const desde = $("#f-desde");
+      const hasta = $("#f-hasta");
+      desde.min = periodo.desde;
+      desde.max = periodo.hasta;
+      hasta.min = periodo.desde;
+      hasta.max = periodo.hasta;
+      desde.value = periodo.desde;
+      hasta.value = periodo.hasta;
     }
 
     function esFeriado(fecha) {
@@ -1784,6 +1789,7 @@
     function renderDatos(registros) {
       REGISTROS = registros;
       $("#resumen-periodo").textContent = textoPeriodoDisponible(registros);
+      aplicarPeriodoDisponible(registros);
       const cumplimiento = cumplimientoIntervencion(registros);
 
       if (cumplimiento.total > 0) {
@@ -1844,8 +1850,6 @@
     ["#f-desde", "#f-hasta", "#f-muni"].forEach(selector => {
       $(selector).addEventListener("change", renderAnalisis);
     });
-
-    rangoInicial(30);
 
     cargar();
   </script>

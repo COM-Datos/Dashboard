@@ -176,8 +176,8 @@ canvas{max-width:100%;display:block}
 .map-topbar-title{display:flex;align-items:center;gap:10px;flex:1;min-width:160px}
 .map-topbar-title h2{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-.2px}
 .map-filter-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.map-filter-row input[type=date]{height:32px;padding:0 10px;font-size:12px;border:1px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;font-family:'DM Sans',sans-serif;transition:border-color .15s}
-.map-filter-row input[type=date]:focus{border-color:var(--blue)}
+.map-filter-row input[type=date],.map-filter-row select{height:32px;padding:0 10px;font-size:12px;border:1px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;font-family:'DM Sans',sans-serif;transition:border-color .15s}
+.map-filter-row input[type=date]:focus,.map-filter-row select:focus{border-color:var(--blue)}
 .btn-map-sm{height:32px;padding:0 12px;font-size:12px;font-weight:500;border:1px solid var(--border2);border-radius:8px;background:var(--surface);color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
 .btn-map-sm:hover{background:var(--surface2)}
 .btn-map-sm.active{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue)}
@@ -261,7 +261,7 @@ canvas{max-width:100%;display:block}
   .map-topbar{padding:.75rem 1rem;gap:8px}
   .map-topbar-title{min-width:100%}
   .map-filter-row{width:100%}
-  .map-filter-row input[type=date]{flex:1;min-width:0}
+  .map-filter-row input[type=date],.map-filter-row select{flex:1;min-width:140px}
   .btn-map-sm,.btn-map-apply,.btn-map-close{min-height:38px}
   .map-legend-bar,.map-stats-bar{padding:.5rem 1rem;gap:8px}
   .hp-grid{flex-direction:column;gap:1rem}
@@ -683,8 +683,19 @@ canvas{max-width:100%;display:block}
     <div class="map-filter-row">
       <input type="date" id="map-f1" aria-label="Fecha desde del mapa">
       <div id="map-f2wrap" style="display:none"><input type="date" id="map-f2" aria-label="Fecha hasta del mapa"></div>
+      <select id="map-mun" aria-label="Municipio del mapa">
+        <option value="">Todos los municipios</option>
+      </select>
+      <select id="map-circ" aria-label="Circuito del mapa">
+        <option value="">Todos los circuitos</option>
+      </select>
+      <select id="map-transp" aria-label="Categoría de transportista del mapa">
+        <option value="all">Todos los transportistas</option>
+        <option value="empresa">Empresas</option>
+        <option value="fideicomiso">Fideicomiso</option>
+        <option value="moto">Motocarros</option>
+      </select>
       <button class="btn-map-sm" id="btn-map-rango" onclick="toggleMapRange()">Rango</button>
-      <button class="btn-map-apply" onclick="renderMapa()">Aplicar</button>
       <button class="btn-map-sm" onclick="toggleHorarios()" style="display:flex;align-items:center;gap:5px">
         <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         Horarios
@@ -830,8 +841,7 @@ function enCat(r){
   const inc=getCol(r,'incidente')||'';
   return activeCats.has(inc);
 }
-function enTransp(r){
-  const sel=document.getElementById('f-transp').value;
+function enTranspValor(r,sel){
   if(sel==='all')return true;
   const t=getCol(r,'transportista');
   if(sel==='fideicomiso')return isFideicomiso(t);
@@ -839,6 +849,7 @@ function enTransp(r){
   if(sel==='moto')return !isEmpresa(t)&&!isFideicomiso(t);
   return true;
 }
+function enTransp(r){return enTranspValor(r,document.getElementById('f-transp').value);}
 function parseDate(v){
   if(!v)return null;
   if(v instanceof Date)return isNaN(v)?null:v;
@@ -2174,8 +2185,30 @@ function fmtDT(v){
   return rawDateStr(v)||'—';
 }
 
+function updateMapCircuits(){
+  const mun=document.getElementById('map-mun').value;
+  const sel=document.getElementById('map-circ');
+  const actual=sel.value;
+  const circs=[...new Set(allData.filter(r=>!mun||String(getCol(r,'municipio')||'-').trim()===mun).map(r=>String(getCol(r,'circuito')||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es',{numeric:true}));
+  sel.innerHTML='<option value="">Todos los circuitos</option>';
+  circs.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o)});
+  if(circs.includes(actual))sel.value=actual;
+}
+
+function initMapFilters(){
+  const munSel=document.getElementById('map-mun');
+  const actual=munSel.value;
+  const muns=[...new Set(allData.map(r=>String(getCol(r,'municipio')||'-').trim()))].sort();
+  munSel.innerHTML='<option value="">Todos los municipios</option>';
+  muns.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=MUNI_MAP[m]||('Municipio '+m);munSel.appendChild(o)});
+  if(muns.includes(actual))munSel.value=actual;
+  updateMapCircuits();
+  document.getElementById('map-transp').value=document.getElementById('f-transp').value;
+}
+
 function abrirMapa(){
   document.getElementById('map-view').classList.add('open');
+  initMapFilters();
   const f1=document.getElementById('fecha1').value;
   const f2=isRange&&document.getElementById('fecha2').value?document.getElementById('fecha2').value:f1;
   const ultimoInicio=f2?mapUltimosDias(f2,MAP_MAX_DIAS):f1;
@@ -2210,6 +2243,7 @@ function toggleMapRange(){
     const f1=document.getElementById('map-f1').value;
     if(f1)document.getElementById('map-f2').max=mapMaxHasta(f1);
   }
+  renderMapa();
 }
 
 // Si cambian la fecha "desde" del mapa a mano, el "hasta" no puede quedar a más de
@@ -2221,7 +2255,12 @@ document.getElementById('map-f1').addEventListener('change',()=>{
   const tope=mapMaxHasta(f1);
   f2el.max=tope;
   if(f2el.value&&f2el.value>tope)f2el.value=tope;
+  renderMapa();
 });
+document.getElementById('map-f2').addEventListener('change',renderMapa);
+document.getElementById('map-mun').addEventListener('change',()=>{updateMapCircuits();renderMapa()});
+document.getElementById('map-circ').addEventListener('change',renderMapa);
+document.getElementById('map-transp').addEventListener('change',renderMapa);
 
 function toggleMapCat(cat){
   catVisible[cat]=!catVisible[cat];
@@ -2284,6 +2323,9 @@ function renderMapa(){
   if(!f1){alert('Seleccioná una fecha.');return;}
   const desde=dayStart(new Date(f1+'T00:00:00'));
   const f2v=document.getElementById('map-f2').value;
+  const mapMun=document.getElementById('map-mun').value;
+  const mapCirc=document.getElementById('map-circ').value;
+  const mapTransp=document.getElementById('map-transp').value;
   if(mapRangeActive&&!f2v){alert('Seleccioná la fecha Hasta.');document.getElementById('map-f2').focus();return;}
   if(mapRangeActive&&f2v<f1){alert('La fecha Desde no puede ser posterior a Hasta.');document.getElementById('map-f2').focus();return;}
   let hasta=mapRangeActive&&f2v?dayEnd(new Date(f2v+'T00:00:00')):dayEnd(new Date(f1+'T00:00:00'));
@@ -2307,7 +2349,10 @@ function renderMapa(){
   });
 
   const puntos=allData.filter(r=>{
-    if(!enCat(r)||!enTransp(r)||(currentMode==='unicos'&&esRepetido(r)))return false;
+    if(!enCat(r)||!enTranspValor(r,mapTransp)||(currentMode==='unicos'&&esRepetido(r)))return false;
+    if(mapTransp!=='all'&&catReclamo(r)==='sin')return false;
+    if(mapMun&&String(getCol(r,'municipio')||'-').trim()!==mapMun)return false;
+    if(mapCirc&&String(getCol(r,'circuito')||'').trim()!==mapCirc)return false;
     const f=parseDate(getCol(r,'fecha_de_reclamo'));
     return f&&f>=desde&&f<=hasta;
   });
@@ -2349,10 +2394,13 @@ function renderMapa(){
     cnt[cat]++;
     const id=String(getCol(r,'id')||'').trim();
     const nHijos=hijosCount[id]||0;
+    const padre=String(getCol(r,'id_del_padre')||'').trim();
     const incidente=getCol(r,'incidente')||'—';
     const municipio=getMuni(r);
     const circuito=getCol(r,'circuito')||'—';
-    const rep=esRepetido(r)?'Sí':'No';
+    const relacion=esRepetido(r)
+      ?'<div class="pop-rep">Repetido del reclamo <strong>#'+(padre||'sin identificar')+'</strong></div>'
+      :(nHijos>0?'<div class="pop-rep">Reclamos repetidos asociados: <strong>'+nHijos+'</strong></div>':'');
     const transportista=getCol(r,'transportista')||'—';
     const catLabel=cat==='c24'?'Resuelto en ≤ 24h':cat==='cmas'?'Resuelto en > 24h':'Sin resolver';
 
@@ -2373,8 +2421,7 @@ function renderMapa(){
       <div class="pop-row"><span class="pop-lbl">Transportista</span><span class="pop-val">${transportista}</span></div>
       <div class="pop-row"><span class="pop-lbl">Ingreso</span><span class="pop-val">${fmtDT(fRecRaw)}</span></div>
       <div class="pop-row"><span class="pop-lbl">Resolución</span><span class="pop-val">${fmtDT(fResRaw)}</span></div>
-      <div class="pop-row"><span class="pop-lbl">Repetido</span><span class="pop-val">${rep}</span></div>
-      <div class="pop-rep">Repetidos asociados: <strong>${nHijos}</strong></div>
+      ${relacion}
     </div>`,{maxWidth:280});
 
     allMarkers.push({cat,marker});
@@ -2382,12 +2429,16 @@ function renderMapa(){
   });
 
   const total=cnt.c24+cnt.cmas+cnt.sin;
-  const transp=document.getElementById('f-transp');
+  const transp=document.getElementById('map-transp');
+  const munMapa=document.getElementById('map-mun');
+  const circMapa=document.getElementById('map-circ');
   const periodoMapa=mapRangeActive&&f2v&&f2v!==f1?`${fmt(f1)} — ${fmt(f2v)}`:fmt(f1);
   const modo=currentMode==='unicos'?'Solo únicos':'Todos los reclamos';
   document.getElementById('map-context').innerHTML=
     `<div class="map-stat"><strong>Período:</strong> ${periodoMapa}</div>`+
     `<div class="map-stat"><strong>Vista:</strong> ${modo}</div>`+
+    `<div class="map-stat"><strong>Municipio:</strong> ${munMapa.options[munMapa.selectedIndex]?.text||'Todos'}</div>`+
+    `<div class="map-stat"><strong>Circuito:</strong> ${circMapa.options[circMapa.selectedIndex]?.text||'Todos'}</div>`+
     `<div class="map-stat"><strong>Transportista:</strong> ${transp.options[transp.selectedIndex]?.text||'Todos'}</div>`+
     `<div class="map-stat"><strong>Categorías:</strong> ${activeCats.size}</div>`+
     `<button class="btn-map-sm" type="button" onclick="cerrarMapa()">Volver al análisis</button>`;
