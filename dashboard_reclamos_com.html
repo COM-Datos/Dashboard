@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Dashboard Reclamos — COM</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#F7F6F3;
@@ -38,16 +41,17 @@
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
 .page{max-width:980px;margin:0 auto;padding:2rem 1.5rem}
 
-/* Header */
-.page-header{display:flex;align-items:center;gap:14px;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
-.header-badge{width:42px;height:42px;border-radius:var(--radius);background:var(--blue-bg);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.header-badge svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:1.75}
-.header-title{font-size:19px;font-weight:600;letter-spacing:-.3px;color:var(--text)}
-.header-sub{font-size:12px;color:var(--text3);margin-top:2px;font-family:'DM Mono',monospace}
-.header-file-tag{margin-left:auto;display:flex;align-items:center;gap:7px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:500;background:var(--teal-bg);border:1px solid var(--teal-border);color:var(--teal);font-family:'DM Mono',monospace;cursor:pointer;transition:opacity .15s}
+/* Topbar — mismo degradé, tipografía y altura compacta que el resto de los dashboards del COM */
+.com-topbar{background:linear-gradient(135deg,#0f172a 0%,#16213e 55%,#1b3f74 100%);color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.com-topbar-inner{min-height:64px;padding:10px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.header-badge{width:36px;height:36px;border-radius:var(--radius);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.header-badge svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:1.75}
+.header-title{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:16px;font-weight:800;letter-spacing:-.01em;color:#fff}
+.header-sub{font-size:11px;color:#c7d5ea;margin-top:1px;font-family:'DM Mono',monospace}
+.header-file-tag{margin-left:auto;display:flex;align-items:center;gap:7px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:500;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;font-family:'DM Mono',monospace;cursor:pointer;transition:opacity .15s}
 .header-file-tag:hover{opacity:.75}
-.back-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);text-decoration:none;font-family:'DM Mono',monospace;margin-bottom:.75rem;transition:color .15s}
-.back-link:hover{color:var(--text2)}
+.back-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#c7d5ea;text-decoration:none;transition:color .15s;flex-shrink:0}
+.back-link:hover{color:#fff}
 .back-link svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2}
 
 /* Upload */
@@ -97,28 +101,17 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 .period-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-size:12px;color:var(--text2);margin-bottom:1.25rem;font-family:'DM Mono',monospace}
 .period-tag strong{color:var(--text);font-weight:600}
 
-/* KPI Cards */
+/* KPI Cards — mismo lenguaje visual en las 5 páginas: tarjeta blanca neutra,
+   el color va solo en el valor (semántico), no en todo el fondo de la tarjeta. */
 .kpi-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:1.25rem}
-.kpi-card{border-radius:var(--radius-lg);padding:1.25rem 1.5rem;border:1px solid}
-.kpi-card.blue{background:var(--blue-bg);border-color:var(--blue-border)}
-.kpi-card.teal{background:var(--teal-bg);border-color:var(--teal-border)}
-.kpi-card.amber{background:var(--amber-bg);border-color:var(--amber-border)}
-.kpi-card.gray{background:var(--gray-bg);border-color:var(--border2)}
-.kpi-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:.5rem;font-family:'DM Mono',monospace}
-.kpi-card.blue .kpi-label{color:var(--blue)}
-.kpi-card.teal .kpi-label{color:var(--teal)}
-.kpi-card.amber .kpi-label{color:var(--amber)}
-.kpi-card.gray .kpi-label{color:var(--gray)}
-.kpi-val{font-size:36px;font-weight:600;line-height:1;letter-spacing:-1px;font-family:'DM Mono',monospace}
-.kpi-card.blue .kpi-val{color:#0C447C}
-.kpi-card.teal .kpi-val{color:#085041}
-.kpi-card.amber .kpi-val{color:#633806}
-.kpi-card.gray .kpi-val{color:#2C2C2A}
-.kpi-desc{font-size:11px;margin-top:.35rem;opacity:.75}
-.kpi-card.blue .kpi-desc{color:var(--blue)}
-.kpi-card.teal .kpi-desc{color:var(--teal)}
-.kpi-card.amber .kpi-desc{color:var(--amber)}
-.kpi-card.gray .kpi-desc{color:var(--gray)}
+.kpi-card{background:var(--surface);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;border:1px solid var(--border)}
+.kpi-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:.5rem;font-family:'DM Mono',monospace;color:var(--text3)}
+.kpi-val{font-size:36px;font-weight:600;line-height:1;letter-spacing:-1px;font-family:'DM Mono',monospace;color:var(--text)}
+.kpi-card.blue .kpi-val{color:var(--blue)}
+.kpi-card.teal .kpi-val{color:var(--teal)}
+.kpi-card.amber .kpi-val{color:var(--amber)}
+.kpi-card.gray .kpi-val{color:var(--text)}
+.kpi-desc{font-size:11px;margin-top:.35rem;color:var(--text3)}
 
 /* Section cards */
 .section-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem;box-shadow:var(--shadow-sm)}
@@ -183,8 +176,8 @@ canvas{max-width:100%;display:block}
 .map-topbar-title{display:flex;align-items:center;gap:10px;flex:1;min-width:160px}
 .map-topbar-title h2{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-.2px}
 .map-filter-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.map-filter-row input[type=date]{height:32px;padding:0 10px;font-size:12px;border:1px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;font-family:'DM Sans',sans-serif;transition:border-color .15s}
-.map-filter-row input[type=date]:focus{border-color:var(--blue)}
+.map-filter-row input[type=date],.map-filter-row select{height:32px;padding:0 10px;font-size:12px;border:1px solid var(--border2);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;font-family:'DM Sans',sans-serif;transition:border-color .15s}
+.map-filter-row input[type=date]:focus,.map-filter-row select:focus{border-color:var(--blue)}
 .btn-map-sm{height:32px;padding:0 12px;font-size:12px;font-weight:500;border:1px solid var(--border2);border-radius:8px;background:var(--surface);color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
 .btn-map-sm:hover{background:var(--surface2)}
 .btn-map-sm.active{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue)}
@@ -226,8 +219,53 @@ canvas{max-width:100%;display:block}
 .pop-rep{margin-top:7px;padding-top:7px;border-top:1px solid #eee;font-size:11px;color:#666}
 
 @media(max-width:640px){
-  .kpi-row{grid-template-columns:1fr 1fr}
-  .bar-item{grid-template-columns:120px 1fr 50px}
+  .com-topbar-inner{padding:10px 1rem}
+  .page{padding:1.25rem 1rem}
+  .header-file-tag{margin-left:0;width:100%;justify-content:center}
+  .upload-zone{padding:2.25rem 1.25rem}
+
+  .filter-panel{padding:1rem 1.1rem}
+  .filter-row{flex-direction:column;align-items:stretch;gap:10px}
+  .filter-row>div{width:100%;margin-left:0!important;align-self:stretch!important}
+  .ctrl input[type=date],.ctrl select{width:100%;min-height:40px}
+  .divider-v{display:none}
+  .filter-row .btn-toggle,.filter-row .btn-upload{width:100%;justify-content:center;min-height:40px}
+
+  .toggles-row{flex-direction:column;align-items:stretch;gap:8px}
+  .mode-group{width:100%}
+  .mode-btn{flex:1;min-height:40px}
+  .btn-cats{margin-left:0;width:100%;justify-content:center;min-height:40px}
+
+  .kpi-row{grid-template-columns:1fr 1fr;gap:8px}
+  .kpi-card{padding:1rem 1.1rem}
+  .kpi-val{font-size:28px}
+
+  .section-card{padding:1rem 1.1rem}
+  .sec-header{flex-direction:column;align-items:flex-start;gap:8px}
+  .bar-item{grid-template-columns:100px 1fr 44px;gap:8px}
+  .bi-label{font-size:11px}
+
+  .action-row{flex-direction:column}
+  .btn-action{width:100%;justify-content:center;min-height:40px}
+
+  .tbl-wrap{position:relative}
+  .tbl-wrap::after{content:"◀ deslizá para ver más ▶";display:block;text-align:center;font-size:.68rem;color:var(--text3);padding:6px 0 0}
+  .btn-export{min-height:36px}
+
+  .ttab-group,.cat-chips,.mun-chips-row{gap:6px}
+  .ttab,.chip,.mun-chip{min-height:32px;display:inline-flex;align-items:center}
+
+  input[type=number]{min-height:36px}
+
+  /* Overlay del mapa */
+  .map-topbar{padding:.75rem 1rem;gap:8px}
+  .map-topbar-title{min-width:100%}
+  .map-filter-row{width:100%}
+  .map-filter-row input[type=date],.map-filter-row select{flex:1;min-width:140px}
+  .btn-map-sm,.btn-map-apply,.btn-map-close{min-height:38px}
+  .map-legend-bar,.map-stats-bar{padding:.5rem 1rem;gap:8px}
+  .hp-grid{flex-direction:column;gap:1rem}
+  .hp-ctrl input[type=time],.hp-ctrl select,.hp-ctrl input[type=date]{min-height:36px}
 }
 
 /* Transportistas tabs */
@@ -239,41 +277,36 @@ canvas{max-width:100%;display:block}
 .ttab.on.amber{background:#C47A1E;border-color:#C47A1E}
 .ttab.on.gray{background:var(--gray);border-color:var(--gray)}
 </style>
+<link rel="stylesheet" href="assets/dashboard-common.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 </head>
-<body>
-<div class="page">
-
-  <a class="back-link" href="index.html">
-    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-    Centro Operativo
-  </a>
-  <div class="page-header">
-    <div class="header-badge">
-      <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
-    </div>
+<body class="page-reclamos">
+<div class="com-topbar">
+  <div class="com-topbar-inner">
+    <a class="back-link com-back-link" href="index.html">
+      <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Volver al menú principal
+    </a>
+    <div class="header-badge" aria-hidden="true">📋</div>
     <div>
       <div class="header-title">Dashboard de Reclamos</div>
       <div class="header-sub">Centro Operativo de Montevideo — COM</div>
     </div>
-    <div id="header-file-tag" class="header-file-tag" style="display:none" onclick="resetDash()">
-      <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      <span id="header-file-name"></span>
-      <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;opacity:.6"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
-    </div>
   </div>
+</div>
+<div class="page">
 
-  <!-- CONEXIÓN A GOOGLE SHEETS (reemplaza la carga manual de archivo) -->
+  <!-- CARGA INICIAL -->
   <div id="step-upload">
-    <div class="upload-zone" id="drop-zone" style="cursor:default">
-      <div class="upload-icon">🔗</div>
-      <div class="upload-title">Base de reclamos conectada a GitHub</div>
-      <div class="upload-sub">Se actualiza una vez por día · muestra datos hasta <span>ayer</span> inclusive</div>
-      <button class="btn-upload" id="btn-generar" onclick="fetchFromSheets()">
-        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
-        Generar dashboard
-      </button>
-      <div id="file-info"></div>
+    <div class="com-loading-view" id="drop-zone" role="status" aria-live="polite">
+      <div class="com-loading-content">
+        <span class="com-spinner" id="reclamos-spinner" aria-hidden="true"></span>
+        <div class="com-loading-message" id="reclamos-loading-message">Cargando información…</div>
+        <div id="file-info"></div>
+        <div class="com-loading-actions" id="reclamos-loading-actions" hidden>
+          <button class="com-retry-button" id="btn-generar" onclick="fetchFromSheets()">Reintentar</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -283,11 +316,11 @@ canvas{max-width:100%;display:block}
       <div class="panel-label">Período de análisis</div>
       <div class="filter-row">
         <div class="ctrl">
-          <label id="lbl-f1">Desde</label>
+          <label id="lbl-f1" for="fecha1">Desde</label>
           <input type="date" id="fecha1">
         </div>
         <div id="f2wrap" style="display:none" class="ctrl">
-          <label>Hasta</label>
+          <label for="fecha2">Hasta</label>
           <input type="date" id="fecha2">
         </div>
         <div style="align-self:flex-end">
@@ -303,9 +336,11 @@ canvas{max-width:100%;display:block}
           </select>
         </div>
         <div style="align-self:flex-end;margin-left:auto">
-          <button class="btn-upload" onclick="aplicar()" style="height:36px;padding:0 22px;font-size:13px">Generar dashboard</button>
+          <button class="btn-toggle" type="button" onclick="resetReclamosFilters()" style="height:36px;margin-right:6px">Restablecer</button>
+          <button class="btn-upload" id="btn-aplicar" onclick="aplicar()" style="height:36px;padding:0 22px;font-size:13px">Aplicar filtros</button>
         </div>
       </div>
+      <p class="com-range-error" id="reclamos-range-error" role="alert">La fecha Desde no puede ser posterior a Hasta.</p>
     </div>
   </div>
 
@@ -646,10 +681,21 @@ canvas{max-width:100%;display:block}
       <h2>Mapa de reclamos</h2>
     </div>
     <div class="map-filter-row">
-      <input type="date" id="map-f1">
-      <div id="map-f2wrap" style="display:none"><input type="date" id="map-f2"></div>
+      <input type="date" id="map-f1" aria-label="Fecha desde del mapa">
+      <div id="map-f2wrap" style="display:none"><input type="date" id="map-f2" aria-label="Fecha hasta del mapa"></div>
+      <select id="map-mun" aria-label="Municipio del mapa">
+        <option value="">Todos los municipios</option>
+      </select>
+      <select id="map-circ" aria-label="Circuito del mapa">
+        <option value="">Todos los circuitos</option>
+      </select>
+      <select id="map-transp" aria-label="Categoría de transportista del mapa">
+        <option value="all">Todos los transportistas</option>
+        <option value="empresa">Empresas</option>
+        <option value="fideicomiso">Fideicomiso</option>
+        <option value="moto">Motocarros</option>
+      </select>
       <button class="btn-map-sm" id="btn-map-rango" onclick="toggleMapRange()">Rango</button>
-      <button class="btn-map-apply" onclick="renderMapa()">Aplicar</button>
       <button class="btn-map-sm" onclick="toggleHorarios()" style="display:flex;align-items:center;gap:5px">
         <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         Horarios
@@ -706,6 +752,7 @@ canvas{max-width:100%;display:block}
     <div class="map-leg-item" id="tog-cmas" onclick="toggleMapCat('cmas')"><div class="map-leg-dot" style="background:#EF9F27"></div>Resuelto en &gt; 24h</div>
     <div class="map-leg-item" id="tog-sin" onclick="toggleMapCat('sin')"><div class="map-leg-dot" style="background:#D85A30"></div>Sin resolver</div>
   </div>
+  <div class="map-stats-bar" id="map-context" aria-live="polite"></div>
   <div class="map-stats-bar" id="map-stats-bar"></div>
   <div id="leaflet-map"></div>
 </div>
@@ -724,8 +771,48 @@ const BAR_LABELS=['Resueltos en ≤ 24h','Resueltos 24h – 48h','Resueltos 48h 
 
 let allData=[], isRange=false, chartRes=null, chartPct=null, chartUnicos=null;
 let globalDatos=[], globalDesde=null, globalHasta=null;
-let currentMode='todos', activeCats=new Set(DEFAULT_CATS);
+let currentMode='todos', activeCats=new Set(DEFAULT_CATS), presentCatsGlobal=[];
 let lastMuns=[], lastMunMap={};
+const RECLAMOS_SESSION_KEY='com.reclamos.filters';
+let dataVersion=0, filteredCacheKey='', filteredCache=[];
+
+function readReclamosState(){
+  try{return JSON.parse(sessionStorage.getItem(RECLAMOS_SESSION_KEY)||'null')}catch(_){sessionStorage.removeItem(RECLAMOS_SESSION_KEY);return null}
+}
+function saveReclamosState(){
+  sessionStorage.setItem(RECLAMOS_SESSION_KEY,JSON.stringify({
+    fecha1:document.getElementById('fecha1').value,
+    fecha2:document.getElementById('fecha2').value,
+    isRange,
+    transp:document.getElementById('f-transp').value,
+    mode:currentMode,
+    cats:[...activeCats]
+  }));
+}
+function validateReclamosRange(){
+  const desde=document.getElementById('fecha1'),hasta=document.getElementById('fecha2');
+  const invalid=Boolean(isRange&&desde.value&&hasta.value&&desde.value>hasta.value);
+  hasta.min=isRange?desde.value:'';
+  hasta.setCustomValidity(invalid?'La fecha Desde no puede ser posterior a Hasta.':'');
+  desde.setAttribute('aria-invalid',String(invalid));
+  hasta.setAttribute('aria-invalid',String(invalid));
+  document.getElementById('reclamos-range-error').classList.toggle('show',invalid);
+  document.getElementById('btn-aplicar').disabled=invalid;
+  return !invalid;
+}
+function restoreReclamosState(presentCats,ayer){
+  const state=readReclamosState();
+  if(!state)return;
+  if(state.fecha1&&state.fecha1<=ayer)document.getElementById('fecha1').value=state.fecha1;
+  if(state.fecha2&&state.fecha2<=ayer)document.getElementById('fecha2').value=state.fecha2;
+  isRange=Boolean(state.isRange);
+  document.getElementById('f2wrap').style.display=isRange?'flex':'none';
+  document.getElementById('btn-rango').classList.toggle('active',isRange);
+  document.getElementById('lbl-f1').textContent=isRange?'Desde':'Fecha';
+  if([...document.getElementById('f-transp').options].some(o=>o.value===state.transp))document.getElementById('f-transp').value=state.transp;
+  currentMode=state.mode==='unicos'?'unicos':'todos';
+  if(Array.isArray(state.cats))activeCats=new Set(state.cats.filter(c=>presentCats.includes(c)));
+}
 
 function isFideicomiso(t){
   if(!t)return false;
@@ -754,8 +841,7 @@ function enCat(r){
   const inc=getCol(r,'incidente')||'';
   return activeCats.has(inc);
 }
-function enTransp(r){
-  const sel=document.getElementById('f-transp').value;
+function enTranspValor(r,sel){
   if(sel==='all')return true;
   const t=getCol(r,'transportista');
   if(sel==='fideicomiso')return isFideicomiso(t);
@@ -763,6 +849,7 @@ function enTransp(r){
   if(sel==='moto')return !isEmpresa(t)&&!isFideicomiso(t);
   return true;
 }
+function enTransp(r){return enTranspValor(r,document.getElementById('f-transp').value);}
 function parseDate(v){
   if(!v)return null;
   if(v instanceof Date)return isNaN(v)?null:v;
@@ -841,16 +928,25 @@ function ayerStr(){
 async function fetchFromSheets(){
   const btn=document.getElementById('btn-generar');
   const fi=document.getElementById('file-info');
-  btn.disabled=true;btn.style.opacity='.55';
-  fi.innerHTML='<div class="file-status ok">⏳ Descargando la base desde GitHub…</div>';
+  const spinner=document.getElementById('reclamos-spinner');
+  const message=document.getElementById('reclamos-loading-message');
+  const actions=document.getElementById('reclamos-loading-actions');
+  document.getElementById('step-upload').style.display='block';
+  btn.disabled=true;
+  spinner.hidden=false;
+  actions.hidden=true;
+  message.className='com-loading-message';
+  message.textContent='Cargando información…';
+  fi.textContent='';
   try{
     const data=await fetchCSV(CSV_REC);
     allData=data.filter(r=>esValido(r));
+    dataVersion++;
+    filteredCacheKey='';
     const cols=Object.keys(data[0]||{}).map(x=>x.toLowerCase());
     const miss=['fecha_de_reclamo','fecha_resuelto','incidente','tipo_de_reclamo','municipio','repetido'].filter(c=>!cols.includes(c));
     if(miss.length){
-      fi.innerHTML=`<div class="file-status err">⚠ Columnas no encontradas en la Sheet: ${miss.join(', ')}</div>`;
-      return;
+      throw new Error(`Faltan columnas requeridas: ${miss.join(', ')}`);
     }
     // Tope "a día vencido": nunca mostrar más allá de ayer, aunque la hoja tenga algo de hoy
     const ayer=ayerStr();
@@ -864,19 +960,23 @@ async function fetchFromSheets(){
     }
     // Build cat chips from present cats
     const presentCats=[...new Set(allData.map(r=>getCol(r,'incidente')||'').filter(Boolean))].sort();
+    presentCatsGlobal=presentCats;
     activeCats=new Set(presentCats.filter(c=>DEFAULT_CATS.has(c)));
+    restoreReclamosState(presentCats,ayer);
     buildCatChips(presentCats);
-    const ahora=new Date();
-    const hhmm=String(ahora.getHours()).padStart(2,'0')+':'+String(ahora.getMinutes()).padStart(2,'0');
-    fi.innerHTML=`<div class="file-status ok">✓ ${allData.length.toLocaleString('es-UY')} registros válidos · datos hasta ${fmt(allDates[allDates.length-1]||ayer)}</div>`;
-    document.getElementById('header-file-name').textContent='GitHub · actualizado '+hhmm;
-    document.getElementById('header-file-tag').style.display='flex';
+    document.getElementById('mode-todos').classList.toggle('active',currentMode==='todos');
+    document.getElementById('mode-unicos').classList.toggle('active',currentMode==='unicos');
     document.getElementById('step-filter').style.display='block';
+    document.getElementById('step-upload').style.display='none';
     aplicar(); // Renderiza de una con el período completo — evita el segundo clic en "Generar dashboard"
   } catch(err){
-    fi.innerHTML=`<div class="file-status err">✗ Error: ${err.message}</div>`;
+    console.error('No se pudo cargar Reclamos:',err);
+    spinner.hidden=true;
+    message.className='com-loading-message com-loading-error';
+    message.textContent='No se pudo cargar la información.';
+    actions.hidden=false;
   } finally {
-    btn.disabled=false;btn.style.opacity='';
+    btn.disabled=false;
   }
 }
 
@@ -891,6 +991,8 @@ function buildCatChips(cats){
       if(activeCats.has(c))activeCats.delete(c);
       else activeCats.add(c);
       b.classList.toggle('on',activeCats.has(c));
+      filteredCacheKey='';
+      saveReclamosState();
       if(globalDatos.length)renderDashboard();
     };
     grid.appendChild(b);
@@ -902,7 +1004,15 @@ function toggleRange(){
   document.getElementById('f2wrap').style.display=isRange?'flex':'none';
   document.getElementById('btn-rango').classList.toggle('active',isRange);
   document.getElementById('lbl-f1').textContent=isRange?'Desde':'Fecha';
+  validateReclamosRange();
 }
+
+['fecha1','fecha2'].forEach(id=>document.getElementById(id).addEventListener('change',validateReclamosRange));
+document.getElementById('f-transp').addEventListener('change',()=>{
+  filteredCacheKey='';
+  saveReclamosState();
+  if(globalDatos.length)renderDashboard();
+});
 
 function setMode(mode){
   currentMode=mode;
@@ -910,12 +1020,33 @@ function setMode(mode){
   document.getElementById('mode-unicos').classList.toggle('active',mode==='unicos');
   const uc=document.getElementById('chart-unicos-section');
   if(uc)uc.style.display=mode==='unicos'&&document.getElementById('charts-section').style.display!=='none'?'block':'none';
+  saveReclamosState();
   if(globalDatos.length)renderDashboard();
 }
 
 function toggleCats(){
   const p=document.getElementById('cat-panel');
   p.style.display=p.style.display==='none'?'block':'none';
+}
+
+function resetReclamosFilters(){
+  sessionStorage.removeItem(RECLAMOS_SESSION_KEY);
+  const ayer=ayerStr();
+  const dates=allData.map(r=>String(getCol(r,'fecha_de_reclamo')||'').slice(0,10)).filter(d=>d.length===10).sort();
+  if(dates.length){document.getElementById('fecha1').value=dates[0];document.getElementById('fecha2').value=dates[dates.length-1]>ayer?ayer:dates[dates.length-1]}
+  isRange=true;
+  document.getElementById('f2wrap').style.display='flex';
+  document.getElementById('btn-rango').classList.add('active');
+  document.getElementById('lbl-f1').textContent='Desde';
+  document.getElementById('f-transp').value='all';
+  currentMode='todos';
+  document.getElementById('mode-todos').classList.add('active');
+  document.getElementById('mode-unicos').classList.remove('active');
+  activeCats=new Set(presentCatsGlobal.filter(c=>DEFAULT_CATS.has(c)));
+  buildCatChips(presentCatsGlobal);
+  filteredCacheKey='';
+  validateReclamosRange();
+  aplicar();
 }
 
 function filtrar(lista){
@@ -925,8 +1056,10 @@ function filtrar(lista){
 function aplicar(){
   const f1=document.getElementById('fecha1').value;
   if(!f1){alert('Seleccioná una fecha.');return;}
-  globalDesde=dayStart(new Date(f1+'T00:00:00'));
   const f2=document.getElementById('fecha2').value;
+  if(isRange&&!f2){alert('Seleccioná la fecha Hasta.');document.getElementById('fecha2').focus();return;}
+  if(!validateReclamosRange()){document.getElementById('fecha2').focus();return;}
+  globalDesde=dayStart(new Date(f1+'T00:00:00'));
   globalHasta=isRange&&f2?dayEnd(new Date(f2+'T00:00:00')):dayEnd(new Date(f1+'T00:00:00'));
   globalDatos=allData;
   const periodoTxt=isRange&&f2&&f1!==f2?`${fmt(f1)} — ${fmt(f2)}`:fmt(f1);
@@ -937,11 +1070,16 @@ function aplicar(){
   document.getElementById('municipio-section').style.display='none';
   document.getElementById('step-dashboard').style.display='block';
   document.getElementById('step-dashboard').scrollIntoView({behavior:'smooth',block:'start'});
+  saveReclamosState();
   renderDashboard();
 }
 
 function getFiltered(){
-  return globalDatos.filter(r=>enCat(r)&&enTransp(r));
+  const key=dataVersion+'|'+document.getElementById('f-transp').value+'|'+[...activeCats].sort().join('\u001f');
+  if(key===filteredCacheKey)return filteredCache;
+  filteredCacheKey=key;
+  filteredCache=globalDatos.filter(r=>enCat(r)&&enTransp(r));
+  return filteredCache;
 }
 
 function renderDashboard(){
@@ -1981,8 +2119,10 @@ function resetDash(){
   document.getElementById('step-upload').style.display='block';
   document.getElementById('step-filter').style.display='none';
   document.getElementById('step-dashboard').style.display='none';
-  document.getElementById('header-file-tag').style.display='none';
+  const headerTag=document.getElementById('header-file-tag');
+  if(headerTag)headerTag.style.display='none';
   document.getElementById('file-info').innerHTML='';
+  fetchFromSheets();
 }
 </script>
 
@@ -2001,6 +2141,11 @@ const MAP_MAX_DIAS=3;
 function mapMaxHasta(f1){
   const d=new Date(f1+'T00:00:00');
   d.setDate(d.getDate()+(MAP_MAX_DIAS-1));
+  return toKey(d);
+}
+function mapUltimosDias(hasta,dias){
+  const d=new Date(hasta+'T00:00:00');
+  d.setDate(d.getDate()-(dias-1));
   return toKey(d);
 }
 
@@ -2040,20 +2185,42 @@ function fmtDT(v){
   return rawDateStr(v)||'—';
 }
 
+function updateMapCircuits(){
+  const mun=document.getElementById('map-mun').value;
+  const sel=document.getElementById('map-circ');
+  const actual=sel.value;
+  const circs=[...new Set(allData.filter(r=>!mun||String(getCol(r,'municipio')||'-').trim()===mun).map(r=>String(getCol(r,'circuito')||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es',{numeric:true}));
+  sel.innerHTML='<option value="">Todos los circuitos</option>';
+  circs.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o)});
+  if(circs.includes(actual))sel.value=actual;
+}
+
+function initMapFilters(){
+  const munSel=document.getElementById('map-mun');
+  const actual=munSel.value;
+  const muns=[...new Set(allData.map(r=>String(getCol(r,'municipio')||'-').trim()))].sort();
+  munSel.innerHTML='<option value="">Todos los municipios</option>';
+  muns.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=MUNI_MAP[m]||('Municipio '+m);munSel.appendChild(o)});
+  if(muns.includes(actual))munSel.value=actual;
+  updateMapCircuits();
+  document.getElementById('map-transp').value=document.getElementById('f-transp').value;
+}
+
 function abrirMapa(){
   document.getElementById('map-view').classList.add('open');
+  initMapFilters();
   const f1=document.getElementById('fecha1').value;
-  const f2=document.getElementById('fecha2').value;
-  document.getElementById('map-f1').value=f1;
+  const f2=isRange&&document.getElementById('fecha2').value?document.getElementById('fecha2').value:f1;
+  const ultimoInicio=f2?mapUltimosDias(f2,MAP_MAX_DIAS):f1;
+  const mapF1=f1&&ultimoInicio&&f1<ultimoInicio?ultimoInicio:f1;
+  document.getElementById('map-f1').value=mapF1;
   const mapF2el=document.getElementById('map-f2');
-  const tope=f1?mapMaxHasta(f1):null;
+  const tope=mapF1?mapMaxHasta(mapF1):null;
   if(tope)mapF2el.max=tope;
-  if(isRange&&f2){
-    mapF2el.value=(tope&&f2>tope)?tope:f2;
-    document.getElementById('map-f2wrap').style.display='inline-block';
-    document.getElementById('btn-map-rango').classList.add('active');
-    mapRangeActive=true;
-  }
+  mapF2el.value=f2||mapF1;
+  mapRangeActive=Boolean(f2&&mapF1&&f2!==mapF1);
+  document.getElementById('map-f2wrap').style.display=mapRangeActive?'inline-block':'none';
+  document.getElementById('btn-map-rango').classList.toggle('active',mapRangeActive);
   if(!leafletMap){
     leafletMap=L.map('leaflet-map').setView([-34.9011,-56.1645],12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(leafletMap);
@@ -2076,6 +2243,7 @@ function toggleMapRange(){
     const f1=document.getElementById('map-f1').value;
     if(f1)document.getElementById('map-f2').max=mapMaxHasta(f1);
   }
+  renderMapa();
 }
 
 // Si cambian la fecha "desde" del mapa a mano, el "hasta" no puede quedar a más de
@@ -2087,7 +2255,12 @@ document.getElementById('map-f1').addEventListener('change',()=>{
   const tope=mapMaxHasta(f1);
   f2el.max=tope;
   if(f2el.value&&f2el.value>tope)f2el.value=tope;
+  renderMapa();
 });
+document.getElementById('map-f2').addEventListener('change',renderMapa);
+document.getElementById('map-mun').addEventListener('change',()=>{updateMapCircuits();renderMapa()});
+document.getElementById('map-circ').addEventListener('change',renderMapa);
+document.getElementById('map-transp').addEventListener('change',renderMapa);
 
 function toggleMapCat(cat){
   catVisible[cat]=!catVisible[cat];
@@ -2150,6 +2323,11 @@ function renderMapa(){
   if(!f1){alert('Seleccioná una fecha.');return;}
   const desde=dayStart(new Date(f1+'T00:00:00'));
   const f2v=document.getElementById('map-f2').value;
+  const mapMun=document.getElementById('map-mun').value;
+  const mapCirc=document.getElementById('map-circ').value;
+  const mapTransp=document.getElementById('map-transp').value;
+  if(mapRangeActive&&!f2v){alert('Seleccioná la fecha Hasta.');document.getElementById('map-f2').focus();return;}
+  if(mapRangeActive&&f2v<f1){alert('La fecha Desde no puede ser posterior a Hasta.');document.getElementById('map-f2').focus();return;}
   let hasta=mapRangeActive&&f2v?dayEnd(new Date(f2v+'T00:00:00')):dayEnd(new Date(f1+'T00:00:00'));
 
   // Tope defensivo de MAP_MAX_DIAS días (evita miles de marcadores y que se cuelgue el navegador)
@@ -2171,6 +2349,10 @@ function renderMapa(){
   });
 
   const puntos=allData.filter(r=>{
+    if(!enCat(r)||!enTranspValor(r,mapTransp)||(currentMode==='unicos'&&esRepetido(r)))return false;
+    if(mapTransp!=='all'&&catReclamo(r)==='sin')return false;
+    if(mapMun&&String(getCol(r,'municipio')||'-').trim()!==mapMun)return false;
+    if(mapCirc&&String(getCol(r,'circuito')||'').trim()!==mapCirc)return false;
     const f=parseDate(getCol(r,'fecha_de_reclamo'));
     return f&&f>=desde&&f<=hasta;
   });
@@ -2212,10 +2394,13 @@ function renderMapa(){
     cnt[cat]++;
     const id=String(getCol(r,'id')||'').trim();
     const nHijos=hijosCount[id]||0;
+    const padre=String(getCol(r,'id_del_padre')||'').trim();
     const incidente=getCol(r,'incidente')||'—';
     const municipio=getMuni(r);
     const circuito=getCol(r,'circuito')||'—';
-    const rep=esRepetido(r)?'Sí':'No';
+    const relacion=esRepetido(r)
+      ?'<div class="pop-rep">Repetido del reclamo <strong>#'+(padre||'sin identificar')+'</strong></div>'
+      :(nHijos>0?'<div class="pop-rep">Reclamos repetidos asociados: <strong>'+nHijos+'</strong></div>':'');
     const transportista=getCol(r,'transportista')||'—';
     const catLabel=cat==='c24'?'Resuelto en ≤ 24h':cat==='cmas'?'Resuelto en > 24h':'Sin resolver';
 
@@ -2236,8 +2421,7 @@ function renderMapa(){
       <div class="pop-row"><span class="pop-lbl">Transportista</span><span class="pop-val">${transportista}</span></div>
       <div class="pop-row"><span class="pop-lbl">Ingreso</span><span class="pop-val">${fmtDT(fRecRaw)}</span></div>
       <div class="pop-row"><span class="pop-lbl">Resolución</span><span class="pop-val">${fmtDT(fResRaw)}</span></div>
-      <div class="pop-row"><span class="pop-lbl">Repetido</span><span class="pop-val">${rep}</span></div>
-      <div class="pop-rep">Repetidos asociados: <strong>${nHijos}</strong></div>
+      ${relacion}
     </div>`,{maxWidth:280});
 
     allMarkers.push({cat,marker});
@@ -2245,6 +2429,19 @@ function renderMapa(){
   });
 
   const total=cnt.c24+cnt.cmas+cnt.sin;
+  const transp=document.getElementById('map-transp');
+  const munMapa=document.getElementById('map-mun');
+  const circMapa=document.getElementById('map-circ');
+  const periodoMapa=mapRangeActive&&f2v&&f2v!==f1?`${fmt(f1)} — ${fmt(f2v)}`:fmt(f1);
+  const modo=currentMode==='unicos'?'Solo únicos':'Todos los reclamos';
+  document.getElementById('map-context').innerHTML=
+    `<div class="map-stat"><strong>Período:</strong> ${periodoMapa}</div>`+
+    `<div class="map-stat"><strong>Vista:</strong> ${modo}</div>`+
+    `<div class="map-stat"><strong>Municipio:</strong> ${munMapa.options[munMapa.selectedIndex]?.text||'Todos'}</div>`+
+    `<div class="map-stat"><strong>Circuito:</strong> ${circMapa.options[circMapa.selectedIndex]?.text||'Todos'}</div>`+
+    `<div class="map-stat"><strong>Transportista:</strong> ${transp.options[transp.selectedIndex]?.text||'Todos'}</div>`+
+    `<div class="map-stat"><strong>Categorías:</strong> ${activeCats.size}</div>`+
+    `<button class="btn-map-sm" type="button" onclick="cerrarMapa()">Volver al análisis</button>`;
   document.getElementById('map-stats-bar').innerHTML=
     `<div class="map-stat">Total: <strong>${total.toLocaleString('es-UY')}</strong></div>`+
     `<div class="map-stat" style="color:#1D9E75">≤ 24h: <strong>${cnt.c24.toLocaleString('es-UY')}</strong></div>`+

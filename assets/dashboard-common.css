@@ -1,0 +1,1315 @@
+.com-loading-view {
+  /* Antes esto tenía un techo de 560px (clamp con tope en 55vh) — en pantallas
+     normales quedaba como una caja chica pegada arriba, con un montón de
+     espacio vacío debajo hasta el final del viewport. Ahora ocupa el alto
+     disponible debajo del topbar (64px) para que el spinner quede centrado
+     en la pantalla real, no en una caja arbitrariamente chica. */
+  min-height: max(260px, calc(100vh - 64px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+}
+
+.com-loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: 420px;
+  text-align: center;
+}
+
+.com-spinner {
+  width: 38px;
+  height: 38px;
+  border: 3px solid #dbe3ed;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: com-spin .8s linear infinite;
+  flex: 0 0 auto;
+}
+
+.com-spinner[hidden],
+.com-loading-view[hidden],
+.com-loading-actions[hidden] {
+  display: none !important;
+}
+
+.com-loading-message {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.com-loading-error {
+  color: #b42318;
+}
+
+.com-loading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.com-retry-button {
+  min-height: 38px;
+  padding: 0 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.com-retry-button:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.com-inline-loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.com-inline-loading .com-spinner {
+  width: 24px;
+  height: 24px;
+  border-width: 3px;
+}
+
+body a:focus-visible,
+body button:focus-visible,
+body select:focus-visible,
+body summary:focus-visible,
+body input[type]:focus-visible,
+body [tabindex]:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, .42);
+  outline-offset: 2px;
+}
+
+.com-back-link,
+.back,
+.back-link,
+.topbar-back,
+.top-back {
+  min-height: 36px;
+  align-items: center;
+  touch-action: manipulation;
+}
+
+.com-icon-button {
+  touch-action: manipulation;
+}
+
+.com-range-error {
+  display: none;
+  margin: 6px 0 0;
+  color: #b42318;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.com-range-error.show {
+  display: block;
+}
+
+body input[type="date"][aria-invalid="true"] {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, .12);
+}
+
+.com-available-period {
+  margin: -6px 0 14px;
+  color: var(--com-text-muted, #667085);
+  font-family: var(--com-font);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@keyframes com-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .com-spinner { animation-duration: 2.4s; }
+}
+
+@media (max-width: 640px) {
+  .com-back-link,
+  .back,
+  .back-link,
+  .topbar-back,
+  .top-back {
+    display: inline-flex;
+    min-width: 36px;
+  }
+
+  .com-icon-button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-tareas .topin {
+    gap: 10px;
+  }
+
+  .page-tareas .top-back {
+    width: 100%;
+    order: -1;
+  }
+
+  .page-tareas .brand {
+    flex: 1 1 190px;
+  }
+
+  .page-tareas .actions {
+    margin-left: 0;
+  }
+
+  .page-tareas .tabs .tab,
+  .page-tareas .actions .btn {
+    min-height: 40px;
+  }
+
+  .page-tareas .head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-tareas .navweek {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+  }
+
+  .page-tareas .navweek .arr,
+  .page-tareas .navweek .btn {
+    width: 100%;
+    min-height: 40px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   COM visual system · P2
+   This is the shared presentation layer. Page-specific rules remain responsible
+   for charts, maps and data semantics; these tokens align the product shell,
+   hierarchy, density and controls without changing behavior.
+   -------------------------------------------------------------------------- */
+:root {
+  --com-bg: #f4f6f8;
+  --com-surface: #ffffff;
+  --com-surface-subtle: #f8fafc;
+  --com-text: #182230;
+  --com-text-muted: #667085;
+  --com-text-soft: #98a2b3;
+  --com-border: #e1e7ef;
+  --com-border-strong: #cbd5e1;
+  --com-primary: #2563eb;
+  --com-primary-hover: #1d4ed8;
+  --com-primary-soft: #eff6ff;
+  --com-header: #111c32;
+  --com-header-muted: #cbd5e1;
+  --com-danger: #b42318;
+  --com-radius-control: 8px;
+  --com-radius-card: 12px;
+  --com-shadow: 0 1px 2px rgba(16, 24, 40, .045), 0 1px 3px rgba(16, 24, 40, .06);
+  --com-shadow-raised: 0 4px 12px rgba(16, 24, 40, .08);
+  --com-font: "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body.page-index,
+body.page-agenda,
+body.page-reclamos,
+body.page-zona-limpia,
+body.page-transportistas,
+body.page-tareas {
+  background: var(--com-bg);
+  color: var(--com-text);
+  font-family: var(--com-font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.page-index button,
+.page-index input,
+.page-index select,
+.page-agenda button,
+.page-agenda input,
+.page-agenda select,
+.page-reclamos button,
+.page-reclamos input,
+.page-reclamos select,
+.page-zona-limpia button,
+.page-zona-limpia input,
+.page-zona-limpia select,
+.page-transportistas button,
+.page-transportistas input,
+.page-transportistas select,
+.page-tareas button,
+.page-tareas input,
+.page-tareas select {
+  font-family: inherit;
+}
+
+/* Product shell */
+.page-agenda .topbar,
+.page-reclamos .com-topbar,
+.page-zona-limpia .topbar,
+.page-transportistas > header,
+.page-tareas .top {
+  background: var(--com-header);
+  box-shadow: 0 1px 3px rgba(16, 24, 40, .16);
+}
+
+.page-agenda .topbar .inner,
+.page-reclamos .com-topbar-inner,
+.page-zona-limpia .topbar,
+.page-transportistas > header,
+.page-tareas .topin {
+  min-height: 62px;
+}
+
+.com-back-link,
+.back,
+.back-link,
+.topbar-back,
+.top-back {
+  display: inline-flex;
+  gap: 6px;
+  padding: 0 8px;
+  border-radius: 7px;
+  font-family: var(--com-font);
+  color: var(--com-header-muted);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .15s ease, background-color .15s ease;
+}
+
+.com-back-link:hover,
+.back:hover,
+.back-link:hover,
+.topbar-back:hover,
+.top-back:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, .08);
+}
+
+/* Ícono del header: misma "placa" translúcida en las 5 páginas — antes cada
+   una hacía lo suyo (sin caja, o con su propio color sólido de marca). */
+.page-reclamos .header-badge,
+.page-transportistas > header .logo,
+.page-zona-limpia .brand-ico,
+.page-tareas .mark,
+.page-agenda .titlerow .ico {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .12);
+  border: 1px solid rgba(255, 255, 255, .28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 17px;
+  line-height: 1;
+  color: #fff;
+}
+
+.page-agenda .titlerow h1,
+.page-reclamos .header-title,
+.page-zona-limpia .brand-name,
+.page-transportistas > header h1,
+.page-tareas .brand h1 {
+  font-family: var(--com-font);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+.page-reclamos .header-sub,
+.page-zona-limpia .brand-file,
+.page-transportistas > header p,
+.page-tareas .brand p,
+.page-agenda .titlerow p {
+  color: var(--com-header-muted);
+  font-family: var(--com-font);
+  font-size: 11px;
+  letter-spacing: 0;
+  opacity: .82;
+}
+
+/* Content rhythm and hierarchy */
+.page-agenda .wrap {
+  padding-bottom: 48px;
+}
+
+.page-agenda section {
+  margin-top: 30px;
+}
+
+.page-transportistas .container,
+.page-tareas .main {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.page-agenda h2.sec {
+  margin-bottom: 14px;
+  padding-bottom: 9px;
+  border-bottom-width: 1px;
+  color: var(--com-text);
+  font-size: 22px;
+  letter-spacing: -.02em;
+}
+
+.page-agenda h2.sec .n {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--com-header);
+  font-size: 13px;
+}
+
+.page-agenda h3.sub,
+.page-reclamos .sec-title,
+.page-zona-limpia .summary-toolbar h2,
+.page-zona-limpia .map-view-head h2,
+.page-transportistas .chart-title,
+.page-transportistas .table-header h2,
+.page-tareas .head h2 {
+  color: var(--com-text);
+  font-family: var(--com-font);
+  font-weight: 700;
+  letter-spacing: -.015em;
+}
+
+.page-agenda h3.sub,
+.page-reclamos .sec-title,
+.page-zona-limpia .summary-toolbar h2,
+.page-zona-limpia .map-view-head h2,
+.page-transportistas .chart-title {
+  font-size: 16px;
+}
+
+.page-tareas .head h2 {
+  font-size: 20px;
+}
+
+.page-reclamos .sec-sub,
+.page-zona-limpia .summary-toolbar p,
+.page-zona-limpia .map-view-head p,
+.page-transportistas .results-count,
+.page-tareas .head p,
+.page-tareas .history-help {
+  color: var(--com-text-muted);
+}
+
+/* Cards and data surfaces */
+.page-index .tile,
+.page-agenda .card,
+.page-reclamos .section-card,
+.page-zona-limpia .chart-card,
+.page-zona-limpia .daily-details,
+.page-transportistas .chart-card,
+.page-transportistas .table-card,
+.page-transportistas .upload-card,
+.page-tareas .detail,
+.page-tareas .macro-panel,
+.page-tareas .filters,
+.page-tareas .history-summary {
+  border-color: var(--com-border);
+  border-radius: var(--com-radius-card);
+  box-shadow: var(--com-shadow);
+}
+
+.page-transportistas .chart-card,
+.page-transportistas .table-card,
+.page-transportistas .upload-card {
+  border: 1px solid var(--com-border);
+}
+
+.page-transportistas .kpi-card {
+  border-radius: var(--com-radius-card);
+  padding: 16px;
+  box-shadow: inset 0 0 0 1px var(--com-border), var(--com-shadow);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.page-transportistas .kpi-card:hover,
+.page-index .tile.active:hover {
+  transform: none;
+  box-shadow: var(--com-shadow-raised);
+}
+
+.page-reclamos .section-card,
+.page-transportistas .chart-card,
+.page-transportistas .table-card {
+  padding: 18px;
+}
+
+.page-zona-limpia .summary-block {
+  border-color: var(--com-border);
+  border-radius: 9px;
+  background: var(--com-surface-subtle);
+}
+
+.page-zona-limpia .summary-block:hover {
+  border-color: var(--com-border-strong);
+  background: var(--com-surface);
+}
+
+/* Filters and form controls */
+.page-agenda .filters,
+.page-reclamos .filter-card,
+.page-zona-limpia .fbar,
+.page-transportistas .date-filter,
+.page-tareas .filters {
+  background: var(--com-surface);
+  border-color: var(--com-border);
+}
+
+.page-agenda .filters,
+.page-tareas .filters {
+  gap: 14px;
+  padding: 16px;
+}
+
+.page-agenda .field label,
+.page-reclamos .ctrl label,
+.page-zona-limpia .fbar-lbl,
+.page-transportistas .date-filter-group label,
+.page-tareas .field label {
+  color: var(--com-text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+.page-agenda input[type="date"],
+.page-agenda select,
+.page-reclamos .ctrl input[type="date"],
+.page-reclamos .ctrl select,
+.page-reclamos input[type="number"],
+.page-zona-limpia .fbar input[type="date"],
+.page-zona-limpia .fbar select,
+.page-transportistas select,
+.page-transportistas input[type="text"],
+.page-transportistas input[type="date"],
+.page-tareas input,
+.page-tareas select {
+  min-height: 38px;
+  border: 1px solid var(--com-border-strong);
+  border-radius: var(--com-radius-control);
+  background: var(--com-surface);
+  color: var(--com-text);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.page-agenda input[type="date"]:hover,
+.page-agenda select:hover,
+.page-reclamos input:hover,
+.page-reclamos select:hover,
+.page-zona-limpia input:hover,
+.page-zona-limpia select:hover,
+.page-transportistas input:hover,
+.page-transportistas select:hover,
+.page-tareas input:hover,
+.page-tareas select:hover {
+  border-color: #94a3b8;
+}
+
+.page-agenda input[type="date"]:focus,
+.page-agenda select:focus,
+.page-reclamos input:focus,
+.page-reclamos select:focus,
+.page-zona-limpia input:focus,
+.page-zona-limpia select:focus,
+.page-transportistas input:focus,
+.page-transportistas select:focus,
+.page-tareas input:focus,
+.page-tareas select:focus {
+  border-color: var(--com-primary);
+  background: var(--com-surface);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+/* Buttons and tabs */
+.com-retry-button,
+.page-agenda .datasrc button,
+.page-reclamos .btn-upload,
+.page-reclamos .btn-toggle,
+.page-reclamos .btn-action,
+.page-reclamos .btn-cats,
+.page-reclamos .mode-btn,
+.page-reclamos .ttab,
+.page-reclamos .btn-export,
+.page-reclamos .btn-map-sm,
+.page-reclamos .btn-map-apply,
+.page-reclamos .btn-map-close,
+.page-zona-limpia .ntab,
+.page-zona-limpia .btn-nw,
+.page-zona-limpia .btn-rst,
+.page-zona-limpia .summary-map-action,
+.page-zona-limpia .summary-link,
+.page-transportistas .btn-header-action,
+.page-transportistas .btn-browse,
+.page-transportistas .chart-toggle-btn,
+.page-transportistas .btn-ranking,
+.page-transportistas .rank-search-clear,
+.page-transportistas .btn-excel,
+.page-transportistas .page-btn,
+.page-tareas .btn,
+.page-tareas .arr,
+.page-tareas .tab,
+.page-tareas .typefilter {
+  border-radius: var(--com-radius-control);
+  font-weight: 600;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
+}
+
+.page-reclamos .btn-upload,
+.page-reclamos .btn-map-apply,
+.page-zona-limpia .summary-map-action,
+.page-transportistas .btn-browse,
+.page-transportistas .btn-ranking,
+.page-tareas .btn.primary {
+  border-color: var(--com-primary);
+  background: var(--com-primary);
+  color: #fff;
+  box-shadow: none;
+}
+
+.page-reclamos .btn-upload:hover,
+.page-reclamos .btn-map-apply:hover,
+.page-zona-limpia .summary-map-action:hover,
+.page-transportistas .btn-browse:hover,
+.page-transportistas .btn-ranking:hover,
+.page-tareas .btn.primary:hover {
+  background: var(--com-primary-hover);
+  border-color: var(--com-primary-hover);
+  opacity: 1;
+  transform: none;
+}
+
+.page-reclamos .mode-btn.active,
+.page-reclamos .ttab.on,
+.page-zona-limpia .ntab.on,
+.page-transportistas .chart-toggle-btn.active,
+.page-tareas .tab.on,
+.page-tareas .typefilter.on {
+  border-color: var(--com-primary);
+  background: var(--com-primary-soft);
+  color: var(--com-primary);
+  box-shadow: inset 0 -2px 0 var(--com-primary);
+}
+
+.page-zona-limpia .summary-link {
+  color: var(--com-primary);
+}
+
+.page-agenda #agenda-reset,
+.page-reclamos .btn-toggle,
+.page-reclamos .btn-action,
+.page-reclamos .btn-export,
+.page-zona-limpia .btn-rst,
+.page-transportistas .rank-search-clear,
+.page-transportistas .page-btn,
+.page-tareas .btn,
+.page-tareas .arr {
+  border: 1px solid var(--com-border-strong);
+  background: var(--com-surface);
+  color: #344054;
+  box-shadow: none;
+}
+
+.page-agenda #agenda-reset:hover,
+.page-reclamos .btn-toggle:hover,
+.page-reclamos .btn-action:hover,
+.page-reclamos .btn-export:hover,
+.page-zona-limpia .btn-rst:hover,
+.page-transportistas .rank-search-clear:hover,
+.page-transportistas .page-btn:hover,
+.page-tareas .btn:hover,
+.page-tareas .arr:hover {
+  border-color: #94a3b8;
+  background: var(--com-surface-subtle);
+  color: var(--com-text);
+}
+
+button:disabled,
+input:disabled,
+select:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+/* KPI hierarchy */
+.page-agenda .kpi,
+.page-reclamos .kpi-card,
+.page-zona-limpia .kpi,
+.page-transportistas .kpi-card,
+.page-tareas .metric,
+.page-tareas .hstat {
+  font-variant-numeric: tabular-nums;
+}
+
+.page-agenda .kpi .k-label,
+.page-reclamos .kpi-label,
+.page-zona-limpia .klabel,
+.page-transportistas .kpi-label,
+.page-tareas .metric span,
+.page-tareas .hstat span {
+  color: var(--com-text-muted);
+  font-family: var(--com-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+.page-agenda .kpi .k-val,
+.page-reclamos .kpi-val,
+.page-zona-limpia .kval,
+.page-transportistas .kpi-value {
+  font-size: 29px;
+  line-height: 1.1;
+  letter-spacing: -.03em;
+}
+
+/* Tables */
+.page-agenda .tablewrap,
+.page-reclamos .tbl-wrap,
+.page-zona-limpia .table-scroll,
+.page-transportistas .table-wrap,
+.page-tareas .wrap {
+  border-radius: 10px;
+}
+
+/* Aviso de scroll horizontal en mobile — Reclamos y Transportistas ya lo
+   tenían cada uno por su lado; acá se agrega para Agenda y Zona Limpia,
+   que tienen tablas que también desbordan en pantallas chicas y no
+   avisaban nada. */
+@media (max-width: 640px) {
+  .page-agenda .tablewrap,
+  .page-zona-limpia .table-scroll,
+  .page-zona-limpia #tw-cov {
+    position: relative;
+  }
+
+  .page-agenda .tablewrap::after,
+  .page-zona-limpia .table-scroll::after,
+  .page-zona-limpia #tw-cov::after {
+    content: "◀ deslizá para ver más ▶";
+    display: block;
+    text-align: center;
+    font-size: .68rem;
+    color: var(--com-text-soft);
+    padding: 6px 0 0;
+  }
+}
+
+.page-agenda table.grid,
+.page-reclamos table,
+.page-zona-limpia table,
+.page-transportistas table,
+.page-tareas table {
+  color: var(--com-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.page-agenda table.grid th,
+.page-reclamos table th,
+.page-zona-limpia table th,
+.page-transportistas thead th,
+.page-tareas table th {
+  background: #f1f5f9;
+  color: #475467;
+  border-bottom: 1px solid var(--com-border);
+  font-family: var(--com-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+.page-reclamos table td,
+.page-zona-limpia table td,
+.page-transportistas table td,
+.page-tareas table td {
+  border-bottom-color: #edf1f5;
+}
+
+.page-agenda table.grid tbody tr:hover td,
+.page-reclamos table tbody tr:hover td,
+.page-zona-limpia table tbody tr:hover td,
+.page-transportistas table tbody tr:hover td,
+.page-tareas table tbody tr:hover td {
+  background: var(--com-surface-subtle);
+}
+
+/* Landing page: same product language, quieter presentation and better density. */
+.page-index {
+  padding: 36px 24px;
+}
+
+.page-index .cover {
+  max-width: 900px;
+}
+
+.page-index .eyebrow {
+  margin-bottom: 8px;
+  color: var(--com-text-muted);
+  font-family: var(--com-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.page-index .headline {
+  color: var(--com-text);
+  font-family: var(--com-font);
+  font-size: clamp(30px, 5vw, 44px);
+  letter-spacing: -.04em;
+}
+
+.page-index .rule {
+  margin: 16px auto 28px;
+  background: var(--com-primary);
+}
+
+.page-index .grid {
+  gap: 12px;
+}
+
+.page-index .tile {
+  min-height: 148px;
+  padding: 22px 14px 18px;
+  border-color: var(--com-border);
+  border-radius: 14px;
+}
+
+.page-index .tile-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+}
+
+.page-index .tile-name {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.page-index .tile-tag {
+  border-color: var(--com-border);
+  background: var(--com-surface-subtle);
+  font-family: var(--com-font);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+/* Shared loading presentation */
+.com-loading-view {
+  background: var(--com-bg);
+}
+
+.com-spinner {
+  border-color: #d7e0ea;
+  border-top-color: var(--com-primary);
+}
+
+.com-loading-message {
+  color: var(--com-text-muted);
+  font-family: var(--com-font);
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .page-agenda .wrap,
+  .page-reclamos .main,
+  .page-zona-limpia .vbody,
+  .page-transportistas .container,
+  .page-tareas .main {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .page-transportistas .charts-row-3 {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-agenda .topbar .inner,
+  .page-reclamos .com-topbar-inner,
+  .page-zona-limpia .topbar,
+  .page-transportistas > header,
+  .page-tareas .topin {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .page-agenda .wrap,
+  .page-reclamos .main,
+  .page-zona-limpia .vbody,
+  .page-transportistas .container,
+  .page-tareas .main {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .page-agenda section {
+    margin-top: 24px;
+  }
+
+  .page-agenda h2.sec {
+    font-size: 20px;
+  }
+
+  .page-reclamos .section-card,
+  .page-transportistas .chart-card,
+  .page-transportistas .table-card {
+    padding: 15px;
+  }
+
+  .page-agenda .filters .field,
+  .page-tareas .filters .field {
+    min-width: min(100%, 180px);
+    flex: 1 1 180px;
+  }
+
+  .page-transportistas .header-actions {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-index {
+    padding: 26px 16px;
+  }
+
+  .page-index .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .page-index .tile {
+    min-height: 132px;
+    padding: 18px 10px 14px;
+  }
+
+  .page-index .tile-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .page-agenda .wrap,
+  .page-reclamos .main,
+  .page-zona-limpia .vbody,
+  .page-transportistas .container,
+  .page-tareas .main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .page-agenda .filters,
+  .page-tareas .filters {
+    padding: 14px;
+  }
+
+  .page-agenda .filters .field,
+  .page-tareas .filters .field,
+  .page-agenda .filters input,
+  .page-agenda .filters select,
+  .page-tareas .filters input,
+  .page-tareas .filters select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .page-agenda .kpis {
+    gap: 10px;
+  }
+
+  .page-agenda .kpi,
+  .page-reclamos .kpi-card,
+  .page-transportistas .kpi-card {
+    padding: 13px;
+  }
+
+  .page-agenda .kpi .k-val,
+  .page-reclamos .kpi-val,
+  .page-zona-limpia .kval,
+  .page-transportistas .kpi-value {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 340px) {
+  .page-index .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Header unificado: Transportistas es la referencia visual del producto. */
+.page-agenda .topbar,
+.page-reclamos .com-topbar,
+.page-zona-limpia .cscreen-topbar,
+.page-zona-limpia #dscreen > .topbar,
+.page-transportistas > header,
+.page-tareas .top {
+  background: linear-gradient(135deg, #0f172a 0%, #16213e 55%, #1b3f74 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+}
+
+.page-agenda .topbar .inner,
+.page-reclamos .com-topbar-inner,
+.page-zona-limpia .cscreen-topbar,
+.page-zona-limpia #dscreen > .topbar,
+.page-transportistas > header,
+.page-tareas .topin {
+  min-height: 64px;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.page-agenda .titlerow,
+.page-zona-limpia .brand,
+.page-tareas .brand {
+  gap: 10px;
+}
+
+.page-reclamos .header-badge,
+.page-transportistas > header .logo,
+.page-zona-limpia .brand-ico,
+.page-tareas .mark,
+.page-agenda .titlerow .ico {
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #fff;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .3));
+}
+
+.page-agenda .titlerow h1,
+.page-reclamos .header-title,
+.page-zona-limpia .brand-name,
+.page-transportistas > header h1,
+.page-tareas .brand h1 {
+  margin: 0;
+  color: #fff;
+  font-family: var(--com-font);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+}
+
+.page-agenda .titlerow p,
+.page-reclamos .header-sub,
+.page-zona-limpia .brand-file,
+.page-transportistas > header p,
+.page-tareas .brand p {
+  margin: 1px 0 0;
+  color: #c7d5ea;
+  font-family: var(--com-font);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0;
+  opacity: .7;
+}
+
+.page-agenda .com-back-link,
+.page-reclamos .com-back-link,
+.page-zona-limpia .com-back-link,
+.page-transportistas .com-back-link,
+.page-tareas .com-back-link {
+  min-height: 36px;
+  padding: 0 8px;
+  color: #c7d5ea;
+  font-family: var(--com-font);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+@media (max-width: 700px) {
+  .page-agenda .topbar .inner,
+  .page-reclamos .com-topbar-inner,
+  .page-zona-limpia .cscreen-topbar,
+  .page-zona-limpia #dscreen > .topbar,
+  .page-transportistas > header,
+  .page-tareas .topin {
+    padding: 10px 14px;
+  }
+}
+
+/* Estado inicial unificado: Reclamos es la referencia de posición y fondo. */
+.page-reclamos .com-loading-view,
+.page-transportistas #loadingScreen,
+.page-zona-limpia #cscreen .com-loading-view,
+.page-tareas #initialLoading,
+.page-agenda .loader {
+  position: fixed;
+  inset: 64px 0 0;
+  z-index: 10;
+  width: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 40px max(24px, calc((100vw - 1200px) / 2 + 24px));
+  align-items: flex-start;
+  justify-content: flex-start;
+  background: #f7f6f3;
+}
+
+.page-reclamos .com-loading-content,
+.page-transportistas #loadingScreen .com-loading-content,
+.page-zona-limpia #cscreen .com-loading-content,
+.page-tareas #initialLoading .com-loading-content,
+.page-agenda .loader .com-loading-content {
+  max-width: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  text-align: left;
+}
+
+.page-reclamos .com-loading-message,
+.page-transportistas #loadingScreen .com-loading-message,
+.page-zona-limpia #cscreen .com-loading-message,
+.page-tareas #initialLoading .com-loading-message,
+.page-agenda .loader .com-loading-message {
+  margin: 0;
+  color: #182230;
+  font-family: var(--com-font);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@media (max-width: 700px) {
+  .page-reclamos .com-loading-view,
+  .page-transportistas #loadingScreen,
+  .page-zona-limpia #cscreen .com-loading-view,
+  .page-tareas #initialLoading,
+  .page-agenda .loader {
+    padding: 28px 20px;
+  }
+}
+
+/* Bolsones: integración con la estructura visual compartida del producto. */
+body.page-bolsones {
+  background: var(--com-bg);
+  color: var(--com-text);
+  font-family: var(--com-font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.page-bolsones button,
+.page-bolsones input,
+.page-bolsones select {
+  font-family: inherit;
+}
+
+.page-bolsones .topbar {
+  padding: 0;
+  background: linear-gradient(135deg, #0f172a 0%, #16213e 55%, #1b3f74 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+}
+
+.page-bolsones .topbar .inner {
+  min-height: 64px;
+  max-width: none;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-bolsones .com-back-link {
+  min-height: 36px;
+  padding: 0 8px;
+  color: #c7d5ea;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.page-bolsones .titlerow {
+  margin: 0;
+  gap: 10px;
+}
+
+.page-bolsones .titlerow .ico {
+  color: #fff;
+  font-family: "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-size: 22px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .18));
+}
+
+.page-bolsones .titlerow h1 {
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+}
+
+.page-bolsones .titlerow p {
+  margin: 1px 0 0;
+  color: #c7d5ea;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.3;
+  opacity: .7;
+}
+
+.page-bolsones .wrap {
+  max-width: 1320px;
+  padding: 0 24px 48px;
+}
+
+.page-bolsones section {
+  margin-top: 30px;
+}
+
+.page-bolsones h2.sec {
+  margin: 0 0 14px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--com-border);
+  color: var(--com-text);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+
+.page-bolsones h3.sub {
+  color: var(--com-text);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.page-bolsones .card,
+.page-bolsones .kpi {
+  border: 1px solid var(--com-border);
+  border-radius: var(--com-radius-card);
+  box-shadow: var(--com-shadow);
+}
+
+.page-bolsones .filters {
+  gap: 12px;
+  padding: 14px 16px;
+}
+
+.page-bolsones .field label,
+.page-bolsones .k-label {
+  color: var(--com-text-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.page-bolsones input[type="date"],
+.page-bolsones select {
+  min-height: 38px;
+  padding: 7px 10px;
+  border: 1px solid var(--com-border);
+  border-radius: var(--com-radius-control);
+  font-size: 13px;
+}
+
+.page-bolsones .kpis {
+  gap: 10px;
+}
+
+.page-bolsones .kpi {
+  min-width: 160px;
+  padding: 12px 15px;
+}
+
+.page-bolsones .k-val {
+  font-size: 28px;
+}
+
+.page-bolsones .loader {
+  position: fixed;
+  inset: 64px 0 0;
+  z-index: 10;
+  min-height: 0;
+  margin: 0;
+  padding: 40px max(24px, calc((100vw - 1200px) / 2 + 24px));
+  align-items: flex-start;
+  justify-content: flex-start;
+  background: #f7f6f3;
+}
+
+.page-bolsones .loader .com-loading-content {
+  max-width: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  text-align: left;
+}
+
+.page-bolsones .loader .com-loading-message {
+  margin: 0;
+  color: #182230;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@media (max-width: 700px) {
+  .page-bolsones .topbar .inner {
+    padding: 10px 14px;
+  }
+
+  .page-bolsones .wrap {
+    padding: 0 12px 36px;
+  }
+
+  .page-bolsones section {
+    margin-top: 22px;
+  }
+
+  .page-bolsones h2.sec {
+    font-size: 20px;
+  }
+
+  .page-bolsones .loader {
+    padding: 28px 20px;
+  }
+}
