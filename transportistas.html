@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generador de Dashboard — Asistencia Transportistas</title>
+<title>Dashboard COM</title>
+<link rel="icon" type="image/png" href="assets/logo-ciemsa.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -468,10 +469,7 @@
     .pagination .page-btn { min-height: 38px; min-width: 38px; }
   }
 </style>
-<link rel="stylesheet" href="assets/dashboard-common.css">
-<link rel="stylesheet" href="assets/reporting-common.css?v=20260918">
-<script src="assets/reporting-common.js?v=20260918"></script>
-<script src="assets/reporting-services.js?v=20260918"></script>
+<link rel="stylesheet" href="assets/dashboard-common.css?v=20260921">
 </head>
 <body class="page-transportistas">
 
@@ -486,10 +484,6 @@
     <p id="headerSub">Centro Operativo de Montevideo — COM</p>
   </div>
   <div class="header-actions">
-    <button class="com-report-launch" id="btn-reportes-transportistas" type="button" onclick="COMServiceReports.open('transportistas')" disabled>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
-      Generar informe
-    </button>
     <button type="button" class="btn-header-action" onclick="volverAlGenerador()">
       📅 Cambiar período
     </button>
@@ -1607,7 +1601,6 @@ function formatDateLabel(fecha) {
 
 // ── Render ─────────────────────────────────────────────────────────────────
 function renderDashboard(d, filename) {
-  COMServiceReports.enable('transportistas', d);
   // Destroy old charts
   Object.values(chartInstances).forEach(c => c.destroy());
   chartInstances = {};
@@ -2244,7 +2237,6 @@ function renderDashboard(d, filename) {
 
 // ── Navegación ─────────────────────────────────────────────────────────────
 function volverAlGenerador() {
-  COMServiceReports.disable('transportistas');
   document.getElementById('dashboard').style.display = 'none';
   document.getElementById('uploadScreen').style.display = 'flex';
   document.getElementById('loadingScreen').style.display = 'none';
