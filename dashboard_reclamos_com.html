@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard COM</title>
-<link rel="icon" type="image/png" href="assets/logo-ciemsa.png">
+<title>Dashboard Reclamos — COM</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -278,8 +277,9 @@ canvas{max-width:100%;display:block}
 .ttab.on.amber{background:#C47A1E;border-color:#C47A1E}
 .ttab.on.gray{background:var(--gray);border-color:var(--gray)}
 </style>
+<link rel="stylesheet" href="assets/dashboard-common.css">
+<link rel="stylesheet" href="assets/reporting-common.css?v=20260918">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
-<link rel="stylesheet" href="assets/dashboard-common.css?v=20260921">
 </head>
 <body class="page-reclamos">
 <div class="com-topbar">
@@ -293,6 +293,10 @@ canvas{max-width:100%;display:block}
       <div class="header-title">Dashboard de Reclamos</div>
       <div class="header-sub">Centro Operativo de Montevideo — COM</div>
     </div>
+    <button class="com-report-launch" id="btn-reportes-reclamos" type="button" onclick="abrirInformesReclamos()" disabled>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+      Generar informe
+    </button>
   </div>
 </div>
 <div class="page">
@@ -760,6 +764,7 @@ canvas{max-width:100%;display:block}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="assets/reporting-common.js?v=20260918"></script>
 <script>
 const EMPRESAS=['DG','TESSA','EQUIPO','SALIR ADELANTE','ROSADO','TAYM','VOS CON VOZ'];
 const EMPRESAS_EXACTAS=['Pendiente-097','Región Zona Limpia-090','EMPRESA ISMAEL & LOURDES-036','VOLUMINOSO 1 - SA-1033','VOLUMINOSO 2 - SA-1034','VOLUMINOSO 3 - SA-1035','VOLUMINOSO 4 - SA-1036','VOLUMINOSO 5 - SA-1037','VOLUMINOSO 6 - SA-1038'];
@@ -969,6 +974,7 @@ async function fetchFromSheets(){
     document.getElementById('mode-unicos').classList.toggle('active',currentMode==='unicos');
     document.getElementById('step-filter').style.display='block';
     document.getElementById('step-upload').style.display='none';
+    document.getElementById('btn-reportes-reclamos').disabled=false;
     aplicar(); // Renderiza de una con el período completo — evita el segundo clic en "Generar dashboard"
   } catch(err){
     console.error('No se pudo cargar Reclamos:',err);
@@ -2450,6 +2456,293 @@ function renderMapa(){
     `<div class="map-stat" style="color:#A32D2D">Sin resolver: <strong>${cnt.sin.toLocaleString('es-UY')}</strong></div>`;
 
   if(total>0) leafletMap.invalidateSize();
+}
+
+// =====================
+// INFORMES DE RECLAMOS
+// =====================
+let reportesReclamos=null;
+const REPORT_TIPOS={
+  volumen:{label:'Ingresados y resueltos',description:'Totales del período y detalle por municipio.'},
+  sla24:{label:'% resueltos en 24 horas',description:'Resultado global y por municipio.'},
+  incidentes:{label:'Distribución de incidentes',description:'Participación por tipo de incidente.'},
+  resolucion:{label:'Promedio de resolución',description:'Promedio global y por municipio.'},
+  motocarros:{label:'Promedio de motocarros y reclamos',description:'Con mínimo de 10 reclamos por día.'},
+  franjas:{label:'Promedio por franja horaria',description:'Reclamos por motocarro en cada hora.'}
+};
+const REPORT_COLORS=['#185FA5','#1D9E75','#EF9F27','#D85A30','#7B5EA7','#2AAFCF','#5E8C31','#888780','#D44C8C','#56718f','#9f7f50'];
+const REPORT_HOUR_BANDS=[
+  {label:'00:00–02:59',from:0,to:2},{label:'03:00–05:59',from:3,to:5},
+  {label:'06:00–08:59',from:6,to:8},{label:'09:00–11:59',from:9,to:11},
+  {label:'12:00–14:59',from:12,to:14},{label:'15:00–17:59',from:15,to:17},
+  {label:'18:00–20:59',from:18,to:20},{label:'21:00–23:59',from:21,to:23}
+];
+
+function reportNum(n,dec=0){
+  return Number(n||0).toLocaleString('es-UY',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+}
+function reportPct(n,d,dec=1){
+  return d>0?reportNum(n/d*100,dec)+'%':'—';
+}
+function reportStateClosed(r){
+  return ['cerrado','resuelto','closed'].includes(String(getCol(r,'estado')||'').trim().toLowerCase());
+}
+function reportRawMuni(r){
+  return String(getCol(r,'municipio')||'-').trim()||'-';
+}
+function reportUniverse(opts){
+  let rows=allData.filter(r=>DEFAULT_CATS.has(String(getCol(r,'incidente')||'').trim()));
+  if(opts.municipio!=='all')rows=rows.filter(r=>reportRawMuni(r)===opts.municipio);
+  return rows;
+}
+function reportInPeriod(r,col,from,to){
+  const date=parseDate(getCol(r,col));
+  return Boolean(date&&date>=from&&date<=to);
+}
+function reportDuration(r){
+  const start=parseDate(getCol(r,'fecha_de_reclamo'));
+  const end=parseDate(getCol(r,'fecha_resuelto'));
+  return start&&end?diffH(start,end):null;
+}
+function reportScopeLabel(opts){
+  return opts.municipio==='all'?'Todo Montevideo':(MUNI_MAP[opts.municipio]||('Municipio '+opts.municipio));
+}
+function reportPeriodLabel(opts){
+  return opts.from===opts.to?fmt(opts.from):fmt(opts.from)+' — '+fmt(opts.to);
+}
+function reportMunicipalStats(base,from,to,hoursMax){
+  const codes=[...new Set(base.map(reportRawMuni))].sort((a,b)=>{
+    if(a==='-')return 1;if(b==='-')return-1;return a.localeCompare(b,'es',{numeric:true});
+  });
+  return codes.map(code=>{
+    const rows=base.filter(r=>reportRawMuni(r)===code);
+    const entered=rows.filter(r=>reportInPeriod(r,'fecha_de_reclamo',from,to));
+    const resolved=rows.filter(r=>reportInPeriod(r,'fecha_resuelto',from,to));
+    const within24=entered.filter(r=>distBucket(r)===0);
+    const durations=entered.map(reportDuration).filter(h=>h!==null&&h>=0&&h<=hoursMax);
+    return{
+      code,label:MUNI_MAP[code]||('Municipio '+code),entered:entered.length,resolved:resolved.length,
+      within24:within24.length,avgHours:durations.length?durations.reduce((a,b)=>a+b,0)/durations.length:null
+    };
+  }).filter(row=>row.entered||row.resolved);
+}
+function reportProductivity(base,from,to){
+  const source=base.filter(r=>{
+    if(esRepetido(r)||clasifTransp(getCol(r,'transportista'))!=='motocarro')return false;
+    return reportInPeriod(r,'fecha_resuelto',from,to);
+  });
+  const calculate=rows=>{
+    const groups={};
+    rows.forEach(r=>{
+      const date=parseDate(getCol(r,'fecha_resuelto'));
+      const transporter=String(getCol(r,'transportista')||'').trim();
+      if(!date||!transporter)return;
+      const key=toKey(date)+'|'+transporter;
+      groups[key]=(groups[key]||0)+1;
+    });
+    const qualified=Object.entries(groups).filter(([,count])=>count>=10);
+    const days={};
+    qualified.forEach(([key,count])=>{
+      const day=key.split('|')[0];
+      if(!days[day])days[day]={motos:0,reclamos:0};
+      days[day].motos++;
+      days[day].reclamos+=count;
+    });
+    const dayRows=Object.values(days);
+    const motoDays=qualified.length;
+    const reclamos=qualified.reduce((sum,[,count])=>sum+count,0);
+    return{
+      activeDays:dayRows.length,motoDays,reclamos,
+      avgMotos:dayRows.length?motoDays/dayRows.length:0,
+      avgClaims:motoDays?reclamos/motoDays:0,
+      excluded:Object.values(groups).filter(count=>count<10).length
+    };
+  };
+  const global=calculate(source);
+  const municipalities=[...new Set(source.map(reportRawMuni))].sort().map(code=>{
+    const stats=calculate(source.filter(r=>reportRawMuni(r)===code));
+    return Object.assign({code,label:MUNI_MAP[code]||('Municipio '+code)},stats);
+  }).filter(row=>row.activeDays);
+  return{global,municipalities};
+}
+function reportHourly(base,from,to){
+  const source=base.filter(r=>{
+    if(esRepetido(r)||clasifTransp(getCol(r,'transportista'))!=='motocarro')return false;
+    return reportInPeriod(r,'fecha_resuelto',from,to);
+  });
+  const groups={};
+  source.forEach(r=>{
+    const raw=getCol(r,'fecha_resuelto');
+    const date=parseDate(raw);
+    const transporter=String(getCol(r,'transportista')||'').trim();
+    if(!date||!transporter)return;
+    let hour=date.getHours();
+    if(typeof raw==='string'){
+      const match=raw.trim().match(/^\d{4}-\d{2}-\d{2}[T\s](\d{2}):/);
+      if(match)hour=parseInt(match[1]);
+    }
+    if(isNaN(hour)||hour<0||hour>23)return;
+    const key=toKey(date)+'|'+hour;
+    if(!groups[key])groups[key]={motos:{}};
+    groups[key].motos[transporter]=(groups[key].motos[transporter]||0)+1;
+  });
+  const threshold=Math.max(1,parseInt(document.getElementById('rec-umbral-motos-h')?.value)||2);
+  return Array.from({length:24},(_,hour)=>{
+    const dayRows=Object.entries(groups).filter(([key])=>Number(key.split('|')[1])===hour).map(([,group])=>{
+      const counts=Object.values(group.motos);
+      return{motos:counts.length,reclamos:counts.reduce((a,b)=>a+b,0),ratio:counts.reduce((a,b)=>a+b,0)/counts.length};
+    });
+    const avgMotos=dayRows.length?dayRows.reduce((a,b)=>a+b.motos,0)/dayRows.length:0;
+    const avgClaims=dayRows.length?dayRows.reduce((a,b)=>a+b.ratio,0)/dayRows.length:0;
+    return{
+      hour,label:String(hour).padStart(2,'0')+':00–'+String(hour).padStart(2,'0')+':59',
+      activeDays:dayRows.length,avgMotos,avgClaims,
+      total:dayRows.reduce((a,b)=>a+b.reclamos,0),
+      eligible:dayRows.length>0&&avgMotos>=threshold
+    };
+  });
+}
+function reportIncidentRows(entered){
+  const counts={};
+  entered.forEach(r=>{
+    const name=String(getCol(r,'incidente')||'Sin clasificar').trim()||'Sin clasificar';
+    counts[name]=(counts[name]||0)+1;
+  });
+  return Object.entries(counts).map(([label,count])=>({label,count})).sort((a,b)=>b.count-a.count);
+}
+function reportBuildModel(opts){
+  if(!allData.length)throw new Error('La información todavía no terminó de cargar.');
+  const selected=new Set(opts.types||[]);
+  if(!selected.size)throw new Error('Seleccioná al menos un contenido para el informe.');
+  const from=dayStart(new Date(opts.from+'T00:00:00'));
+  const to=dayEnd(new Date(opts.to+'T00:00:00'));
+  const base=reportUniverse(opts);
+  const entered=base.filter(r=>reportInPeriod(r,'fecha_de_reclamo',from,to));
+  const resolved=base.filter(r=>reportInPeriod(r,'fecha_resuelto',from,to));
+  if(!entered.length&&!resolved.length)throw new Error('No hay reclamos para el período y alcance seleccionados.');
+
+  const resolutionDays=Math.max(1,parseInt(document.getElementById('umbral-dias-res')?.value)||30);
+  const hoursMax=resolutionDays*24;
+  const durations=entered.map(reportDuration).filter(h=>h!==null&&h>=0&&h<=hoursMax);
+  const within24=entered.filter(r=>distBucket(r)===0);
+  const avgHours=durations.length?durations.reduce((a,b)=>a+b,0)/durations.length:null;
+  const generated=new Intl.DateTimeFormat('es-UY',{dateStyle:'short',timeStyle:'short'}).format(new Date());
+  const scope=reportScopeLabel(opts);
+  const sections=[];
+
+  if(selected.has('volumen'))sections.push({
+    type:'kpis',title:'Ingresados y resueltos',note:'Actividad del período',
+    items:[
+      {label:'Ingresados',value:reportNum(entered.length),detail:'por fecha de reclamo'},
+      {label:'Resueltos',value:reportNum(resolved.length),detail:'por fecha de resolución',tone:'teal'}
+    ]
+  });
+
+  if(selected.has('sla24'))sections.push({
+    type:'kpis',title:'Resolución dentro de 24 horas',note:'',
+    items:[
+      {label:'Resueltos en ≤ 24 h',value:reportPct(within24.length,entered.length,0),detail:'sobre total ingresados',tone:'teal'}
+    ]
+  });
+
+  if(selected.has('incidentes')){
+    const incidentRows=reportIncidentRows(entered);
+    sections.push({
+      type:'bars',title:'Distribución de incidentes',note:'Cantidad y participación',
+      items:incidentRows.map((row,index)=>({
+        label:row.label,amount:row.count,value:reportNum(row.count)+' · '+reportPct(row.count,entered.length,0),
+        color:REPORT_COLORS[index%REPORT_COLORS.length]
+      }))
+    });
+  }
+
+  if(selected.has('resolucion'))sections.push({
+    type:'kpis',title:'Promedio de resolución',note:'',
+    items:[
+      {label:'Promedio',value:avgHours===null?'—':reportNum(avgHours,1)+' h',detail:'excl. > '+resolutionDays+' días'}
+    ]
+  });
+
+  if(opts.municipio==='all'&&([...selected].some(type=>['volumen','sla24','resolucion'].includes(type)))){
+    const municipal=reportMunicipalStats(base,from,to,hoursMax);
+    const columns=['Municipio'],aligns=['left'];
+    if(selected.has('volumen')){columns.push('Ingresados','Resueltos');aligns.push('right','right');}
+    if(selected.has('sla24')){columns.push('% ≤24 h');aligns.push('right');}
+    if(selected.has('resolucion')){columns.push('Prom. resolución');aligns.push('right');}
+    sections.push({
+      type:'table',title:'Resultados por municipio',note:'',columns,aligns,
+      rows:municipal.map(row=>{
+        const values=[row.label];
+        if(selected.has('volumen'))values.push(reportNum(row.entered),reportNum(row.resolved));
+        if(selected.has('sla24'))values.push({value:reportPct(row.within24,row.entered,0),tone:'positive'});
+        if(selected.has('resolucion'))values.push(row.avgHours===null?'—':reportNum(row.avgHours,1)+' h');
+        return values;
+      })
+    });
+  }
+
+  if(selected.has('motocarros')){
+    const productivity=reportProductivity(base,from,to);
+    sections.push({
+      type:'kpis',title:'Promedio de motocarros y reclamos',note:'Mínimo de 10 reclamos por motocarro y día',
+      items:[
+        {label:'Motocarros promedio por día',value:productivity.global.activeDays?reportNum(productivity.global.avgMotos,1):'—',detail:''},
+        {label:'Reclamos por motocarro',value:productivity.global.motoDays?reportNum(productivity.global.avgClaims,1):'—',detail:'promedio diario',tone:'teal'}
+      ]
+    });
+    if(opts.municipio==='all')sections.push({
+      type:'table',title:'Motocarros por municipio',note:'',
+      columns:['Municipio','Motocarros prom./día','Reclamos por motocarro'],
+      aligns:['left','right','right'],
+      rows:productivity.municipalities.map(row=>[
+        row.label,reportNum(row.avgMotos,1),{value:reportNum(row.avgClaims,1),tone:'positive'}
+      ])
+    });
+  }
+
+  if(selected.has('franjas')){
+    const hourly=reportHourly(base,from,to);
+    const eligible=hourly.filter(row=>row.eligible);
+    sections.push({
+      type:'bars',title:'Promedio por franja horaria',note:'Reclamos por motocarro',
+      items:eligible.map((row,index)=>({
+        label:row.label,amount:row.avgClaims,value:reportNum(row.avgClaims,2)+' rec./moto',
+        color:REPORT_COLORS[index%REPORT_COLORS.length]
+      }))
+    });
+  }
+
+  return{
+    title:'Informe de Reclamos',subtitle:'Resultados operativos del período seleccionado',service:'Reclamos',mark:'COM',
+    meta:[
+      {label:'Período',value:reportPeriodLabel(opts)},{label:'Cobertura',value:scope}
+    ],
+    sections,footer:'Generado '+generated+' · Período '+reportPeriodLabel(opts)
+  };
+}
+function initInformesReclamos(){
+  if(reportesReclamos)return reportesReclamos;
+  const muniOptions=[{value:'all',label:'Todo Montevideo'}]
+    .concat(Object.entries(MUNI_MAP).map(([value,label])=>({value,label})));
+  reportesReclamos=COMReports.create({
+    id:'reclamos-report',service:'Informes de Reclamos',multiple:true,
+    defaultTypes:[],
+    reportTypes:Object.entries(REPORT_TIPOS).map(([value,item])=>({value,label:item.label,description:item.description})),
+    fields:[
+      {id:'municipio',label:'Cobertura',value:'all',options:muniOptions,help:'Todo Montevideo incluye el detalle por municipio.'}
+    ],
+    defaults:()=>({
+      from:document.getElementById('fecha1').value,
+      to:document.getElementById('fecha2').value||document.getElementById('fecha1').value,
+      municipio:'all'
+    }),
+    generate:reportBuildModel
+  });
+  return reportesReclamos;
+}
+function abrirInformesReclamos(){
+  if(!allData.length)return;
+  initInformesReclamos().open();
 }
 
 // Auto-carga al abrir la página — evita el clic extra de "Generar dashboard"
