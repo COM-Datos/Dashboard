@@ -279,6 +279,9 @@ svg{display:block;width:100%;height:auto}
 @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>
 <link rel="stylesheet" href="assets/dashboard-common.css">
+<link rel="stylesheet" href="assets/reporting-common.css?v=20260918">
+<script src="assets/reporting-common.js?v=20260918"></script>
+<script src="assets/reporting-services.js?v=20260918"></script>
 </head>
 <body class="page-agenda">
 
@@ -296,6 +299,10 @@ svg{display:block;width:100%;height:auto}
         <p>Centro Operativo de Montevideo — COM</p>
       </div>
     </div>
+    <button class="com-report-launch" id="btn-reportes-agenda" type="button" onclick="COMServiceReports.open('agenda')" disabled>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+      Generar informe
+    </button>
   </div>
 </header>
 
@@ -1511,6 +1518,7 @@ function arrancar(){
   const hayJornadas = renderSituacion();
   renderAviso(hayJornadas);
   render();
+  COMServiceReports.enable('agenda');
 }
 
 $("#f-muni").innerHTML = '<option value="todos">Todos</option>' +

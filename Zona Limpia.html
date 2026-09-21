@@ -207,6 +207,9 @@ tr.cr{cursor:pointer}
 }
 </style>
 <link rel="stylesheet" href="assets/dashboard-common.css">
+<link rel="stylesheet" href="assets/reporting-common.css?v=20260918">
+<script src="assets/reporting-common.js?v=20260918"></script>
+<script src="assets/reporting-services.js?v=20260918"></script>
 </head>
 <body class="page-zona-limpia">
 
@@ -258,6 +261,10 @@ tr.cr{cursor:pointer}
         <button class="ntab" id="nt-cov" role="tab" aria-selected="false" onclick="swTab('cov')">Análisis de cobertura</button>
         <button class="ntab" id="nt-map" role="tab" aria-selected="false" onclick="swTab('map')">Mapa</button>
       </div>
+      <button class="com-report-launch" id="btn-reportes-zona-limpia" type="button" onclick="COMServiceReports.open('zona-limpia')" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+        Generar informe
+      </button>
       <button class="btn-nw" onclick="initAll()">↻ Actualizar</button>
     </div>
   </div>
@@ -537,6 +544,7 @@ async function initAll(){
     document.getElementById('dscreen').style.display='flex';
     autoF();
     swTab(curTab);
+    COMServiceReports.enable('zona-limpia');
     fetchCSV(CSV_REC).then(objsREC=>{
       if(loadToken!==zlLoadToken)return;
       REC=buildREC(objsREC);hasRec=Object.keys(REC).length>0;
