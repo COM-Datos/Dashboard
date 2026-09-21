@@ -3,10 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard Agenda · Centro Operativo de Montevideo</title>
+<title>Dashboard COM</title>
+<link rel="icon" type="image/png" href="assets/logo-ciemsa.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
 <style>
 :root{
   --bg:#f4f5f7;
@@ -18,7 +20,7 @@
   --blue:#2563eb;
   --green:#16a34a;
   --red:#ef4444;
-  --orange:#f97316;
+  --orange:#e8a08d;
   --yellow:#eab308;
   --teal:#0d9488;
   --sky:#7dd3fc;
@@ -41,24 +43,23 @@ body{
 
 /* ---------- encabezado ---------- */
 .topbar{
-  /* Mismo degradé, tipografía y altura compacta que el resto de los dashboards del COM */
-  background:linear-gradient(135deg,#0f172a 0%,#16213e 55%,#1b3f74 100%);
-  color:#fff;
+  background:linear-gradient(100deg,#0b1a33 0%,#132c52 55%,#1b3f74 100%);
+  color:#fff;padding:20px 0 26px;
 }
-.topbar .inner{min-height:64px;padding:10px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar .inner{max-width:1180px;margin:0 auto;padding:0 24px}
 .back{
-  display:inline-flex;align-items:center;gap:6px;
-  color:#c7d5ea;text-decoration:none;font-size:12px;font-weight:500;
-  flex-shrink:0;
+  display:inline-flex;align-items:center;gap:8px;
+  color:#c7d5ea;text-decoration:none;font-size:14.5px;font-weight:500;
+  padding:4px 2px;border-radius:6px;
 }
 .back:hover{color:#fff}
-.back svg{width:12px;height:12px}
-.titlerow{display:flex;align-items:center;gap:10px;margin-top:0}
+.back svg{width:15px;height:15px}
+.titlerow{display:flex;align-items:center;gap:14px;margin-top:10px}
 .titlerow .ico{
-  font-size:20px;line-height:1;
+  font-size:30px;line-height:1;
   filter:drop-shadow(0 2px 4px rgba(0,0,0,.3));
 }
-.titlerow h1{margin:0;font-size:17px;font-weight:800;letter-spacing:-.02em}
+.titlerow h1{margin:0;font-size:31px;font-weight:800;letter-spacing:-.02em}
 
 /* ---------- secciones ---------- */
 section{margin-top:var(--gap-sec)}
@@ -148,7 +149,10 @@ body.cargando main > section{display:none}
   background:var(--line);border:1px solid var(--line);
   border-radius:9px;overflow:hidden;
 }
-.at-item{background:var(--surface);padding:11px 8px 14px;text-align:center}
+.at-item{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:104px;background:var(--surface);padding:11px 8px 12px;text-align:center;
+}
 .at-item b{display:block;font-size:16px;font-weight:800;color:var(--navy);line-height:1.1}
 .at-item .d{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-bottom:6px}
 .at-item .v{
@@ -157,6 +161,39 @@ body.cargando main > section{display:none}
 }
 @media (max-width:860px){ .at-grid{grid-template-columns:repeat(4,1fr)} }
 @media (max-width:470px){ .at-grid{grid-template-columns:repeat(2,1fr)} }
+
+/* ---------- mapa de calor ---------- */
+.heatmap-card{margin-top:16px;padding:15px 18px 18px}
+.heatmap-head{
+  display:block;margin-bottom:14px;
+}
+.heatmap-head .at-label{
+  margin:0 0 11px;font-size:12px;font-weight:800;letter-spacing:.07em;
+}
+.heatmap-controls{
+  display:inline-flex;flex-wrap:wrap;align-items:flex-end;gap:10px;
+  padding:5px 7px;background:#f8fafc;border:1px solid var(--line);border-radius:8px;
+}
+.heatmap-controls .field{gap:2px}
+.heatmap-controls .field label{font-size:9px}
+.heatmap-controls select{min-width:124px;padding:4px 7px;min-height:29px;font-size:12.5px}
+.intensity-field{min-width:150px}
+.intensity-row{display:flex;align-items:center;gap:6px;height:29px}
+.intensity-row span{font-size:10px;color:var(--muted);font-weight:700}
+#mapa-intensidad{width:110px;accent-color:var(--navy);cursor:pointer}
+#mapa-calor{
+  height:480px;border:1px solid var(--line);border-radius:9px;overflow:hidden;
+  background:#eef1f4;
+}
+.mapa-error{height:100%;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);padding:24px}
+.maplibregl-map{font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+@media (max-width:680px){
+  #mapa-calor{height:390px}
+  .heatmap-controls{width:100%}
+  .heatmap-controls .field{flex:1 1 145px}
+  .heatmap-controls select,.intensity-field{width:100%;min-width:0}
+  #mapa-intensidad{width:100%}
+}
 
 /* ---------- tabla situación actual ---------- */
 .tablewrap{overflow:auto;border-radius:var(--radius)}
@@ -214,9 +251,20 @@ input[type=date]:hover,select:hover{border-color:#9ca3af}
 .kpi.r{border-top-color:var(--red)}
 .kpi.o{border-top-color:var(--orange)}
 .kpi.t{border-top-color:var(--teal)}
+.kpi.p{border-top-color:#4c1d95}
+.kpi.n{border-top-color:var(--navy)}
+.kpi.avg{border-top-color:#9ca3af}
 .kpi .k-label{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .kpi .k-val{display:block;font-size:32px;font-weight:800;letter-spacing:-.03em;line-height:1.2;font-variant-numeric:tabular-nums}
 .kpi .k-foot{display:block;font-size:12.5px;color:var(--muted)}
+.k-extra{display:block;margin-top:2px;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;font-weight:700;line-height:1.2}
+.descargas-kpis{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.descargas-kpis .kpi{min-width:0;padding:12px 14px 13px}
+.descargas-kpis .k-val{font-size:25px}
+.kpi-breakdown{display:contents}
+.kpi.lugar{border-top-color:var(--serie-color)}
+.kpi.lugar .k-label{display:flex;align-items:center;gap:7px;white-space:nowrap;letter-spacing:.02em;text-transform:none}
+.kpi.lugar .k-label::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--serie-color);flex:none}
 
 /* ---------- gráficas ---------- */
 .chartbox{padding:16px 18px 8px;position:relative}
@@ -269,32 +317,36 @@ svg{display:block;width:100%;height:auto}
 .bar-d{transition:opacity .12s}
 .slot:hover .bar-d{opacity:.72}
 
+@media (max-width:860px){
+  .descargas-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
 @media (max-width:680px){
-  .wrap{padding:0 16px 48px}
-  .topbar .inner{padding:10px 16px}
+  .wrap,.topbar .inner{padding-left:16px;padding-right:16px}
+  .titlerow h1{font-size:24px}
+  h2.sec{font-size:24px}
+  .datasrc{align-items:flex-start;flex-direction:column}
   .kpi{flex:1 1 45%;min-width:0;padding:12px 14px}
   .kpi .k-val{font-size:26px}
-  }
+  .descargas-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .descargas-kpis .k-val{font-size:23px}
+}
 @media print{ body{background:#fff} }
 @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>
-<link rel="stylesheet" href="assets/dashboard-common.css">
+<link rel="stylesheet" href="assets/dashboard-common.css?v=20260921">
 </head>
 <body class="page-agenda">
 
 <header class="topbar">
   <div class="inner">
     <!-- ajustar el href según dónde quede el índice del sitio -->
-    <a class="back com-back-link" href="index.html">
+    <a class="back" href="index.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Volver al menú principal
     </a>
     <div class="titlerow">
       <span class="ico" aria-hidden="true">📅</span>
-      <div>
-        <h1>Dashboard de Agenda</h1>
-        <p>Centro Operativo de Montevideo — COM</p>
-      </div>
+      <h1>Dashboard Agenda</h1>
     </div>
   </div>
 </header>
@@ -302,11 +354,8 @@ svg{display:block;width:100%;height:auto}
 <main class="wrap">
 
   <!-- mientras se cargan los datos se muestra sólo esto -->
-  <div class="loader" id="loader" role="status" aria-label="Cargando información">
-    <div class="com-loading-content">
-      <span class="com-spinner" aria-hidden="true"></span>
-      <span class="com-loading-message">Cargando información…</span>
-    </div>
+  <div class="loader" id="loader" role="status" aria-label="Cargando datos">
+    <span class="spin"></span>
   </div>
 
   <!-- avisos: oculto salvo que falle la carga o los cupos estén vencidos -->
@@ -314,11 +363,30 @@ svg{display:block;width:100%;height:auto}
 
   <!-- 1 · DATOS DEL AÑO -->
   <section>
-    <h2 class="sec"><span class="n">1</span><span id="at-titulo">Resumen del período disponible</span></h2>
-    <p class="com-available-period" id="at-periodo">Período disponible: —</p>
+    <h2 class="sec"><span class="n">1</span><span id="at-titulo">Datos 2026</span></h2>
     <div class="card atencion">
       <p class="at-label">Promedio de días de atención por municipio</p>
       <div class="at-grid" id="at-grid"></div>
+    </div>
+    <div class="card heatmap-card">
+      <div class="heatmap-head">
+        <p class="at-label">MAPA DE CALOR</p>
+        <div class="heatmap-controls">
+          <div class="field">
+            <label for="mapa-muni">Municipio</label>
+            <select id="mapa-muni" aria-label="Municipio del mapa de calor"></select>
+          </div>
+          <div class="field intensity-field">
+            <label for="mapa-intensidad">Intensidad</label>
+            <div class="intensity-row">
+              <span>Baja</span>
+              <input type="range" id="mapa-intensidad" min="0.2" max="4" step="0.1" value="1" aria-label="Intensidad del mapa de calor">
+              <span>Alta</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="mapa-calor" role="img" aria-label="Mapa de calor de agendas resueltas"></div>
     </div>
   </section>
 
@@ -346,7 +414,7 @@ svg{display:block;width:100%;height:auto}
 
   <!-- 3 · PERÍODO DE ANÁLISIS -->
   <section>
-    <h2 class="sec"><span class="n">3</span>Período de análisis</h2>
+    <h2 class="sec"><span class="n">3</span>Seleccionar rango de fechas</h2>
     <div class="card filters" role="group" aria-label="Período de análisis">
       <div class="field">
         <label for="f-desde">Desde</label>
@@ -360,31 +428,16 @@ svg{display:block;width:100%;height:auto}
         <label for="f-muni">Municipio</label>
         <select id="f-muni"></select>
       </div>
-      <button type="button" class="com-retry-button" id="agenda-reset">Restablecer</button>
     </div>
-    <p class="com-range-error" id="range-error" role="alert">La fecha Desde no puede ser posterior a Hasta.</p>
 
     <div class="nested">
 
-    <!-- 3.1 SOLICITUDES INGRESADAS -->
+    <!-- 3.1 SERVICIOS INGRESADOS -->
     <section>
-      <h3 class="sub"><span class="n">3.1</span>Solicitudes ingresadas</h3>
-    <div class="kpis">
-      <div class="kpi p"><span class="k-label">Total</span><span class="k-val" id="ki-total">–</span></div>
-      <div class="kpi avg"><span class="k-label">Promedio día</span><span class="k-val" id="ki-prom">–</span></div>
-    </div>
-    <div class="card chartbox">
-      <div id="ci"></div>
-      <div class="tip" id="tipi" role="tooltip"></div>
-    </div>
-  </section>
-
-    <!-- 3.2 SERVICIOS REALIZADOS -->
-    <section>
-      <h3 class="sub"><span class="n">3.2</span>Servicios realizados</h3>
+      <h3 class="sub"><span class="n">3.1</span>Servicios ingresados</h3>
     <div class="kpis">
       <div class="kpi"><span class="k-label">Total</span><span class="k-val" id="k1-total">–</span></div>
-      <div class="kpi t"><span class="k-label">Promedio día</span><span class="k-val" id="k1-prom">–</span></div>
+      <div class="kpi avg"><span class="k-label">Promedio día</span><span class="k-val" id="k1-prom">–</span></div>
     </div>
     <div class="card chartbox">
       <div id="c1"></div>
@@ -392,12 +445,12 @@ svg{display:block;width:100%;height:auto}
     </div>
   </section>
 
-    <!-- 3.3 CAMIONES UTILIZADOS -->
+    <!-- 3.2 SERVICIOS REALIZADOS -->
     <section>
-      <h3 class="sub"><span class="n">3.3</span>Camiones utilizados</h3>
+      <h3 class="sub"><span class="n">3.2</span>Servicios realizados</h3>
     <div class="kpis">
-      <div class="kpi"><span class="k-label">Total turnos</span><span class="k-val" id="k2-total">–</span></div>
-      <div class="kpi t"><span class="k-label">Promedio día</span><span class="k-val" id="k2-prom">–</span></div>
+      <div class="kpi o"><span class="k-label">Total</span><span class="k-val" id="k2-total">–</span></div>
+      <div class="kpi avg"><span class="k-label">Promedio día</span><span class="k-val" id="k2-prom">–</span></div>
     </div>
     <div class="card chartbox">
       <div id="c2"></div>
@@ -405,18 +458,32 @@ svg{display:block;width:100%;height:auto}
     </div>
   </section>
 
-    <!-- 3.4 DESCARGAS -->
+    <!-- 3.3 CAMIONES UTILIZADOS -->
     <section>
-      <h3 class="sub"><span class="n">3.4</span>Descargas</h3>
+      <h3 class="sub"><span class="n">3.3</span>Camiones utilizados</h3>
     <div class="kpis">
-      <div class="kpi"><span class="k-label">Total</span><span class="k-val" id="k3-total">–</span></div>
-      <div class="kpi t"><span class="k-label">Promedio día</span><span class="k-val" id="k3-prom">–</span></div>
+      <div class="kpi t"><span class="k-label">Total turnos</span><span class="k-val" id="k3-total">–</span></div>
+      <div class="kpi avg"><span class="k-label">Promedio día</span><span class="k-val" id="k3-prom">–</span></div>
     </div>
     <div class="card chartbox">
       <div id="c3"></div>
       <div class="tip" id="tip3" role="tooltip"></div>
     </div>
-    <p class="nota" id="n3" hidden></p>
+  </section>
+
+    <!-- 3.4 DESCARGAS -->
+    <section>
+      <h3 class="sub"><span class="n">3.4</span>Descargas</h3>
+    <div class="kpis descargas-kpis">
+      <div class="kpi n"><span class="k-label">Total</span><span class="k-val" id="k4-total">–</span><span class="k-extra">100%</span></div>
+      <div class="kpi-breakdown" id="k4-lugares"></div>
+      <div class="kpi avg"><span class="k-label">Promedio día</span><span class="k-val" id="k4-prom">–</span></div>
+    </div>
+    <div class="card chartbox">
+      <div id="c4"></div>
+      <div class="tip" id="tip4" role="tooltip"></div>
+    </div>
+    <p class="nota" id="n4" hidden></p>
     </section>
 
     </div><!-- /.nested -->
@@ -426,6 +493,7 @@ svg{display:block;width:100%;height:auto}
 
 <input type="file" id="picker" accept=".csv" hidden>
 
+<script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script>
 <script>
 /* ==========================================================================
    CONFIGURACIÓN — lo único que hay que editar cuando cambia la operativa
@@ -441,11 +509,11 @@ const CONFIG = {
      OJO: data/reclamos.csv NO sirve acá. Es la base general de reclamos, no
      trae fecha_de_agenda ni hecho ni las filas de agenda. Esta página necesita
      el export "Tabla de reclamos de agenda personalizada", que se sube como
-     data/agenda.csv. */
+     data/reclamos-agenda.csv. */
   reclamos: [
-    "data/agenda.csv",
-    "datos/agenda.csv",
-    "https://raw.githubusercontent.com/COM-Datos/Dashboard/main/data/agenda.csv"
+    "data/reclamos-agenda.csv",
+    "datos/reclamos-agenda.csv",
+    "https://raw.githubusercontent.com/COM-Datos/Dashboard/main/data/reclamos-agenda.csv"
   ],
   /* copia de respaldo de los cupos */
   cupos: [
@@ -454,33 +522,34 @@ const CONFIG = {
     "https://raw.githubusercontent.com/COM-Datos/Dashboard/main/data/cupos.json"
   ],
 
-  /* CUPOS EN VIVO — se leen de nuevo cada vez que se abre la página, directo
-     de CDA2.0 · hoja CamionCupoProyectado. No se usa el link de "Publicar en
-     la web" (Google no lo deja leer desde otro sitio, por CORS) — se lee el
-     mismo documento por el mecanismo de consulta (gviz) vía un <script>, que
-     sí lo permite. Si esto falla, se usa la copia de CONFIG.cupos. */
-  cuposSheetId: "1GVfBIboSuNdDU-60rOBXBbRm4F-8UQpOCE4alM_9d-Q",
-  cuposGid: "26135142",
+  /* CUPOS EN VIVO — se leen de nuevo cada vez que se abre la página.
+     Para obtener esta URL, en CDA2.0:
+       Archivo → Compartir → Publicar en la web
+       → en "Contenido publicado" elegir la hoja CamionCupoProyectado
+       → formato "Valores separados por comas (.csv)"  → Publicar
+     Queda algo así (terminada en output=csv):
+       https://docs.google.com/spreadsheets/d/e/2PACX-1vR.../pub?gid=123456&single=true&output=csv
+     Si queda vacía, o si la planilla no responde, se usa la copia de CONFIG.cupos. */
+  cuposURL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSxetTmM9tQiSTmmkluA5iiVpQh76jn8wrActYozj3hJEDjvAK_1_4XRuipxUrsjoAv2nnb_2wU6MFx/pub?gid=26135142&single=true&output=csv",
 
   /* DESCARGAS — cada fila es un viaje a planta. Sale de la hoja
-     REGISTRO DESCARGA de PLANIFICACION AGENDA 2026, leída igual que los
-     cupos. Mientras no se pueda leer se usa el archivo local. */
+     REGISTRO DESCARGA de PLANIFICACION AGENDA 2026, publicada igual que los
+     cupos. Mientras descargasURL esté vacía se usa el archivo local. */
   descargas: [
     "data/descargas.csv",
     "datos/descargas.csv",
     "https://raw.githubusercontent.com/COM-Datos/Dashboard/main/data/descargas.csv"
   ],
-  descargasSheetId: "1OSD8E28LFH8IutC0NaLmV9jnsxJ-89e_EI932kOwTY4",
-  descargasGid: "1863071158",
+  descargasURL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRBHNqLd2HQlN4CJC3ChcCLf3S7dOOgwItrH3UWkSxwlTf6soWNYmfhUYqEzw8MLvphHa5B7iNAi-4W/pub?gid=1863071158&single=true&output=csv",
 
   /* Lugares de descarga, en el orden en que se apilan y con su color.
      Cualquier lugar que no esté acá se agrupa en "Otros". */
   lugares: [
-    {nombre:"Montevideo Integra", color:"#4c1d95"},
-    {nombre:"DFR",                color:"#7c3aed"},
-    {nombre:"Univar",             color:"#a78bfa"},
-    {nombre:"Filadelfia",         color:"#c4b5fd"},
-    {nombre:"Faro",               color:"#ddd6fe"}
+    {nombre:"Montevideo Integra", etiqueta:"M. INTEGRA", color:"#f4c84a"},
+    {nombre:"DFR",                color:"#f39a4a"},
+    {nombre:"Univar",             color:"#16a6b6"},
+    {nombre:"Filadelfia",         color:"#7bc47f"},
+    {nombre:"Faro",               color:"#9b7bd6"}
   ],
 
   /* Primera columna de la tabla de Situación actual: municipio y su día fijo.
@@ -637,8 +706,8 @@ function fechaISO(s){
    misma estructura que cupos.json. Ubica las columnas por nombre, así
    que aguanta que se agreguen o muevan columnas en la planilla.
    ========================================================================== */
-function cuposDesdeCSV(text){ return cuposDesdeFilas(parseCSVFilas(text)); }
-function cuposDesdeFilas(filas){
+function cuposDesdeCSV(text){
+  const filas = parseCSVFilas(text);
   let col = null;
   for (let i = 0; i < Math.min(filas.length, 30); i++){
     const f = filas[i].map(x => (x||"").trim());
@@ -686,8 +755,8 @@ function cuposDesdeFilas(filas){
    con un formulario al costado. Las columnas se ubican por nombre y las filas
    válidas son las que tienen fecha reconocible.
    ========================================================================== */
-function descargasDesdeCSV(text){ return descargasDesdeFilas(parseCSVFilas(text)); }
-function descargasDesdeFilas(filas){
+function descargasDesdeCSV(text){
+  const filas = parseCSVFilas(text);
   let col = null;
   for (let i = 0; i < Math.min(filas.length, 30); i++){
     const f = filas[i].map(x => norm(x).trim());
@@ -749,137 +818,44 @@ async function traerTexto(rutas){
   throw new Error(fallas.join(" · "));
 }
 
-/* ==========================================================================
-   LECTURA EN VIVO DE GOOGLE SHEETS (gviz, vía <script> — esquiva CORS)
-   Mismo mecanismo que dashboard_reclamos_com.html / Zona Limpia.html /
-   Transportistas.html: se inyecta un <script> que le pide los datos a
-   Google Sheets envueltos en una función (JSONP), en vez de un fetch()
-   normal — un fetch() directo a Sheets lo bloquea el navegador por CORS,
-   pero un <script src="..."> no está sujeto a esa regla.
-   ========================================================================== */
-function loadGvizJsonp(sheetId, gid){
-  return new Promise((resolve, reject) => {
-    const cbName = "_gvizCb_" + Date.now() + "_" + Math.floor(Math.random()*1e6);
-    window[cbName] = function(resp){
-      delete window[cbName];
-      const s = document.getElementById(cbName + "_s"); if (s) s.remove();
-      if (resp && resp.status === "ok" && resp.table) resolve(resp.table);
-      else reject(new Error("la planilla no devolvió datos (¿es pública?)"));
-    };
-    const timer = setTimeout(() => {
-      if (window[cbName]){
-        delete window[cbName];
-        const s = document.getElementById(cbName + "_s"); if (s) s.remove();
-        reject(new Error("tiempo de espera agotado"));
-      }
-    }, 20000);
-    const script = document.createElement("script");
-    script.id = cbName + "_s";
-    script.src = "https://docs.google.com/spreadsheets/d/" + sheetId
-      + "/gviz/tq?tqx=responseHandler:" + cbName + "&gid=" + gid;
-    script.onerror = () => { clearTimeout(timer); delete window[cbName]; reject(new Error("no se pudo cargar el script de Sheets")); };
-    document.head.appendChild(script);
-  });
-}
-
-/* Convierte una tabla gviz en el mismo array-de-arrays que produce
-   parseCSVFilas() sobre un CSV de verdad — incluida la fila de encabezados,
-   que gviz suele devolver como la primera fila de datos en vez de detectarla
-   sola (por eso cuposDesdeFilas / descargasDesdeFilas, que ya escanean las
-   primeras filas buscando "Fecha"/"Municipio"/etc., funcionan igual sin
-   cambiarles nada). */
-function gvizToFilas(table, encabezadoFijo){
-  const cols = table.cols || [];
-  /* gviz a veces detecta bien la fila de encabezados y la separa en cols[]
-     (dejando table.rows solo con datos, como en Descargas) y a veces no la
-     detecta y la deja como una fila más de datos (como en Cupos) — y en ese
-     segundo caso, encima, pierde el texto de las columnas que interpretó
-     como fecha o número (lo vuelve null: "Fecha" y "CupoMaximo" desaparecen
-     sin dejar rastro). Por eso quien llama puede pasar encabezadoFijo con los
-     nombres reales ya confirmados, salteando la detección de gviz del todo.
-     Si no lo pasa, se usan los labels de cols[] (y si vienen vacíos, el
-     escaneo de cuposDesdeFilas/descargasDesdeFilas sigue de largo hasta
-     encontrar la fila de verdad más abajo). */
-  const encabezado = encabezadoFijo || cols.map(c => c.label || c.id || "");
-  const filasDatos = (table.rows || []).map(row => (row.c || []).map((cell, i) => {
-    if (!cell || cell.v === null || cell.v === undefined) return "";
-    const tipo = (cols[i] || {}).type;
-    const v = cell.v;
-    if (typeof v === "string" && (tipo === "date" || tipo === "datetime")){
-      const m = v.match(/Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+),(\d+))?\)/);
-      if (m){
-        const [, y, mo, d, h, mi] = m;
-        const fecha = y + "-" + String(+mo+1).padStart(2,"0") + "-" + String(d).padStart(2,"0");
-        if (+y <= 1899) return (h||"0") + ":" + String(mi||"0").padStart(2,"0"); // hora pura
-        return (h !== undefined) ? fecha + " " + String(h).padStart(2,"0") + ":" + String(mi).padStart(2,"0") : fecha;
-      }
-    }
-    /* todo lo demás como texto: igual que un CSV real, donde no hay tipos —
-       un número acá (30, 16...) rompería el .trim() del escaneo de columnas
-       si quedara como number */
-    return String(v);
-  }));
-  return [encabezado, ...filasDatos];
-}
-
-/* Los cupos se leen en vivo de CDA2.0. Si falla (Sheets no responde, cambió
-   de lugar, etc.) se cae a la copia local para no dejar la tabla vacía. */
-const ENCABEZADO_CUPOS = ["Fecha","Municipio","HoraInicio","HoraFin","CupoMaximo","Agendadas","Disponibilidad","Confirmado","Sin Confirmar"];
+/* Los cupos se leen en vivo de la hoja publicada. Si no hay URL configurada o
+   la planilla no responde, se cae a la copia local para no dejar la tabla vacía. */
 async function cargarCupos(){
-  try {
-    const table = await loadGvizJsonp(CONFIG.cuposSheetId, CONFIG.cuposGid);
-    return cuposDesdeFilas(gvizToFilas(table, ENCABEZADO_CUPOS));
-  } catch(e){
-    DATOS.avisoCupos = "No se pudo actualizar esta información. Se intentó usar la última copia disponible.";
+  if (CONFIG.cuposURL){
+    const sep = CONFIG.cuposURL.includes("?") ? "&" : "?";
+    try {
+      return cuposDesdeCSV(await traerTexto(CONFIG.cuposURL + sep + "_=" + Date.now()));
+    } catch(e){
+      DATOS.avisoCupos = "No se pudo leer la planilla publicada (" + (e.message || e)
+        + "). La tabla está armada con la copia de <code>cupos.json</code>, que puede estar vieja.";
+    }
   }
   return JSON.parse(await traerTexto(CONFIG.cupos));
 }
 
-/* Igual que los cupos: primero la hoja en vivo, si no el archivo local. */
+/* Igual que los cupos: primero la hoja publicada, si no el archivo local. */
 async function cargarDescargas(){
-  try {
-    return descargasDesdeFilas(gvizToFilas(await loadGvizJsonp(CONFIG.descargasSheetId, CONFIG.descargasGid)));
-  } catch(e){
-    DATOS.avisoDescargas = "No se pudo actualizar esta información. Se intentó usar la última copia disponible.";
+  if (CONFIG.descargasURL){
+    const sep = CONFIG.descargasURL.includes("?") ? "&" : "?";
+    try {
+      return descargasDesdeCSV(await traerTexto(CONFIG.descargasURL + sep + "_=" + Date.now()));
+    } catch(e){
+      DATOS.avisoDescargas = "No se pudo leer la hoja de descargas publicada (" + (e.message || e)
+        + "). Se está usando la copia de <code>descargas.csv</code>, que puede estar vieja.";
+    }
   }
   return descargasDesdeCSV(await traerTexto(CONFIG.descargas));
 }
 
-/* Las 3 fuentes se piden juntas pero se resuelven cada una por su cuenta: si
-   falta cupos.json o descargas.csv (por ejemplo, todavía no se subieron), las
-   secciones que dependen de agenda.csv (1, 3.1, 3.2) igual muestran datos
-   reales en vez de quedar en cero. Solo si falla agenda.csv no hay nada que
-   mostrar y se corta con error, como antes. */
 async function cargar(){
-  const [rCsv, rCupos, rDescargas] = await Promise.allSettled([
+  const [csv, cupos, descargas] = await Promise.all([
     traerTexto(CONFIG.reclamos),
     cargarCupos(),
     cargarDescargas()
   ]);
-
-  if (rCsv.status === "fulfilled"){
-    DATOS.reclamos = parseCSV(rCsv.value);
-  } else {
-    throw rCsv.reason;   // sin la base de agenda no hay nada que mostrar
-  }
-
-  if (rCupos.status === "fulfilled"){
-    DATOS.cupos = rCupos.value;
-  } else {
-    DATOS.cupos = {fuente:"(cupos no disponibles)", jornadas:[]};
-    if (!DATOS.avisoCupos){
-      DATOS.avisoCupos = "La información de cupos no está disponible temporalmente.";
-    }
-  }
-
-  if (rDescargas.status === "fulfilled"){
-    DATOS.descargas = rDescargas.value;
-  } else {
-    DATOS.descargas = [];
-    if (!DATOS.avisoDescargas){
-      DATOS.avisoDescargas = "La información de descargas no está disponible temporalmente.";
-    }
-  }
+  DATOS.reclamos = parseCSV(csv);
+  DATOS.cupos = cupos;
+  DATOS.descargas = descargas;
 }
 
 /* ==========================================================================
@@ -933,10 +909,7 @@ function renderSituacion(){
       const cupo = j.cupo || 0;
       const a = ocup.get(j.fecha + "|" + muni) || 0;
       const p = cupo ? Math.round(a / cupo * 100) : 0;
-      const libres = Math.max(0, cupo - a);
-      const tip = dia+" "+ddmmyyyy(j.fecha)+" · "+fmt(a)+" de "+fmt(cupo)
-                + " cupos ocupados · "+fmt(libres)+" disponibles";
-      tds += '<td><div class="cell lv'+nivel(p)+'" title="'+esc(tip)+'">'
+      tds += '<td><div class="cell lv'+nivel(p)+'">'
            +   '<span class="date">'+ddmmyyyy(j.fecha)+'</span>'
            +   '<span class="row"><span class="pct">'+p+'%</span>'
            +     '<span class="cupos">'+fmt(a)+' / '+fmt(cupo)+' cupos</span></span>'
@@ -953,18 +926,18 @@ function renderSituacion(){
    1. PROMEDIO DE ATENCIÓN POR MUNICIPIO
    --------------------------------------------------------------------------
    Días entre fecha_de_reclamo y fecha_de_agenda, promediados por municipio
-   sobre todo el período disponible. Entran sólo las agendas atendidas por un transportista
+   sobre todo el año. Entran sólo las agendas atendidas por un transportista
    real —camión o motocarro— así que quedan afuera las canceladas, las que no
    confirmaron fecha, las repetidas y el resto de los estados falsos, con el
-   mismo criterio que usa 3.1.
+   mismo criterio que usa 3.2.
    ========================================================================== */
-function atencionPorMunicipio(){
+function atencionPorMunicipio(anio){
   const acc = new Map();
   for (const r of DATOS.reclamos){
     if (!esServicio(r)) continue;
     const rec = (r.fecha_de_reclamo  || "").slice(0,10);
     const age = (r.fecha_de_agenda   || "").slice(0,10);
-    if (!rec || !age) continue;
+    if (!rec || !age || age.slice(0,4) !== anio) continue;
     const d = Math.round((new Date(age+"T12:00:00") - new Date(rec+"T12:00:00")) / 86400000);
     if (d < 0) continue;                  // agenda anterior al reclamo: dato roto
     const mu = (r.municipio || "").trim();
@@ -976,23 +949,159 @@ function atencionPorMunicipio(){
 }
 
 function renderAtencion(){
-  $("#at-titulo").textContent = "Resumen del período disponible";
-  const cobertura = DATOS.cobertura.ingresados;
-  $("#at-periodo").textContent = cobertura
-    ? "Período disponible: " + fechaLarga(new Date(cobertura.desde+"T12:00:00"))
-      + " al " + fechaLarga(new Date(cobertura.hasta+"T12:00:00"))
-    : "Período disponible: sin fechas válidas";
-  const acc = atencionPorMunicipio();
+  const anio = CONFIG.anio;
+  $("#at-titulo").textContent = "Datos " + anio;
+  const acc = atencionPorMunicipio(anio);
   $("#at-grid").innerHTML = CONFIG.municipios.map(({muni, dia})=>{
     const a = acc.get(muni);
     const hay = a && a.n > 0;
-    const tip = hay ? fmt(a.n)+" agendas atendidas en el período disponible"
-                    : "sin agendas atendidas en el período disponible";
-    return '<div class="at-item" title="'+esc("Municipio "+muni+" · "+dia+" · "+tip)+'">'
+    return '<div class="at-item">'
          +   '<b>'+esc(muni)+'</b><span class="d">'+esc(dia)+'</span>'
          +   '<span class="v">'+(hay ? fmt(Math.round(a.suma / a.n)) : "—")+'</span>'
          + '</div>';
   }).join("");
+}
+
+/* ==========================================================================
+   1. MAPA DE CALOR DE AGENDAS RESUELTAS
+   --------------------------------------------------------------------------
+   Usa todas las filas con fecha_resuelto en CONFIG.anio y coordenadas válidas.
+   Sólo se descartan las canceladas, por cualquiera de sus dos marcas.
+   El filtro es propio del mapa y no depende del período de análisis.
+   ========================================================================== */
+let MAPA_CALOR = null;
+let MAPA_LISTO = false;
+let MAPA_PENDIENTE = null;
+
+function puntosMapaCalor(muni){
+  const puntos = [];
+  for (const r of DATOS.reclamos){
+    if ((r.fecha_resuelto || "").slice(0,4) !== CONFIG.anio) continue;
+    if (esCancelada(r)) continue;
+    if (muni !== "todos" && (r.municipio || "").trim() !== muni) continue;
+    const lat = Number(String(r.latitud || "").replace(",", "."));
+    const lon = Number(String(r.longitud || "").replace(",", "."));
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+    if (lat < -90 || lat > 90 || lon < -180 || lon > 180) continue;
+    puntos.push([lat, lon, 1]);
+  }
+  return puntos;
+}
+
+function datosGeoJSON(puntos){
+  return {
+    type:"FeatureCollection",
+    features:puntos.map(punto=>({
+      type:"Feature",
+      properties:{},
+      geometry:{type:"Point", coordinates:[punto[1], punto[0]]}
+    }))
+  };
+}
+
+function prepararEstiloMapa(){
+  const capas = MAPA_CALOR.getStyle().layers || [];
+  capas.forEach(capa=>{
+    if (capa.type === "symbol"){
+      MAPA_CALOR.setLayoutProperty(capa.id, "visibility", "none");
+      return;
+    }
+
+    if (capa.type === "line" && /road|street|highway|motorway|trunk|transport|bridge|tunnel/i.test(capa.id)){
+      try {
+        MAPA_CALOR.setPaintProperty(capa.id, "line-color", "#4b5563");
+        MAPA_CALOR.setPaintProperty(capa.id, "line-opacity", .82);
+      } catch (_) {
+        /* Algunas capas usan patrones y conservan su estilo original. */
+      }
+    }
+  });
+
+  MAPA_CALOR.addSource("agendas-resueltas", {
+    type:"geojson",
+    data:datosGeoJSON([])
+  });
+  MAPA_CALOR.addLayer({
+    id:"calor-agendas",
+    type:"heatmap",
+    source:"agendas-resueltas",
+    maxzoom:15,
+    paint:{
+      "heatmap-weight":1,
+      "heatmap-intensity":.03,
+      "heatmap-radius":["interpolate", ["linear"], ["zoom"], 9, 12, 13, 22],
+      "heatmap-opacity":.82,
+      "heatmap-color":[
+        "interpolate", ["linear"], ["heatmap-density"],
+        0, "rgba(96,165,250,0)",
+        .12, "#60a5fa",
+        .34, "#22d3ee",
+        .56, "#34d399",
+        .76, "#facc15",
+        .92, "#fb923c",
+        1, "#dc2626"
+      ]
+    }
+  });
+}
+
+function actualizarMapaCalor({puntos, intensidad, muni, opciones}){
+  MAPA_CALOR.getSource("agendas-resueltas").setData(datosGeoJSON(puntos));
+  MAPA_CALOR.setPaintProperty("calor-agendas", "heatmap-intensity", .01 + intensidad * .02);
+
+  if (opciones.ajustarVista !== false){
+    if (muni === "todos"){
+      MAPA_CALOR.jumpTo({center:[-56.19, -34.84], zoom:10.5});
+    } else if (puntos.length){
+      const limites = new maplibregl.LngLatBounds();
+      puntos.forEach(punto=> limites.extend([punto[1], punto[0]]));
+      MAPA_CALOR.fitBounds(limites, {padding:18, maxZoom:13, duration:0});
+    }
+  }
+
+  requestAnimationFrame(()=> MAPA_CALOR.resize());
+}
+
+function renderMapaCalor(opciones = {}){
+  const el = $("#mapa-calor");
+  const muni = $("#mapa-muni").value || "todos";
+  const puntos = puntosMapaCalor(muni);
+  const intensidad = Number($("#mapa-intensidad").value) || 1;
+  MAPA_PENDIENTE = {puntos, intensidad, muni, opciones};
+
+  if (typeof maplibregl === "undefined"){
+    el.innerHTML = '<div class="mapa-error">No se pudo cargar el mapa. Revisá la conexión a internet y recargá la página.</div>';
+    return;
+  }
+
+  if (!MAPA_CALOR){
+    MAPA_CALOR = new maplibregl.Map({
+      container:el,
+      style:{
+        version:8,
+        sources:{
+          "agenda-base":{
+            type:"raster",
+            tiles:["https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"],
+            tileSize:256,
+            maxzoom:16
+          }
+        },
+        layers:[{id:"agenda-base", type:"raster", source:"agenda-base"}]
+      },
+      center:[-56.19, -34.84],
+      zoom:10.5,
+      attributionControl:false
+    });
+    MAPA_CALOR.on("load", ()=>{
+      prepararEstiloMapa();
+      MAPA_LISTO = true;
+      if (MAPA_PENDIENTE) actualizarMapaCalor(MAPA_PENDIENTE);
+    });
+    return;
+  }
+
+  if (MAPA_LISTO) actualizarMapaCalor(MAPA_PENDIENTE);
 }
 
 /* ==========================================================================
@@ -1002,10 +1111,12 @@ function renderAtencion(){
 function renderAviso(hayJornadas){
   const el = $("#datasrc");
   const avisos = [];
-  if (DATOS.avisoCupos) avisos.push('<span><b>Cupos:</b> ' + DATOS.avisoCupos + '</span>');
-  if (DATOS.avisoDescargas) avisos.push('<span><b>Descargas:</b> ' + DATOS.avisoDescargas + '</span>');
+  if (DATOS.avisoCupos) avisos.push('<span><b>Cupos desactualizados:</b> ' + DATOS.avisoCupos + '</span>');
+  if (DATOS.avisoDescargas) avisos.push('<span><b>Descargas desactualizadas:</b> ' + DATOS.avisoDescargas + '</span>');
   if (!hayJornadas){
-    avisos.push('<span><b>Sin jornadas próximas:</b> no hay cupos vigentes desde hoy en adelante.</span>');
+    avisos.push('<span><b>Cupos vencidos:</b> ninguna jornada con cupos es de hoy en adelante,'
+      + ' así que la tabla de Situación actual quedó vacía. Hay que habilitar cupos nuevos en'
+      + ' CDA2.0 · CamionCupoProyectado.</span>');
   }
   if (!avisos.length){ el.className = "datasrc"; el.innerHTML = ""; return; }
   el.className = "datasrc show";
@@ -1013,13 +1124,13 @@ function renderAviso(hayJornadas){
 }
 
 function renderEstadoError(msg){
-  console.error("No se pudo cargar Agenda:", msg);
   const el = $("#datasrc");
   el.className = "datasrc show";
-  el.innerHTML = '<span><b>No se pudo cargar la información.</b> Reintentá o elegí un archivo de respaldo.</span>'
-    + '<button type="button" id="btn-retry-agenda">Reintentar</button>'
-    + '<button type="button" id="btn-pick">Elegir archivo…</button>';
-  $("#btn-retry-agenda").addEventListener("click", ()=> location.reload());
+  el.innerHTML = '<span><b>No se pudieron cargar los datos:</b> '+esc(msg)+'</span>'
+    + '<span class="sep">|</span>'
+    + '<span>Si abriste el archivo con doble clic, el navegador bloquea la lectura de archivos locales.'
+    + ' Levantá el servidor con <code>servir.bat</code>, o cargá el CSV a mano:</span>'
+    + '<button type="button" id="btn-pick">Elegir CSV…</button>';
   $("#btn-pick").addEventListener("click", ()=> $("#picker").click());
 }
 
@@ -1035,7 +1146,22 @@ $("#picker").addEventListener("change", async e=>{
 });
 
 /* ==========================================================================
-   3.1 SERVICIOS REALIZADOS
+   3.1 SERVICIOS INGRESADOS
+   --------------------------------------------------------------------------
+   Universo: solicitudes cuya fecha_de_reclamo cae dentro del rango y del
+             municipio elegidos. Se descartan las canceladas por cualquiera
+             de sus dos marcas y las NOVALIDO; se conservan NOVALIDOATENDIDO.
+   Promedio: total ÷ días calendario cubiertos por la fuente.
+   ========================================================================== */
+/* colores de cada sección */
+const COLOR = {
+  ingresos:"#2563eb",                       // 3.1
+  servicios:"#e8a08d",                      // 3.2
+  camion:"#0d9488", motocarro:"#7dd3fc"    // 3.3
+};
+
+/* ==========================================================================
+   3.2 SERVICIOS REALIZADOS
    --------------------------------------------------------------------------
    Universo: agendas cuya fecha_resuelto cae dentro del rango elegido, del
              municipio elegido, descartando las que no son un servicio
@@ -1044,14 +1170,6 @@ $("#picker").addEventListener("change", async e=>{
    Promedio: total ÷ días del rango sin contar los domingos (no se hace
              servicio), redondeado a entero.
    ========================================================================== */
-/* colores de cada sección */
-const COLOR = {
-  ingresos:"#6366f1",
-  servicios:"#2563eb",
-  camion:"#0d9488", motocarro:"#7dd3fc",
-  locales:["#0d9488","#2563eb","#38bdf8","#a7d8ef"]
-};
-
 const MES_CORTO = ["ene","feb","mar","abr","may","jun","jul","ago","set","oct","nov","dic"];
 
 /* mayúsculas y sin acentos, para comparar nombres escritos de distinta forma */
@@ -1072,8 +1190,8 @@ function esServicio(r){
   return !CONFIG.noEsServicioClaves.some(k => n.includes(k));
 }
 
-/* Una solicitud cuenta al ingresar aunque después no confirme fecha o se
-   repita. Sólo se excluyen las canceladas y las clasificadas como NOVALIDO. */
+/* una solicitud cuenta como ingresada aunque luego no confirme fecha o quede
+   repetida. Sólo se quitan las canceladas y las clasificadas como NOVALIDO. */
 function esIngreso(r){
   return !esCancelada(r) && (r.tipo_de_reclamo || "").trim() !== "NOVALIDO";
 }
@@ -1128,7 +1246,8 @@ function promedioPorDia(total, dias, muni){
   return n ? total / n : 0;
 }
 
-/* Para ingresos cuentan todos los días calendario que cubre la fuente. */
+/* Los reclamos se ingresan también domingos y feriados, por lo que esta
+   sección divide por todos los días calendario que cubre la fuente. */
 function promedioPorDiaCalendario(total, dias){
   const n = dias.filter(d => !d.sinDatos).length;
   return n ? total / n : 0;
@@ -1185,7 +1304,7 @@ function serviciosPorDia(desde, hasta, muni){
   return marcarSinDatos(dias, DATOS.cobertura.resueltos);
 }
 
-/* 3.2 — turnos por día. Un turno es un transportista trabajando un día: se
+/* 3.3 — turnos por día. Un turno es un transportista trabajando un día: se
    cuentan los pares (fecha, transportista) distintos, no las agendas. */
 function turnosPorDia(desde, hasta, muni){
   const {dias, idx} = diasDelRango(desde, hasta);
@@ -1206,7 +1325,7 @@ function turnosPorDia(desde, hasta, muni){
   return marcarSinDatos(dias, DATOS.cobertura.agendas);
 }
 
-/* 3.3 — descargas por día, separadas por lugar. La hoja de descargas no tiene
+/* 3.4 — descargas por día, separadas por lugar. La hoja de descargas no tiene
    municipio, así que el filtro de municipio no se puede aplicar acá. */
 function descargasPorDia(desde, hasta){
   const {dias, idx} = diasDelRango(desde, hasta);
@@ -1220,11 +1339,15 @@ function descargasPorDia(desde, hasta){
   return marcarSinDatos(dias, DATOS.cobertura.descargas);
 }
 
-/* series apiladas de 3.3, con "Otros" al final sólo si aparece algún lugar
+/* series apiladas de 3.4, con "Otros" al final sólo si aparece algún lugar
    que no esté en la configuración */
 function seriesDescargas(dias){
-  const s = CONFIG.lugares.map(l => ({key:l.nombre, label:l.nombre, color:l.color}));
-  if (dias.some(d => d.v["Otros"])) s.push({key:"Otros", label:"Otros", color:"#9ca3af"});
+  const s = CONFIG.lugares.map(l => ({
+    key:l.nombre,
+    label:(l.etiqueta || l.nombre).toUpperCase(),
+    color:l.color
+  }));
+  if (dias.some(d => d.v["Otros"])) s.push({key:"Otros", label:"OTROS", color:"#9ca3af"});
   return s;
 }
 
@@ -1241,7 +1364,8 @@ function niceStep(max){
    Una barra por día, fecha en el eje X, domingos con franja y rótulo propio,
    y etiqueta flotante con el total del día.
    ========================================================================== */
-function barrasDiarias(el, tip, dias, series, prom){
+function barrasDiarias(el, tip, dias, series, prom, opciones = {}){
+  const marcarNoServicio = opciones.marcarSinServicio !== false;
   tip.classList.remove("on");
   if (!dias.length){
     el.innerHTML = '<p class="empty">No hay datos en el período elegido. Probá ampliar las fechas.</p>';
@@ -1296,7 +1420,7 @@ function barrasDiarias(el, tip, dias, series, prom){
          confunda con un día que tuvo cero actividad */
       barra = '<line class="sd-stub" x1="'+(cx-bw/2).toFixed(1)+'" y1="'+y(0).toFixed(1)
             + '" x2="'+(cx+bw/2).toFixed(1)+'" y2="'+y(0).toFixed(1)+'"/>';
-    } else if (!barra && d.sinServicio){
+    } else if (!barra && d.sinServicio && marcarNoServicio){
       /* domingos y feriados van con un tope gris apoyado en el cero: se
          entiende que el día está y no tiene servicio, sin dejar un hueco */
       barra = '<rect class="dom-stub" x="'+(cx-bw/2).toFixed(1)+'" y="'+(y(0)-5).toFixed(1)
@@ -1307,10 +1431,10 @@ function barrasDiarias(el, tip, dias, series, prom){
 
     if (i%paso===0){
       const rotulo = d.sinDatos ? "sin datos"
-                   : d.domingo ? "dom"
-                   : d.feriado ? "feriado"
+                   : marcarNoServicio && d.domingo ? "dom"
+                   : marcarNoServicio && d.feriado ? "feriado"
                    : d.dia + ' ' + MES_CORTO[d.mes];
-      g += '<text class="axis dia'+(d.sinServicio||d.sinDatos?" libre":"")+'" text-anchor="end" dominant-baseline="middle"'
+      g += '<text class="axis dia'+((marcarNoServicio&&d.sinServicio)||d.sinDatos?" libre":"")+'" text-anchor="end" dominant-baseline="middle"'
          + ' transform="translate('+cx.toFixed(1)+','+(H-mb+12)+') rotate(-90)">'
          + rotulo + '</text>';
     }
@@ -1370,7 +1494,7 @@ function barrasDiarias(el, tip, dias, series, prom){
       html += conDatos.map(x => '<span class="d"><i class="sw" style="background:'+x.color+'"></i>'
                               + esc(x.label)+': '+fmt(d.v[x.key])+'</span>').join("");
     }
-    if (d.sinServicio && !n){
+    if (d.sinServicio && marcarNoServicio && !n){
       html += '<span class="d">'+(d.feriado ? "feriado · " : "")+'no se hace servicio</span>';
     }
     tip.innerHTML = html;
@@ -1389,35 +1513,6 @@ function barrasDiarias(el, tip, dias, series, prom){
 /* ==========================================================================
    RENDER DE LAS SECCIONES FILTRADAS
    ========================================================================== */
-const AGENDA_SESSION_KEY="com.agenda.filters.v2";
-
-function validateAgendaRange(){
-  const desdeEl=$("#f-desde"), hastaEl=$("#f-hasta"), error=$("#range-error");
-  const invalid=Boolean(desdeEl.value&&hastaEl.value&&desdeEl.value>hastaEl.value);
-  hastaEl.setCustomValidity(invalid?"La fecha Desde no puede ser posterior a Hasta.":"");
-  desdeEl.setAttribute("aria-invalid",String(invalid));
-  hastaEl.setAttribute("aria-invalid",String(invalid));
-  error.classList.toggle("show",invalid);
-  return !invalid;
-}
-
-function saveAgendaState(){
-  sessionStorage.setItem(AGENDA_SESSION_KEY,JSON.stringify({
-    desde:$("#f-desde").value,hasta:$("#f-hasta").value,muni:$("#f-muni").value
-  }));
-}
-
-function restoreAgendaState(){
-  try{
-    const state=JSON.parse(sessionStorage.getItem(AGENDA_SESSION_KEY)||"null");
-    if(!state)return false;
-    if(state.desde)$("#f-desde").value=state.desde;
-    if(state.hasta)$("#f-hasta").value=state.hasta;
-    if([...$("#f-muni").options].some(o=>o.value===state.muni))$("#f-muni").value=state.muni;
-    return true;
-  }catch(_){ sessionStorage.removeItem(AGENDA_SESSION_KEY); return false; }
-}
-
 function render(){
   const tope = ayer();
   /* hacia atrás se puede elegir lo que sea; hacia adelante el tope es ayer,
@@ -1427,87 +1522,110 @@ function render(){
 
   const desde = $("#f-desde").value, hasta = $("#f-hasta").value, muni = $("#f-muni").value;
   if (!desde || !hasta) return;
-  if (!validateAgendaRange()) return;
-  saveAgendaState();
+  if (desde > hasta){ $("#f-hasta").value = desde; return render(); }
 
-  /* 3.1 solicitudes ingresadas */
-  const diasI = ingresosPorDia(desde, hasta, muni);
-  const totalI = diasI.reduce((a,d)=>a+(d.v.total||0), 0);
-  const promI = promedioPorDiaCalendario(totalI, diasI);
-  $("#ki-total").textContent = fmt(totalI);
-  $("#ki-prom").textContent = fmt(Math.round(promI));
-  barrasDiarias($("#ci"), $("#tipi"), diasI,
-    [{key:"total", label:"Solicitudes", color:COLOR.ingresos}],
-    {valor:promI, texto:fmt(Math.round(promI))});
-
-  /* 3.2 servicios realizados */
-  const dias1 = serviciosPorDia(desde, hasta, muni);
+  /* 3.1 servicios ingresados: las canceladas y NOVALIDO no cuentan. Como los
+     reclamos se ingresan todos los días, el promedio usa días calendario. */
+  const dias1 = ingresosPorDia(desde, hasta, muni);
   const total1 = dias1.reduce((a,d)=>a+(d.v.total||0), 0);
-  const prom1 = promedioPorDia(total1, dias1, muni);
+  const prom1 = promedioPorDiaCalendario(total1, dias1);
   $("#k1-total").textContent = fmt(total1);
   $("#k1-prom").textContent = fmt(Math.round(prom1));
   barrasDiarias($("#c1"), $("#tip1"), dias1,
-    [{key:"total", label:"Servicios", color:COLOR.servicios}],
-    {valor:prom1, texto:fmt(Math.round(prom1))});
+    [{key:"total", label:"Ingresados", color:COLOR.ingresos}],
+    {valor:prom1, texto:fmt(Math.round(prom1))},
+    {marcarSinServicio:false});
 
-  /* 3.2 camiones utilizados — las tarjetas cuentan sólo turnos de camión;
-     la gráfica muestra igual el motocarro apilado arriba */
-  const dias2 = turnosPorDia(desde, hasta, muni);
-  const camiones2 = dias2.reduce((a,d)=>a+(d.v.camion||0), 0);
-  const prom2 = promedioPorDia(camiones2, dias2, muni);
-  $("#k2-total").textContent = fmt(camiones2);
+  /* 3.2 servicios realizados */
+  const dias2 = serviciosPorDia(desde, hasta, muni);
+  const total2 = dias2.reduce((a,d)=>a+(d.v.total||0), 0);
+  const prom2 = promedioPorDia(total2, dias2, muni);
+  $("#k2-total").textContent = fmt(total2);
   $("#k2-prom").textContent = fmt(Math.round(prom2));
-  barrasDiarias($("#c2"), $("#tip2"), dias2, [
+  barrasDiarias($("#c2"), $("#tip2"), dias2,
+    [{key:"total", label:"Servicios", color:COLOR.servicios}],
+    {valor:prom2, texto:fmt(Math.round(prom2))});
+
+  /* 3.3 camiones utilizados — las tarjetas cuentan sólo turnos de camión;
+     la gráfica muestra igual el motocarro apilado arriba */
+  const dias3 = turnosPorDia(desde, hasta, muni);
+  const camiones3 = dias3.reduce((a,d)=>a+(d.v.camion||0), 0);
+  const prom3 = promedioPorDia(camiones3, dias3, muni);
+  $("#k3-total").textContent = fmt(camiones3);
+  $("#k3-prom").textContent = fmt(Math.round(prom3));
+  barrasDiarias($("#c3"), $("#tip3"), dias3, [
     {key:"camion",    label:"Camión",    color:COLOR.camion},
     {key:"motocarro", label:"Motocarro", color:COLOR.motocarro}
-  ], {valor:prom2, texto:fmt(Math.round(prom2))});
+  ], {valor:prom3, texto:fmt(Math.round(prom3))});
 
-  /* 3.3 descargas — sale de la hoja REGISTRO DESCARGA, que no tiene municipio,
+  /* 3.4 descargas — sale de la hoja REGISTRO DESCARGA, que no tiene municipio,
      así que esta sección ignora el filtro de municipio.
      La hoja es un registro rodante de pocas semanas: si el rango elegido va más
      atrás, el promedio se calcula sólo sobre los días que sí tienen registro,
      porque dividir por días sin dato daría un promedio falso. */
-  const dias3 = descargasPorDia(desde, hasta);
-  const series3 = seriesDescargas(dias3);
-  const total3 = dias3.reduce((a,d)=> a + series3.reduce((b,s)=>b+(d.v[s.key]||0), 0), 0);
-  const prom3 = promedioPorDia(total3, dias3);
-  $("#k3-total").textContent = fmt(total3);
-  $("#k3-prom").textContent = fmt(Math.round(prom3));
-  barrasDiarias($("#c3"), $("#tip3"), dias3, series3, {valor:prom3, texto:fmt(Math.round(prom3))});
+  const dias4 = descargasPorDia(desde, hasta);
+  const series4 = seriesDescargas(dias4);
+  const total4 = dias4.reduce((a,d)=> a + series4.reduce((b,s)=>b+(d.v[s.key]||0), 0), 0);
+  const prom4 = promedioPorDia(total4, dias4);
+  $("#k4-total").textContent = fmt(total4);
+  const resumen4 = series4.map((s,indice)=>({
+    ...s,
+    indice,
+    total:dias4.reduce((acum,d)=> acum + (d.v[s.key] || 0), 0)
+  }));
+  const cuotas4 = resumen4.map(item=>{
+    const exacto = total4 ? item.total / total4 * 100 : 0;
+    return {key:item.key, valor:Math.floor(exacto), resto:exacto % 1};
+  });
+  let puntosRestantes4 = total4 ? 100 - cuotas4.reduce((a,c)=>a+c.valor, 0) : 0;
+  [...cuotas4]
+    .sort((a,b)=>b.resto-a.resto)
+    .slice(0,puntosRestantes4)
+    .forEach(c=>{ c.valor += 1; });
+  const porcentajes4 = Object.fromEntries(cuotas4.map(c=>[c.key,c.valor]));
+  $("#k4-lugares").innerHTML = resumen4
+    .sort((a,b)=>b.total-a.total || a.indice-b.indice)
+    .map(s=>{
+    return '<div class="kpi lugar" style="--serie-color:'+esc(s.color)+'">'
+      + '<span class="k-label">'+esc(s.label)+'</span>'
+      + '<span class="k-val">'+fmt(s.total)+'</span>'
+      + '<span class="k-extra">'+fmt(porcentajes4[s.key])+'%</span></div>';
+  }).join("");
+  $("#k4-prom").textContent = fmt(Math.round(prom4));
+  barrasDiarias($("#c4"), $("#tip4"), dias4, series4, {valor:prom4, texto:fmt(Math.round(prom4))});
 
   /* el filtro de municipio no aplica acá: hay que decirlo, si no parece que la
      sección no reacciona */
-  const nota3 = $("#n3");
+  const nota4 = $("#n4");
   if (muni !== "todos"){
-    nota3.hidden = false;
-    nota3.innerHTML = "Las descargas se registran por viaje a planta, sin municipio, "
+    nota4.hidden = false;
+    nota4.innerHTML = "Las descargas se registran por viaje a planta, sin municipio, "
       + "así que esta sección muestra <b>todos los municipios</b> aunque arriba esté "
       + "filtrado el " + esc(muni) + ".";
   } else {
-    nota3.hidden = true;
+    nota4.hidden = true;
   }
 }
 
 /* ==========================================================================
    ARRANQUE
    ========================================================================== */
-/* El rango inicial usa toda la ventana real de la base, no un número fijo de días. */
-function rangoDisponible(){
-  const cobertura=DATOS.cobertura.ingresados;
-  if(!cobertura)return;
-  const desde=$("#f-desde"),hasta=$("#f-hasta");
-  desde.min=cobertura.desde;desde.max=cobertura.hasta;
-  hasta.min=cobertura.desde;hasta.max=cobertura.hasta;
-  desde.value=cobertura.desde;
-  hasta.value=cobertura.hasta;
+/* el rango arranca en los últimos N días cerrados: termina ayer, no hoy */
+function rangoInicial(dias){
+  const hasta = new Date(); hasta.setDate(hasta.getDate()-1);
+  const desde = new Date(hasta); desde.setDate(desde.getDate()-(dias-1));
+  $("#f-desde").value = iso(desde);
+  $("#f-hasta").value = iso(hasta);
+  /* el selector de fecha no deja ir más allá de ayer */
+  $("#f-desde").max = iso(hasta);
+  $("#f-hasta").max = iso(hasta);
 }
 
 function arrancar(){
   document.body.classList.remove("cargando");
   calcularCobertura();
-  rangoDisponible();
-  restoreAgendaState();
   renderAtencion();
+  renderMapaCalor();
   const hayJornadas = renderSituacion();
   renderAviso(hayJornadas);
   render();
@@ -1516,19 +1634,17 @@ function arrancar(){
 $("#f-muni").innerHTML = '<option value="todos">Todos</option>' +
   CONFIG.municipios.map(m=>'<option value="'+m.muni+'">Municipio '+m.muni+'</option>').join("");
 
+$("#mapa-muni").innerHTML = '<option value="todos">Todos</option>' +
+  CONFIG.municipios.map(m=>'<option value="'+m.muni+'">Municipio '+m.muni+'</option>').join("");
+$("#mapa-muni").addEventListener("change", renderMapaCalor);
+$("#mapa-intensidad").addEventListener("input", ()=> renderMapaCalor({ajustarVista:false}));
+
 ["#f-desde","#f-hasta","#f-muni"].forEach(s=>{
   $(s).addEventListener("change", render);
 });
 
-$("#agenda-reset").addEventListener("click",()=>{
-  sessionStorage.removeItem(AGENDA_SESSION_KEY);
-  rangoDisponible();
-  $("#f-muni").value="todos";
-  validateAgendaRange();
-  render();
-});
-
 document.body.classList.add("cargando");
+rangoInicial(30);
 cargar().then(arrancar).catch(e=>{
   document.body.classList.remove("cargando");
   renderEstadoError(e.message || String(e));

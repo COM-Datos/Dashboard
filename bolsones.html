@@ -4,10 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Dashboard de Bolsones del Centro Operativo de Montevideo">
-  <title>Dashboard de Bolsones · Centro Operativo de Montevideo</title>
+  <title>Dashboard COM</title>
+  <link rel="icon" type="image/png" href="assets/logo-ciemsa.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
 
   <style>
     :root {
@@ -263,6 +265,95 @@
 
     .cum-item.late .cum-val {
       color: var(--orange);
+    }
+
+    /* Mapa de calor anual */
+    .heatmap-card {
+      margin-top: 16px;
+      padding: 15px 18px 18px;
+    }
+
+    .heatmap-head {
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .heatmap-head .at-label {
+      margin: 0 0 11px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .07em;
+    }
+
+    .heatmap-controls {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 5px 7px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .heatmap-controls .field {
+      gap: 2px;
+    }
+
+    .heatmap-controls .field label {
+      font-size: 9px;
+    }
+
+    .heatmap-controls select {
+      min-width: 124px;
+      min-height: 29px;
+      padding: 4px 7px;
+      font-size: 12.5px;
+    }
+
+    .intensity-field {
+      min-width: 150px;
+    }
+
+    .intensity-row {
+      display: flex;
+      height: 29px;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .intensity-row span {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    #mapa-intensidad {
+      width: 110px;
+      accent-color: var(--navy);
+      cursor: pointer;
+    }
+
+    #mapa-calor {
+      height: 480px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #eef1f4;
+    }
+
+    .mapa-error {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .maplibregl-map {
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     }
 
     .actual-resumen {
@@ -543,7 +634,7 @@
     .kpi.planta-burgues { border-top-color: #9b7bd6; }
     .plantas-kpis {
       display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(7, minmax(0, 1fr));
     }
     .plantas-kpis .kpi {
       min-width: 0;
@@ -566,6 +657,15 @@
       font-variant-numeric: tabular-nums;
       font-weight: 800;
       letter-spacing: -.03em;
+      line-height: 1.2;
+    }
+    .k-extra {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
       line-height: 1.2;
     }
 
@@ -688,6 +788,12 @@
       .plantas-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .plantas-kpis .k-val { font-size: 23px; }
       .actual-resumen { padding: 10px; }
+      #mapa-calor { height: 390px; }
+      .heatmap-controls { width: 100%; }
+      .heatmap-controls .field { flex: 1 1 145px; }
+      .heatmap-controls select,
+      .intensity-field { width: 100%; min-width: 0; }
+      #mapa-intensidad { width: 100%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -702,13 +808,14 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="assets/dashboard-common.css?v=20260914-2">
+  <link rel="stylesheet" href="assets/dashboard-common.css?v=20260921">
 </head>
 
 <body class="page-bolsones">
   <header class="topbar">
     <div class="inner">
-      <a class="back com-back-link" href="index.html" aria-label="Volver al menú principal">
+      <!-- Ajustar el destino cuando esté definido el índice general del sitio. -->
+      <a class="back" href="index.html" aria-label="Volver al menú principal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M19 12H5M12 19l-7-7 7-7"></path>
         </svg>
@@ -716,31 +823,23 @@
       </a>
 
       <div class="titlerow">
-        <span class="ico" aria-hidden="true">🧺</span>
-        <div>
-          <h1>Dashboard de Bolsones</h1>
-          <p>Centro Operativo de Montevideo — COM</p>
-        </div>
+        <span class="ico" aria-hidden="true">♻</span>
+        <h1>Dashboard Bolsones</h1>
       </div>
     </div>
   </header>
 
   <main class="wrap">
-    <div class="loader" id="loader" role="status" aria-live="polite" aria-label="Cargando información">
-      <div class="com-loading-content">
-        <span class="spin com-spinner" aria-hidden="true"></span>
-        <span class="com-loading-message">Cargando información…</span>
-      </div>
-    </div>
-
-    <section aria-labelledby="titulo-resumen-disponible">
-      <h2 class="sec" id="titulo-resumen-disponible">
+    <section aria-labelledby="titulo-datos-2026">
+      <h2 class="sec" id="titulo-datos-2026">
         <span class="n" aria-hidden="true">1</span>
-        <span>Resumen del período disponible</span>
+        <span>Datos 2026</span>
       </h2>
-      <p class="com-available-period" id="resumen-periodo">Período disponible: —</p>
 
       <div class="card cumplimiento" id="cumplimiento">
+        <div class="loader" id="loader" role="status" aria-label="Cargando datos">
+          <span class="spin"></span>
+        </div>
         <div class="cum-grid" id="cum-grid" aria-live="polite" hidden>
           <div class="cum-item ok" id="cum-siguiente">
             <span class="cum-label">Solicitudes atendidas en la intervención siguiente</span>
@@ -751,6 +850,27 @@
             <span class="cum-val" id="pct-atraso">–</span>
           </div>
         </div>
+      </div>
+
+      <div class="card heatmap-card">
+        <div class="heatmap-head">
+          <p class="at-label">MAPA DE CALOR</p>
+          <div class="heatmap-controls">
+            <div class="field">
+              <label for="mapa-muni">Municipio</label>
+              <select id="mapa-muni" aria-label="Municipio del mapa de calor"></select>
+            </div>
+            <div class="field intensity-field">
+              <label for="mapa-intensidad">Intensidad</label>
+              <div class="intensity-row">
+                <span>Baja</span>
+                <input type="range" id="mapa-intensidad" min="0.2" max="4" step="0.1" value="1" aria-label="Intensidad del mapa de calor">
+                <span>Alta</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mapa-calor" role="img" aria-label="Mapa de calor de solicitudes resueltas en 2026"></div>
       </div>
 
       <div class="datasrc" id="datasrc" role="alert"></div>
@@ -851,14 +971,17 @@
             <div class="kpi total-bolsones">
               <span class="k-label">Total</span>
               <span class="k-val" id="k-bolsones-total">–</span>
+              <span class="k-extra">100%</span>
             </div>
             <div class="kpi purple">
               <span class="k-label">Bolsones grandes</span>
               <span class="k-val" id="k-bolsones-grandes">–</span>
+              <span class="k-extra" id="k-bolsones-grandes-pct">–</span>
             </div>
             <div class="kpi lilac">
               <span class="k-label">Bolsones chicos</span>
               <span class="k-val" id="k-bolsones-chicos">–</span>
+              <span class="k-extra" id="k-bolsones-chicos-pct">–</span>
             </div>
             <div class="kpi promedio">
               <span class="k-label">Promedio día</span>
@@ -905,26 +1028,36 @@
             <div class="kpi total-plantas">
               <span class="k-label">Total kg</span>
               <span class="k-val" id="k-plantas-total">–</span>
+              <span class="k-extra">100%</span>
             </div>
-            <div class="kpi planta-usina">
+            <div class="kpi planta-usina" data-planta="usina">
               <span class="k-label">Usina 5 bis</span>
               <span class="k-val" id="k-planta-usina">–</span>
+              <span class="k-extra" id="k-planta-usina-pct">–</span>
             </div>
-            <div class="kpi planta-geminis">
+            <div class="kpi planta-geminis" data-planta="geminis">
               <span class="k-label">Géminis</span>
               <span class="k-val" id="k-planta-geminis">–</span>
+              <span class="k-extra" id="k-planta-geminis-pct">–</span>
             </div>
-            <div class="kpi planta-paloma">
+            <div class="kpi planta-paloma" data-planta="paloma">
               <span class="k-label">La Paloma</span>
               <span class="k-val" id="k-planta-paloma">–</span>
+              <span class="k-extra" id="k-planta-paloma-pct">–</span>
             </div>
-            <div class="kpi planta-duran">
+            <div class="kpi planta-duran" data-planta="duran">
               <span class="k-label">Durán</span>
               <span class="k-val" id="k-planta-duran">–</span>
+              <span class="k-extra" id="k-planta-duran-pct">–</span>
             </div>
-            <div class="kpi planta-burgues">
+            <div class="kpi planta-burgues" data-planta="burgues">
               <span class="k-label">Burgues</span>
               <span class="k-val" id="k-planta-burgues">–</span>
+              <span class="k-extra" id="k-planta-burgues-pct">–</span>
+            </div>
+            <div class="kpi promedio" id="kpi-plantas-promedio">
+              <span class="k-label">Promedio día</span>
+              <span class="k-val" id="k-plantas-promedio">–</span>
             </div>
           </div>
 
@@ -939,13 +1072,11 @@
 
   <input type="file" id="picker" accept=".csv,text/csv" hidden>
 
+  <script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script>
   <script>
     const CONFIG = {
       anio: 2026,
-      archivos: [
-        "data/bolsones.csv",
-        "https://raw.githubusercontent.com/COM-Datos/Dashboard/main/data/bolsones.csv"
-      ],
+      archivo: "data/solicitudes-bolsones.csv",
       colorSolicitudes: "#2563eb",
       colorServicios: "#d98f75",
       colorBolsones: "#7c3aed",
@@ -1020,6 +1151,9 @@
     const FORMATO_NUMERO = new Intl.NumberFormat("es-UY");
     const MESES_CORTOS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "set", "oct", "nov", "dic"];
     let REGISTROS = [];
+    let MAPA_CALOR = null;
+    let MAPA_LISTO = false;
+    let MAPA_PENDIENTE = null;
 
     function esc(valor) {
       return String(valor).replace(/[&<>\"]/g, caracter => ({
@@ -1113,6 +1247,159 @@
       );
 
       return Number.isNaN(tiempo) ? null : { anio, tiempo, dia };
+    }
+
+    function fechaResolucion(registro) {
+      const explicita = registro.fecha_resuelto
+        || registro.fecha_de_resuelto
+        || registro["Fecha resuelto"]
+        || registro["Fecha de resuelto"];
+      if (explicita) return fechaNormalizada(explicita);
+
+      /* La base actual no incluye fecha_resuelto. En ella, una solicitud
+         cerrada queda fechada mediante fecha_de_gestion. */
+      const estado = normalizarTexto(registro.estado).trim();
+      if (estado !== "CERRADO" && estado !== "RESUELTO") return null;
+      return fechaNormalizada(registro.fecha_de_gestion);
+    }
+
+    function puntosMapaCalor(municipio) {
+      const solicitudes = new Map();
+
+      REGISTROS.forEach((registro, indice) => {
+        const fecha = fechaResolucion(registro);
+        if (!fecha || fecha.anio !== CONFIG.anio) return;
+
+        const muni = (registro.municipio || "").trim();
+        if (municipio !== "todos" && muni !== municipio) return;
+
+        const latitud = Number(String(registro.latitud || "").replace(",", "."));
+        const longitud = Number(String(registro.longitud || "").replace(",", "."));
+        if (!Number.isFinite(latitud) || !Number.isFinite(longitud)) return;
+        if (latitud < -90 || latitud > 90 || longitud < -180 || longitud > 180) return;
+
+        const id = (registro.id_solicitud || "").trim();
+        const clave = id || `fila-${indice}`;
+        if (!solicitudes.has(clave)) solicitudes.set(clave, [latitud, longitud, 1]);
+      });
+
+      return [...solicitudes.values()];
+    }
+
+    function datosGeoJSON(puntos) {
+      return {
+        type: "FeatureCollection",
+        features: puntos.map(punto => ({
+          type: "Feature",
+          properties: {},
+          geometry: { type: "Point", coordinates: [punto[1], punto[0]] }
+        }))
+      };
+    }
+
+    function prepararEstiloMapa() {
+      const capas = MAPA_CALOR.getStyle().layers || [];
+      capas.forEach(capa => {
+        if (capa.type === "symbol") {
+          MAPA_CALOR.setLayoutProperty(capa.id, "visibility", "none");
+          return;
+        }
+
+        if (capa.type === "line" && /road|street|highway|motorway|trunk|transport|bridge|tunnel/i.test(capa.id)) {
+          try {
+            MAPA_CALOR.setPaintProperty(capa.id, "line-color", "#4b5563");
+            MAPA_CALOR.setPaintProperty(capa.id, "line-opacity", .82);
+          } catch (_) {
+            /* Algunas capas usan patrones y conservan su estilo original. */
+          }
+        }
+      });
+
+      MAPA_CALOR.addSource("solicitudes-resueltas", {
+        type: "geojson",
+        data: datosGeoJSON([])
+      });
+      MAPA_CALOR.addLayer({
+        id: "calor-solicitudes",
+        type: "heatmap",
+        source: "solicitudes-resueltas",
+        maxzoom: 15,
+        paint: {
+          "heatmap-weight": 1,
+          "heatmap-intensity": .03,
+          "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 9, 12, 13, 22],
+          "heatmap-opacity": .82,
+          "heatmap-color": [
+            "interpolate", ["linear"], ["heatmap-density"],
+            0, "rgba(96,165,250,0)",
+            .12, "#60a5fa",
+            .34, "#22d3ee",
+            .56, "#34d399",
+            .76, "#facc15",
+            .92, "#fb923c",
+            1, "#dc2626"
+          ]
+        }
+      });
+    }
+
+    function actualizarMapaCalor({ puntos, intensidad, municipio, opciones }) {
+      MAPA_CALOR.getSource("solicitudes-resueltas").setData(datosGeoJSON(puntos));
+      MAPA_CALOR.setPaintProperty("calor-solicitudes", "heatmap-intensity", .01 + intensidad * .02);
+
+      if (opciones.ajustarVista !== false) {
+        if (municipio === "todos") {
+          MAPA_CALOR.jumpTo({ center: [-56.19, -34.84], zoom: 10.5 });
+        } else if (puntos.length) {
+          const limites = new maplibregl.LngLatBounds();
+          puntos.forEach(punto => limites.extend([punto[1], punto[0]]));
+          MAPA_CALOR.fitBounds(limites, { padding: 18, maxZoom: 13, duration: 0 });
+        }
+      }
+
+      requestAnimationFrame(() => MAPA_CALOR.resize());
+    }
+
+    function renderMapaCalor(opciones = {}) {
+      const elemento = $("#mapa-calor");
+      const municipio = $("#mapa-muni").value || "todos";
+      const puntos = puntosMapaCalor(municipio);
+      const intensidad = Number($("#mapa-intensidad").value) || 1;
+      MAPA_PENDIENTE = { puntos, intensidad, municipio, opciones };
+
+      if (typeof maplibregl === "undefined") {
+        elemento.innerHTML = '<div class="mapa-error">No se pudo cargar el mapa. Revisá la conexión a internet y recargá la página.</div>';
+        return;
+      }
+
+      if (!MAPA_CALOR) {
+        MAPA_CALOR = new maplibregl.Map({
+          container: elemento,
+          style: {
+            version: 8,
+            sources: {
+              "agenda-base": {
+                type: "raster",
+                tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"],
+                tileSize: 256,
+                maxzoom: 16
+              }
+            },
+            layers: [{ id: "agenda-base", type: "raster", source: "agenda-base" }]
+          },
+          center: [-56.19, -34.84],
+          zoom: 10.5,
+          attributionControl: false
+        });
+        MAPA_CALOR.on("load", () => {
+          prepararEstiloMapa();
+          MAPA_LISTO = true;
+          if (MAPA_PENDIENTE) actualizarMapaCalor(MAPA_PENDIENTE);
+        });
+        return;
+      }
+
+      if (MAPA_LISTO) actualizarMapaCalor(MAPA_PENDIENTE);
     }
 
     /* Devuelve la primera fecha de intervención posterior al día en que entró
@@ -1227,42 +1514,23 @@
       return FORMATO_NUMERO.format(valor);
     }
 
-    function obtenerPeriodoDisponible(registros) {
-      const fechas = registros
-        .map(registro => (registro.fecha_de_solicitud || "").slice(0, 10))
-        .filter(fecha => /^\d{4}-\d{2}-\d{2}$/.test(fecha))
-        .sort();
-      return fechas.length ? { desde: fechas[0], hasta: fechas[fechas.length - 1] } : null;
-    }
-
-    function textoPeriodoDisponible(registros) {
-      const periodo = obtenerPeriodoDisponible(registros);
-      if (!periodo) return "Período disponible: sin fechas válidas";
-      const mostrar = fecha => new Date(fecha + "T12:00:00").toLocaleDateString("es-UY", {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-      });
-      return `Período disponible: ${mostrar(periodo.desde)} al ${mostrar(periodo.hasta)}`;
-    }
-
     function iso(fecha) {
       return fecha.getFullYear() + "-"
         + String(fecha.getMonth() + 1).padStart(2, "0") + "-"
         + String(fecha.getDate()).padStart(2, "0");
     }
 
-    function aplicarPeriodoDisponible(registros) {
-      const periodo = obtenerPeriodoDisponible(registros);
-      if (!periodo) return;
-      const desde = $("#f-desde");
-      const hasta = $("#f-hasta");
-      desde.min = periodo.desde;
-      desde.max = periodo.hasta;
-      hasta.min = periodo.desde;
-      hasta.max = periodo.hasta;
-      desde.value = periodo.desde;
-      hasta.value = periodo.hasta;
+    /* El período inicial abarca los últimos 30 días completos y termina ayer. */
+    function rangoInicial(dias) {
+      const hasta = new Date();
+      hasta.setDate(hasta.getDate() - 1);
+      const desde = new Date(hasta);
+      desde.setDate(desde.getDate() - (dias - 1));
+
+      $("#f-desde").value = iso(desde);
+      $("#f-hasta").value = iso(hasta);
+      $("#f-desde").max = iso(hasta);
+      $("#f-hasta").max = iso(hasta);
     }
 
     function esFeriado(fecha) {
@@ -1679,10 +1947,14 @@
       const chicos = dias.reduce((suma, dia) => suma + (dia.chico || 0), 0);
       const total = grandes + chicos;
       const promedio = dias.length ? total / dias.length : 0;
+      const pctGrandes = total ? Math.round((grandes / total) * 100) : 0;
+      const pctChicos = total ? 100 - pctGrandes : 0;
 
       $("#k-bolsones-total").textContent = numero(total);
       $("#k-bolsones-grandes").textContent = numero(grandes);
       $("#k-bolsones-chicos").textContent = numero(chicos);
+      $("#k-bolsones-grandes-pct").textContent = numero(pctGrandes) + "%";
+      $("#k-bolsones-chicos-pct").textContent = numero(pctChicos) + "%";
       $("#k-bolsones-promedio").textContent = numero(Math.round(promedio));
       graficoBarrasDiarias(
         $("#grafico-bolsones"),
@@ -1752,6 +2024,17 @@
         dias.reduce((suma, dia) => suma + (dia[planta.key] || 0), 0)
       ]));
       const total = CONFIG.plantas.reduce((suma, planta) => suma + totales[planta.key], 0);
+      const promedio = dias.length ? total / dias.length : 0;
+      const cuotas = CONFIG.plantas.map(planta => {
+        const exacto = total ? (totales[planta.key] / total) * 100 : 0;
+        return { key: planta.key, valor: Math.floor(exacto), resto: exacto % 1 };
+      });
+      let puntosRestantes = total ? 100 - cuotas.reduce((suma, cuota) => suma + cuota.valor, 0) : 0;
+      [...cuotas]
+        .sort((a, b) => b.resto - a.resto)
+        .slice(0, puntosRestantes)
+        .forEach(cuota => { cuota.valor += 1; });
+      const porcentajesPlantas = Object.fromEntries(cuotas.map(cuota => [cuota.key, cuota.valor]));
 
       $("#k-plantas-total").textContent = numero(total);
       $("#k-planta-usina").textContent = numero(totales.usina);
@@ -1759,12 +2042,30 @@
       $("#k-planta-paloma").textContent = numero(totales.paloma);
       $("#k-planta-duran").textContent = numero(totales.duran);
       $("#k-planta-burgues").textContent = numero(totales.burgues);
+      $("#k-planta-usina-pct").textContent = numero(porcentajesPlantas.usina) + "%";
+      $("#k-planta-geminis-pct").textContent = numero(porcentajesPlantas.geminis) + "%";
+      $("#k-planta-paloma-pct").textContent = numero(porcentajesPlantas.paloma) + "%";
+      $("#k-planta-duran-pct").textContent = numero(porcentajesPlantas.duran) + "%";
+      $("#k-planta-burgues-pct").textContent = numero(porcentajesPlantas.burgues) + "%";
+      $("#k-plantas-promedio").textContent = numero(Math.round(promedio));
+
+      const contenedorKpis = $(".plantas-kpis");
+      const tarjetaPromedio = $("#kpi-plantas-promedio");
+      CONFIG.plantas
+        .map((planta, indice) => ({ ...planta, indice }))
+        .sort((a, b) => totales[b.key] - totales[a.key] || a.indice - b.indice)
+        .forEach(planta => {
+          contenedorKpis.insertBefore(
+            contenedorKpis.querySelector(`[data-planta="${planta.key}"]`),
+            tarjetaPromedio
+          );
+        });
 
       graficoBarrasDiarias(
         $("#grafico-plantas"),
         $("#tip-plantas"),
         dias,
-        0,
+        promedio,
         {
           etiqueta: "Kilos descargados",
           marcarDiasSinServicio: true,
@@ -1788,8 +2089,6 @@
 
     function renderDatos(registros) {
       REGISTROS = registros;
-      $("#resumen-periodo").textContent = textoPeriodoDisponible(registros);
-      aplicarPeriodoDisponible(registros);
       const cumplimiento = cumplimientoIntervencion(registros);
 
       if (cumplimiento.total > 0) {
@@ -1807,33 +2106,27 @@
       $("#datasrc").className = "datasrc";
       $("#datasrc").innerHTML = "";
       renderSituacionActual(registros);
+      renderMapaCalor();
       renderAnalisis();
     }
 
     function mostrarError(mensaje) {
       $("#loader").hidden = true;
-      console.error("No se pudo cargar la base de Bolsones:", mensaje);
       const aviso = $("#datasrc");
       aviso.className = "datasrc show";
-      aviso.innerHTML = `<span><b>No pudimos cargar la información.</b> Abrí la versión publicada o seleccioná el archivo de Bolsones.</span>`
+      aviso.innerHTML = `<span><b>No se pudo cargar la base:</b> ${esc(mensaje)}. Si abriste el HTML con doble clic, elegí el CSV manualmente.</span>`
         + `<button type="button" id="btn-pick">Elegir CSV…</button>`;
       $("#btn-pick").addEventListener("click", () => $("#picker").click());
     }
 
     async function cargar() {
-      const fallas = [];
-      for (const archivo of CONFIG.archivos) {
-        try {
-          const separador = archivo.includes("?") ? "&" : "?";
-          const respuesta = await fetch(`${archivo}${separador}_=${Date.now()}`, { cache: "no-store" });
-          if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
-          renderDatos(parseCSV(await respuesta.text()));
-          return;
-        } catch (error) {
-          fallas.push(`${archivo}: ${error.message || error}`);
-        }
+      try {
+        const respuesta = await fetch(`${CONFIG.archivo}?_=${Date.now()}`, { cache: "no-store" });
+        if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
+        renderDatos(parseCSV(await respuesta.text()));
+      } catch (error) {
+        mostrarError(error.message || String(error));
       }
-      mostrarError(fallas.join(" · "));
     }
 
     $("#picker").addEventListener("change", async evento => {
@@ -1847,9 +2140,18 @@
         .map(municipio => `<option value="${municipio}">Municipio ${municipio}</option>`)
         .join("");
 
+    $("#mapa-muni").innerHTML = '<option value="todos">Todos</option>'
+      + Object.keys(CONFIG.diasIntervencion)
+        .map(municipio => `<option value="${municipio}">Municipio ${municipio}</option>`)
+        .join("");
+    $("#mapa-muni").addEventListener("change", renderMapaCalor);
+    $("#mapa-intensidad").addEventListener("input", () => renderMapaCalor({ ajustarVista: false }));
+
     ["#f-desde", "#f-hasta", "#f-muni"].forEach(selector => {
       $(selector).addEventListener("change", renderAnalisis);
     });
+
+    rangoInicial(30);
 
     cargar();
   </script>
