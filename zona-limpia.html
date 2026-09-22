@@ -206,6 +206,21 @@ tr.cr{cursor:pointer}
   .table-scroll table,#tw-cov table{min-width:640px}
   #v-map #mel{height:65vh;min-height:420px}
 }
+
+/* Una columna compacta por filtro para mantenerlos en una sola fila. */
+html body.page-zona-limpia .fbar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr)) 30px;gap:6px;align-items:end;padding-top:1.1rem;padding-bottom:.85rem}
+.fbar-field{display:flex;flex-direction:column;gap:3px;min-width:0}
+.fbar-field .fbar-lbl{font-size:9px;line-height:1;white-space:nowrap}
+.fbar-field select,.fbar-field input[type=date]{width:100%;min-width:0;height:36px;padding:0 6px;font-size:11px}
+.fbar-sep{display:none}
+.fbar-note{grid-column:1/-1}
+.fbar .btn-rst{grid-column:auto;width:30px;min-width:30px;height:38px;min-height:38px;font-size:15px}
+@media(max-width:760px){
+  html body.page-zona-limpia .fbar{grid-template-columns:repeat(7,minmax(0,1fr)) 30px;gap:4px;padding-top:1.05rem;padding-bottom:.8rem}
+  .fbar-field .fbar-lbl{font-size:8px;letter-spacing:.02em}
+  .fbar-field select,.fbar-field input[type=date]{height:36px;padding:0 3px;font-size:10px}
+  .fbar .btn-rst{grid-column:auto;width:30px;min-width:30px;height:38px;min-height:38px}
+}
 </style>
 <link rel="stylesheet" href="assets/dashboard-common.css?v=20260922-27">
 </head>
@@ -262,21 +277,37 @@ tr.cr{cursor:pointer}
   </div>
 
   <div class="fbar">
-    <label class="fbar-lbl" for="f-mun">Municipio</label>
-    <select id="f-mun"><option value="">Todos</option></select>
-    <label class="fbar-lbl" for="f-circ">Circuito</label>
-    <select id="f-circ"><option value="">Todos</option></select>
+    <div class="fbar-field">
+      <label class="fbar-lbl" for="f-mun">Municipio</label>
+      <select id="f-mun"><option value="">Todos</option></select>
+    </div>
+    <div class="fbar-field">
+      <label class="fbar-lbl" for="f-circ">Circuito</label>
+      <select id="f-circ"><option value="">Todos</option></select>
+    </div>
     <div class="fbar-sep"></div>
-    <label class="fbar-lbl" for="f-d1">Desde</label><input type="date" id="f-d1">
-    <label class="fbar-lbl" for="f-d2">Hasta</label><input type="date" id="f-d2">
+    <div class="fbar-field">
+      <label class="fbar-lbl" for="f-d1">Desde</label>
+      <input type="date" id="f-d1">
+    </div>
+    <div class="fbar-field">
+      <label class="fbar-lbl" for="f-d2">Hasta</label>
+      <input type="date" id="f-d2">
+    </div>
     <div class="fbar-sep"></div>
-    <label class="fbar-lbl" id="lbl-f-emp" for="f-emp">Empresa</label>
-    <select id="f-emp"><option value="">Todas</option></select>
-    <label class="fbar-lbl" id="lbl-f-unidad" for="f-unidad">Unidad</label>
-    <select id="f-unidad"><option value="">Todas</option></select>
+    <div class="fbar-field">
+      <label class="fbar-lbl" id="lbl-f-emp" for="f-emp">Empresa</label>
+      <select id="f-emp"><option value="">Todas</option></select>
+    </div>
+    <div class="fbar-field">
+      <label class="fbar-lbl" id="lbl-f-unidad" for="f-unidad">Unidad</label>
+      <select id="f-unidad"><option value="">Todas</option></select>
+    </div>
     <div class="fbar-sep"></div>
-    <label class="fbar-lbl" id="lbl-f-turno" for="f-turno">Turno</label>
-    <select id="f-turno"><option value="">Todos</option><option value="Matutino">Matutino</option><option value="Vespertino">Vespertino</option><option value="Nocturno">Nocturno</option></select>
+    <div class="fbar-field">
+      <label class="fbar-lbl" id="lbl-f-turno" for="f-turno">Turno</label>
+      <select id="f-turno"><option value="">Todos</option><option value="Matutino">Matutino</option><option value="Vespertino">Vespertino</option><option value="Nocturno">Nocturno</option></select>
+    </div>
     <span class="fbar-note" id="cov-filter-note" hidden>La cobertura se calcula por territorio y período; empresa, unidad y turno no aplican en esta vista.</span>
     <button class="btn-rst com-icon-button" type="button" aria-label="Restablecer filtros" title="Restablecer filtros" onclick="resetF()">↻</button>
   </div>

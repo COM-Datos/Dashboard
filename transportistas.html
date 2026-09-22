@@ -468,6 +468,20 @@
     }
     .pagination .page-btn { min-height: 38px; min-width: 38px; }
   }
+
+  /* Los siete indicadores principales permanecen en una sola fila. */
+  body.page-transportistas .kpi-grid { grid-template-columns: repeat(7,minmax(0,1fr)); gap: 8px; }
+  html body.page-transportistas .kpi-card { min-width: 0; padding: 14px 9px; }
+  body.page-transportistas .kpi-label { font-size: .62rem; letter-spacing: .45px; line-height: 1.2; }
+  body.page-transportistas .kpi-value { font-size: 1.55rem; }
+  body.page-transportistas .kpi-sub { font-size: .68rem; line-height: 1.2; }
+  @media(max-width:640px) {
+    body.page-transportistas .kpi-grid { grid-template-columns: repeat(7,minmax(0,1fr)); gap: 5px; }
+    html body.page-transportistas .kpi-card { padding: 11px 5px; border-radius: 10px; }
+    body.page-transportistas .kpi-label { font-size: .5rem; letter-spacing: .2px; }
+    body.page-transportistas .kpi-value { font-size: 1.15rem; }
+    body.page-transportistas .kpi-sub { font-size: .55rem; }
+  }
 </style>
 <link rel="stylesheet" href="assets/dashboard-common.css?v=20260922-27">
 </head>
@@ -1038,6 +1052,20 @@ function downloadDashboard(d, filename) {
   @media(max-width:900px){.charts-row-2{grid-template-columns:1fr}.persona-charts-row{grid-template-columns:1fr}.persona-mini-kpis{grid-template-columns:repeat(3,1fr)}}
   .chart-card,.charts-row-2>*,.charts-row-3>*,.ranking-row>*,.servicio-evol-wrap{min-width:0}.chart-card canvas,.servicio-evol-wrap canvas{max-width:100%}
   @media(max-width:600px){header{padding:16px}header h1{font-size:1.1rem}.container{padding:14px 10px}}
+
+  /* Mantiene los siete indicadores principales en una sola fila. */
+  .kpi-grid{grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+  .kpi-card{min-width:0;padding:14px 9px}
+  .kpi-label{font-size:.62rem;letter-spacing:.45px;line-height:1.2}
+  .kpi-value{font-size:1.55rem}
+  .kpi-sub{font-size:.68rem;line-height:1.2}
+  @media(max-width:640px){
+    .kpi-grid{grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+    .kpi-card{padding:11px 5px;border-radius:10px}
+    .kpi-label{font-size:.5rem;letter-spacing:.2px}
+    .kpi-value{font-size:1.15rem}
+    .kpi-sub{font-size:.55rem}
+  }
 </style>
 </head>
 <body>
