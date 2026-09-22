@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard Reclamos — COM</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Dashboard COM</title>
+<link rel="icon" type="image/png" href="assets/logo-ciemsa.png">
+<script>
+  document.title = "Dashboard COM";
+  window.addEventListener("pageshow", () => { document.title = "Dashboard COM"; });
+</script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -277,20 +285,19 @@ canvas{max-width:100%;display:block}
 .ttab.on.amber{background:#C47A1E;border-color:#C47A1E}
 .ttab.on.gray{background:var(--gray);border-color:var(--gray)}
 </style>
-<link rel="stylesheet" href="assets/dashboard-common.css">
+<link rel="stylesheet" href="assets/dashboard-common.css?v=20260922-27">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 </head>
 <body class="page-reclamos">
 <div class="com-topbar">
   <div class="com-topbar-inner">
-    <a class="back-link com-back-link" href="index.html">
-      <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    <a class="com-back-link" href="index.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Volver al menú principal
     </a>
     <div class="header-badge" aria-hidden="true">📋</div>
     <div>
-      <div class="header-title">Dashboard de Reclamos</div>
-      <div class="header-sub">Centro Operativo de Montevideo — COM</div>
+      <div class="header-title">Dashboard Reclamos</div>
     </div>
   </div>
 </div>
@@ -301,7 +308,7 @@ canvas{max-width:100%;display:block}
     <div class="com-loading-view" id="drop-zone" role="status" aria-live="polite">
       <div class="com-loading-content">
         <span class="com-spinner" id="reclamos-spinner" aria-hidden="true"></span>
-        <div class="com-loading-message" id="reclamos-loading-message">Cargando información…</div>
+        <div class="com-loading-message" id="reclamos-loading-message">Cargando información</div>
         <div id="file-info"></div>
         <div class="com-loading-actions" id="reclamos-loading-actions" hidden>
           <button class="com-retry-button" id="btn-generar" onclick="fetchFromSheets()">Reintentar</button>
@@ -380,11 +387,6 @@ canvas{max-width:100%;display:block}
         <div class="kpi-label">% ≤ 24h</div>
         <div class="kpi-val" id="kpi-p24">—</div>
         <div class="kpi-desc">sobre total ingresados</div>
-      </div>
-      <div class="kpi-card gray">
-        <div class="kpi-label">Sin resolver</div>
-        <div class="kpi-val" id="kpi-sin">—</div>
-        <div class="kpi-desc">estado abierto</div>
       </div>
       <div class="kpi-card blue">
         <div class="kpi-label">Prom. resolución</div>
@@ -936,7 +938,7 @@ async function fetchFromSheets(){
   spinner.hidden=false;
   actions.hidden=true;
   message.className='com-loading-message';
-  message.textContent='Cargando información…';
+  message.textContent='Cargando información';
   fi.textContent='';
   try{
     const data=await fetchCSV(CSV_REC);
@@ -968,7 +970,7 @@ async function fetchFromSheets(){
     document.getElementById('mode-unicos').classList.toggle('active',currentMode==='unicos');
     document.getElementById('step-filter').style.display='block';
     document.getElementById('step-upload').style.display='none';
-    aplicar(); // Renderiza de una con el período completo — evita el segundo clic en "Generar dashboard"
+    aplicar(false); // Carga inicial: renderiza sin desplazar la página hacia abajo.
   } catch(err){
     console.error('No se pudo cargar Reclamos:',err);
     spinner.hidden=true;
@@ -1053,7 +1055,7 @@ function filtrar(lista){
   return currentMode==='unicos'?lista.filter(r=>!esRepetido(r)):lista;
 }
 
-function aplicar(){
+function aplicar(desplazar=true){
   const f1=document.getElementById('fecha1').value;
   if(!f1){alert('Seleccioná una fecha.');return;}
   const f2=document.getElementById('fecha2').value;
@@ -1069,7 +1071,7 @@ function aplicar(){
   document.getElementById('charts-section').style.display='none';
   document.getElementById('municipio-section').style.display='none';
   document.getElementById('step-dashboard').style.display='block';
-  document.getElementById('step-dashboard').scrollIntoView({behavior:'smooth',block:'start'});
+  if(desplazar)document.getElementById('step-dashboard').scrollIntoView({behavior:'smooth',block:'start'});
   saveReclamosState();
   renderDashboard();
 }
@@ -1101,7 +1103,6 @@ function renderDashboard(){
   const total=ingresados.length||1;
   const pct24=Math.round(buckets[0]/total*100);
   document.getElementById('kpi-p24').textContent=pct24+'%';
-  document.getElementById('kpi-sin').textContent=buckets[4].toLocaleString('es-UY');
   document.getElementById('dist-badge').textContent=ingresados.length.toLocaleString('es-UY')+' reclamos';
   // Promedio horas resolución — sobre ingresados, excluir negativos y >N días (configurable)
   const diasMaxEl=document.getElementById('umbral-dias-res');
