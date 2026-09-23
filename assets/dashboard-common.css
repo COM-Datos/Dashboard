@@ -980,6 +980,10 @@ select:disabled {
   box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
 }
 
+.page-agenda .topbar {
+  padding: 0;
+}
+
 .page-agenda .topbar .inner,
 .page-reclamos .com-topbar-inner,
 .page-zona-limpia .cscreen-topbar,
@@ -994,10 +998,19 @@ select:disabled {
   flex-wrap: wrap;
 }
 
+.page-agenda .topbar .inner {
+  width: 100%;
+  max-width: none;
+}
+
 .page-agenda .titlerow,
 .page-zona-limpia .brand,
 .page-tareas .brand {
   gap: 10px;
+}
+
+.page-agenda .titlerow {
+  margin: 0;
 }
 
 .page-reclamos .header-badge,
@@ -1049,6 +1062,8 @@ select:disabled {
 }
 
 .page-agenda .com-back-link,
+.page-agenda .back,
+.page-bolsones .back,
 .page-reclamos .com-back-link,
 .page-zona-limpia .com-back-link,
 .page-transportistas .com-back-link,
@@ -1229,6 +1244,28 @@ body.page-bolsones {
   box-shadow: var(--com-shadow);
 }
 
+/* Bolsones: el borde superior identifica cada métrica con el mismo color que
+   su serie en las gráficas. Esta regla va después del borde común para que la
+   estandarización de tarjetas no borre la referencia cromática. */
+.page-bolsones .kpi {
+  border-top-width: 3px;
+  border-top-style: solid;
+}
+
+.page-bolsones .kpi.total-solicitudes { border-top-color: #2563eb; }
+.page-bolsones .kpi.total-servicios { border-top-color: #d98f75; }
+.page-bolsones .kpi.total-bolsones,
+.page-bolsones .kpi.total-plantas { border-top-color: var(--com-header); }
+.page-bolsones .kpi.total-camiones { border-top-color: #0d9488; }
+.page-bolsones .kpi.promedio { border-top-color: #9ca3af; }
+.page-bolsones .kpi.purple { border-top-color: #7c3aed; }
+.page-bolsones .kpi.lilac { border-top-color: #c4b5fd; }
+.page-bolsones .kpi.planta-usina { border-top-color: #f4c84a; }
+.page-bolsones .kpi.planta-geminis { border-top-color: #f39a4a; }
+.page-bolsones .kpi.planta-paloma { border-top-color: #16a6b6; }
+.page-bolsones .kpi.planta-duran { border-top-color: #7bc47f; }
+.page-bolsones .kpi.planta-burgues { border-top-color: #9b7bd6; }
+
 .page-bolsones .filters {
   gap: 12px;
   padding: 14px 16px;
@@ -1312,4 +1349,863 @@ body.page-bolsones {
   .page-bolsones .loader {
     padding: 28px 20px;
   }
+}
+
+/* Agenda: Bolsones es la referencia de ancho, escala tipográfica y densidad. */
+.page-agenda .wrap {
+  max-width: 1320px;
+}
+
+.page-agenda h2.sec {
+  padding-bottom: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.page-agenda h2.sec .n {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.page-agenda .filters {
+  gap: 12px;
+  padding: 14px 16px;
+}
+
+.page-agenda .field label {
+  letter-spacing: .02em;
+}
+
+.page-agenda input[type="date"],
+.page-agenda select {
+  padding: 7px 10px;
+  font-weight: 400;
+}
+
+.page-agenda .kpi {
+  min-width: 160px;
+  padding: 12px 15px;
+  border-radius: var(--com-radius-card);
+  box-shadow: var(--com-shadow);
+}
+
+.page-agenda .kpi .k-val {
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+/* Cabecera común en dos niveles: navegación arriba y producto debajo. */
+.page-agenda .topbar .inner,
+.page-bolsones .topbar .inner,
+.page-reclamos .com-topbar-inner,
+.page-zona-limpia .cscreen-topbar,
+.page-zona-limpia #dscreen > .topbar,
+.page-transportistas > header,
+.page-tareas .topin {
+  min-height: 88px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: 22px auto;
+  column-gap: 12px;
+  row-gap: 4px;
+  align-items: center;
+  padding: 10px 24px;
+}
+
+.page-agenda .com-back-link,
+.page-bolsones .com-back-link,
+.page-reclamos .com-back-link,
+.page-zona-limpia .com-back-link,
+.page-transportistas .com-back-link,
+.page-tareas .com-back-link {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  justify-self: start;
+  min-height: 22px;
+  padding: 0 2px;
+}
+
+.page-agenda .titlerow,
+.page-bolsones .titlerow {
+  grid-column: 1 / 3;
+  grid-row: 2;
+}
+
+.page-reclamos .header-badge,
+.page-transportistas > header .logo {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.page-reclamos .com-topbar-inner > .header-badge + div,
+.page-transportistas > header > .logo + div {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.page-zona-limpia .cscreen-topbar > .brand,
+.page-zona-limpia #dscreen > .topbar > .brand,
+.page-tareas .topin > .brand {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.page-transportistas .header-actions,
+.page-zona-limpia .topbar-actions,
+.page-tareas .actions {
+  grid-column: 3;
+  grid-row: 2;
+  margin-left: 0;
+}
+
+.page-tareas .tabs {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: start;
+}
+
+@media (max-width: 700px) {
+  .page-agenda .topbar .inner,
+  .page-bolsones .topbar .inner,
+  .page-reclamos .com-topbar-inner,
+  .page-zona-limpia .cscreen-topbar,
+  .page-zona-limpia #dscreen > .topbar,
+  .page-transportistas > header,
+  .page-tareas .topin {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: 22px auto auto;
+    padding: 10px 14px;
+  }
+
+  .page-transportistas .header-actions,
+  .page-zona-limpia .topbar-actions,
+  .page-tareas .tabs {
+    width: 100%;
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .page-tareas .actions {
+    grid-column: 3;
+    grid-row: 2;
+  }
+}
+
+/* Cabecera y carga inicial comunes para los seis dashboards. */
+:root {
+  --com-dashboard-header-height: 88px;
+}
+
+.page-agenda .topbar,
+.page-bolsones .topbar,
+.page-reclamos .com-topbar,
+.page-zona-limpia .cscreen-topbar,
+.page-zona-limpia #dscreen > .topbar,
+.page-transportistas > header,
+.page-tareas .top {
+  min-height: var(--com-dashboard-header-height);
+}
+
+/* La cabecera siempre queda por encima del panel de carga, incluso si en una
+   pantalla angosta crece a una tercera fila de controles. */
+.page-agenda .topbar,
+.page-bolsones .topbar,
+.page-reclamos .com-topbar,
+.page-zona-limpia .cscreen-topbar,
+.page-transportistas > header {
+  position: relative;
+  z-index: 20;
+}
+
+.page-agenda .loader,
+.page-bolsones .loader,
+.page-reclamos .com-loading-view,
+.page-transportistas #loadingScreen,
+.page-zona-limpia #cscreen .com-loading-view,
+.page-tareas #initialLoading {
+  position: fixed;
+  inset: var(--com-dashboard-header-height) 0 0;
+  z-index: 10;
+  width: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 24px;
+  align-items: center;
+  justify-content: center;
+  background: var(--com-bg, #f7f6f3);
+}
+
+.page-agenda .loader .com-loading-content,
+.page-bolsones .loader .com-loading-content,
+.page-reclamos .com-loading-content,
+.page-transportistas #loadingScreen .com-loading-content,
+.page-zona-limpia #cscreen .com-loading-content,
+.page-tareas #initialLoading .com-loading-content {
+  max-width: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  text-align: left;
+}
+
+.page-agenda .loader .com-loading-message,
+.page-bolsones .loader .com-loading-message,
+.page-reclamos .com-loading-message,
+.page-transportistas #loadingScreen .com-loading-message,
+.page-zona-limpia #cscreen .com-loading-message,
+.page-tareas #initialLoading .com-loading-message {
+  margin: 0;
+  color: var(--com-text, #182230);
+  font-family: var(--com-font);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.page-agenda .loader .com-spinner,
+.page-bolsones .loader .com-spinner,
+.page-reclamos .com-spinner,
+.page-transportistas #loadingScreen .com-spinner,
+.page-zona-limpia #cscreen .com-spinner,
+.page-tareas #initialLoading .com-spinner {
+  width: 38px;
+  height: 38px;
+  border: 3px solid #dbe3ed;
+  border-top-color: #2563eb;
+}
+
+/* Agenda controla la visibilidad con la clase `cargando` del body. La clase
+   visual común no debe dejar el overlay activo una vez finalizada la carga. */
+.page-agenda .loader {
+  display: none;
+}
+
+.page-agenda.cargando .loader {
+  display: flex;
+}
+
+.page-agenda.cargando {
+  overflow: hidden;
+}
+
+/* El contenido de cada cabecera comparte el mismo eje que su área principal. */
+.page-agenda,
+.page-bolsones {
+  --com-header-content-max: 1320px;
+  --com-header-content-padding: 24px;
+}
+
+.page-reclamos {
+  --com-header-content-max: 980px;
+  --com-header-content-padding: 24px;
+}
+
+.page-transportistas {
+  --com-header-content-max: 1400px;
+  --com-header-content-padding: 20px;
+}
+
+.page-zona-limpia {
+  --com-header-content-max: 100vw;
+  --com-header-content-padding: 20px;
+}
+
+.page-tareas {
+  --com-header-content-max: 1440px;
+  --com-header-content-padding: 24px;
+}
+
+.page-agenda .topbar .inner,
+.page-bolsones .topbar .inner,
+.page-reclamos .com-topbar-inner,
+.page-zona-limpia .cscreen-topbar,
+.page-zona-limpia #dscreen > .topbar,
+.page-transportistas > header,
+.page-tareas .topin {
+  padding-left: max(
+    var(--com-header-content-padding),
+    calc((100% - var(--com-header-content-max)) / 2 + var(--com-header-content-padding))
+  );
+  padding-right: max(
+    var(--com-header-content-padding),
+    calc((100% - var(--com-header-content-max)) / 2 + var(--com-header-content-padding))
+  );
+}
+
+/* Jerarquía de texto de la franja azul. */
+.page-agenda .titlerow h1,
+.page-bolsones .titlerow h1,
+.page-reclamos .header-title,
+.page-zona-limpia .brand-name,
+.page-transportistas > header h1,
+.page-tareas .brand h1 {
+  font-size: 27px;
+  line-height: 1;
+}
+
+.page-agenda .com-back-link,
+.page-bolsones .com-back-link,
+.page-reclamos .com-back-link,
+.page-zona-limpia .com-back-link,
+.page-transportistas .com-back-link,
+.page-tareas .com-back-link {
+  gap: 5px;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  line-height: 1;
+}
+
+/* Corrección óptica: el bloque de identidad quedaba visualmente más bajo que
+   el enlace Volver aunque sus cajas estuvieran matemáticamente centradas. */
+.page-agenda .titlerow,
+.page-bolsones .titlerow,
+.page-reclamos .header-badge,
+.page-reclamos .com-topbar-inner > .header-badge + div,
+.page-transportistas > header .logo,
+.page-transportistas > header > .logo + div,
+.page-zona-limpia .brand,
+.page-tareas .brand {
+  transform: translateY(-1px);
+}
+
+.page-agenda .com-back-link svg,
+.page-bolsones .com-back-link svg,
+.page-reclamos .com-back-link svg,
+.page-zona-limpia .com-back-link svg,
+.page-transportistas .com-back-link svg,
+.page-tareas .com-back-link svg {
+  width: 11px !important;
+  height: 11px !important;
+}
+
+@media (max-width: 760px) {
+  .page-zona-limpia .cscreen-topbar,
+  .page-zona-limpia #dscreen > .topbar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Definición final: apariencia compacta original de Zona Limpia. Debe quedar
+   al final para que ninguna regla histórica de los dashboards la reemplace. */
+html body .com-back-link.com-back-link {
+  box-sizing: content-box !important;
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: -6px -8px !important;
+  padding: 6px 8px !important;
+  flex: 0 0 auto !important;
+  gap: 5px !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #c7d5ea !important;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  line-height: normal !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+html body .com-back-link.com-back-link:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, .10) !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+
+html body .com-back-link.com-back-link svg {
+  display: block !important;
+  width: 11px !important;
+  min-width: 11px !important;
+  height: 11px !important;
+  flex: 0 0 11px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+  stroke-linecap: butt !important;
+  stroke-linejoin: miter !important;
+}
+
+/* Réplica exacta del enlace de regreso de Zona Limpia. Se declaran todas las
+   métricas y la flecha para neutralizar los estilos históricos de cada HTML. */
+.page-agenda .com-back-link,
+.page-bolsones .com-back-link,
+.page-reclamos .com-back-link,
+.page-zona-limpia .com-back-link,
+.page-transportistas .com-back-link,
+.page-tareas .com-back-link {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 0 0 auto !important;
+  gap: 5px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #c7d5ea !important;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-variant: normal !important;
+  letter-spacing: normal !important;
+  line-height: normal !important;
+  text-align: left !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  overflow: visible !important;
+  cursor: pointer !important;
+  transition: color .15s, background-color .15s, box-shadow .15s !important;
+}
+
+.page-agenda .com-back-link:hover,
+.page-bolsones .com-back-link:hover,
+.page-reclamos .com-back-link:hover,
+.page-zona-limpia .com-back-link:hover,
+.page-transportistas .com-back-link:hover,
+.page-tareas .com-back-link:hover {
+  color: #fff !important;
+}
+
+.page-agenda .com-back-link svg,
+.page-bolsones .com-back-link svg,
+.page-reclamos .com-back-link svg,
+.page-zona-limpia .com-back-link svg,
+.page-transportistas .com-back-link svg,
+.page-tareas .com-back-link svg {
+  display: block !important;
+  width: 11px !important;
+  min-width: 11px !important;
+  height: 11px !important;
+  flex: 0 0 11px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+  stroke-linecap: butt !important;
+  stroke-linejoin: miter !important;
+}
+
+/* Evita que la cabecera salte cuando el contenido cargado hace aparecer la
+   barra vertical. Este archivo sólo se usa en los seis dashboards, por eso la
+   reserva puede aplicarse al documento completo desde el primer render. */
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+/* La identidad de la cabecera no depende de las fuentes web. Así evitamos el
+   pequeño salto de métricas que ocurría cuando Plus Jakarta/DM Sans terminaba
+   de cargarse. El ancho reservado de Volver mantiene fijo el inicio del título. */
+.page-agenda .com-back-link,
+.page-bolsones .com-back-link,
+.page-reclamos .com-back-link,
+.page-zona-limpia .com-back-link,
+.page-transportistas .com-back-link,
+.page-tareas .com-back-link {
+  width: 166px;
+  flex: 0 0 166px;
+  font-family: "Segoe UI", Arial, sans-serif !important;
+}
+
+.page-agenda .titlerow h1,
+.page-bolsones .titlerow h1,
+.page-reclamos .header-title,
+.page-zona-limpia .brand-name,
+.page-transportistas > header h1,
+.page-tareas .brand h1 {
+  font-family: "Segoe UI", Arial, sans-serif !important;
+}
+
+.page-agenda .titlerow .ico,
+.page-bolsones .titlerow .ico,
+.page-reclamos .header-badge,
+.page-transportistas > header .logo,
+.page-zona-limpia .brand-ico,
+.page-tareas .mark {
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.page-agenda .topbar,
+.page-bolsones .topbar,
+.page-reclamos .com-topbar,
+.page-zona-limpia .cscreen-topbar,
+.page-zona-limpia #dscreen > .topbar,
+.page-transportistas > header,
+.page-tareas .top {
+  overflow-anchor: none;
+}
+
+/* Alineación geométrica idéntica de la identidad en los seis encabezados. */
+.page-agenda .com-back-link,
+.page-bolsones .com-back-link,
+.page-reclamos .com-back-link,
+.page-zona-limpia .com-back-link,
+.page-transportistas .com-back-link,
+.page-tareas .com-back-link {
+  height: 32px;
+  min-height: 32px;
+  margin: 0 !important;
+  padding: 0 2px !important;
+  display: inline-flex;
+  align-items: center;
+  line-height: 32px;
+}
+
+.page-agenda .titlerow,
+.page-bolsones .titlerow,
+.page-zona-limpia .brand,
+.page-tareas .brand {
+  min-height: 32px;
+  margin-top: 0 !important;
+  display: flex;
+  align-items: center;
+}
+
+.page-reclamos .com-topbar-inner > .header-badge + div,
+.page-transportistas > header > .logo + div {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.page-agenda .titlerow .ico,
+.page-bolsones .titlerow .ico,
+.page-reclamos .header-badge,
+.page-transportistas > header .logo,
+.page-zona-limpia .brand-ico,
+.page-tareas .mark {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 26px;
+  line-height: 32px;
+}
+
+.page-agenda .titlerow h1,
+.page-bolsones .titlerow h1,
+.page-reclamos .header-title,
+.page-zona-limpia .brand-name,
+.page-transportistas > header h1,
+.page-tareas .brand h1 {
+  min-height: 32px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  line-height: 32px;
+}
+
+
+@media (max-width: 700px) {
+  .page-tareas .topin {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+@media (max-width: 680px) {
+  .page-agenda .topbar .inner,
+  .page-bolsones .topbar .inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-reclamos .com-topbar-inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-transportistas > header {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* Encabezado de Datos generales: título y período comparten una única línea
+   divisoria, ubicada debajo de ambos textos. */
+.page-agenda .com-section-heading,
+.page-bolsones .com-section-heading {
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--navy, #0f2444);
+}
+
+.page-agenda .com-section-heading h2.sec,
+.page-bolsones .com-section-heading h2.sec {
+  margin-bottom: 4px;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.page-agenda .com-section-heading .com-available-period,
+.page-bolsones .com-section-heading .com-available-period {
+  margin: 0;
+}
+
+/* Bolsones usa el mismo azul de Agenda en todas las líneas de sección. */
+.page-bolsones h2.sec {
+  border-bottom-color: var(--navy, #0f2444);
+}
+
+/* Ancho de producto unificado: Agenda y Bolsones son la referencia. */
+.page-agenda,
+.page-bolsones,
+.page-reclamos,
+.page-transportistas,
+.page-zona-limpia,
+.page-tareas {
+  --com-header-content-max: 1320px;
+  --com-header-content-padding: 24px;
+}
+
+.page-reclamos .page,
+.page-transportistas .container,
+.page-zona-limpia .vbody,
+.page-tareas .main,
+.page-tareas .status {
+  width: 100%;
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Zona Limpia necesita conservar el fondo completo de la barra de filtros,
+   pero sus controles siguen el mismo eje de 1320 px. */
+.page-zona-limpia .fbar {
+  width: 100%;
+  max-width: none;
+  padding-left: max(24px, calc((100% - 1320px) / 2 + 24px));
+  padding-right: max(24px, calc((100% - 1320px) / 2 + 24px));
+}
+
+.page-zona-limpia .com-range-error {
+  width: 100%;
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Cabecera común en una sola fila: volver, identidad y acciones. */
+:root {
+  --com-dashboard-header-height: 84px;
+}
+
+.page-agenda .topbar .inner,
+.page-bolsones .topbar .inner,
+.page-reclamos .com-topbar-inner,
+.page-zona-limpia .cscreen-topbar,
+.page-zona-limpia #dscreen > .topbar,
+.page-transportistas > header,
+.page-tareas .topin {
+  min-height: var(--com-dashboard-header-height);
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.page-agenda .topbar .inner > *,
+.page-bolsones .topbar .inner > *,
+.page-reclamos .com-topbar-inner > *,
+.page-zona-limpia .cscreen-topbar > *,
+.page-zona-limpia #dscreen > .topbar > *,
+.page-transportistas > header > *,
+.page-tareas .topin > * {
+  align-self: center;
+}
+
+.page-agenda .titlerow,
+.page-bolsones .titlerow,
+.page-zona-limpia .brand,
+.page-transportistas .header-actions,
+.page-zona-limpia .topbar-actions,
+.page-tareas .brand,
+.page-tareas .tabs,
+.page-tareas .actions {
+  align-items: center;
+}
+
+.page-agenda .com-back-link,
+.page-bolsones .com-back-link,
+.page-reclamos .com-back-link,
+.page-zona-limpia .com-back-link,
+.page-transportistas .com-back-link,
+.page-tareas .com-back-link,
+.page-agenda .titlerow,
+.page-bolsones .titlerow,
+.page-reclamos .header-badge,
+.page-reclamos .com-topbar-inner > .header-badge + div,
+.page-transportistas > header .logo,
+.page-transportistas > header > .logo + div,
+.page-zona-limpia .cscreen-topbar > .brand,
+.page-zona-limpia #dscreen > .topbar > .brand,
+.page-tareas .topin > .brand,
+.page-tareas .tabs,
+.page-transportistas .header-actions,
+.page-zona-limpia .topbar-actions,
+.page-tareas .actions {
+  grid-column: auto;
+  grid-row: auto;
+}
+
+.page-agenda .com-back-link,
+.page-bolsones .com-back-link,
+.page-reclamos .com-back-link,
+.page-zona-limpia .com-back-link,
+.page-transportistas .com-back-link,
+.page-tareas .com-back-link {
+  flex: 0 0 auto;
+  min-height: 32px;
+}
+
+.page-agenda .titlerow,
+.page-bolsones .titlerow,
+.page-zona-limpia .brand,
+.page-tareas .brand {
+  margin: 0;
+}
+
+.page-transportistas .header-actions,
+.page-zona-limpia .topbar-actions,
+.page-tareas .actions {
+  margin-left: auto;
+}
+
+@media (max-width: 760px) {
+  .page-agenda,
+  .page-bolsones,
+  .page-reclamos,
+  .page-transportistas,
+  .page-zona-limpia,
+  .page-tareas {
+    --com-header-content-padding: 16px;
+  }
+
+  .page-reclamos .page,
+  .page-transportistas .container,
+  .page-zona-limpia .vbody,
+  .page-tareas .main,
+  .page-tareas .status {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .page-zona-limpia .fbar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .page-agenda .topbar .inner,
+  .page-bolsones .topbar .inner,
+  .page-reclamos .com-topbar-inner,
+  .page-zona-limpia .cscreen-topbar,
+  .page-zona-limpia #dscreen > .topbar,
+  .page-transportistas > header,
+  .page-tareas .topin {
+    flex-wrap: wrap;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .page-transportistas .header-actions,
+  .page-zona-limpia .topbar-actions,
+  .page-tareas .tabs {
+    flex-basis: 100%;
+  }
+}
+
+/* Apariencia compacta original de Zona Limpia. Esta es la última regla del
+   archivo para que ningún estilo histórico vuelva a modificar el enlace. */
+body .com-back-link {
+  box-sizing: content-box !important;
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 0 0 auto !important;
+  gap: 5px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #c7d5ea !important;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  line-height: normal !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
+  transform: none !important;
+}
+
+body .com-back-link:hover {
+  color: #fff !important;
+}
+
+body .com-back-link svg {
+  display: block !important;
+  width: 11px !important;
+  min-width: 11px !important;
+  height: 11px !important;
+  flex: 0 0 11px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+  stroke-linecap: butt !important;
+  stroke-linejoin: miter !important;
 }

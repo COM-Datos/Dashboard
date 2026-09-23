@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard Zona Limpia — COM</title>
+<title>Dashboard COM</title>
+<link rel="icon" type="image/png" href="assets/logo-ciemsa.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -205,30 +206,44 @@ tr.cr{cursor:pointer}
   .table-scroll table,#tw-cov table{min-width:640px}
   #v-map #mel{height:65vh;min-height:420px}
 }
+
+/* Una columna compacta por filtro para mantenerlos en una sola fila. */
+html body.page-zona-limpia .fbar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr)) 30px;gap:6px;align-items:end;padding-top:1.1rem;padding-bottom:.85rem}
+.fbar-field{display:flex;flex-direction:column;gap:3px;min-width:0}
+.fbar-field .fbar-lbl{font-size:9px;line-height:1;white-space:nowrap}
+.fbar-field select,.fbar-field input[type=date]{width:100%;min-width:0;height:36px;padding:0 6px;font-size:11px}
+.fbar-sep{display:none}
+.fbar-note{grid-column:1/-1}
+.fbar .btn-rst{grid-column:auto;width:30px;min-width:30px;height:38px;min-height:38px;font-size:15px}
+@media(max-width:760px){
+  html body.page-zona-limpia .fbar{grid-template-columns:repeat(7,minmax(0,1fr)) 30px;gap:4px;padding-top:1.05rem;padding-bottom:.8rem}
+  .fbar-field .fbar-lbl{font-size:8px;letter-spacing:.02em}
+  .fbar-field select,.fbar-field input[type=date]{height:36px;padding:0 3px;font-size:10px}
+  .fbar .btn-rst{grid-column:auto;width:30px;min-width:30px;height:38px;min-height:38px}
+}
 </style>
-<link rel="stylesheet" href="assets/dashboard-common.css">
+<link rel="stylesheet" href="assets/dashboard-common.css?v=20260922-27">
 </head>
 <body class="page-zona-limpia">
 
 <!-- ── CONEXIÓN ── -->
 <div id="cscreen">
   <div class="cscreen-topbar">
-    <a class="back-link com-back-link" href="index.html">
-      <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    <a class="com-back-link" href="index.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Volver al menú principal
     </a>
     <div class="brand">
-      <div class="brand-ico" aria-hidden="true">♻️</div>
+      <div class="brand-ico" aria-hidden="true">🚚</div>
       <div>
-        <div class="brand-name">Dashboard de Zona Limpia</div>
-        <div class="brand-file">Centro Operativo de Montevideo — COM</div>
+        <div class="brand-name">Dashboard Zona Limpia</div>
       </div>
     </div>
   </div>
   <div class="com-loading-view" role="status" aria-live="polite">
     <div class="com-loading-content">
       <span class="com-spinner" id="zl-spinner" aria-hidden="true"></span>
-      <div class="com-loading-message" id="c-status">Cargando información…</div>
+      <div class="com-loading-message" id="c-status">Cargando información</div>
       <div class="com-loading-actions" id="zl-loading-actions" hidden>
         <button class="com-retry-button" id="c-retry" onclick="initAll()">Reintentar</button>
       </div>
@@ -239,15 +254,14 @@ tr.cr{cursor:pointer}
 <!-- ── DASHBOARD ── -->
 <div id="dscreen">
   <div class="topbar">
-    <a class="topbar-back com-back-link" href="index.html">
-      <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    <a class="com-back-link" href="index.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Volver al menú principal
     </a>
     <div class="brand">
-      <div class="brand-ico">♻️</div>
+      <div class="brand-ico" aria-hidden="true">🚚</div>
       <div>
-        <div class="brand-name">Dashboard de Zona Limpia</div>
-        <div class="brand-file" id="bfile">Centro Operativo de Montevideo — COM</div>
+        <div class="brand-name">Dashboard Zona Limpia</div>
       </div>
     </div>
     <div class="topbar-actions" style="display:flex;align-items:center;gap:8px;margin-left:auto">
@@ -263,21 +277,37 @@ tr.cr{cursor:pointer}
   </div>
 
   <div class="fbar">
-    <label class="fbar-lbl" for="f-mun">Municipio</label>
-    <select id="f-mun"><option value="">Todos</option></select>
-    <label class="fbar-lbl" for="f-circ">Circuito</label>
-    <select id="f-circ"><option value="">Todos</option></select>
+    <div class="fbar-field">
+      <label class="fbar-lbl" for="f-mun">Municipio</label>
+      <select id="f-mun"><option value="">Todos</option></select>
+    </div>
+    <div class="fbar-field">
+      <label class="fbar-lbl" for="f-circ">Circuito</label>
+      <select id="f-circ"><option value="">Todos</option></select>
+    </div>
     <div class="fbar-sep"></div>
-    <label class="fbar-lbl" for="f-d1">Desde</label><input type="date" id="f-d1">
-    <label class="fbar-lbl" for="f-d2">Hasta</label><input type="date" id="f-d2">
+    <div class="fbar-field">
+      <label class="fbar-lbl" for="f-d1">Desde</label>
+      <input type="date" id="f-d1">
+    </div>
+    <div class="fbar-field">
+      <label class="fbar-lbl" for="f-d2">Hasta</label>
+      <input type="date" id="f-d2">
+    </div>
     <div class="fbar-sep"></div>
-    <label class="fbar-lbl" id="lbl-f-emp" for="f-emp">Empresa</label>
-    <select id="f-emp"><option value="">Todas</option></select>
-    <label class="fbar-lbl" id="lbl-f-unidad" for="f-unidad">Unidad</label>
-    <select id="f-unidad"><option value="">Todas</option></select>
+    <div class="fbar-field">
+      <label class="fbar-lbl" id="lbl-f-emp" for="f-emp">Empresa</label>
+      <select id="f-emp"><option value="">Todas</option></select>
+    </div>
+    <div class="fbar-field">
+      <label class="fbar-lbl" id="lbl-f-unidad" for="f-unidad">Unidad</label>
+      <select id="f-unidad"><option value="">Todas</option></select>
+    </div>
     <div class="fbar-sep"></div>
-    <label class="fbar-lbl" id="lbl-f-turno" for="f-turno">Turno</label>
-    <select id="f-turno"><option value="">Todos</option><option value="Matutino">Matutino</option><option value="Vespertino">Vespertino</option><option value="Nocturno">Nocturno</option></select>
+    <div class="fbar-field">
+      <label class="fbar-lbl" id="lbl-f-turno" for="f-turno">Turno</label>
+      <select id="f-turno"><option value="">Todos</option><option value="Matutino">Matutino</option><option value="Vespertino">Vespertino</option><option value="Nocturno">Nocturno</option></select>
+    </div>
     <span class="fbar-note" id="cov-filter-note" hidden>La cobertura se calcula por territorio y período; empresa, unidad y turno no aplican en esta vista.</span>
     <button class="btn-rst com-icon-button" type="button" aria-label="Restablecer filtros" title="Restablecer filtros" onclick="resetF()">↻</button>
   </div>
@@ -520,7 +550,7 @@ async function initAll(){
   spinner.hidden=false;
   actions.hidden=true;
   st.className='com-loading-message';
-  st.textContent='Cargando información…';
+  st.textContent='Cargando información';
   document.getElementById('cscreen').style.display='flex';
   document.getElementById('dscreen').style.display='none';
   try{

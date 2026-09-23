@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generador de Dashboard — Asistencia Transportistas</title>
+<title>Dashboard COM</title>
+<link rel="icon" type="image/png" href="assets/logo-ciemsa.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -467,20 +468,33 @@
     }
     .pagination .page-btn { min-height: 38px; min-width: 38px; }
   }
+
+  /* Los siete indicadores principales permanecen en una sola fila. */
+  body.page-transportistas .kpi-grid { grid-template-columns: repeat(7,minmax(0,1fr)); gap: 8px; }
+  html body.page-transportistas .kpi-card { min-width: 0; padding: 14px 9px; }
+  body.page-transportistas .kpi-label { font-size: .62rem; letter-spacing: .45px; line-height: 1.2; }
+  body.page-transportistas .kpi-value { font-size: 1.55rem; }
+  body.page-transportistas .kpi-sub { font-size: .68rem; line-height: 1.2; }
+  @media(max-width:640px) {
+    body.page-transportistas .kpi-grid { grid-template-columns: repeat(7,minmax(0,1fr)); gap: 5px; }
+    html body.page-transportistas .kpi-card { padding: 11px 5px; border-radius: 10px; }
+    body.page-transportistas .kpi-label { font-size: .5rem; letter-spacing: .2px; }
+    body.page-transportistas .kpi-value { font-size: 1.15rem; }
+    body.page-transportistas .kpi-sub { font-size: .55rem; }
+  }
 </style>
-<link rel="stylesheet" href="assets/dashboard-common.css">
+<link rel="stylesheet" href="assets/dashboard-common.css?v=20260922-27">
 </head>
 <body class="page-transportistas">
 
 <header>
-  <a class="back-link com-back-link" href="index.html">
-    <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  <a class="com-back-link" href="index.html">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Volver al menú principal
   </a>
-  <div class="logo">🚛</div>
+  <div class="logo" aria-hidden="true">🚛</div>
   <div>
-    <h1>Dashboard de Transportistas</h1>
-    <p id="headerSub">Centro Operativo de Montevideo — COM</p>
+    <h1>Dashboard Transportistas</h1>
   </div>
   <div class="header-actions">
     <button type="button" class="btn-header-action" onclick="volverAlGenerador()">
@@ -536,7 +550,7 @@
 <div id="loadingScreen" class="com-loading-view" role="status" aria-live="polite">
   <div class="com-loading-content">
     <div class="com-spinner" aria-hidden="true"></div>
-    <p id="loadingMsg" class="com-loading-message">Cargando información…</p>
+    <p id="loadingMsg" class="com-loading-message">Cargando información</p>
   </div>
 </div>
 
@@ -872,7 +886,7 @@ function buildFilename() {
 
 async function fetchFromSheets() {
   if (!validateGeneratorRange()) return;
-  showLoading('Cargando información…');
+  showLoading('Cargando información');
   try {
     // Método 1: JSONP — funciona desde file://, webview, y cualquier contexto
     const table = await loadGvizJsonp();
@@ -885,7 +899,7 @@ async function fetchFromSheets() {
   } catch(err) {
     // Si JSONP falla, intentar fetch como fallback (funciona en servidores HTTP normales)
     try {
-      showLoading('Cargando información…');
+      showLoading('Cargando información');
       const urls = [
         `https://docs.google.com/spreadsheets/d/${SHEET_ID}/pub?output=csv&gid=0`,
         `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`,
@@ -1038,6 +1052,20 @@ function downloadDashboard(d, filename) {
   @media(max-width:900px){.charts-row-2{grid-template-columns:1fr}.persona-charts-row{grid-template-columns:1fr}.persona-mini-kpis{grid-template-columns:repeat(3,1fr)}}
   .chart-card,.charts-row-2>*,.charts-row-3>*,.ranking-row>*,.servicio-evol-wrap{min-width:0}.chart-card canvas,.servicio-evol-wrap canvas{max-width:100%}
   @media(max-width:600px){header{padding:16px}header h1{font-size:1.1rem}.container{padding:14px 10px}}
+
+  /* Mantiene los siete indicadores principales en una sola fila. */
+  .kpi-grid{grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+  .kpi-card{min-width:0;padding:14px 9px}
+  .kpi-label{font-size:.62rem;letter-spacing:.45px;line-height:1.2}
+  .kpi-value{font-size:1.55rem}
+  .kpi-sub{font-size:.68rem;line-height:1.2}
+  @media(max-width:640px){
+    .kpi-grid{grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+    .kpi-card{padding:11px 5px;border-radius:10px}
+    .kpi-label{font-size:.5rem;letter-spacing:.2px}
+    .kpi-value{font-size:1.15rem}
+    .kpi-sub{font-size:.55rem}
+  }
 </style>
 </head>
 <body>
