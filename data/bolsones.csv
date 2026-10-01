@@ -6934,7 +6934,7 @@ solicita vaciado y bolson nuevo
 Medio dia",2,Vaciado,2,1.0 grande,2026-09-29 13:24:00,Gestión creada automáticamente,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,La Paloma,2,16:37,Cerrado,861,28,horaciodasilveira@imm.gub.uy
 157015,CH,AV BRASIL 2415,Edificios,1,AV BRASIL,2415,-34.90641622,-56.16163869,Patricia San Germán,094833587,2026-09-25 20:42:00,"VACINA SOLICITA SE LE ENTREGUE OTRO BOLSON PROQUE CUANDO SE LE VACIO SE LE DEJO UNO ROTO 
 
-DESCARGA PENDIENTE",1,Vaciado,1,2.0 grande,2026-09-29 19:46:00,,VOLUMINOSO 6 - SA-1038,,,1,,Resuelto,0,30,patysangerman@hotmail.com
+DESCARGA PENDIENTE",1,Vaciado,1,2.0 grande,2026-09-29 19:46:00,,VOLUMINOSO 6 - SA-1038,,,1,,Cerrado,0,30,patysangerman@hotmail.com
 151861,CH,Rambla Luz,Edificios,1,BASILIO PEREIRA DE LA LUZ,1035,-34.90925679,-56.14045282,Mario Da Silva,95740312,2026-07-21 11:10:00,"59898966642
 sabado antes de las 13",1,Vaciado,0,2.0 grande,2026-07-25 08:51:00,NO SALE NADIE,EMPRESA LOS LANZANI-037,SCW 6247,,0,0,Cerrado,4092,21,
 151701,CH,Grupo Habitacional,Comunidad bolsón,1,BV JOSE BATLLE Y ORDOÑEZ,1665,-34.89475698,-56.12859362,Jael Umpierrez,094779982,2026-07-18 10:14:00,vaciado 094277016,1,Vaciado,1,Entrega,2026-07-25 08:19:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Ex-Cofeca,1,12:45,Cerrado,0,1,jael.umpierrez@gmail.com
@@ -7264,7 +7264,6 @@ REAGENDADO
 DE MAÑANA",1,Vaciado,1,2.0 chico,2026-08-11 09:03:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,La Paloma,1,09:46,Cerrado,0,1,
 153034,A,FARAMIÑAN 667,Casa particular,1,FARAMIÑAN,667,-34.84318036,-56.23897349,Silvana hernández,096 235 736,2026-07-29 09:44:00,". Solicitud creada a partir del reclamo: 3631892. 59896235736
 ",1,Vaciado,1,2.0 chico,2026-08-11 07:18:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,La Paloma,1,09:46,Cerrado,0,1,Silvanahernandez021985@gmail.com
-150278,F,COOP MESA 1,Cooperativas,5,CNO FELIPE CARDOSO  y Calle 1  (Calle 3 y Pasaje A),,-34.86994293,-56.10897423,Francisco Amorena,099 020 257 // 099 179 926,2026-07-01 07:07:00,,5,Vaciado,5,2.0 grande,2026-07-01 07:13:00,4g1ch,Dahiana-10,SDJ 5095,Géminis,5,10:12,Cerrado,0,420,fabianartigas@outlook.com
 152878,CH,Edificio IUS,Edificios,1,JOSE LUIS ZORRILLA DE SAN MARTIN,195,-34.92603150,-56.16017616,Silvina Lindner,099700132,2026-08-03 16:00:00,,1,Vaciado,1,2.0 grande,2026-08-11 09:11:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Géminis,1,10:14,Cerrado,0,1,silvina.lindner@gmail.com
 153122,CH,Lar Mesoiro,Edificios,2,BV GRAL ARTIGAS,266,-34.92405799,-56.16152690,Elena Martirena,099604602,2026-08-06 09:36:00,"VACIADO +598 93 748 354
 ",2,Vaciado,1,2.0 chico,2026-08-11 08:35:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Géminis,1,10:14,Cerrado,0,19,emartirenacal@gmail.com
@@ -7654,36 +7653,13 @@ dejamos bolsones rotos",1,Vaciado,1,2.0 chico,2026-08-27 19:27:00,Gestión cread
 
 EN LA TARDE ",1,Vaciado,1,2.0 grande,2026-08-27 17:48:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Burgues,1,20:20,Cerrado,0,2,
 150364,A,AMEGHINO 4412,Casa particular,1,AMEGHINO,4412,-34.86015701,-56.23246754,William Valdez,98072177,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 08:05:00,no atiende,Limpio-099,,,0,0,Cerrado,0,1,
-150291,C,TORRE GRITO DE ASCENCIO,Edificios,1,SITIO GRANDE,1161,-34.87451172,-56.19456458,JORGE CERUTI,93 944 206,2026-07-01 08:21:00,"vaciado
-598 93 944 206",1,Vaciado,0,1.0 grande,2026-07-02 09:22:00,NO SALE NADIE,Veronica y Alejandro-202,SDC 6831,,0,0,Cerrado,891,32,
-150309,D,JUAN ACOSTA 4591,Cooperativas,1,JUAN ACOSTA,4591,-34.84378340,-56.16475880,Gonzalo Maximiliano Maiarú Guadalupe,093 393 375,2026-07-01 10:19:00,"vaciado
-de mañana en lo posible antes de las 8
-59893393375",1,Vaciado,2,Entrega,2026-07-02 07:22:00,2 CH,Mauricio Olivera-232,SDE 6597,Durán,2,9:36,Cerrado,0,1,Gonzalo.maiaru90@gmail.com
 150381,A,PEDRO CELESTINO BAUZA 4399,Casa particular,1,PEDRO CELESTINO BAUZA,4399,-34.85922514,-56.23069616,Micaela Perez,95836696,2026-07-02 03:00:00,,1,Vaciado,0,2.0 chico,2026-07-02 09:52:00,no atiende,Limpio-099,,,0,0,Cerrado,0,1,
 150361,A,PUESTO DE FRUTAS & VERDURAS,Otros,1,AV CARLOS MARIA RAMIREZ,414,-34.85987111,-56.22859935,Sandra Martinez,94137118,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 07:36:00,1 ch,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
 150362,A,Comercio,Otros,1,AV CARLOS MARIA RAMIREZ,416,-34.85987111,-56.22859935,Raquel Caceres,094730105,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 07:29:00,1ch,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
 150382,A,PEDRO CELESTINO BAUZA 4447,Casa particular,1,PEDRO CELESTINO BAUZA,4447,-34.85861950,-56.23142904,Rita Romero,98940287,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 09:56:00,1 ch,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
-150360,C,GRAL ENRIQUE MARTINEZ 2158,Casa particular,1,GRAL ENRIQUE MARTINEZ,2158,-34.87199212,-56.16960172,Jose Luis Fernandez Ibarra,094167302,2026-07-01 21:09:00,"VACIADO. Entre 09:00 y 11:00 hs
-+598 94 167 302
-",1,Vaciado,1,2.0 chico,2026-07-02 10:23:00, 1g,EMPRESA LOS LANZANI-037,SCW 6247,Burgues,1,11:50,Cerrado,0,1,
 150391,CH,DEL SOL 2,Edificios,1,RAMON MASINI,3208,-34.90957530,-56.15069167,MARCELO ETCHENIQUE,098598533 // 92184610,2026-07-02 07:31:00,"vaciado
 +598 92 184 610
 en la mañana ",1,Vaciado,1,2.0 chico,2026-07-03 08:37:00,1 g,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,1,12:50,Cerrado,1121,64,
-150317,C,CASA PARTICULAR,Casa particular,1,RAMON MARQUEZ,3337 BIS,-34.86239499,-56.18500666,LILIAM,+598 98 932 224,2026-07-01 11:31:00,"vaciado
-598 98 932 224
-cerca de mediodía o hasta las 15hs",1,Vaciado,1,2.0 chico,2026-07-02 14:00:00,1 ch,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Durán,1,16:02,Cerrado,0,0,
-150325,C,BENITO JUAREZ 3406,Casa particular,1,BENITO JUAREZ,3406 BIS,-34.86794087,-56.16624719,Cecilia Cladera,94077569,2026-07-01 12:09:00,"vaciado
-598 94 077 569
-bis apto 1
-cerca del mediodia
-",1,Vaciado,1,2.0 chico,2026-07-02 14:19:00,1 CH,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Durán,1,16:02,Cerrado,0,1,cecicladera@gmail.com
-150385,D,JOSE BALTAR 4128,Casa particular,1,JOSE BALTAR,4128,-34.78789126,-56.13769885,Andrés caraballo,097600077,2026-07-01 07:23:00,"REAGENDADO
-VACIADO +598 97 600 077
-EN LA TARDE",1,Vaciado,2,2.0 grande,2026-07-02 15:30:00,Gestión creada automáticamente,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Durán,2,16:02,Cerrado,0,0,acaraballo78@hotmail.com
-150289,CH,Edificio Laumar,Edificios,1,BV JUAN BENITO BLANCO,3345,-34.90743158,-56.14096469,Yina Davila,099571332,2026-07-01 07:28:00,"vaciado
-598 99 571 332
-07:30 a 11",1,Vaciado,0,2.0 chico,2026-07-03 10:50:00,"Gestión creada automáticamente
-NO ATIENDE",Victoria Rodríguez-21,SDE 8454,,0,,Cerrado,0,18,yinadavila@hotmail.com
 150440,CH,Lar Mesoiro,Edificios,2,BV GRAL ARTIGAS,266,-34.92405799,-56.16152690,Elena Martirena,099604602,2026-07-02 11:30:00,"VACIADO 
 +598 93 748 354",2,Vaciado,1,2.0 chico,2026-07-03 08:24:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Géminis,2,10:40,Cerrado,0,19,emartirenacal@gmail.com
 150393,CH,ELLAURI,Edificios,1,JOSE ELLAURI,1143,-34.91001677,-56.15161069,ARTURO VIDAL,2709 2213,2026-07-02 07:46:00,"vaciado
@@ -7695,19 +7671,9 @@ NO ATIENDE",Victoria Rodríguez-21,SDE 8454,,0,,Cerrado,0,18,yinadavila@hotmail.
 150410,CH,Edificio,Edificios,1,JOSE BENITO LAMAS,2726,-34.91180562,-56.15801235,Lucía Bertolotti,094862323,2026-07-02 08:43:00,"vaciado
 +598 96 222 536
 8:30 a 11:00",1,Vaciado,2,2.0 chico,2026-07-03 09:05:00,2 ch,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,2,12:40,Cerrado,0,0,alegria.lucy@gmail.com
-150304,CH,Edificio Capdevila,Edificios,1,ALEJANDRO CHUCARRO,1124,-34.91150744,-56.14802553,Julieta Calvo,99940596,2026-07-01 09:44:00,"vaciado
-598 99 940 596
-de 8 a 11.30",1,Vaciado,2,1.0 grande,2026-07-03 08:49:00,"Gestión creada automáticamente
-1 G y 1 CH",Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,2,12:50,Cerrado,0,22,
 150426,CH,El Ayui,Edificios,1,21 DE SETIEMBRE,2458 BIS,-34.91349968,-56.16229718,Fernando Cotugno Loureiro,091920900,2026-07-02 10:09:00,"vaciado
 +598 91 920 900
 8 a 12",1,Vaciado,1,Entrega,2026-07-03 08:20:00,Gestión creada automáticamente,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,1,12:50,Cerrado,0,28,
-150333,CH,Edificio Playa Bávaros,Edificios,1,JUAN MARIA PEREZ,2934,-34.91818818,-56.15001084,Alberto Torres,095 937 047,2026-07-01 13:58:00,"vaciado
-598 95 937 047
-de 7 a 14hs",1,Vaciado,1,2.0 chico,2026-07-03 07:36:00,1 g,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,1,12:50,Cerrado,0,11,albertoramont@gmail.com
-150306,CH,EDIFICIO RIAZOR ,Edificios,2,JOSE ELLAURI,990,-34.91234998,-56.15345944,Juan Viera,099417597,2026-07-01 10:01:00,"vaciado
-59894037896
-DÍA VIERNES DE 06 A 10 Y DE 11 A 14 hs. DÍA SÁBADO DE 06 A 10 Y DE 11 A 14 HS",1,Vaciado,1,1.0 grande,2026-07-03 07:33:00,1 g,Victoria Rodríguez-21,SDE 8454,Géminis,1,13:00,Cerrado,0,0,empresaibicuy@yahoo.com.ar
 150466,CH,MAGNOLIA,Edificios,2,JOAQUIN NUÑEZ,3116,-34.92408184,-56.15469553,PEDRO,96224229 ,2026-07-02 14:02:00,6 a 14hs o de 14 a 22hs,2,Vaciado,2,1.0 grande,2026-07-03 08:24:00,2 g,Victoria Rodríguez-21,SDE 8454,Géminis,2,13:00,Cerrado,2287,40,
 150428,CH,Brito del Pino,Edificios,1,GRAL JOSE ESTEBAN BRITO DEL PINO,1367,-34.90374217,-56.15784358,Sergio Edison Labraga Solar,092708795,2026-07-02 10:37:00,"vaciado 
 +598 92 708 795
@@ -7721,18 +7687,9 @@ sabado 7 a 11",1,Vaciado,1,2.0 grande,2026-07-03 07:51:00,1 g,Victoria Rodrígue
 150474,CH,BV JUAN BENITO BLANCO 3270,Edificios,2,BV JUAN BENITO BLANCO,3270,-34.90882422,-56.14232044,Jorge Ferreira ,096329619,2026-07-02 16:20:00,Desde las 14 h y 18 h ,2,Vaciado,1,2.0 grande,2026-07-03 15:18:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Géminis,1,18:45,Cerrado,0,2,
 150399,CH,FELICIANO RODRIGUEZ 1,Otros,1,FELICIANO RODRIGUEZ,2715,-34.90005995,-56.15550755,Claudia,+598 99 024 306,2026-07-02 08:14:00,"vaciado
 +598 99 024 306",1,Vaciado,1,2.0 chico,2026-07-03 16:54:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Géminis,1,19:29,Cerrado,0,0,
-150301,CH,EDIFICIO ITALPARK,Edificios,2,AV ITALIA,2605,-34.89220357,-56.15962125,ROSSANA MENDEZ,097 627 622 ,2026-07-01 09:14:00,"vaciado
-598 96 755 254",2,Vaciado,2,2.0 grande,2026-07-03 16:36:00,"Gestión creada automáticamente
-
-1 ch
-1 g
-",Jorge Muller-230,SDB 8218,Géminis,2,19:29,Cerrado,334,40,
 150461,CH,MANTENIMIENTO DE VEHICULOS DE LIMPIEZA,Dependencias de la IM,1,AV GRAL RIVERA,3881,-34.89869314,-56.13025993,JORGE CODENANZA / ADRIAN FRUGONI,INT. 9083 / 9099,2026-07-02 13:52:00,"vaciado 
 Jose Duhalde - Rivera y Vnaguardia",1,Vaciado,1,2.0 grande,2026-07-03 18:12:00,,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Géminis,1,19:37,Cerrado,0,0,jorge.codenanza@imm.gub.uy
 150478,CH,MALDONADO 2428,Casa particular,1,MALDONADO,2428,-34.90762643,-56.16139638,María Fernanda De Gregorio,099213049,2026-07-02 20:45:00,. Solicitud creada a partir del reclamo: 3479432.,1,Vaciado,1,2.0 chico,2026-07-03 14:10:00,Gestión creada automáticamente,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Géminis,1,16:46,Cerrado,0,1,ferdeg@hotmail.com
-150296,CH,FIRENZE,Edificios,1,JUAN BENITO BLANCO,731,-34.91833588,-56.15082277,LUIS,091 697 634,2026-07-01 08:53:00,"vaciado
-598 91 697 634
-Viernes de 7 a 11",1,Vaciado,0,1.0 grande,2026-07-03 07:14:00,Gestión creada automáticamente,Sandra Delgado & Carlos Dorado-1019,SDE 3657,,0,0,Cerrado,24,9,
 152134,CH,Torre del Poeta,Edificios,1,TABARE,2446,-34.92753980,-56.15884941,Graciela Ferrer,099 564 355,2026-07-24 12:31:00,"+598 97 453 119
 antes de las 13",1,Vaciado,1,2.0 chico,2026-07-25 11:47:00,Gestión creada automáticamente,VOLUMINOSO 1 - SA-1033,,,0,0,Cerrado,0,21,zg_ferrer@hotmail.com
 152892,A,Casa,Desconocido,1,MENA,4440,-34.85242951,-56.21177625,Nathalia Torres,099121211,2026-08-04 07:38:00,"vaciado
@@ -7789,34 +7746,16 @@ en la tarde",1,Vaciado,1,2.0 chico,2026-08-27 14:05:00,1 ch,Jorge Muller-230,SDB
 155010,B,CNEL FEDERICO BRANDSEN 1971,Casa particular,3,CNEL FEDERICO BRANDSEN,1971,-34.90133061,-56.17325102,Pablo Miranda,099579378,2026-08-31 19:52:00,Horario de 8 a 11 y de 17 a 20 +598 99 307 681,1,Vaciado,3,2.0 chico,2026-09-07 17:39:00,Gestión creada automáticamente,Teresa Martines & Jorge Almada-1020,SDC 7010,La Paloma,3,18:51,Cerrado,0,1,
 156029,E,MATAOJO 1865,Edificios,1,MATAOJO,1865,-34.88800836,-56.12142345,Camila Mosera ,094323689,2026-09-12 13:32:00,"vaciado -  apto 3 o apto 1
 +598 94 323 689",1,Vaciado,1,2.0 chico,2026-09-16 07:54:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Géminis,1,10:11,Cerrado,0,1,camimosera@gmail.com
-150354,D,JOSE BALTAR 4128,Casa particular,1,JOSE BALTAR,4128,-34.78789126,-56.13769885,Andrés caraballo,097600077,2026-07-01 18:11:00,"VACIADO.
-59897600077",1,Vaciado,0,2.0 grande,2026-07-02 07:19:00,NO SALE NADIE,EMPRESA LOS LANZANI-037,SCW 6247,,0,0,Cerrado,0,0,acaraballo78@hotmail.com
 150370,A,INCLUSA 475,Casa particular,1,INCLUSA,475,-34.85880270,-56.23183743,aaaaaa aaaaa,23093596,2026-07-02 03:00:00,,1,Vaciado,0,2.0 chico,2026-07-02 08:47:00,PERSONAS MAYORES. NO SALE NADIE,Limpio-099,,,0,0,Cerrado,0,1,
 150369,A,INCLUSA 443,Casa particular,1,INCLUSA,443,-34.85839375,-56.23151613,Ma Carmen Valdez,Ma Carmen Valdez,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 08:52:00,1ch,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
 150374,A,JOSE MARMOL 545,Casa particular,1,JOSE MARMOL,545,-34.86028644,-56.23206594,Gladys Rocha,94506500,2026-07-02 03:00:00,,1,Vaciado,0,2.0 chico,2026-07-02 09:12:00,no atiende,Limpio-099,,,0,0,Cerrado,0,1,
 150376,A,JOSE MARMOL 526,Casa particular,1,JOSE MARMOL,526,-34.86003226,-56.23203131,Soledad Reyes,94185329,2026-07-02 03:00:00,,1,Vaciado,0,2.0 chico,2026-07-02 09:20:00,LO TIENE VACIO,Limpio-099,,,0,0,Cerrado,0,1,
 150365,A,AMEGHINO 4440,Casa particular,1,AMEGHINO,4440,-34.85985410,-56.23283156,Christina Rodríguez,94610914,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 08:20:00,1 CH,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
-150302,C,COOPERATIVA ANDAMIOS,Cooperativas,2,CNEL LUCAS PIRIZ,2302,-34.88050270,-56.16472379,Germán Costa,091085923,2026-07-01 09:16:00,"vaciado
-598 94 542 905",2,Vaciado,3,1.0 grande,2026-07-02 08:00:00,3 G,Veronica y Alejandro-202,SDC 6831,Burgues,3,11:24,Cerrado,217,48,
-150328,C,CARLOS SOLE 3368,Casa particular,1,CARLOS SOLE,3368,-34.86750925,-56.19925414,Sonia Lembo, 2203 6202,2026-07-01 12:32:00,"vaciado
-598 95 509 801
-apto 1
-mediodia",1,Vaciado,1,2.0 chico,2026-07-02 13:48:00,Gestión creada automáticamente,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Durán,1,16:02,Cerrado,0,1,
-150351,C,AV GRAL GARIBALDI 2479,Edificios,4,AV GRAL GARIBALDI,2479,-34.88529008,-56.16508276,Nicolai Ostraujov,098494587,2026-07-01 17:09:00,horario de 12pm a 4pm y de 4:30 a 19:30 ,4,Vaciado,2,2.0 grande,2026-07-02 13:10:00,2 G,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Durán,2,16:02,Cerrado,0,70,
-150299,C,GRAND BOULEVARD,Edificios,6,BV GRAL ARTIGAS,2260,-34.88600134,-56.16570928,LUIS ALBERTO FLORES    Shirley Gutiérrez	,98283113   098657823,2026-07-01 09:08:00,"vaciado
-598 96 432 415
-horario de 07 a 13hs",2,Vaciado,7,1.0 grande,2026-07-02 09:35:00,6g 1ch,EMPRESA LOS LANZANI-037,SCW 6247,Burgues,7,11:50,Cerrado,1008,0,
 150367,A,INCLUSA 467,Casa particular,1,INCLUSA,467,-34.85859540,-56.23158204,Franco Martinez,91026735,2026-07-02 03:00:00,,1,Vaciado,0,2.0 chico,2026-07-02 08:38:00,NO SALE NADIE,Limpio-099,,,0,0,Cerrado,0,1,
 150368,A,INCLUSA 415,Casa particular,1,INCLUSA,415,-34.85808342,-56.23096362,Victoria Burgos,91342218,2026-07-02 03:00:00,,1,Vaciado,0,2.0 chico,2026-07-02 08:51:00,NO SALE NADIE,Limpio-099,,,0,0,Cerrado,0,1,
-150288,C,GRAFICOS I,Edificios,2,AV  DR. LUIS ALBERTO DE HERRERA,2765,-34.87891680,-56.15562650,LILIAN GONZALEZ,094770378,2026-07-01 07:13:00,"vaciado
-598 94 770 378
-AP 101
-de 6 a 10",2,Vaciado,5,1.0 grande,2026-07-02 07:54:00,3ch 2g,Mauricio Olivera-232,SDE 6597,Durán,5,9:36,Cerrado,455,39,
 150377,A,JOSE MARMOL 427,Casa particular,1,JOSE MARMOL,427,-34.85890419,-56.23035349,Julio Salinas,95045525,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 09:28:00,Gestión creada automáticamente,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
 150366,A,AMEGHINO 4390,Casa particular,1,AMEGHINO,4390,-34.86050238,-56.23205718,Claudia Fernandez,94360740,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 08:25:00,Gestión creada automáticamente,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
 150383,A,VICENTE YAÑEZ PINZON 4392,Casa particular,1,VICENTE YAÑEZ PINZON,4392,-34.85983208,-56.23127710,Carlos Martinez,95315072,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 09:59:00,1 ch,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
-150295,C,RAMON ESTOMBA 3577,Casa particular,1,RAMON ESTOMBA,3577,-34.86252676,-56.19004593,Juan Manuel Jones,098989776,2026-07-01 08:52:00,"vaciado
-598 98 989 776",1,Vaciado,1,2.0 chico,2026-07-02 09:08:00,1ch,Dahiana-10,SDJ 5095,Burgues,1,10:40,Cerrado,0,1,juanmjones73@gmail.com
 150452,CH,Edificio Chapalco,Edificios,1,TERU,546,-34.92245355,-56.15215803,Federico Moares,099692149,2026-07-02 12:55:00,"vaciado 
 +598 95 151 521
 7 a 14",1,Vaciado,1,2.0 chico,2026-07-03 07:35:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Géminis,1,10:40,Cerrado,0,1,
@@ -7830,8 +7769,6 @@ de 6 a 10",2,Vaciado,5,1.0 grande,2026-07-02 07:54:00,3ch 2g,Mauricio Olivera-23
 150418,CH,Edificio Baron de Rio Branco,Edificios,2,AV DR FRANCISCO SOCA,1213,-34.90815071,-56.15404513,MARIA SERRA Y MARIL GARCIA,094364978,2026-07-02 09:16:00,"vaciado 
 +598 94 364 978
 9 a 11",2,Vaciado,1,2.0 grande,2026-07-03 09:47:00,1G,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,2,12:40,Cerrado,0,16,mapaserra@gmail.com
-150355,CH,EDIFICIO SHIVA,Edificios,1,BV ESPAÑA,2660,-34.91344785,-56.15601769,MONICA LARROSA,099 645 035,2026-07-01 18:07:00,"VACIADO. Horario 9 a 17hs
-+598 99 645 035",1,Vaciado,1,1.0 grande,2026-07-03 09:24:00,Gestión creada automáticamente,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,1,12:50,Cerrado,803,30,
 150446,CH,PAULINO PIMIENTA 955,Edificios,2,PAULINO PIMIENTA,955,-34.91324655,-56.15114838,Elizabeth Almada,092 516 313,2026-07-02 12:17:00,"vaciado
 +598 92 516 313
 9 a 17 
@@ -7840,19 +7777,10 @@ de 6 a 10",2,Vaciado,5,1.0 grande,2026-07-02 07:54:00,3ch 2g,Mauricio Olivera-23
 +598 94 226 449
 9:00 a 16:00
 sabados 9 a 12 ",2,Vaciado,1,1.0 grande,2026-07-03 11:24:00,1 g,Victoria Rodríguez-21,SDE 8454,Géminis,2,13:00,Cerrado,899,39,
-150329,CH,Edificio Solano Antuña,Edificios,1,FRANCISCO SOLANO ANTUÑA,2920,-34.91917166,-56.15055654,Susana Revello,097841501,2026-07-01 13:21:00,"vaciado
-598 97 841 501
-de 7 a 15 h de lunes a viernes",1,Vaciado,2,2.0 chico,2026-07-03 07:30:00,1g 1ch,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,2,12:50,Cerrado,19663225,5,
 150450,CH,Edificio Montero,Edificios,1,JOSE MARIA MONTERO,3066,-34.92282093,-56.15485754,Hugo Frache apto 201,27121815 - 099590419,2026-07-02 12:48:00,"vaciado 
 +598 97 888 550 
 viernes de 9 a 13",1,Vaciado,1,2.0 chico,2026-07-03 11:35:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Géminis,1,13:00,Cerrado,0,7,hfrache@gmail.com
-150305,CH,Edificio 01 Parque Battle,Edificios,1,RAMON ORTIZ,2903,-34.88812789,-56.15297883,Federico Machado,099591662,2026-07-01 09:59:00,"vaciado
-598 97 312 420
-de 10:00 a 16:00",1,Vaciado,1,2.0 grande,2026-07-03 12:33:00,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,Géminis,1,13:05,Cerrado,0,70,fedemach@gmail.com
 150482,CH,ANZANI	1427,Edificios,1,ANZANI,1427,-34.89895813,-56.13356134,Teresa Pérez,098991691,2026-07-02 20:05:00,pasar despues de las 11,1,Vaciado,2,2.0 grande,2026-07-03 12:05:00,2 gf,Dahiana-10,SDJ 5095,Géminis,2,13:16,Cerrado,1,1,
-150327,CH,EDIFICIO LA LOBA,Edificios,2,AV ITALIA,2374,-34.89466535,-56.16393037,MARIA CELESTE,098757401,2026-07-01 12:38:00,"vaciado
-598 98 757 401
-partir de las 09:00 en adelante",1,Vaciado,2,1.0 grande,2026-07-03 09:04:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Géminis,2,13:16,Cerrado,419,24,
 150483,CH,Lazaro Gadea,Edificios,1,LAZARO GADEA,971,-34.91396495,-56.15009810,Gisel,notiene,2026-07-02 22:19:00,,1,Vaciado,1,2.0 chico,2026-07-03 15:43:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Géminis,1,18:45,Cerrado,4086,15,
 150475,CH,EDIFICIO PALMAR,Edificios,1,BV GRAL ARTIGAS,1496,-34.90105378,-56.16407943,TIAGO ELIZALDE,+598 96 891 711,2026-07-02 09:00:00, De lunes a viernes de 9:30 a 17:00 y sábados de 9 y 30  a 13 horas.,1,Vaciado,1,1.0 grande,2026-07-03 12:20:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Géminis,1,13:00,Cerrado,931,0,
 150448,CH,EDIFICIO LARRAÑAGA,Edificios,1,AV  DR. LUIS ALBERTO DE HERRERA,2092,-34.88905622,-56.14717603,SUSANA PEPE,096 598 451 /  096 133 292,2026-07-02 12:31:00,"vaciado 
@@ -7867,18 +7795,8 @@ DESPUES DE LAS 10 AM",1,Vaciado,1,1.0 grande,2026-07-03 11:50:00,1 g,Victoria Ro
 150363,A,Jardin,Centros Educativos,1,AV CARLOS MARIA RAMIREZ,532,-34.86138799,-56.23049309,Alejandra Garrido,96439580,2026-07-02 03:00:00,,1,Vaciado,0,2.0 chico,2026-07-02 07:39:00,ESCUELA. VACACIONES,Limpio-099,,,0,0,Cerrado,0,1,
 150379,A,LAURELES 476,Casa particular,1,LAURELES,476,-34.86004227,-56.23043423,Fernando Etchart,99214524,2026-07-02 03:00:00,,1,Vaciado,0,2.0 chico,2026-07-02 09:37:00,NO CONTESTA,Limpio-099,,,0,0,Cerrado,0,1,
 150371,A,INCLUSA 523,Casa particular,1,INCLUSA,523,-34.85943508,-56.23261777,Diego Riquelme,97685594,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 08:54:00,1 ch,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
-150419,A,JOSE MARMOL 545,Casa particular,1,JOSE MARMOL,545,-34.86028644,-56.23206594,Gladys Rocha,94506500,2026-07-02 00:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 09:19:00,,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
 150378,A,Apartamento,Edificios,1,LAURELES,475,-34.86021362,-56.23036884,Jenni Rodríguez,99124836,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 09:32:00,1 ch,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
 150372,A,INCLUSA 529,Casa particular,1,INCLUSA,529,-34.85948534,-56.23267917,Estela Udoy,23061705,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 09:03:00,1 ch,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
-150313,C,IBIA VI,Edificios,2,AV  DR. LUIS ALBERTO DE HERRERA,3210,-34.87145959,-56.16333568,Gonzalo Secco,+598 97 474 618,2026-07-01 10:50:00,"vaciado
-598 97 474 618
- 9 a 12.30",1,Vaciado,0,2.0 chico,2026-07-02 10:38:00,no atiende,EMPRESA LOS LANZANI-037,SCW 6247,,0,0,Cerrado,32100531,54,
-150320,C,IBIROCAHY 3537,Casa particular,1,IBIROCAHY,3537,-34.85664899,-56.18572623,Lucia Pereira ,091346656,2026-07-01 11:42:00,"vaciado
-598 91 346 656",1,Vaciado,1,2.0 chico,2026-07-02 08:26:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Burgues,1,10:40,Cerrado,0,1,
-150350,D,COOPERATIVA COVINES,Cooperativas,1,EMILIO RAÑA,2712,-34.88055179,-56.16030586,GIMENA CORREA,095224435,2026-07-01 17:06:00,,1,Vaciado,2,1.0 grande,2026-07-02 07:24:00,2 G,Veronica y Alejandro-202,SDC 6831,Burgues,2,11:24,Cerrado,161,21,larinabaitx@hotmail.com
-150331,C,Sin nombre av millan,Cooperativas,2,AV MILLAN,3740,-34.85917971,-56.19546755, Verónica García,099358966,2026-07-01 13:51:00,"vaciado
-598 94 666 073
-De 8 a 14.",2,Vaciado,5,2.0 chico,2026-07-02 08:50:00,5ch,EMPRESA LOS LANZANI-037,SCW 6247,Burgues,5,11:50,Cerrado,1,58,verogk@hotmail.com
 150445,CH,Edificio MAROC,Edificios,1,RAMON MASINI,3309,-34.91110467,-56.14895560,Elisa Suarez,000000,2026-07-02 12:16:00,. Solicitud creada a partir del reclamo: 3477649.,1,Vaciado,0,2.0 grande,2026-07-03 08:08:00,"Gestión creada automáticamente
 NO ATIENDE",Dahiana-10,SDJ 5095,,0,,Cerrado,0,10,
 150449,CH,edificio Austral,Edificios,1,JOSE ELLAURI,790,-34.91633698,-56.15440078,Rodolfo Schaich,95 616 596,2026-07-02 12:42:00,"vaciado 
@@ -7886,8 +7804,6 @@ NO ATIENDE",Dahiana-10,SDJ 5095,,0,,Cerrado,0,10,
 150404,CH,Infinit,Edificios,1,AV SARMIENTO,2656,-34.91426364,-56.15467109,Carolina Bettinelli ,099590481,2026-07-02 08:27:00,"VACIADO
 +598 99 590 481
 11 a 13",1,Vaciado,0,Contenedor,2026-07-03 11:45:00,no atiede,Dahiana-10,SDJ 5095,Géminis,0,0,Cerrado,0,17,
-150358,CH,EL VIEJO PANCHO 2540,Casa particular,1,EL VIEJO PANCHO,2540,-34.91013518,-56.15820003,-,99 626 678,2026-07-01 20:34:00,"VACIADO.
-+598 99 626 678",1,Vaciado,3,2.0 chico,2026-07-03 09:55:00,3g,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Géminis,3,12:30,Cerrado,0,1,
 150519,CH,PUNTA PAITILLA,Edificios,1,JUAN BENITO BLANCO,723,-34.91849640,-56.15087780,JAVIER DA COSTA,097 015 603,2026-07-03 10:34:00,"Horario viernes de 10 a 18
 Sábado de 9 a 12:30
 
@@ -7895,17 +7811,9 @@ Sábado de 9 a 12:30
 150415,CH,AMANCAY,Edificios,1,JOSE ELLAURI,1074,-34.91139101,-56.15278283,ROBERTO DIAZ,091652179,2026-07-02 09:02:00,"vaciado
 +598 91 652 179
 8 a 13",1,Vaciado,2,1.0 grande,2026-07-03 10:44:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,1,12:40,Cerrado,666,7,
-150311,CH,CIUDAD JARDIN,Edificios,1,AV BRASIL,2528,-34.90739293,-56.15936564,JOSE NAVAS,092 085 085 ,2026-07-01 10:33:00,"vaciado
-598 92 085 085
-lunes a viernes de 07 a 15 hrs",1,Vaciado,1,1.0 grande,2026-07-03 07:48:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,1,12:40,Cerrado,411,68,
 150468,CH,EDIFICIO VISTA INFINITA,Edificios,3,26 DE MARZO,3393,-34.90621524,-56.13972024,CARIL DA SILVA,091 235 860,2026-07-02 14:21:00,Viernes de 8 a 16 o sábado 8 a 12,3,Vaciado,2,1.0 grande,2026-07-03 08:40:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,3,12:40,Cerrado,585,34,
-150346,CH,Edificio Bage ,Edificios,1,AV BRASIL,3079,-34.91341560,-56.14980622,María pou,095720153,2026-07-01 16:40:00,"Viernes de 13-17 o de 17:30-20:30
-Sábados después de las 17",1,Vaciado,1,2.0 chico,2026-07-03 14:47:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Géminis,1,18:45,Cerrado,0,20,mechupou@hotmail.com
 150443,CH,ERRAZQUIN,Edificios,1,AV CENTENARIO,3099,-34.88321488,-56.15270705,ADRIAN ALCANTARO,099 382 101,2026-07-02 11:59:00,"vaciado 
 +598 94 382 716",1,Vaciado,2,1.0 grande,2026-07-03 12:56:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Géminis,2,15:05,Cerrado,700,48,
-150316,CH,Edificio Shopping ,Edificios,1,JUAN PABLO LAGUNA,3480,-34.90269551,-56.13876072,Roberto Pombo,099423279,2026-07-01 10:53:00,"vaciado
-59893587940
-",1,Vaciado,0,1.0 grande,2026-07-03 17:49:00,no atendieron ,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,,0,0,Cerrado,0,18,rpombo@adinet.com.uy
 152119,B,ALTOS DEL BULEVAR,Edificios,1,BV GRAL ARTIGAS,2095,-34.88908232,-56.16583010,JOSE MENDEZ,llamar portería 096742345 // 093630691,2026-07-24 09:59:00,"+598 96 742 345
 9 a 16:30",1,Vaciado,0,2.0 grande,2026-07-27 07:04:00,enviamos fuera de horario,EMPRESA LOS LANZANI-037,SCW 6247,,0,0,Cerrado,4015,100,
 152040,B,RAICES NUEVAS,Cooperativas,3,MERCEDES,1643,-34.90202104,-56.18177647,MELIZA GONZALEZ,099 578 532,2026-07-23 12:31:00,+598 99 586 740,3,Vaciado,0,2.0 chico,2026-07-27 08:42:00,no atiende,Michael Rodriguez-191,SDG 8586,,0,0,Cerrado,4048,50,raicesnuevas39@gmail.com
@@ -7967,12 +7875,6 @@ vaciado
 150384,A,LAURELES 482,Casa particular,1,LAURELES,482,-34.86009624,-56.23050075,Estela Mazedo,95635330,2026-07-02 03:00:00,,1,Vaciado,0,2.0 chico,2026-07-02 09:34:00,BOLSON VACIO,Limpio-099,,,0,0,Cerrado,0,1,
 150380,A,PEDRO CELESTINO BAUZA  4388,Casa particular,1,PEDRO CELESTINO BAUZA ,4388,-34.85909030,-56.23072099,Guillermo Odabachin,99417521,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 09:47:00,1 ch,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
 150375,A,JOSE MARMOL 521,Casa particular,1,JOSE MARMOL,521,-34.86009669,-56.23183113,Romina Zoto,95192297,2026-07-02 03:00:00,,1,Vaciado,1,2.0 chico,2026-07-02 08:25:00,Gestión creada automáticamente,Limpio-099,,Durán,1,10:29,Cerrado,0,1,
-150290,C,EVEREST,Edificios,1,AV  DR. LUIS ALBERTO DE HERRERA,3869,-34.86295432,-56.17975041,ANDRES CARMONA,091389143,2026-07-01 08:03:00,"vaciado
-598 97 403 757
-de 08:30 a 16:30",1,Vaciado,1,1.0 grande,2026-07-02 08:48:00,1 g,Dahiana-10,SDJ 5095,Burgues,1,10:40,Cerrado,459,20,
-150347,D,IBIROCAHY 3907,Casa particular,1,IBIROCAHY,3907,-34.85038120,-56.18210286,Javier Ugolini,22154615,2026-07-01 16:46:00,,1,Vaciado,1,2.0 chico,2026-07-02 07:46:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Burgues,1,10:40,Cerrado,0,1,
-150310,C,COOPERATIVA DEL NAVIO-  MARTIN FIERRO 2597,Cooperativas,2,MARTIN FIERRO,2597,-34.88092717,-56.16292415,LUCIANA BARRIENTOS,098491775,2026-07-01 10:22:00,"vaciado
-598 98 048 228",2,Vaciado,3,2.0 grande,2026-07-02 07:41:00,3 G,Veronica y Alejandro-202,SDC 6831,Burgues,3,11:24,Cerrado,164,28,barrientos.luciana@gmail.com
 150395,CH,VALDETORRES,Edificios,2,JOSE ELLAURI,881,-34.91454328,-56.15359892,JAVIER SAAD,093535646,2026-07-02 08:03:00,"vaciado
 +598 93 535 646
 8 a 12
@@ -7984,43 +7886,23 @@ de 08:30 a 16:30",1,Vaciado,1,1.0 grande,2026-07-02 08:48:00,1 g,Dahiana-10,SDJ 
 +598 97 531 294
 8 a 12",3,Vaciado,2,2.0 chico,2026-07-03 11:07:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,3,12:40,Cerrado,78,20,
 150481,CH,Edificio Italia,Edificios,1,JUAN BENITO BLANCO,773,-34.91748111,-56.15053699,Vilda Carrara,094199991,2026-07-02 19:50:00,,1,Vaciado,6,Entrega,2026-07-03 11:08:00,3g 3ch,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,6,12:50,Cerrado,0,30,vildac@gmail.com
-150321,CH,CHILOE,Edificios,1,JUAN BENITO BLANCO,643,-34.92023793,-56.15146361,EMILIANO NAVAJAS,099639146,2026-07-01 10:50:00,"vaciado
-598 97 039 751
-De 10:30 a 13",1,Vaciado,1,1.0 grande,2026-07-03 10:32:00,Gestión creada automáticamente,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,1,12:50,Cerrado,17,18,
 150406,CH,PEDRO F BERRO 1115,Edificios,2,PEDRO F BERRO,1115,-34.91118106,-56.14970217,Blanca Caceres,093708268,2026-07-02 08:32:00,"vaciado
 +598 96 508 513
 8 a 12",2,Vaciado,2,2.0 chico,2026-07-03 09:23:00,2 g,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,2,12:40,Cerrado,0,0,
 150400,CH,PANORAMA 1,Edificios,1,ALEJANDRO CHUCARRO,1286,-34.90961562,-56.14527295,ALFREDO VIOJO,094770475,2026-07-02 08:14:00,"vaciado
 +598 94 770 475
 8 a 12",1,Vaciado,2,2.0 chico,2026-07-03 09:36:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,1,12:40,Cerrado,6,20,
-150319,CH,SOLEIL BIARRITZ,Edificios,2,JUAN BENITO BLANCO,616,-34.92098960,-56.15152584,FIORELLA PRESTINARI,2711 63 08 / 095 826 879,2026-07-01 11:42:00,"vaciado
-598 99 111 795
-de 9 a 13 horas",1,Vaciado,2,2.0 grande,2026-07-03 09:45:00,1g 1ch,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,2,12:50,Cerrado,13,23,
-150298,CH,Edificio Marus,Edificios,1,JAIME ZUDAÑEZ,2833,-34.91657959,-56.15160289,Maria Cristina Islas,099247118,2026-07-01 09:01:00,"vaciado
-598 94 550 269
-de 9 a 11 am",1,Vaciado,1,2.0 grande,2026-07-03 09:12:00,Gestión creada automáticamente,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,1,12:50,Cerrado,0,20,
-150293,CH,Edificio Golf Towers,Edificios,3,BV GRAL ARTIGAS,70,-34.92755857,-56.16116259,Jorge Rengifo,092800014,2026-07-01 08:29:00,"vaciado
-598 92 889 292
-viernes de 08.00 a 16:00
-Sábados de 09:00 a 13:00",2,Vaciado,3,1.0 grande,2026-07-03 10:30:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Géminis,2,13:00,Cerrado,0,1,Edificiogolftowers@gmail.com
 150414,CH,Edificio Penta Gamma,Edificios,1,LUIS FRANZINI,944,-34.91378428,-56.15881164,Mariela bermudez,098141657,2026-07-02 09:00:00,"vaciado
 +598 98 141 657
 8 a 10",1,Vaciado,1,2.0 chico,2026-07-03 09:07:00,1 g,Victoria Rodríguez-21,SDE 8454,Géminis,1,13:00,Cerrado,0,1,
 150444,CH,COLUMBUS,Edificios,1,DR JOSE SCOSERIA,2459,-34.91538621,-56.15923244,JULIO MENDEZ,94 773 174,2026-07-02 12:12:00,"vaciado 
 8 a 16 
 +598 97 007 746",1,Vaciado,2,1.0 grande,2026-07-03 08:55:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Géminis,1,13:00,Cerrado,980,42,
-150359,CH,Cooperativa Ucodevi N4,Cooperativas,1,LUIS DE LA TORRE,625,-34.91788729,-56.15804658,María Eugenia Islas,099515825,2026-07-01 20:44:00,"VACIADO
-+598 99 515 825",1,Vaciado,0,1.0 grande,2026-07-03 15:46:00,"Gestión creada automáticamente
-
-no atendieron ",Miguel Larrosa & Alejandra Díaz-252,SDE 4150,,0,0,Cerrado,0,19,islasmei@msn.com
 150435,CH,PARK HILL,Edificios,1,AV MCAL ESTIGARRIBIA,694,-34.91579821,-56.16214737,RUBEN PRIETO,095 435 646,2026-07-02 10:44:00,"VACIADO 
 +598 93 935 828",1,Vaciado,1,1.0 grande,2026-07-03 15:24:00,Gestión creada automáticamente,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Géminis,1,16:46,Cerrado,830,30,
 150413,CH,EMBAJADOR,Edificios,1,JOSE ELLAURI,967 BIS,-34.91275575,-56.15362927,FLORENCIA PARBORELL,2707 5450,2026-07-02 07:14:00,"vaciado
 59894911276
 ",1,Vaciado,1,2.0 chico,2026-07-03 14:34:00,Gestión creada automáticamente,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Géminis,1,16:46,Cerrado,662,60,
-150334,CH,RIVA DEL GARDA,Edificios,1,AV BRASIL,2385,-34.90618195,-56.16232694,DANIEL MENDIETA,098 191 816,2026-07-01 14:09:00,"vaciado
-598 98 191 816
-Portería de 8 a 20 hs",1,Vaciado,2,1.0 grande,2026-07-03 13:37:00,1g 1ch,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Géminis,2,16:46,Cerrado,418,19,
 152124,F,COOPERATIVA JUANA DE AMERICA,Cooperativas,10,PSJE 12 6196 esq. CONT CICERON,6196,-34.83090370,-56.11431698,MIRTHA / ADMINISTRACION,098060482 / 25147243,2026-07-24 10:15:00,"+598 92 085 972
 7:30 a 15:30",4,Vaciado,13,2.0 grande,2026-07-27 08:47:00,13g,Dahiana-10,SDJ 5095,Géminis,13,9:28,Cerrado,0,399,
 152006,B,LIBRA ,Edificios,1,IBIRAY,2230,-34.91691062,-56.16533455,Gabriela Berch ,59895862642,2026-07-23 09:57:00,"+598 95 862 642
@@ -8067,26 +7949,12 @@ la mañana",2,Vaciado,3,1.0 grande,2026-07-03 10:28:00,"Gestión creada automát
 150408,CH,Edificio Bulevar ,Edificios,1,BV GRAL ARTIGAS,642,-34.91679225,-56.16232070,Carlos De León,097 473 673,2026-07-02 08:40:00,"vaciado
 +598 97 545 973
 8 a 12 ",1,Vaciado,2,2.0 grande,2026-07-03 08:17:00,2 ch,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,1,12:40,Cerrado,0,27,anamax@adinet.com.uy
-150315,CH,ALEJANDRO CHUCARRO 1030,Edificios,2,ALEJANDRO CHUCARRO,1030,-34.91287301,-56.14942811,Lui do santos,59898184930,2026-07-01 11:21:00,"vaciado
-598 98 184 930
-viernes de 08:00 15:00 y sábados de 08:00 a 11:00",1,Vaciado,1,2.0 grande,2026-07-03 08:42:00,Gestión creada automáticamente,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,1,12:50,Cerrado,0,8,
-150292,CH,Edificio Fanny,Edificios,1,BV ESPAÑA,2938,-34.91510075,-56.14997468,Cristina Sica,94 424 416,2026-07-01 08:23:00,"vaciado
-598 93 811 322
-portería de 8 a14",1,Vaciado,2,2.0 chico,2026-07-03 08:06:00,1 g 1ch,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,2,12:50,Cerrado,0,42,csica06@gmail.com
-150338,CH,SIN NOMBRE 129,Edificios,1,BV ESPAÑA,2926,-34.91505238,-56.15016179,Carlos ,95214630,2026-07-01 14:50:00,"vaciado
-598 99 927 486
-de lunes a viernes de 8hs a 15 y 30.",1,Vaciado,1,2.0 chico,2026-07-03 07:59:00,1 g,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Géminis,1,12:50,Cerrado,0,18,
 150420,CH,BV ESPAÑA 2575,Casa particular,2,BV ESPAÑA,2575,-34.91238932,-56.15850394,Sebatián Correa,093 549 236,2026-07-02 09:25:00,"vaciado 
 093549236
 7 a 11 ",2,Vaciado,1,2.0 grande,2026-07-03 07:41:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Géminis,2,13:00,Cerrado,0,1,
 150459,CH,Las Colinas ,Edificios,2,DR JOSE SCOSERIA,2682,-34.91514643,-56.15411261,Diego Fynn,099544903,2026-07-02 13:37:00,"vaciado 
 59899205238
 12 a 20",2,Vaciado,2,2.0 chico,2026-07-03 16:18:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Géminis,2,18:45,Cerrado,0,0,fynndiego@gmail.com
-150336,CH,Casa 2,Edificios,3,SIMON BOLIVAR,1278,-34.90578236,-56.15953900,Laura Delor,099 309 143,2026-07-01 14:38:00,"vaciado
-598 96 724 520
-HORARIO DE 12 A 15:30 de lunes a viernes",1,Vaciado,1,2.0 chico,2026-07-03 14:44:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Géminis,1,18:45,Cerrado,0,1,
-150323,CH,RAFAEL PASTORIZA 1338,Casa particular,1,RAFAEL PASTORIZA,1338,-34.90472353,-56.15179690,María Noel Bonavoglia,099 796 224,2026-07-01 11:53:00,"vaciado
-598 99 796 224",1,Vaciado,1,2.0 chico,2026-07-03 17:52:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Géminis,1,19:29,Cerrado,0,1,
 150476,CH,PLACE VENDOME,Edificios,2,SILVESTRE BLANCO,2385,-34.90439163,-56.16203454,ROSANNA FALGALDE / JOSE GENTILE(PORTERO),099 207 327 / 099 659 611,2026-07-02 16:51:00,Viernes de 13:00 - 21:00 ,2,Vaciado,2,1.0 grande,2026-07-03 13:25:00,1g 1ch,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Géminis,2,16:46,Cerrado,764,46,rossanafagalde@gmail.com
 152232,B,DR LAURO MULLER 2011,Casa particular,1,DR LAURO MULLER,2011,-34.91256355,-56.17104798,ANDRES DUARTE,98195527,2026-07-26 11:36:00,. Solicitud creada a partir del reclamo: 3613705.,1,Vaciado,0,2.0 grande,2026-07-27 07:22:00,no atiende,Iver Frachinetti-067,SCJ 6160,,0,0,Cerrado,0,1,aduarte.6789@gmail.com
 151779,B,PLAZA CAGANCHA 1145,Edificios,1,PLAZA CAGANCHA,1145,-34.90534293,-56.19172037,Agustina Silva ,095363898,2026-07-20 13:39:00,"piso 6
@@ -8214,9 +8082,6 @@ horario de lunes a viernes de 08 a 13 hs",1,Vaciado,2,1.0 grande,2026-07-04 09:1
 150429,CH,EDIFICIO DEL PUERTO,Edificios,3,RBLA ARMENIA,3801,-34.90394079,-56.13152395,Irene KasprzykE,097474308,2026-07-02 10:21:00,"vaciado 
 +598 95 514 668
 NO hay Portería de 13.30 hs a 14.00hs.",1,Vaciado,1,Entrega,2026-07-04 10:52:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Ex-Cofeca,1,12:15,Cerrado,4046,21,Irenek@gmk.com.uy
-150283,CH,Edficio Biarritz,Edificios,1,JUAN BENITO BLANCO,664,-34.91981177,-56.15113290,Luis dos Santos,094958734,2026-07-01 07:03:00,"vaciado
-59897120045
-",1,Vaciado,1,2.0 chico,2026-07-04 07:59:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Ex-Cofeca,1,12:15,Cerrado,0,18,
 150472,CH,SUNRISE,Edificios,4,ROQUE GRASERAS,640,-34.92017736,-56.15225766,GUILLERMO SUHR,95144025,2026-07-02 15:51:00,Horario: Desde las 14h. Sábado de 8 a 12h. ,4,Vaciado,3,2.0 grande,2026-07-04 10:04:00,"2 G
 1 CH",Mauricio Olivera-232,SDE 6597,Ex-Cofeca,3,12:45,Cerrado,2275,56,
 150514,CH,Edificio JUCANE,Edificios,1,CARACE,543,-34.92261223,-56.15337301,-Willy Rosano,098761931,2026-07-03 09:39:00,"De 7 a14
@@ -8231,8 +8096,6 @@ REAGENDADO",2,Vaciado,4,1.0 grande,2026-07-04 08:29:00,3g y 1ch ,Michael Rodrigu
 +598 97 717 876",1,Vaciado,1,1.0 grande,2026-07-04 09:21:00,Gestión creada automáticamente,Michael Rodriguez-191,SDG 8586,Ex-Cofeca,1,12:47,Cerrado,0,1,Jmaturroportillo@gmail.com
 150504,CH,Edificio residencial parque,Edificios,1,JOSE ELLAURI,581,-34.92024194,-56.15683074,Rosario agüero,096884132,2026-07-03 08:08:00,"+598 97 526 703
 De de 8 a 11",1,Vaciado,1,2.0 chico,2026-07-04 09:40:00,Gestión creada automáticamente,Michael Rodriguez-191,SDG 8586,Ex-Cofeca,1,12:47,Cerrado,0,9,
-150326,CH,MET ROUND POINT,Edificios,4,AV  DR. LUIS ALBERTO DE HERRERA,2561,-34.88201883,-56.15301715,CARLOS,097 671 523,2026-07-01 12:27:00,"vaciado
-598 96 439 310",3,Vaciado,3,1.0 grande,2026-07-03 12:21:00,3g 2ch,Mauricio Olivera-232,SDE 6597,Géminis,3,13:05,Cerrado,1096,90,
 150407,CH,EDIFICIO MENSULA,Edificios,2,GRAL URQUIZA,3040,-34.88360811,-56.15654121,ENRIQUE PEREIRA,099 607 526,2026-07-02 08:37:00,"vaciado
 +598 99 958 264
 ",2,Vaciado,4,1.0 grande,2026-07-03 12:50:00,4 g,Dahiana-10,SDJ 5095,Géminis,4,13:16,Cerrado,172,64,edif.mensula1block2@vera.com.uy
@@ -8248,13 +8111,6 @@ sabados 8 a 12",1,Vaciado,1,1.0 grande,2026-07-03 15:05:00,Gestión creada autom
 1 ch
 1 g
 ",Jorge Muller-230,SDB 8218,Géminis,2,19:29,Cerrado,1087,36,
-150314,CH,DE LOS POCITOS,Edificios,2,ALEJANDRO CHUCARRO,1198,-34.91072419,-56.14689999,JOSE CASTRO,095 018 360,2026-07-01 10:52:00,"vaciado
-598 95 018 360",2,Vaciado,2,2.0 chico,2026-07-03 18:20:00,"Gestión creada automáticamente
-
-1ch
-1g",Jorge Muller-230,SDB 8218,Géminis,2,19:29,Cerrado,2,17,
-150357,CH,LUCES DEL OMBÚ,Edificios,1,LUIS FRANZINI,942,-34.91389879,-56.15879815,GUSTAVO CARDOZO,094 150 800,2026-07-01 20:16:00,"VACIADO. Viernes de 8:00 a 21:00 Horas. Sábado de 8:00 a 13:00 Horas.
-+598 97 317 531",1,Vaciado,1,2.0 grande,2026-07-03 14:49:00,Gestión creada automáticamente,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Géminis,1,16:46,Cerrado,1144,52,
 150561,CH,Edificio Shopping ,Edificios,1,JUAN PABLO LAGUNA,3480,-34.90269551,-56.13876072,Roberto Pombo,099423279,2026-07-03 17:49:00,"vaciado reagendado 
 59893587940
 ",1,Vaciado,0,1.0 grande,2026-07-04 07:06:00,no atendio ,Sandra Delgado & Carlos Dorado-1019,SDE 3657,,0,0,Cerrado,0,18,rpombo@adinet.com.uy
@@ -8264,9 +8120,6 @@ sabados 8 a 12",1,Vaciado,1,1.0 grande,2026-07-03 15:05:00,Gestión creada autom
 Viernes de 7 a 11",1,Vaciado,0,1.0 grande,2026-07-04 07:47:00,no atendio ,Mauricio Olivera-232,SDE 6597,,0,0,Cerrado,24,9,
 150531,CH,Edificio sin nombre,Edificios,1,CORONEL ALEGRE,1274,-34.90575445,-56.15597474,Maite Iglesias,59898165688,2026-07-03 11:53:00,"+598 98 165 688
 reagendado",1,Vaciado,0,2.0 grande,2026-07-04 09:32:00,NO SALE NADIE,EMPRESA LOS LANZANI-037,SCW 6247,,0,0,Cerrado,0,14,maiteiglesias158@gmail.com
-150287,CH,Edifico Exeter,Edificios,1,JUAN BENITO BLANCO,1095,-34.91187930,-56.14713610,Pablo Menéndez,099598438,2026-07-01 07:08:00,"vaciado
-598 96 630 007
-",1,Vaciado,1,2.0 chico,2026-07-04 09:07:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Ex-Cofeca,1,11:36,Cerrado,0,27,menendezabeijon@gmail.com
 150497,CH,DUBRONIK,Edificios,1,FRANCISCO A VIDAL,642,-34.92059734,-56.15037453,RICARDO OLIVERA,92931558,2026-07-03 07:58:00,"viernes de 09 a 15 sábados de 09 a 11 horas
 +598 92 931 558",1,Vaciado,1,1.0 grande,2026-07-04 09:19:00,Gestión creada automáticamente,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Ex-Cofeca,1,11:57,Cerrado,1101,22,
 150509,CH,EDIFICIO PAZ GRANDE,Edificios,3,AV 8 DE OCTUBRE,2830,-34.88662829,-56.15768841,JORGE AZAMBUJA,98401138,2026-07-03 09:20:00,"Viernes de 10 a 17 hs y sabado de 10 a 13 hs
@@ -8370,7 +8223,6 @@ EN LA MAÑANA",1,Vaciado,1,2.0 grande,2026-07-04 09:41:00,Gestión creada autom�
 REAGENDADO ",1,Vaciado,1,2.0 chico,2026-07-04 08:09:00,Gestión creada automáticamente,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Ex-Cofeca,1,11:57,Cerrado,0,18,yinadavila@hotmail.com
 150513,CH,BOHEMIANS,Edificios,2,AV DR FRANCISCO SOCA,1187,-34.90788295,-56.15416196,FLAVIA AVILA,092 199 103 // 99 272 404,2026-07-03 09:39:00,"+598 99 272 404
 de 9 a 15 estoy yo después no hay nadie solo portería virtual con difícil acceso",2,Vaciado,2,1.0 grande,2026-07-04 09:56:00,1g y 1ch ,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Ex-Cofeca,2,11:57,Cerrado,508,42,
-150344,CH,ALGAROBO,Edificios,1,JUAN BENITO BLANCO,972,-34.91366629,-56.14883165,JOSÉ QUIÑONEZ,094 455 958,2026-07-01 16:08:00,,1,Vaciado,1,2.0 grande,2026-07-04 08:08:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Ex-Cofeca,1,11:36,Cerrado,69,20,
 150506,CH,MARINA,Edificios,1,JOSE ELLAURI,814,-34.91577360,-56.15405680,LARRY GIMENEZ,097493387,2026-07-03 09:03:00,+598 98 979 685,1,Vaciado,1,1.0 grande,2026-07-04 10:04:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Ex-Cofeca,1,11:36,Cerrado,625,10,
 150496,CH,EDIFICIO VILLA D´ESTE,Edificios,2,JOSE ELLAURI,537,-34.92072401,-56.15719086,PABLO REPICIO,097192139,2026-07-03 07:56:00,+598 97 192 139,2,Vaciado,2,1.0 grande,2026-07-04 07:22:00,2 G,EMPRESA LOS LANZANI-037,SCW 6247,Ex-Cofeca,2,11:36,Cerrado,514,36,
 150551,CH,EDIFICIO KIMBERLY,Edificios,2,CNO DE LOS HORMIGUEROS,3203,-34.90857959,-56.14471141,.,095241499,2026-07-03 18:43:00,"vaciado 
@@ -8414,7 +8266,6 @@ TODO EL DIA HAY GENTE",1,Vaciado,1,2.0 chico,2026-07-27 07:38:00,1 G,Dahiana-10,
 +598 95 969 967
 DE 08:00 A 12:00",1,Vaciado,0,2.0 grande,2026-07-04 07:20:00,HABIA ACLARADO DE 08:00 A 12:00,Mauricio Olivera-232,SDE 6597,,0,0,Cerrado,0,1,irene@malakita.com
 150492,CH,WINDSOR,Edificios,2,21 DE SETIEMBRE,2875,-34.91909829,-56.15493101,WASHINGTON PINTOS,096 131 820,2026-07-03 07:33:00,+598 91 498 500,2,Vaciado,4,1.0 grande,2026-07-04 10:27:00,4 G,EMPRESA LOS LANZANI-037,SCW 6247,Ex-Cofeca,4,11:36,Cerrado,468,38,
-150349,CH,TABARE esq. RBLA MAHATMA GANDHI 2445,Edificios,1,TABARE esq. RBLA MAHATMA GANDHI,2445,-34.92754502,-56.15869184,José María Cerisola ,095 509 011,2026-07-01 17:20:00,. Solicitud creada a partir del reclamo: 3470792.,1,Vaciado,3,1.0 grande,2026-07-04 10:52:00,2g y 1ch ,EMPRESA LOS LANZANI-037,SCW 6247,Ex-Cofeca,3,11:36,Cerrado,0,1,jcerisol@gmail.com
 150555,CH,MAKAO,Edificios,1,LA GACETA,1341,-34.90417792,-56.14587371,MARIA GRANDAL,099 915 930,2026-07-03 16:23:00,"vaciado 
 +598 99 075 563
 Lunes a viernes de 8.00 hrs a 11.00 hrs",1,Vaciado,1,1.0 grande,2026-07-04 08:27:00,Gestión creada automáticamente,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Ex-Cofeca,1,11:57,Cerrado,1220,18,
@@ -8459,8 +8310,6 @@ Viernes de 08:00 a 16:00",1,Vaciado,1,1.0 grande,2026-07-04 14:40:00,Gestión cr
 150537,CH,BAYONA LA REAL,Edificios,1,SANTIAGO GADEA,3220,-34.89374694,-56.14798040,CAMILA ACOSTA,24816487,2026-07-02 07:00:00,"vaciado 
 +598 96 439 267
 13 a 20 ",1,Vaciado,1,1.0 grande,2026-07-04 14:00:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,1,17:47,Cerrado,1049,31,
-150294,CH,Edificio Las Mariposas,Edificios,1,LEYENDA PATRIA,2880,-34.92024312,-56.15609729,marcelo piñeiro,096 413 953,2026-07-01 08:41:00,"vaciado
-598 97 341 292",1,Vaciado,0,2.0 chico,2026-07-04 09:00:00,NO SALE NADIE,Dahiana-10,SDJ 5095,,0,0,Cerrado,0,0,
 150534,CH,sin nombre 149,Otros,1,THIEBAUT,1766,-34.89247078,-56.13310108,.,99 620 560,2026-07-03 11:48:00,+598 99 620 560,1,Vaciado,1,2.0 chico,2026-07-04 09:51:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Ex-Cofeca,1,12:15,Cerrado,0,1,
 150491,CH,Edificio MAROC,Edificios,1,RAMON MASINI,3309,-34.91110467,-56.14895560,Elisa Suarez,000000,2026-07-03 08:03:00,REAGENDADO ,1,Vaciado,2,2.0 grande,2026-07-04 11:58:00,"1 G
 1 CH",Mauricio Olivera-232,SDE 6597,Ex-Cofeca,2,12:45,Cerrado,0,10,
@@ -8472,15 +8321,10 @@ DE 08:00 A 12:00",1,Vaciado,0,2.0 chico,2026-08-12 09:12:00,ES REPETIDA CON OTRA
 El horario ideal es Viernes de 14 hs a 17:30 y sábados de 14 a 17:30 hs.",2,Vaciado,2,1.0 grande,2026-07-04 15:43:00,"Gestión creada automáticamente
 1 chico
 1 grande",Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,2,17:47,Cerrado,901,40,
-150356,CH,FIRENZE,Edificios,1,JUAN BENITO BLANCO,980,-34.91358715,-56.14874404,CARLOS BETANCUR,094 858 781,2026-07-01 20:13:00,"VACIADO. Después de 14.00 horas
-+598 94 858 781",1,Vaciado,1,1.0 grande,2026-07-04 14:25:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,1,17:47,Cerrado,70,18,
 150447,CH,EDIFICIO MIRADOR,Edificios,2,MELITON GONZALEZ,1173,-34.90355877,-56.13178284,MILITZA ARAUJO,099657489/26235457,2026-07-02 12:23:00,"vaciado 
 +598 98 670 260
 12 a 20 ",1,Vaciado,1,2.0 grande,2026-07-04 16:03:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,1,17:47,Cerrado,4042,8,miliza.araujo@gmail.com
 150467,CH,ELECTRA,Edificios,1,JOSE ELLAURI,809,-34.91576888,-56.15426740,MIGUEL ANGEL CAÑE,096436432,2026-07-02 14:05:00,de 14 a 20 hs ,1,Vaciado,1,2.0 grande,2026-07-04 15:06:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,1,17:47,Cerrado,657,14,
-150563,CH,IGUAZÚ,Edificios,1,26 DE MARZO,1137,-34.91031405,-56.15021467,GRISELL SWOBODA,095005825,2026-07-01 13:54:00,"vaciado
-598 94 531 335
-Después de las 14 hs ",1,Vaciado,1,2.0 grande,2026-07-04 15:27:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,1,17:47,Cerrado,637,24,
 151963,B,COOPERATIVA INCHALA,Cooperativas,2,CERRITO,120,-34.90767697,-56.21344191,MARTA POITTEVIN	,099675989,2026-07-22 18:21:00,vaciado - 098272875 ,1,Vaciado,2,1.0 grande,2026-07-27 10:22:00,2g,Iver Frachinetti-067,SCJ 6160,La Paloma,2,12:46,Cerrado,43,14,
 151934,B,Klee,Edificios,1,SAN JOSE,1327 BIS,-34.90649802,-56.18734531,Monica Noble ,+598 98 613 281,2026-07-22 11:50:00,+598 98 613 281 vaciado de 9:30 a 16:30 ,1,Vaciado,1,2.0 chico,2026-07-27 11:24:00,1g,EMPRESA LOS LANZANI-037,SCW 6247,La Paloma,1,13:18,Cerrado,0,25,blengio@hotmail.com
 151779,B,PLAZA CAGANCHA 1145,Edificios,1,PLAZA CAGANCHA,1145,-34.90534293,-56.19172037,Agustina Silva ,095363898,2026-07-20 13:39:00,"piso 6
@@ -8533,21 +8377,11 @@ Sabado 6 a 12 o 20 a 24
 +598 96 397 747
 ",1,Vaciado,1,2.0 chico,2026-07-04 07:46:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Ex-Cofeca,1,12:15,Cerrado,0,1,laura.nozar@gmail.com
 150503,CH,EDIFICIO PUERTA DEL SOL,Edificios,1,BV ESPAÑA,2666,-34.91349850,-56.15584789,JULIO TOLEDO,093 677 830,2026-07-03 08:46:00,+598 93 677 830,1,Vaciado,1,2.0 grande,2026-07-04 11:22:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Ex-Cofeca,1,12:15,Cerrado,497,37,
-150564,CH,CASTEL NUOVO,Edificios,2,PEDRO F BERRO,1056,-34.91205328,-56.15068979,PABLO TAMAREO,099815521,2026-07-02 00:00:00,VACIADO 59897784282,2,Vaciado,3,1.0 grande,2026-07-04 08:06:00,2gy 1ch ,Mauricio Olivera-232,SDE 6597,Ex-Cofeca,3,12:45,Cerrado,30,61,
 150556,CH,BV JUAN BENITO BLANCO 3254,Edificios,2,BV JUAN BENITO BLANCO ,3254,-34.90912409,-56.14288776,Franco Pugliese ,099139907,2026-07-03 17:02:00,"vaciado 
 +598 94 287 921",2,Vaciado,2,1.0 grande,2026-07-04 08:38:00,"1 G
 1 CH",Mauricio Olivera-232,SDE 6597,Ex-Cofeca,2,12:45,Cerrado,0,1,arq.pugliese@gmail.com
-150308,CH,PINAMAR,Edificios,1,SOLANO GARCIA,2425,-34.92195156,-56.16072773,LEONARDO PEIRAN,095 926 248,2026-07-01 10:13:00,"vaciado
-598 99 090 592
-horario de 11 a 20 hrs",1,Vaciado,1,1.0 grande,2026-07-04 11:29:00,Gestión creada automáticamente,Michael Rodriguez-191,SDG 8586,Ex-Cofeca,1,12:47,Cerrado,718,28,
-150322,CH,Edificio Leonglay,Edificios,1,LEYENDA PATRIA,2948,-34.92124011,-56.15578866,Cecilia Faget,92 434 545,2026-07-01 11:53:00,"vaciado
-598 92 434 545
-Lunes a Viernes de 13:00 a 21:00",1,Vaciado,1,2.0 grande,2026-07-04 14:32:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,1,17:47,Cerrado,0,1,cecilia.fagetbrunner@gmail.com
 150486,CH,Edificios,Edificios,2,GUAYAQUI,3251,-34.90956331,-56.14876088,MARIA RODRIGUEZ,98 714 060,2026-07-03 01:59:00,"+598 99 997 507
 horario de portería sabado de hr 15:00 a hr 19:00",2,Vaciado,2,2.0 chico,2026-07-04 15:37:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,2,17:47,Cerrado,0,28,alisbafa@gmail.com
-150580,CH,Torre del Poeta,Edificios,1,TABARE,2446,-34.92753980,-56.15884941,Graciela Ferrer,099 564 355,2026-07-01 09:29:00,"VACIADO 59897453119
-HASTA LAS 13:00",1,Vaciado,1,2.0 chico,2026-07-04 13:38:00,"1 G
-1 CH",Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,2,17:47,Cerrado,0,21,zg_ferrer@hotmail.com
 152193,F,COVIESS 90 II,Cooperativas,2,CAMBAY,2717,-34.86547544,-56.11615823,María del Carmen Cedrez,095270230,2026-07-25 09:42:00,vaciado - +598 95 270 230,2,Vaciado,2,2.0 chico,2026-07-27 07:44:00,Gestión creada automáticamente,VOLUMINOSO 2 - SA-1034,,La Paloma,2,12:10,Cerrado,1,37,mariadelcarmencedrez@gmail.com
 151722,B,CASA COLECTIVA DE MIDES,Otros,1,SARANDI (CIUDAD VIEJA),310,-34.90880008,-56.20862258,Sebastian Bente,094004226,2026-07-20 08:03:00,"+598 94 725 526 vaciado 
 reagendado",1,Vaciado,1,2.0 grande,2026-07-27 10:44:00,1 ch,Iver Frachinetti-067,SCJ 6160,La Paloma,1,12:46,Cerrado,0,20,casavarco310@gmail.com
@@ -8687,10 +8521,6 @@ despues de las 14",1,Vaciado,1,2.0 grande,2026-09-08 17:45:00,Gestión creada au
 150602,B,DE LAS INSTRUCCIONES,Edificios,2,AV 18 DE JULIO,1874,-34.90200288,-56.17571135,RAMIRO DA ROSA,+598 93 952 987,2026-07-04 07:38:00,"VACIADO +598 93 952 987
 DE 06:00 A 22.00",2,Vaciado,3,1.0 grande,2026-07-06 09:55:00,3g,EMPRESA LOS LANZANI-037,SCW 6247,La Paloma,3,12:17,Cerrado,2307,60,ramirodar97@gmail.com
 150494,B,Edificio Cordon Design ,Edificios,3,JUAN D JACKSON,1209,-34.90695844,-56.17333319,Leticia Laulhe,092200062,2026-07-03 07:43:00,+598 98 822 937,3,Vaciado,2,2.0 grande,2026-07-06 11:00:00,1g 1ch,Mauricio Olivera-232,SDE 6597,La Paloma,2,12:18,Cerrado,0,238,comartintheosil@gmail.com
-150337,B,Perla,Edificios,2,AV LIB BRIG GRAL LAVALLEJA,1859,-34.89655161,-56.19001919,Mariela Gomez,098 202601,2026-07-01 14:44:00,"vaciado
-598 98 202 601
-Horario de 8:00 a 15:00hrs 
-",2,Vaciado,2,1.0 grande,2026-07-06 10:00:00,2g,Sandra Delgado & Carlos Dorado-1019,SDE 3657,La Paloma,2,12:57,Cerrado,0,0,
 150508,B,EDIFICIO,Edificios,3,AV 8 DE OCTUBRE,2355,-34.89567289,-56.16515220,Claudia Pais ,92 380 630,2026-07-03 09:20:00,"+598 92 149 907
 Horario de mañana",3,Vaciado,2,2.0 grande,2026-07-06 07:08:00,2g,Sandra Delgado & Carlos Dorado-1019,SDE 3657,La Paloma,2,12:57,Cerrado,0,3,edificios@lapetina.com.uy
 150625,B,LA KOLONIA,Edificios,2,PIEDRAS,655,-34.90316329,-56.20351455,ALEJANDRO GIMENEZ,094492123,2026-07-05 14:16:00,"VACIADO +598 99 704 920
@@ -8867,11 +8697,6 @@ No responden ",Gerardo Albano & Brian Albano-253,SCR 5297,,0,0,Cerrado,0,2,
 59896620342
 ",1,Vaciado,3,2.0 grande,2026-07-06 08:31:00,3g,EMPRESA LOS LANZANI-037,SCW 6247,La Paloma,3,12:17,Cerrado,0,38,accanabalc@hotmail.com
 150454,B,AV GONZALO RAMIREZ 2066,Casa particular,2,AV GONZALO RAMIREZ,2066,-34.91171495,-56.16986891,Susana Fabiani,098500699,2026-07-02 13:22:00,. Solicitud creada a partir del reclamo: 3479066.,1,Vaciado,1,2.0 chico,2026-07-06 10:50:00,1 ch,Mauricio Olivera-232,SDE 6597,La Paloma,1,12:18,Cerrado,0,4,susanafabiani@gmail.com
-150339,B,INEFOP,Centros Educativos,2,MISIONES,1352,-34.90767406,-56.20589626,Miguel Carballo,092454060,2026-07-01 15:01:00,"vaciado
-598 93 987 618
-de lunes a viernes de 8hr a 19hr",1,Vaciado,1,2.0 chico,2026-07-06 11:02:00,1g,Sandra Delgado & Carlos Dorado-1019,SDE 3657,La Paloma,1,12:57,Cerrado,1,20,intendencia@inefop.org.uy
-150324,B,AV GRAL RIVERA 2221,Casa particular,1,AV GRAL RIVERA,2221,-34.90200628,-56.16729351,Ines Soca Bruni,098232119,2026-07-01 11:57:00,"vaciado
-598 92 605 697",1,Vaciado,1,2.0 grande,2026-07-06 07:53:00,1 g,Sandra Delgado & Carlos Dorado-1019,SDE 3657,La Paloma,1,12:57,Cerrado,0,2,Socabruni@gmail.com
 150630,B,Embajador,Edificios,2,COLONIA,1193,-34.90478693,-56.19057080,Miguel Palque,99062279,2026-07-05 21:17:00,"VACIADO +598 99 062 279
 Lunes de 10 a 15 o a partir de las 18.00",1,Vaciado,1,1.0 grande,2026-07-06 10:15:00,1 g,Sandra Delgado & Carlos Dorado-1019,SDE 3657,La Paloma,1,12:57,Cerrado,0,51,mpalque@gmail.com
 150637,F,CAMPOAMOR 4450,Casa particular,1,CAMPOAMOR,4450,-34.86799709,-56.11941642,MIRIAM ROBAINA / 	CLAUDIA DE LA IGLESIA 	,099565532 / 099288887,2026-07-02 11:53:00,"+598 99 565 532
@@ -9051,30 +8876,34 @@ de 10 a 15
 156635,E,NOSTRUM,Edificios,2,EREVAN,1770,-34.88703272,-56.11206849,JUAN CARLOS SILVA,097018081,2026-09-21 13:59:00,"vaciado - de 13 a 21hs 
 +598 97 018 081",2,Vaciado,2,2.0 grande,2026-09-23 14:50:00,Gestión creada automáticamente,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,2,17:34,Cerrado,0,143,
 156699,E,DR ALEJANDRO GALLINAL 2122,Casa particular,1,DR ALEJANDRO GALLINAL,2122,-34.87890338,-56.10424410,Rosa Vecino,094421327,2026-09-22 09:56:00,+598 94 421 327 vaciado en la tarde ,1,Vaciado,1,2.0 chico,2026-09-23 15:32:00,Gestión creada automáticamente,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,1,17:34,Cerrado,0,1,
+157111,E,EDMUNDO BIANCHI 2418,Casa particular,1,EDMUNDO BIANCHI,2418,-34.87181461,-56.06233523,ROCINA CHAPE,94434114,2026-09-28 10:00:00,+598 94 434 114 ,1,Vaciado,0,2.0 chico,2026-09-30 07:36:00,no atiende,Mauricio Olivera-232,SDE 6597,,0,0,Cerrado,0,1,
+157194,E,COMPLEJO E TOWER (SKY),Edificios,5,OVIEDO,4739,-34.88694319,-56.10730297,OSVALDO ARELLANO,099 307 906,2026-09-29 10:07:00,"+598 98 630 075
+",5,Vaciado,6,1.0 grande,2026-09-30 08:06:00,6g,Dahiana-10,SDJ 5095,Géminis,6,9:22,Cerrado,207,420,
+156963,E,Inmueble Maceió - Recife - Natal,Edificios,1,RBLA REPUBLICA DE CHILE,4605,-34.89577589,-56.10935082,Eliana Cerviño,099262528,2026-09-25 08:41:00,+598 99 502 754,1,Vaciado,2,2.0 chico,2026-09-30 07:50:00,2 ch,Victoria Rodríguez-21,SDE 8454,Géminis,2,9:39,Cerrado,0,0,
+157136,E,AV SAN CARLOS DE BOLIVAR 6313,Casa particular,1,AV SAN CARLOS DE BOLIVAR,6313,-34.88588759,-56.06875246,Héctor Bergaló,091301513,2026-09-28 13:00:00,+598 91 301 513,1,Vaciado,1,2.0 chico,2026-09-30 09:12:00,1 g,Mauricio Olivera-232,SDE 6597,Géminis,1,10:10,Cerrado,0,0,h.bergalo@gmail.com
+157094,E,LICEO 15 - IBIRAY,Centros Educativos,2,AV ALFREDO AROCENA ESQ. LEIJA,1919,-34.88200405,-56.06092809,Directora,+598 99 191 127,2026-09-28 08:00:00,+598 99 191 127 ,1,Vaciado,1,2.0 chico,2026-09-30 09:00:00,1 g,Mauricio Olivera-232,SDE 6597,Géminis,1,10:10,Cerrado,0,2,libbiray@gmail.com
+157062,E,ARQ HORACIO ACOSTA Y LARA 6931,Casa particular,1,ARQ HORACIO ACOSTA Y LARA,6931,-34.86954085,-56.05708221,Graciela Silvin,94035152,2026-09-27 11:53:00,"vaciado .59894035152
+POR LA MAÑANA",1,Vaciado,1,2.0 chico,2026-09-30 08:00:00,1 ch,Mauricio Olivera-232,SDE 6597,Géminis,1,10:10,Cerrado,0,1,
+157082,E,AV MCAL FRANCISCO SOLANO LOPEZ 1833,Casa particular,1,AV MCAL FRANCISCO SOLANO LOPEZ,1833,-34.88814314,-56.12852195,Jennifer Moisés,098918124,2026-09-28 00:00:00,"de 9 a 12 y de 17 a 20 
++598 97 689 194",1,Vaciado,2,2.0 chico,2026-09-30 10:46:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Géminis,2,12:39,Cerrado,0,1,jenniferms0627@hormail.com
+157044,E,DR JOSE MA DELGADO 1871,Casa particular,1,DR JOSE MA DELGADO,1871,-34.88808857,-56.12323908,Mauricio Ramos,095236222,2026-09-26 11:19:00,apto 03,1,Vaciado,2,2.0 chico,2026-09-30 08:51:00,1g 1ch,Zulma Soca-22,,Géminis,2,12:48,Cerrado,1,1,actuabe@gmail.com
 156759,E,NIZA 1846,Casa particular,1,NIZA,1846,-34.88917808,-56.13091462,Antonella Nicoletta,091 796 027,2026-09-23 07:58:00,"VACIADO - antes de las 9am o luego de 19hs
 +598 91 796 027
-reagendado ",1,Vaciado,1,2.0 chico,2026-09-30 07:34:00, 1g,Zulma Soca-22,,,1,,Asignado,0,1,manicoletta18@gmail.com
-157044,E,DR JOSE MA DELGADO 1871,Casa particular,1,DR JOSE MA DELGADO,1871,-34.88808857,-56.12323908,Mauricio Ramos,095236222,2026-09-26 11:19:00,apto 03,1,Vaciado,2,2.0 chico,2026-09-30 08:51:00,1g 1ch,Zulma Soca-22,,,1,,Asignado,1,1,actuabe@gmail.com
-157062,E,ARQ HORACIO ACOSTA Y LARA 6931,Casa particular,1,ARQ HORACIO ACOSTA Y LARA,6931,-34.86954085,-56.05708221,Graciela Silvin,94035152,2026-09-27 11:53:00,"vaciado .59894035152
-POR LA MAÑANA",1,Vaciado,1,2.0 chico,2026-09-30 08:00:00,1 ch,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,1,
-157094,E,LICEO 15 - IBIRAY,Centros Educativos,2,AV ALFREDO AROCENA ESQ. LEIJA,1919,-34.88200405,-56.06092809,Directora,+598 99 191 127,2026-09-28 08:00:00,+598 99 191 127 ,1,Vaciado,1,2.0 chico,2026-09-30 09:00:00,1 g,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,2,libbiray@gmail.com
+reagendado ",1,Vaciado,1,2.0 chico,2026-09-30 07:34:00, 1g,Zulma Soca-22,,Géminis,1,12:48,Cerrado,0,1,manicoletta18@gmail.com
+157159,E,Sin nombre,Otros,1,ENRIQUE CHIANCONE,4669,-34.87587062,-56.11625144,Tania Luján,095661019 / 25259274 ,2026-09-28 17:07:00,"+598 95 661 019
+Entre las 10 y  las 15h",1,Vaciado,1,2.0 chico,2026-09-30 12:01:00,1 ch,Mauricio Olivera-232,SDE 6597,Géminis,1,13:00,Cerrado,0,3,taniaylujan@gmail.com
 157195,E,Delicias,Edificios,1,AV 18 DE DICIEMBRE,1665,-34.89041447,-56.10437888,Ana María Nuñez,91320012 // 95008463,2026-09-29 10:10:00,"+598 95 008 463
-De 09:30 a 13:30 ",1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,0,38,saltoncito126@gmail.com
-156963,E,Inmueble Maceió - Recife - Natal,Edificios,1,RBLA REPUBLICA DE CHILE,4605,-34.89577589,-56.10935082,Eliana Cerviño,099262528,2026-09-25 08:41:00,+598 99 502 754,1,Vaciado,2,2.0 chico,2026-09-30 07:50:00,2 ch,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,0,0,
-157082,E,AV MCAL FRANCISCO SOLANO LOPEZ 1833,Casa particular,1,AV MCAL FRANCISCO SOLANO LOPEZ,1833,-34.88814314,-56.12852195,Jennifer Moisés,098918124,2026-09-28 00:00:00,"de 9 a 12 y de 17 a 20 
-+598 97 689 194",1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,1,,Asignado,0,1,jenniferms0627@hormail.com
-157194,E,COMPLEJO E TOWER (SKY),Edificios,5,OVIEDO,4739,-34.88694319,-56.10730297,OSVALDO ARELLANO,099 307 906,2026-09-29 10:07:00,"+598 98 630 075
-",5,Vaciado,6,1.0 grande,2026-09-30 08:06:00,6g,Dahiana-10,SDJ 5095,,5,,Asignado,207,420,
-157111,E,EDMUNDO BIANCHI 2418,Casa particular,1,EDMUNDO BIANCHI,2418,-34.87181461,-56.06233523,ROCINA CHAPE,94434114,2026-09-28 10:00:00,+598 94 434 114 ,1,Vaciado,0,2.0 chico,2026-09-30 07:36:00,no atiende,Mauricio Olivera-232,SDE 6597,,0,0,Cerrado,0,1,
-150353,B,JUAN PAULLIER 1226,Casa particular,1,JUAN PAULLIER,1226,-34.90535112,-56.16756733,Carolina Massey ,095491917,2026-07-01 21:59:00,vaciado. Solicitud creada a partir del reclamo: 3474534.,1,Vaciado,0,2.0 chico,2026-07-06 08:02:00,no atiende,Sandra Delgado & Carlos Dorado-1019,SDE 3657,,0,0,Cerrado,1,1,caro.massey@gmail.com
+De 09:30 a 13:30 ",1,Vaciado,1,2.0 chico,2026-09-30 11:39:00,1 g,Victoria Rodríguez-21,SDE 8454,Géminis,1,12:53,Cerrado,0,38,saltoncito126@gmail.com
+157140,E,PUERTO DEL MAR,Edificios,1,RBLA REPUBLICA DE CHILE,4451,-34.89695168,-56.11581230,EDUARDO KARACKOSIAN,099415022,2026-09-28 14:00:00,"+598 99 415 022
+
+en cualquier horario, portería 24hs",1,Vaciado,2,1.0 grande,2026-09-30 14:47:00,2g,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,1,16:24,Cerrado,125,49,
+157053,E,RBLA CONCEPCION DEL URUGUAY 1562,Casa particular,1,RBLA CONCEPCION DEL URUGUAY,1562,-34.89205613,-56.10620131,Jacqueline del Río,094832234,2026-09-27 10:00:00,"vaciado _ entre 12 y 15 hs
++598 94 832 234",1,Vaciado,1,2.0 chico,2026-09-30 12:48:00,1 ch,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,1,16:24,Cerrado,0,1,
 150458,F,FONSECA 4576,Casa particular,1,FONSECA,4576,-34.85438606,-56.14355315,Alba Cazaux,59899170423,2026-07-02 13:13:00,"vaciado 
 59899170423",1,Vaciado,1,2.0 chico,2026-07-06 08:15:00,1g,Zulma Soca-22,,Géminis,1,8:48,Cerrado,0,1,albacazaux@gmail.com
 150469,F,PRIMER COMPLEJO HABITACIONAL UNION,Cooperativas,4,20 DE FEBRERO,2460,-34.86936062,-56.13098875,HUGO ALLIO ,099 552 660,2026-07-02 14:37:00,,4,Vaciado,3,1.0 grande,2026-07-06 07:53:00,2G 1CH,Mauricio Olivera-232,SDE 6597,Géminis,3,8:48,Cerrado,907,84,hugoallio@hotmail.com
 150616,B,Eolo,Edificios,2,CEBOLLATI,1706,-34.91319107,-56.17758878,WILSON EOLO,093566246,2026-07-05 06:13:00,"vaciado +598 98 627 761
  lun a vie en el horario de 7 a 14:30 ",1,Vaciado,4,2.0 grande,2026-07-06 08:00:00,4g,EMPRESA LOS LANZANI-037,SCW 6247,La Paloma,4,12:17,Cerrado,0,15,
-150342,B,JUAN PAULLIER 1068,Casa particular,1,JUAN PAULLIER,1068,-34.90870622,-56.16721089,Paola gregorio ,099740065,2026-07-01 12:56:00,"vaciado
-59899740065
-Horario preferentemente de 9 a 16hs",1,Vaciado,2,2.0 chico,2026-07-06 11:11:00,1g 1ch,Mauricio Olivera-232,SDE 6597,La Paloma,2,12:18,Cerrado,0,1,Pgregorio@beltranzunino.com.uy
 150547,B,HECTOR GUTIERREZ RUIZ 980,Edificios,3,HECTOR GUTIERREZ RUIZ ,980,-34.91235261,-56.19067222,Carla Méndez Klein,098601267,2026-07-03 14:59:00,"vaciado
 +598 98 601 267
 de 9 a 18",3,Vaciado,3,2.0 grande,2026-07-06 10:53:00,1g 2ch,EMPRESA LOS LANZANI-037,SCW 6247,La Paloma,3,12:17,Cerrado,0,120,
@@ -9091,9 +8920,6 @@ EN LA MAÑANA",1,Vaciado,1,2.0 chico,2026-07-06 09:59:00,1 g,Zulma Soca-22,,Gém
 de 10 a 13",1,Vaciado,1,2.0 chico,2026-07-06 10:50:00,1 g,Zulma Soca-22,,La Paloma,1,12:57,Cerrado,0,1,
 150590,F,PAES 2224,Casa particular,1,PAES,2224,-34.87242309,-56.12371504,Ana gravier,094349049,2026-07-04 09:18:00,"+598 94 349 049 VACIADO 
 de 10 a 12",1,Vaciado,0,2.0 chico,2026-07-06 07:22:00,fuera deh orario,Mauricio Olivera-232,SDE 6597,,0,0,Cerrado,0,1,
-150340,B,MAGALLANES 1016,Casa particular,1,MAGALLANES,1016,-34.91104233,-56.17805583,Mauricio Rementeria,099119883,2026-07-01 15:15:00,"vaciado
-59891802078",1,Vaciado,0,2.0 chico,2026-07-06 07:48:00,NO ATIENDE,EMPRESA LOS LANZANI-037,SCW 6247,,0,0,Cerrado,0,1,Urirementeria@gmail.com
-150343,F,4 DE MARZO 741,Casa particular,1,4 DE MARZO,741,-34.80802764,-56.11574401,Carolina Acosta,094369057,2026-07-01 15:40:00,,1,Vaciado,0,2.0 chico,2026-07-06 07:08:00,fuera de horario,Zulma Soca-22,,,0,0,Cerrado,0,1,carotuflor1982@gmail.com
 150517,B,SAN SALVADOR 1519,Casa particular,1,SAN SALVADOR,1519,-34.91168219,-56.18226603, JIMENA CAMACHO,099155461,2026-07-03 10:02:00,+598 99 155 461,1,Vaciado,0,2.0 chico,2026-07-06 08:33:00,no atiende,EMPRESA LOS LANZANI-037,SCW 6247,,0,0,Cerrado,0,1,
 150660,F,COOP MESA 1,Cooperativas,5,CNO FELIPE CARDOSO  y Calle 1  (Calle 3 y Pasaje A),,-34.86994293,-56.10897423,Francisco Amorena,099 020 257 // 099 179 926,2026-07-06 09:00:00,,5,Vaciado,5,2.0 grande,2026-07-06 09:27:00,4g 1ch,Mauricio Olivera-232,SDE 6597,Géminis,5,8:48,Cerrado,0,420,fabianartigas@outlook.com
 150557,B,Edificio Banco de Cobranzas.,Edificios,3,CNEL FEDERICO BRANDSEN,1971,-34.90133061,-56.17325102,MARIO VIOJO,099307681,2026-07-03 17:20:00,"vaciado 
@@ -9115,8 +8941,6 @@ apt 301 y 302
 de 10 a 12",1,Vaciado,1,2.0 chico,2026-07-06 11:39:00,1 g 1ch,Zulma Soca-22,,Géminis,1,12:46,Cerrado,0,1,
 152177,G,CNO DE LA REDENCION 6606,Casa particular,1,CNO DE LA REDENCION,6606,-34.80161100,-56.26209079,Marìa Solari,59899437339,2026-07-24 10:27:00,59899437339,1,Vaciado,2,Entrega,2026-07-28 12:03:00,2 G,Victoria Rodríguez-21,SDE 8454,Durán,2,12:24,Cerrado,0,1,teresasolari@hotmail.com
 150684,F,Plaza Alba Roballo (Coordina Cooperativa “Desde Adentro”),Cooperativas,1,RBLA DR PABLO BLANCO ACEVEDO esq. PSJE 13 (F HERNANDEZ Y ABIPONES),,-34.82945179,-56.11405820,Maira Sosa,094493322,2026-07-05 11:00:00,VACIADO FIJO,1,Vaciado,1,2.0 grande,2026-07-06 13:26:00,1 g,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Géminis,1,17:14,Cerrado,0,1,cooperativadesdeadentro@gmail.com
-150635,F,4 DE MARZO 741,Casa particular,1,4 DE MARZO,741,-34.80802764,-56.11574401,Carolina Acosta,094369057,2026-07-01 15:44:00,"+598 94 369 057
-EN LA TARDE",1,Vaciado,1,2.0 chico,2026-07-06 13:09:00,1 g,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Géminis,1,17:14,Cerrado,0,1,carotuflor1982@gmail.com
 152347,G,COVIGA 4,Cooperativas,2,LAS VIOLETAS,1077,-34.83953446,-56.20257501,MARIA NOEL VIDOT,093 981 624,2026-07-27 18:18:00,,2,Vaciado,3,1.0 grande,2026-07-28 08:28:00,"2 G
 1 CH",Dahiana-10,SDJ 5095,Durán,3,09:31,Cerrado,210,23,manovile@gmail.com
 152206,G,LUIS LASAGNA,Cooperativas,2,LUIS LASAGNA,6141,-34.80301727,-56.24340644,Myriam Sburlati,094 238 088,2026-07-25 12:13:00,"VACIADO - POR LA MAÑANA
@@ -9188,7 +9012,6 @@ apto2 después de las 17hs",1,Vaciado,1,2.0 chico,2026-07-07 15:50:00,,Gerardo A
 59891039860
 EN LA MAÑANA",1,Vaciado,0,2.0 chico,2026-07-08 07:31:00,no estaba ,EMPRESA LOS LANZANI-037,SCW 6247,,0,0,Cerrado,1,1,
 150695,E,RBLA REPUBLICA DE CHILE 4635,Casa particular,1,RBLA REPUBLICA DE CHILE,4635,-34.89564809,-56.10860057,Nadia Cubilla,099321389 NO LLAMAR A ESTE,2026-07-06 12:48:00,. Solicitud creada a partir del reclamo: 3501886.,1,Vaciado,0,2.0 chico,2026-07-08 07:53:00,no atiende,Dahiana-10,SDJ 5095,,0,0,Cerrado,0,1,nadiacubilla@hotmail.com
-150341,E,Edificio,Edificios,1,RAUL MONTERO BUSTAMANTE,6137,-34.88258431,-56.07658429,Sergio Repetto,+598 91 230 041,2026-07-01 10:54:00,,1,Vaciado,0,2.0 grande,2026-07-08 08:33:00,no atiende,Mauricio Olivera-232,SDE 6597,,0,0,Cerrado,1,1,antonioelgeniio10@gmail.com
 150735,E,DALMIRO COSTA 4382,Casa particular,1,DALMIRO COSTA,4382,-34.89172521,-56.12090675,Sebastian González,59898592293,2026-07-06 21:00:00,59898592293,1,Vaciado,0,2.0 chico,2026-07-08 08:42:00,no estaba ,Michael Rodriguez-191,SDG 8586,,0,0,Cerrado,0,1,Sebagonzalezmartinez@gmail.com
 150696,E,Casa verdi,Desconocido,1,VERDI,4310,-34.89605746,-56.11986551,Nadia silvoso,+598 91 450 562,2026-07-06 12:48:00,. Solicitud creada a partir del reclamo: 3501763.,1,Vaciado,0,2.0 chico,2026-07-08 09:02:00,NO ATENDIO ,Michael Rodriguez-191,SDG 8586,,0,0,Cerrado,0,1,Nadiasilvoso@gmail.com
 150720,E,JUAN PEDRO BERANGER 2279,Casa particular,1,JUAN PEDRO BERANGER,2279,-34.87640070,-56.07568020,Leonela,094439030,2026-07-06 16:07:00,"+598 96 461 044
@@ -9275,21 +9098,12 @@ en la tarde",2,Vaciado,1,Entrega,2026-07-07 14:19:00,1g,Gerardo Albano & Brian A
 150749,E,Delicias,Edificios,1,AV 18 DE DICIEMBRE,1665,-34.89041447,-56.10437888,Ana María Nuñez,91320012 // 95008463,2026-07-07 08:16:00,"VACIADO
 +598 95 008 463
 Horario: 9,30 a 13,30 ",1,Vaciado,0,2.0 chico,2026-07-08 09:00:00,fuera de horario,EMPRESA LOS LANZANI-037,SCW 6247,,0,0,Cerrado,0,38,saltoncito126@gmail.com
-150307,E,FRANCISCO DE CALDAS 1621,Casa particular,1,FRANCISCO DE CALDAS,1621,-34.89043515,-56.11554019,Ana Clara González ,099261545,2026-07-01 10:03:00,"598 92 509 147
-9-15
-REAGENDADO",1,Vaciado,0,2.0 chico,2026-07-08 09:21:00,Gestión creada automáticamente,Michael Rodriguez-191,SDG 8586,,0,0,Cerrado,0,1,
 150674,E,COSTA VERDE,Edificios,2,ALMERIA,4756,-34.89477918,-56.10588423,LAURA PONQUETTE,099139108,2026-07-06 10:26:00, 8 a 13hrs +598 94 471 868,2,Vaciado,1,1.0 grande,2026-07-08 08:48:00,1g,Dahiana-10,SDJ 5095,Géminis,2,10:38,Cerrado,1012,35,
 150686,E,edificio Blanes,Edificios,2,RBLA REPUBLICA DE CHILE,4643 BIS,-34.89555814,-56.10804824,-,95 080 065,2026-07-06 11:49:00,"+598 95 177 596
 no hay problema de horario",2,Vaciado,3,2.0 grande,2026-07-08 07:49:00,1g 2ch,Dahiana-10,SDJ 5095,Géminis,3,10:38,Cerrado,0,1,
-150297,E,LUNAS DE MALVIN,Edificios,6,AV ESTANISLAO LOPEZ,4737,-34.88801885,-56.10693457,WALTER BARREIRO,095 822 552 / 2614 4285,2026-07-01 08:54:00,"vaciado
-598 95 822 552
-",3,Vaciado,7,1.0 grande,2026-07-08 08:02:00,4g 3ch,Mauricio Olivera-232,SDE 6597,Géminis,7,11:19,Cerrado,1074,156,
 150749,E,Delicias,Edificios,1,AV 18 DE DICIEMBRE,1665,-34.89041447,-56.10437888,Ana María Nuñez,91320012 // 95008463,2026-07-07 08:16:00,"VACIADO
 +598 95 008 463
 Horario: 9,30 a 13,30 ",1,Vaciado,2,2.0 chico,2026-07-08 10:31:00,2ch,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,2,12:16,Cerrado,0,38,saltoncito126@gmail.com
-150300,E,AV MCAL FRANCISCO SOLANO LOPEZ 1833,Casa particular,1,AV MCAL FRANCISCO SOLANO LOPEZ,1833,-34.88814314,-56.12852195,Jennifer Moisés,098918124,2026-07-01 09:10:00,"vaciado
-de 08 a 12 y de 16 a 20
-59897689194",1,Vaciado,2,2.0 chico,2026-07-08 08:26:00,Gestión creada automáticamente,Michael Rodriguez-191,SDG 8586,Géminis,2,12:22,Cerrado,0,1,jenniferms0627@hormail.com
 150719,E,AQUARIUS,Edificios,4,RBLA REPUBLICA DE CHILE,4507,-34.89703180,-56.11402158,PABLO LANGELOTTI,092910860,2026-07-06 15:52:00,+598 99 916 542,1,Vaciado,3,1.0 grande,2026-07-08 10:36:00,,Michael Rodriguez-191,SDG 8586,Géminis,3,12:22,Cerrado,133,120,
 150648,E,RBLA REPUBLICA DE CHILE 4459,Edificios,2,RBLA REPUBLICA DE CHILE,4459,-34.89705063,-56.11533681,José Luis Alvarez.,59898347420,2026-07-06 08:28:00,+598 98 347 420,2,Vaciado,2,2.0 grande,2026-07-08 09:57:00,2 ch,Michael Rodriguez-191,SDG 8586,Géminis,2,12:22,Cerrado,0,2,jlalvarezgim@gmail.com
 152281,G,PEDRO 1RO 823,Casa particular,1,PEDRO 1RO,823,-34.84572186,-56.20418054,Maria Gabriela Morgavi,095929465,2026-07-27 10:23:00,de mañana,1,Vaciado,0,2.0 chico,2026-07-28 07:36:00,NO SALE NADIE,Dahiana-10,SDJ 5095,,0,0,Cerrado,0,1,gabymorgavi@gmail.com
@@ -9405,15 +9219,9 @@ Después 16hs",1,Vaciado,1,2.0 chico,2026-07-07 15:40:00,,Gerardo Albano & Brian
 150617,E,Edificio Crystal View,Edificios,1,RBLA O´HIGGINS,4715,-34.89577576,-56.10538598,Representante legal del Edificio: Brenda Taube - Portero del Edificio: José Pastorino,2908 2407 / 26148836 // 93 772 944 // 098144121,2026-07-05 06:52:00,vaciado +598 93 772 944,1,Vaciado,2,2.0 chico,2026-07-08 08:16:00,2 g,Dahiana-10,SDJ 5095,Géminis,2,10:38,Cerrado,0,25,administracion@estudiolt.com
 150672,E,DR ALVARO VARGAS GUILLEMETTE 2344,Casa particular,1,DR ALVARO VARGAS GUILLEMETTE,2344,-34.87370231,-56.06092921,Virginia Koncke,099147076,2026-07-06 10:02:00,"+598 97 056 960
 De 9 a 15 ",1,Vaciado,1,2.0 chico,2026-07-08 09:22:00,1 chj,Dahiana-10,SDJ 5095,Géminis,1,10:38,Cerrado,0,1,
-150352,E,CATANIA 2208,Casa particular,1,CATANIA,2208,-34.88180933,-56.08531212,Luis Cesari,099514993,2026-07-01 17:22:00,,1,Vaciado,1,2.0 chico,2026-07-08 08:50:00,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,Géminis,1,11:19,Cerrado,0,1,cesaricasas@gmail.com
 150523,E,EDIFICIO UNIÓN,Edificios,2,AGUSTINA CONTUCCI DE ORIBE,2538,-34.87909627,-56.14681743,ERIKA PEREIRAS / CLAUDIA (LIMPIADORA),095 501 985 / 97 172 520,2026-07-03 10:59:00,"097 172 520 claudia
 La dirección de retiro es por el lado de los garages Agustina contuchi 2538
 entre las 11 de la mañana y las 14hs más bien sobre el medio dia",2,Vaciado,0,1.0 grande,2026-07-08 11:25:00,no atiende,EMPRESA LOS LANZANI-037,SCW 6247,,0,0,Cerrado,0,0,
-150286,E,Edificio   ,Edificios,3,RENE,1652,-34.88861488,-56.08809208,Romina ,+598 99 148 595,2026-07-01 06:52:00,"vaciado
-598 99 148 595
-despues de las 10
-apto 003
-",2,Vaciado,3,2.0 chico,2026-07-08 10:54:00,2 bolsones grandes y 1 bolson chico,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,3,12:16,Cerrado,111,3,
 150789,E,Residencial Malvin.,Edificios,1,RBLA O´HIGGINS,4727,-34.89582429,-56.10513884,Sr. Diego Colman,093949235,2026-07-07 12:45:00,"VACIADO
 de 8 a 15 30hs 
 +598 92 486 979",1,Vaciado,2,2.0 chico,2026-07-08 08:19:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,2,12:16,Cerrado,0,1,
@@ -9433,11 +9241,6 @@ Horario de descanso en portera, hs10.00 a hs 10y30. Horario de tarde,  de hs 180
 +598 98 630 075",5,Vaciado,5,1.0 grande,2026-07-08 15:13:00,"Gestión creada automáticamente
 4 grandes 
 1 chico",Alexis Barbosa-1021,SDB 9603,Géminis,5,16:30,Cerrado,207,420,
-150282,E,COVIUN,Cooperativas,2,ING ALVARO CORREA MORENO,2461,-34.87105771,-56.05621907,CRISTIAN CALACE,099 241 515,2026-07-01 08:08:00,"VACIADO +598 97 596 865 // 096808714
-DE 13:00 A 16:00
-
-hoy 8/7 de 12 a 16
-",2,Vaciado,1,2.0 grande,2026-07-08 12:25:00,1 g,Alexis Barbosa-1021,SDB 9603,Géminis,1,16:30,Cerrado,4036,40,chakahanan@gmail.com
 152013,G,Centro cultural Melilla Melillarte,Centros Educativos,1,CNO SERE esq. CNO DE LA REDENCION,2049,-34.75578990,-56.30552471,Selma Sparano,+598 94 837 651,2026-07-23 10:20:00,"+598 94 837 651
 10 a 13",1,Vaciado,1,2.0 grande,2026-07-28 10:53:00,1 g,Dahiana-10,SDJ 5095,Durán,1,11:31,Cerrado,0,1,
 152334,G,CNO CARLOS MARIA DE PENA 4636,Casa particular,1,CNO CARLOS MARIA DE PENA,4636,-34.84805057,-56.21783882,Belén Figini,59895259213,2026-07-27 14:30:00,hasta las 15 hs ,1,Vaciado,1,2.0 chico,2026-07-28 11:25:00,Gestión creada automáticamente,Sandra Delgado & Carlos Dorado-1019,SDE 3657,Durán,1,12:35,Cerrado,0,1,belenfigini65@gmail.com
@@ -9519,27 +9322,51 @@ desde las 14hd",1,Vaciado,2,2.0 chico,2026-09-23 14:25:00,Gestión creada autom�
 156757,E,Edificio   ,Edificios,3,RENE,1652,-34.88861488,-56.08809208,Romina ,+598 99 148 595,2026-09-22 22:06:00,"+598 99 148 595
 10 am en adelante
 apto 003",3,Vaciado,3,2.0 chico,2026-09-23 16:00:00,Gestión creada automáticamente,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,2,17:34,Cerrado,111,3,
-156752,E,IRUN 2411 2411,Casa particular,1,IRUN 2411,2411,-34.87447958,-56.12388599,Mariela Vera ,099141125,2026-09-23 07:13:00,"REAGENDADO 
-VACIADO +598 99 141 125
-ANTES DE LAS 09:00",1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Zulma Soca-22,,,1,,Asignado,0,1,mvera@adinet.com.uy
-157188,E,FRANCISCO DE CALDAS 1780,Casa particular,1,FRANCISCO DE CALDAS,1780,-34.88643725,-56.11434669,Criseida Doval,098398794,2026-09-29 09:28:00,"+598 98 398 794
-de 9 a 11",1,Vaciado,1,2.0 chico,2026-09-30 08:37:00,1 g,Zulma Soca-22,,,1,,Asignado,0,0,
-157227,E,DR RAUL E BAETGHEN 2306,Casa particular,1,DR RAUL E BAETGHEN,2306,-34.87437708,-56.05430383,Estela de Souza,095041783,2026-09-29 15:51:00,,1,Vaciado,1,2.0 chico,2026-09-30 08:17:00,1 G,Mauricio Olivera-232,SDE 6597,,1,,Asignado,1,1,
-157198,E,COOPERATIVA AFAF3,Cooperativas,3,PALERMO,5685,-34.88866904,-56.08519526,ALICIA VELAZQUEZ,091476570-098104670-092603223,2026-09-29 10:29:00,"+598 91 476 570
-de 09:00 a 13:00",2,Vaciado,2,2.0 grande,,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,2,,Asignado,208,88,
 157096,E,Edificio Bettina,Edificios,2,DR ALEJANDRO GALLINAL,1631,-34.89004017,-56.09559051,Daniel Mora,97191170,2026-09-28 09:00:00,"+598 99 914 764 
 de 8:30 a 10:30hs
-",2,Vaciado,2,2.0 chico,2026-09-30 08:39:00,2g,Victoria Rodríguez-21,SDE 8454,,2,,Asignado,0,28,daniel.1980341@gmail.com
+",2,Vaciado,2,2.0 chico,2026-09-30 08:39:00,2g,Victoria Rodríguez-21,SDE 8454,Géminis,2,9:39,Cerrado,0,28,daniel.1980341@gmail.com
 157092,E,SIN NOMBRE 118,Edificios,1,RBLA REPUBLICA DE CHILE,4475,-34.89709534,-56.11504424,GUSTAVO VARELA,099797080,2026-09-28 07:49:00,"+598 95 923 324 
 8 a 10hs
-",1,Vaciado,1,1.0 grande,2026-09-30 08:04:00,1 g,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,130,18,
-157129,E,Concepcion 1,Edificios,1,RBLA CONCEPCION DEL URUGUAY,1478,-34.89408468,-56.10612639,Evelin Alonzo,094443861,2026-09-28 12:41:00,"+598 94 443 861
-9a12hs",1,Vaciado,1,1.0 grande,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,0,19,Evelin.alonzo@gmail.com
-157235,E,Cooperativa Codevi,Cooperativas,1,PALERMO,5524,-34.88752602,-56.08858561,Stella Galeano,099 29 17 29 ,2026-09-29 21:40:00,En la mañana por favor,1,Vaciado,1,Contenedor,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,111,11,
+",1,Vaciado,1,1.0 grande,2026-09-30 08:04:00,1 g,Victoria Rodríguez-21,SDE 8454,Géminis,1,9:39,Cerrado,130,18,
+156807,E,AGUSTIN ABREU 2347,Casa particular,1,AGUSTIN ABREU,2345,-34.88324256,-56.14785313,Sylvia Núñez,99076052,2026-09-23 11:34:00,"REAGENDADO
+VACIADO +598 99 076 052 
+DE 11:00 A 14:00",1,Vaciado,0,2.0 chico,2026-09-30 10:14:00,fuera de horario,Zulma Soca-22,,,0,0,Cerrado,0,1,sylvianu@adinet.com.uy
+157198,E,COOPERATIVA AFAF3,Cooperativas,3,PALERMO,5685,-34.88866904,-56.08519526,ALICIA VELAZQUEZ,091476570-098104670-092603223,2026-09-29 10:29:00,"+598 91 476 570
+de 09:00 a 13:00",2,Vaciado,4,2.0 grande,2026-09-30 09:29:00,1g 3ch,Mauricio Olivera-232,SDE 6597,Géminis,4,10:10,Cerrado,208,88,
+157227,E,DR RAUL E BAETGHEN 2306,Casa particular,1,DR RAUL E BAETGHEN,2306,-34.87437708,-56.05430383,Estela de Souza,095041783,2026-09-29 15:51:00,,1,Vaciado,1,2.0 chico,2026-09-30 08:17:00,1 G,Mauricio Olivera-232,SDE 6597,Géminis,1,10:10,Cerrado,1,1,
 157171,E,Edificio viajantes III,Edificios,1,HERNANI,1595,-34.88945363,-56.08582908,Valentina Fonseca,59899449333,2026-09-28 21:39:00,"VACIADO - DE 9AM a  14PM
 598 99 449 333
-",1,Vaciado,1,Entrega,,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,1,,Asignado,0,1,valentina.fonseca88@gmail.com
-157233,E,DELPHINUS,Edificios,3,RBLA REPUBLICA DE CHILE,4511,-34.89675689,-56.11324883,ALBERTO CATAÑY,26134283,2026-09-29 21:03:00,,3,Vaciado,3,2.0 grande,,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,3,,Asignado,135,110,
+",1,Vaciado,2,Entrega,2026-09-30 11:15:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Géminis,2,12:39,Cerrado,0,1,valentina.fonseca88@gmail.com
+157233,E,DELPHINUS,Edificios,3,RBLA REPUBLICA DE CHILE,4511,-34.89675689,-56.11324883,ALBERTO CATAÑY,26134283,2026-09-29 21:03:00,,3,Vaciado,4,2.0 grande,2026-09-30 09:58:00,4g,Dahiana-10,SDJ 5095,Géminis,4,12:39,Cerrado,135,110,
+156807,E,AGUSTIN ABREU 2347,Casa particular,1,AGUSTIN ABREU,2345,-34.88324256,-56.14785313,Sylvia Núñez,99076052,2026-09-23 11:34:00,"REAGENDADO
+VACIADO +598 99 076 052 
+DE 11:00 A 14:00",1,Vaciado,1,2.0 chico,2026-09-30 11:37:00,1 g,Zulma Soca-22,,Géminis,1,12:48,Cerrado,0,1,sylvianu@adinet.com.uy
+157188,E,FRANCISCO DE CALDAS 1780,Casa particular,1,FRANCISCO DE CALDAS,1780,-34.88643725,-56.11434669,Criseida Doval,098398794,2026-09-29 09:28:00,"+598 98 398 794
+de 9 a 11",1,Vaciado,1,2.0 chico,2026-09-30 08:37:00,1 g,Zulma Soca-22,,Géminis,1,12:48,Cerrado,0,0,
+156752,E,IRUN 2411 2411,Casa particular,1,IRUN 2411,2411,-34.87447958,-56.12388599,Mariela Vera ,099141125,2026-09-23 07:13:00,"REAGENDADO 
+VACIADO +598 99 141 125
+ANTES DE LAS 09:00",1,Vaciado,1,2.0 chico,2026-09-30 07:14:00,1 ch,Zulma Soca-22,,Géminis,1,12:48,Cerrado,0,1,mvera@adinet.com.uy
+157202,E,West Park,Edificios,1,AV ITALIA,6467,-34.87797571,-56.06934564,Pablo Berhau,97300883,2026-09-29 11:19:00,"+598 97 300 883
+De Lunes a Viernes.
+Horario de 09 a 17 hs.",1,Solicitud,2,2.0 grande,2026-09-30 10:59:00,1g 1ch,Mauricio Olivera-232,SDE 6597,Géminis,2,13:00,Cerrado,0,0,
+157235,E,Cooperativa Codevi,Cooperativas,1,PALERMO,5524,-34.88752602,-56.08858561,Stella Galeano,099 29 17 29 ,2026-09-29 21:40:00,En la mañana por favor,1,Vaciado,1,Contenedor,2026-09-30 12:00:00,1 g,Victoria Rodríguez-21,SDE 8454,Géminis,1,12:53,Cerrado,111,11,
+157129,E,Concepcion 1,Edificios,1,RBLA CONCEPCION DEL URUGUAY,1478,-34.89408468,-56.10612639,Evelin Alonzo,094443861,2026-09-28 12:41:00,"+598 94 443 861
+9a12hs",1,Vaciado,1,1.0 grande,2026-09-30 11:13:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Géminis,1,12:53,Cerrado,0,19,Evelin.alonzo@gmail.com
+157209,E,AGRIGENTO 2427,Casa particular,1,AGRIGENTO,2427,-34.87427556,-56.08780039,Andrea Rodríguez,094527480,2026-09-29 12:35:00,"+598 94 527 480
+DESPUES DE LAS 14:00",1,Vaciado,0,2.0 chico,2026-09-30 13:22:00,fuera de horario,Jorge Muller-230,SDB 8218,,0,0,Cerrado,0,1,
+157162,E,LOS FONTANES,Edificios,1,AMSTERDAM,1449,-34.89507348,-56.11319843,José Ignacio Fascioli,"099254217, 26131183",2026-09-28 17:28:00,"59897680665
+DE 12:30 A 20:00",1,Vaciado,1,1.0 grande,2026-09-30 15:00:00,Gestión creada automáticamente,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,1,16:24,Cerrado,0,37,joseignacio@fascioliadministraciones.com.uy
+156790,E,AZUL,Edificios,1,AV COLOMBES,1305,-34.89675272,-56.11446272,PORTERIA,097 546 076,2026-09-23 10:08:00,"+598 97 446 503
+10 a 17",1,Vaciado,1,1.0 grande,2026-09-30 14:28:00,1 g,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,1,16:24,Cerrado,822,26,
+156754,E,PRIAMO 1554,Casa particular,1,PRIAMO,1554,-34.89038753,-56.08163368,Victoria Suárez,098699476,2026-09-23 07:38:00,"REAGENDADO
+VACIADO +598 98 699 476
+ANTES DE LAS 16HS",1,Vaciado,1,2.0 chico,2026-09-30 13:59:00,1 ch,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,1,16:24,Cerrado,0,1,victoria-suarez@live.com
+156806,E,DR FRANCISCO SIMON 2350,Casa particular,1,DR FRANCISCO SIMON,2350,-34.88472256,-56.14905769,Cecilia Cleffi ,099177775,2026-09-23 11:23:00,"+598 99 177 775
+en la tarde
+",1,Vaciado,1,Entrega,2026-09-30 15:43:00,"Gestión creada automáticamente
+No atiende",Jorge Muller-230,SDB 8218,,0,,Cerrado,0,1,cecil5639@gmail.com
+157141,E,COLUMBIA,Edificios,1,AV ITALIA,4891,-34.88566607,-56.10290388,0,099 090 571 (ESTA ES LA PERSONA QUE PIDE POR WPP),2026-09-28 14:00:00,"+598 94 241 920 
+ 13.30 a 16.30",1,Vaciado,1,1.0 grande,2026-09-30 13:44:00,1 g,Jorge Muller-230,SDB 8218,Burgues,1,17:40,Cerrado,195,30,
 155728,E,Concepción del Uruguay 1688,Casa particular,1,RBLA CONCEPCION DEL URUGUAY,1688,-34.88951936,-56.10611742,Inés Vidal,098711402,2026-09-09 07:10:00,"+598 98 711 402 vaciado 
 reagendado ",1,Vaciado,1,2.0 chico,2026-09-16 14:27:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Géminis,1,16:08,Cerrado,0,1,ividalcutinella@gmail.com
 156061,E,edificio Blanes,Edificios,2,RBLA REPUBLICA DE CHILE,4643 BIS,-34.89555814,-56.10804824,-,95 080 065,2026-09-14 08:30:00,"VACIADO
@@ -9553,7 +9380,6 @@ De 10 h en adelante
 156126,E,NOSTRUM,Edificios,2,EREVAN,1770,-34.88703272,-56.11206849,JUAN CARLOS SILVA,097018081,2026-09-14 14:00:00,en el horario de 13 a 21hs .,2,Vaciado,2,2.0 grande,2026-09-16 14:51:00,1g y 1ch ,Jorge Muller-230,SDB 8218,Géminis,2,18.01,Cerrado,0,143,
 156116,E,AV PEDRO BLANES VIALE 5920,Casa particular,1,AV PEDRO BLANES VIALE,5920,-34.89090789,-56.06726681,Milagros Soto,094532740,2026-09-14 11:25:00,,1,Vaciado,1,2.0 chico,2026-09-16 17:39:00,Gestión creada automáticamente,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Géminis,1,19:12,Cerrado,0,1,Msotobofill@gmail.com
 150659,A,Escuela Nº 23 ,Centros Educativos,1,AV AGRACIADA,4235,-34.85620674,-56.22047329, Alfonsina Arguello,094397444,2026-07-06 09:04:00,59895893972 De 8 a 12,1,Vaciado,2,2.0 grande,2026-07-07 08:39:00,2g,Sandra Delgado & Carlos Dorado-1019,SDE 3657,La Paloma,2,11:38,Cerrado,0,1,
-150345,G,VICUÑA 1827,Casa particular,1,VICUÑA,1827,-34.81141196,-56.21622000,André Márquez,091098803,2026-07-01 16:40:00,De 11 a 18hs ,1,Vaciado,1,2.0 chico,2026-07-07 13:25:00,,Gerardo Albano & Brian Albano-253,SCR 5297,Durán,1,16:09,Cerrado,0,1,
 150700,G,NIÑA 1814,Casa particular,1,NIÑA,1814,-34.80214357,-56.24623490,Nancy Gulpio,098268632,2026-07-06 13:10:00,"+598 98 268 632
 en la tarde",1,Vaciado,1,2.0 grande,2026-07-07 14:11:00,1 ch,Gerardo Albano & Brian Albano-253,SCR 5297,Durán,1,16:09,Cerrado,0,1,
 150787,E,TORRES GARCIA,Edificios,1,RBLA REPUBLICA DE CHILE,4653,-34.89551790,-56.10774042,JUAN CAMPOS,095 588 173,2026-07-07 12:44:00,"VACIADO
@@ -9710,20 +9536,33 @@ VACIADO BOLSON CHICO.",1,Vaciado,1,2.0 chico,2026-09-08 15:00:00,Gestión creada
 156755,E,sin nombre 140,Otros,1,GRAL SANTANDER,2276,-34.87383825,-56.05054115,Martín Villar,99153985,2026-09-22 20:48:00,"+598 95 147 432
 despues de las 9
 toquen timbre y bocina",1,Vaciado,1,2.0 grande,2026-09-23 13:07:00,Gestión creada automáticamente,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,1,17:34,Cerrado,0,1,
-157116,E,JUAN DE DIOS PEZA 2131,Casa particular,1,JUAN DE DIOS PEZA,2131,-34.88349271,-56.13567273,Macarena Herrera,096742000,2026-09-28 10:39:00,+598 96 101 886 ,1,Vaciado,1,2.0 chico,2026-09-30 07:47:00,1 g,Zulma Soca-22,,,1,,Asignado,0,1,
-157204,E,Edificio sin nombre.,Edificios,1,CANDELARIA,1629,-34.89084650,-56.11049507,Lourdes Rapalin ,099616314,2026-09-29 11:56:00,"+598 99 616 314
-",1,Vaciado,1,2.0 grande,,Gestión creada automáticamente,Zulma Soca-22,,,1,,Asignado,0,3,Lrapalin@gmail.com
+157119,E,RBLA REPUBLICA DE CHILE 4459,Edificios,2,RBLA REPUBLICA DE CHILE,4459,-34.89705063,-56.11533681,José Luis Alvarez.,59898347420,2026-09-28 11:04:00,+598 98 347 420,2,Vaciado,2,2.0 grande,2026-09-30 08:19:00,2 G,Victoria Rodríguez-21,SDE 8454,Géminis,2,9:39,Cerrado,0,2,jlalvarezgim@gmail.com
+157137,E,COVICHE,Cooperativas,2,CAP LUIS DUARTE,2061,-34.87897195,-56.10835508,IVAN SENA,097299300,2026-09-28 13:08:00,+598 94 681 515 ,2,Vaciado,2,1.0 grande,2026-09-30 07:32:00,2 ch,Victoria Rodríguez-21,SDE 8454,Géminis,2,9:39,Cerrado,722,12,
 157218,E,Vila Carrasco,Edificios,2,GRAL FRENCH,1824,-34.88014773,-56.04611760,Darío Félix,98929835,2026-09-29 13:56:00,"+598 92 315 507
-",2,Vaciado,4,2.0 chico,2026-09-30 08:39:00,2g 2ch,Mauricio Olivera-232,SDE 6597,,2,,Asignado,0,0,
-156916,E,ING JOSE ACQUISTAPACE 2080,Casa particular,1,ING JOSE ACQUISTAPACE,2080,-34.88546126,-56.08755370,Andres Muro,099294025,2026-09-24 11:50:00,vaciado - 59895222230,1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,1,Muroan@gmail.com
-157119,E,RBLA REPUBLICA DE CHILE 4459,Edificios,2,RBLA REPUBLICA DE CHILE,4459,-34.89705063,-56.11533681,José Luis Alvarez.,59898347420,2026-09-28 11:04:00,+598 98 347 420,2,Vaciado,2,2.0 grande,2026-09-30 08:19:00,2 G,Victoria Rodríguez-21,SDE 8454,,2,,Asignado,0,2,jlalvarezgim@gmail.com
-157137,E,COVICHE,Cooperativas,2,CAP LUIS DUARTE,2061,-34.87897195,-56.10835508,IVAN SENA,097299300,2026-09-28 13:08:00,+598 94 681 515 ,2,Vaciado,2,1.0 grande,2026-09-30 07:32:00,2 ch,Victoria Rodríguez-21,SDE 8454,,2,,Asignado,722,12,
-157126,E,MARSALA X,Edificios,1,RBLA REPUBLICA DE CHILE,4481,-34.89710785,-56.11489832,MERY CAPOZZOLO,099210198,2026-09-28 12:09:00,"+598 94 045 500
-9a13hs",1,Vaciado,1,1.0 grande,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,131,20,
+",2,Vaciado,4,2.0 chico,2026-09-30 08:39:00,2g 2ch,Mauricio Olivera-232,SDE 6597,Géminis,4,10:10,Cerrado,0,0,
 156905,E,JUAN PEDRO BERANGER 2279,Casa particular,1,JUAN PEDRO BERANGER,2279,-34.87640070,-56.07568020,Leonela,094439030,2026-09-24 11:32:00,"VACIADO - de 8 a 12 y de 16 a 20
 
-+598 96 461 044",1,Vaciado,1,2.0 grande,,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,1,,Asignado,0,2,
-157174,E,Casa del vecino misterio (centro cultural),Otros,1,VERDI,4111,-34.89762453,-56.12291399,Eliana Díaz,94 850 703,2026-09-29 06:52:00,+598 94 850 703 vaciado ,1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,1,,Asignado,0,1,
++598 96 461 044",1,Vaciado,2,2.0 grande,2026-09-30 11:37:00,2g,Dahiana-10,SDJ 5095,Géminis,2,12:39,Cerrado,0,2,
+157174,E,Casa del vecino misterio (centro cultural),Otros,1,VERDI,4111,-34.89762453,-56.12291399,Eliana Díaz,94 850 703,2026-09-29 06:52:00,+598 94 850 703 vaciado ,1,Vaciado,2,2.0 chico,2026-09-30 10:11:00,2g,Dahiana-10,SDJ 5095,Géminis,2,12:39,Cerrado,0,1,
+157018,E,MONES ROSES 6064,Casa particular,1,MONES ROSES,6064,-34.88621207,-56.07686776,Sofia Esposito,Sofia 095 220 537 //  Rosanna Padilla 094575325,2026-09-25 22:40:00,VACIADO 095220537  11 a 14,1,Vaciado,1,2.0 chico,2026-09-30 10:48:00,Gestión creada automáticamente,Zulma Soca-22,,Géminis,1,12:48,Cerrado,0,1,sisof21@hotmail.com
+157204,E,Edificio sin nombre.,Edificios,1,CANDELARIA,1629,-34.89084650,-56.11049507,Lourdes Rapalin ,099616314,2026-09-29 11:56:00,"+598 99 616 314
+",1,Vaciado,1,2.0 grande,2026-09-30 09:13:00,1 g,Zulma Soca-22,,Géminis,1,12:48,Cerrado,0,3,Lrapalin@gmail.com
+157116,E,JUAN DE DIOS PEZA 2131,Casa particular,1,JUAN DE DIOS PEZA,2131,-34.88349271,-56.13567273,Macarena Herrera,096742000,2026-09-28 10:39:00,+598 96 101 886 ,1,Vaciado,1,2.0 chico,2026-09-30 07:47:00,1 g,Zulma Soca-22,,Géminis,1,12:48,Cerrado,0,1,
+157192,E,molinos de la union,Otros,1,JOSE DE ECHEGARAY,2324,-34.87488541,-56.13211495,ROSSANA TARDUÑA,94193910,2026-09-29 09:58:00,"+598 98 879 468
+DE 07:00 a 09:00",1,Vaciado,1,2.0 grande,2026-09-30 06:55:00,"Gestión creada automáticamente
+1 grande",Zulma Soca-22,,Géminis,1,12:48,Cerrado,0,20,rossanatarduna@hotmail.es
+157109,E,COOPERATIVA SXXI,Cooperativas,1,MARCO AURELIO,3862,-34.89415140,-56.12759970,GABRIELA DUARTE,099 944 269,2026-09-28 09:45:00,"+598 95 768 243
+8:30a17hs
+",1,Vaciado,2,2.0 grande,2026-09-30 12:17:00,1g 1ch,Mauricio Olivera-232,SDE 6597,Géminis,2,13:00,Cerrado,936,34,
+157237,E,EDMUNDO BIANCHI 2418,Casa particular,1,EDMUNDO BIANCHI,2418,-34.87181461,-56.06233523,ROCINA CHAPE,94434114,2026-09-30 07:36:00,"+598 94 434 114 
+REAGENDADO",1,Vaciado,1,2.0 chico,2026-09-30 11:36:00,1 ch,Mauricio Olivera-232,SDE 6597,Géminis,1,13:00,Cerrado,0,1,
+156916,E,ING JOSE ACQUISTAPACE 2080,Casa particular,1,ING JOSE ACQUISTAPACE,2080,-34.88546126,-56.08755370,Andres Muro,099294025,2026-09-24 11:50:00,vaciado - 59895222230,1,Vaciado,1,2.0 chico,2026-09-30 10:40:00,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,Géminis,1,13:00,Cerrado,0,1,Muroan@gmail.com
+157126,E,MARSALA X,Edificios,1,RBLA REPUBLICA DE CHILE,4481,-34.89710785,-56.11489832,MERY CAPOZZOLO,099210198,2026-09-28 12:09:00,"+598 94 045 500
+9a13hs",1,Vaciado,1,1.0 grande,2026-09-30 11:27:00,1 g,Victoria Rodríguez-21,SDE 8454,Géminis,1,12:53,Cerrado,131,20,
+157181,E,ISLA DE LAS GAVIOTAS,Edificios,2,RBLA REPUBLICA DE CHILE,4525,-34.89649713,-56.11262288,LAZARO CABALLERO,26139122,2026-09-29 08:35:00,"+598 99 274 146
+horario de 08.00 a 17.00hs",2,Vaciado,2,2.0 grande,2026-09-30 14:39:00,2g,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,2,16:24,Cerrado,136,76,
+157209,E,AGRIGENTO 2427,Casa particular,1,AGRIGENTO,2427,-34.87427556,-56.08780039,Andrea Rodríguez,094527480,2026-09-29 12:35:00,"+598 94 527 480
+DESPUES DE LAS 14:00",1,Vaciado,1,2.0 chico,2026-09-30 14:22:00,1 ch,Jorge Muller-230,SDB 8218,Burgues,1,17:40,Cerrado,0,1,
 153675,CH,Cala Di volpe,Edificios,1,LEYENDA PATRIA,2942,-34.92109894,-56.15583236,María Garcia / Rosario Moyano,91841277 / 092841277/ 27106585,2026-08-13 10:30:00,"+598 95 164 512
 Viernes  de 9 a 18hs
 Sábados de 9 a 14
@@ -9764,11 +9603,6 @@ Hasta las 10:30am",1,Vaciado,0,2.0 chico,2026-07-08 07:59:00,cancelo ,EMPRESA LO
 DE 09:00 A 13:00",1,Vaciado,1,2.0 chico,2026-07-08 09:37:00,1 g,Dahiana-10,SDJ 5095,Géminis,1,10:38,Cerrado,0,1,
 150713,E,Edificio Horizonte aire,Edificios,2,ALEJANDRO FLEMING,1634,-34.88959100,-56.09380382,Andrea Martinol,93991809,2026-07-06 13:25:00,"59899331865 apto 105
  a partir de las 9 de la mañana, no antes",2,Vaciado,2,2.0 chico,2026-07-08 10:04:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Géminis,2,10:38,Cerrado,0,40,andymar1127@gmail.com
-150284,E,COOPERATIVA BLANCA,Edificios,2,SANTA MONICA,2414,-34.87086606,-56.05839601,GABRIEL SUPPA ,091 414 021,2026-07-01 08:08:00,"REAGENDADO
-VACIADO +598 91 414 021
-",2,Vaciado,3,2.0 chico,2026-07-08 09:23:00,1g 2ch,Mauricio Olivera-232,SDE 6597,Géminis,3,11:19,Cerrado,4068,20,gabrielsuppa@gmail.com
-150281,E,QUIRQUINCHO 4925,Casa particular,1,QUIRQUINCHO,4925,-34.88467741,-56.10177284,Valeria López,091968568,2026-07-01 07:38:00,"REAGENDADO X2
-VACIADO +598 91 968 568 ",1,Vaciado,1,2.0 chico,2026-07-08 07:49:00,1 ch,Mauricio Olivera-232,SDE 6597,Géminis,1,11:19,Cerrado,0,1,
 150816,E,COVIBAZA,Cooperativas,2,MYOR JUAN A DOBRICH,4741 BIS,-34.87795611,-56.11100207,Sebastian Vázquez,099239736 // 095 123 024  // 099239736 // ,2026-07-07 17:00:00,+598 94 462 578 El horario es de 7 a 9 hrs. ,2,Vaciado,2,1.0 grande,2026-07-08 09:26:00,2g,EMPRESA LOS LANZANI-037,SCW 6247,Géminis,2,12:16,Cerrado,205,48,sebasarq13.04@gmail.com
 150769,E,COOPERATIVA AFAF3,Cooperativas,3,PALERMO,5685,-34.88866904,-56.08519526,ALICIA VELAZQUEZ,091476570-098104670-092603223,2026-07-07 10:12:00,"vaciado
 +598 91 476 570
@@ -9893,17 +9727,23 @@ esta de viaje luego se volvera a contactar",1,Vaciado,1,2.0 chico,2026-08-14 17:
  08:00 A 13:00
 ",1,Vaciado,1,2.0 chico,2026-09-23 09:14:00,Gestión creada automáticamente,Veronica y Alejandro-202,SDC 6831,Burgues,1,12:52,Cerrado,0,1,
 156567,E,SIR EUGEN MILLINGTON DRAKE 1780,Casa particular,1,SIR EUGEN MILLINGTON DRAKE,1780,-34.88411519,-56.05669675,Sebastian Cavallo,099779531,2026-09-21 07:36:00,vaciado - +598 99 779 551,1,Vaciado,1,2.0 chico,2026-09-23 16:30:00,Gestión creada automáticamente,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,1,17:34,Cerrado,0,1,adm.cavallo@gmail.com
-157017,E,ASAMBLEA 4531,Casa particular,1,ASAMBLEA,4531,-34.89169810,-56.11511129,Lucia Genta,098802049,2026-09-25 21:19:00,VACIADO 098802049,1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Zulma Soca-22,,,1,,Asignado,0,1,
-156986,E,GRAL MAXIMO TAJES 7173,Casa particular,1,GRAL MAXIMO TAJES,7173,-34.87531116,-56.05221436,Victoria Rinaldi,98499419,2026-09-25 12:09:00,+598 98 499 419,1,Vaciado,1,2.0 chico,2026-09-30 08:24:00,1 g,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,1,
-157205,E,Cooperativa Portuarios,Cooperativas,2,AV ESC LEDO ARROYO TORRES,5614,-34.88718468,-56.08591205,Alfredo Decia,099 282 188 // 26017276 ó 098882353,2026-09-29 12:00:00,+598 98 680 627,1,Vaciado,1,2.0 grande,,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,28,
-157105,E,COMPLEJO E TOWER (PARK),Edificios,4,OVIEDO,4795,-34.88688342,-56.10602128,-,+598 93 996 414,2026-09-28 09:47:00,+598 93 996 414,4,Vaciado,4,2.0 chico,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,4,,Asignado,709,135,lucianu10@gmail.com
-156798,E,ROCAAMADO,Edificios,1,RBLA REPUBLICA DE CHILE,4447,-34.89694713,-56.11584141,JOSE SUAREZ,098610209,2026-09-23 10:44:00,"+598 99 404 726
-8 a 12 
-16 a 20",1,Vaciado,1,1.0 grande,,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,1,,Asignado,124,16,
-157234,E,Liceo N 10 ,Centros Educativos,2,MATAOJO,1862,-34.88749175,-56.12126732,Andrea Albin y karina Oddone,099889011,2026-09-29 14:31:00,En la medida de lo posible entre las 9 y las 14,2,Vaciado,2,2.0 chico,,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,2,,Asignado,0,2,andrea.r.albin@gmail.com
 156991,E,COOPERTIVA ICOVI,Cooperativas,1,ENRIQUE CHIANCONE,4725,-34.87553709,-56.11485904,SOFIA BENITEZ,099446568,2026-09-25 13:50:00,. Solicitud creada a partir del reclamo: 3988824.,1,Vaciado,0,2.0 chico,2026-09-30 07:17:00,no tenemos el numero,Victoria Rodríguez-21,SDE 8454,,0,0,Cerrado,708,30,
 157207,E,casa del vecino zum felde ,Cooperativas,1,AV GRAL RIVERA esq. ALBERTO ZUM FELDE,1555,-34.89072947,-56.09144000,casa del vecino ,099707079,2026-09-29 12:10:00,+598 92 680 596,1,Vaciado,0,2.0 chico,2026-09-30 07:26:00,no atiende,Dahiana-10,SDJ 5095,,0,0,Cerrado,55465254,1,
 156849,E,PLUTARCO 3918,Casa particular,1,PLUTARCO,3918,-34.89114918,-56.12978146,Estela Bermudez,098 911 115,2026-09-23 21:54:00,vaciado. Solicitud creada a partir del reclamo: 3974103.,1,Vaciado,0,2.0 chico,2026-09-30 08:12:00,no atiende,Zulma Soca-22,,,0,0,Cerrado,0,1,
+156986,E,GRAL MAXIMO TAJES 7173,Casa particular,1,GRAL MAXIMO TAJES,7173,-34.87531116,-56.05221436,Victoria Rinaldi,98499419,2026-09-25 12:09:00,+598 98 499 419,1,Vaciado,1,2.0 chico,2026-09-30 08:24:00,1 g,Mauricio Olivera-232,SDE 6597,Géminis,1,10:10,Cerrado,0,1,
+156798,E,ROCAAMADO,Edificios,1,RBLA REPUBLICA DE CHILE,4447,-34.89694713,-56.11584141,JOSE SUAREZ,098610209,2026-09-23 10:44:00,"+598 99 404 726
+8 a 12 
+16 a 20",1,Vaciado,1,1.0 grande,2026-09-30 10:36:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,Géminis,1,12:39,Cerrado,124,16,
+157234,E,Liceo N 10 ,Centros Educativos,2,MATAOJO,1862,-34.88749175,-56.12126732,Andrea Albin y karina Oddone,099889011,2026-09-29 14:31:00,En la medida de lo posible entre las 9 y las 14,2,Vaciado,1,2.0 chico,2026-09-30 10:19:00,1 ch,Dahiana-10,SDJ 5095,Géminis,1,12:39,Cerrado,0,2,andrea.r.albin@gmail.com
+157197,E,EDIFICIO UNIÓN,Edificios,2,AGUSTINA CONTUCCI DE ORIBE,2538,-34.87909627,-56.14681743,ERIKA PEREIRAS / CLAUDIA (LIMPIADORA),095 501 985 / 97 172 520,2026-09-29 11:32:00,"+598 95 501 985
+ENTRE LAS 11:00 y las 14:00",2,Vaciado,3,1.0 grande,2026-09-30 11:50:00,3g,Zulma Soca-22,,Géminis,3,12:48,Cerrado,0,0,
+157017,E,ASAMBLEA 4531,Casa particular,1,ASAMBLEA,4531,-34.89169810,-56.11511129,Lucia Genta,098802049,2026-09-25 21:19:00,VACIADO 098802049,1,Vaciado,1,2.0 chico,2026-09-30 09:24:00,1 g,Zulma Soca-22,,Géminis,1,12:48,Cerrado,0,1,
+157105,E,COMPLEJO E TOWER (PARK),Edificios,4,OVIEDO,4795,-34.88688342,-56.10602128,-,+598 93 996 414,2026-09-28 09:47:00,+598 93 996 414,4,Vaciado,6,2.0 chico,2026-09-30 10:30:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Géminis,6,12:53,Cerrado,709,135,lucianu10@gmail.com
+157203,E,SAN REMO,Edificios,2,RBLA REPUBLICA DE CHILE,4407,-34.89700328,-56.11750504,EDUARDO AMARAL,091281498,2026-09-29 11:35:00,"+598 99 555 294
+de 08 a 17",2,Vaciado,2,2.0 chico,2026-09-30 13:29:00,2 ch,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,2,16:24,Cerrado,120,24,
+157056,E,SANTIAGO NIEVAS 2184,Casa particular,1,SANTIAGO NIEVAS,2184,-34.88504858,-56.14336929,Eduardo Olivera,098550091,2026-09-27 11:17:00,"vaciado - por la tarde 
++598 99 685 964",1,Vaciado,1,2.0 chico,2026-09-30 15:31:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Burgues,1,17:40,Cerrado,0,1,eolivera1974@gmail.com
+157225,E,NOSTRUM,Edificios,2,EREVAN,1770,-34.88703272,-56.11206849,JUAN CARLOS SILVA,097018081,2026-09-29 15:09:00,horario de 13 a 21hs ,2,Vaciado,2,2.0 grande,2026-09-30 13:52:00,2g,Jorge Muller-230,SDB 8218,Burgues,2,17:40,Cerrado,0,143,
 151037,CH,LUCES DEL OMBÚ,Edificios,1,LUIS FRANZINI,942,-34.91389879,-56.15879815,GUSTAVO CARDOZO,094 150 800,2026-07-10 07:57:00,"59894486307
 viernes de 7 a 23 
 sabado de 7 a 15 ",1,Vaciado,2,2.0 grande,2026-07-11 07:44:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Ex-Cofeca,2,12:40,Cerrado,1144,52,
@@ -9927,9 +9767,6 @@ despues de las 10 ",1,Vaciado,1,1.0 grande,2026-07-11 12:30:00,Gestión creada a
 151099,CH,EDIFICIO SAGITARIO,Edificios,2,21 DE SETIEMBRE,2869,-34.91903153,-56.15521852,SEBASTIAN CASTILLO,095 665 773,2026-07-10 15:35:00,+598 99 612 113 en la mañana,2,Vaciado,3,1.0 grande,2026-07-11 07:32:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Ex-Cofeca,3,12:40,Cerrado,467,42,
 150702,E,MILENIUM,Edificios,2,RBLA REPUBLICA DE CHILE,4667,-34.89555119,-56.10726682,GERMAN ARTIGAS,2613 9418,2026-07-06 11:12:00,"después de las 14 horas
 59892595777",2,Vaciado,2,2.0 chico,2026-07-08 14:28:00,Gestión creada automáticamente,Alexis Barbosa-1021,SDB 9603,Géminis,2,16:30,Cerrado,145,61,
-150303,E,ORINOCO 5006,Edificios,1,ORINOCO,5096,-34.89595255,-56.09845710,Mariela López Luquez ,94293306,2026-07-01 09:38:00,"REAGENDADO
-VACIADO +598 94 293 306
-LUEGO DE LAS 18:00",1,Vaciado,1,2.0 chico,2026-07-08 19:16:00,Se da de baja,Gerardo Albano & Brian Albano-253,SCR 5297,,0,0,Cerrado,0,7,
 150880,F,COOP MESA 1,Cooperativas,5,CNO FELIPE CARDOSO  y Calle 1  (Calle 3 y Pasaje A),,-34.86994293,-56.10897423,Francisco Amorena,099 020 257 // 099 179 926,2026-07-08 12:00:00,vaciado fijo ,4,Vaciado,1,2.0 grande,2026-07-08 12:00:00,,Alexis Barbosa-1021,SDB 9603,Géminis,4,16:30,Cerrado,0,420,fabianartigas@outlook.com
 150815,E,GRAL MAXIMO TAJES 6590,Casa particular,1,GRAL MAXIMO TAJES,6590,-34.87655637,-56.06517875,Silvia Cardozo,099111668,2026-07-07 20:56:00,despues de las 18hs,1,Vaciado,1,2.0 chico,2026-07-08 19:37:00,,Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,1,20:04,Cerrado,1,1,cardofig@hotmail.com
 150697,E,DR ALEJANDRO GALLINAL 2090,Casa particular,1,DR ALEJANDRO GALLINAL,2090,-34.87957762,-56.10369003,Patricia Ojeda,095150979,2026-07-06 12:49:00,Preferentemente en la tarde +598 95 150 979,1,Vaciado,1,2.0 chico,2026-07-08 19:51:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,1,20:02,Cerrado,0,1,bjpato_22@hotmail.com
@@ -10287,9 +10124,6 @@ De 20 a 24hs
 151034,CH,DEL SOL 2,Edificios,1,RAMON MASINI,3208,-34.90957530,-56.15069167,MARCELO ETCHENIQUE,098598533 // 92184610,2026-07-10 07:20:00,+598 92 184 610 vaciado en la mañana ,1,Vaciado,1,2.0 chico,2026-07-11 08:13:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Ex-Cofeca,1,12:40,Cerrado,1121,64,
 151088,CH,JUAN BENITO BLANCO 1189,Casa particular,1,JUAN BENITO BLANCO,1189,-34.91081503,-56.14553279,Ramon Lopez,099033536 / 098067692,2026-07-10 14:51:00,. Solicitud creada a partir del reclamo: 3526380.,1,Vaciado,1,2.0 chico,2026-07-11 13:36:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Ex-Cofeca,1,18:44,Cerrado,0,1,
 151129,CH,FIGARI,Edificios,1,RAMON MASINI,3303,-34.91101883,-56.14904029,GLADIS CARRETA,99248581,2026-07-11 09:36:00, de 9 a 16 ,1,Vaciado,1,1.0 grande,2026-07-11 15:44:00,Gestión creada automáticamente,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Ex-Cofeca,1,16:42,Cerrado,1075,16,
-150604,CH,Edificios ,Edificios,1,JOAQUIN NUÑEZ,2769,-34.92025857,-56.16064582,Alvaro Miños,099169904,2026-07-01 14:55:00,"VACIADO +598 99 169 904
-- LUNES A VIERNES DE 08:00 A 17:00
-- SABADO DE 08:00 A 12:00",1,Vaciado,2,1.0 grande,2026-07-11 09:18:00,Gestión creada automáticamente,EMPRESA LOS LANZANI-037,SCW 6247,Ex-Cofeca,2,12:40,Cerrado,0,1,
 150906,CH,VA´AOSTA,Edificios,3,JUAN MARIA PEREZ,2880,-34.91794067,-56.15112151,CARLOS DIAZ 	,97550823,2026-07-08 16:40:00, de 14 a 22 hs,3,Vaciado,5,1.0 grande,2026-07-11 14:20:00,"2 chicos y 3 grandes
 ",EMPRESA ISMAEL & LOURDES-036,SDC 8463,Ex-Cofeca,5,16:42,Cerrado,1130,36,
 150983,CH,ROSEDAL,Edificios,1,ROQUE GRASERAS,610,-34.92102812,-56.15235322,CHRISTIAN RAMOS,92171182,2026-07-09 12:35:00,"vaciado y cambio de bolson
@@ -10713,20 +10547,10 @@ en la mañana a primera hora
 DE 12:30 a 14:30 ",2,Vaciado,2,2.0 chico,2026-09-16 13:32:00,Gestión creada automáticamente,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Géminis,2,16:33,Cerrado,0,40,andymar1127@gmail.com
 156205,E,BRENDA 5878,Casa particular,1,BRENDA,5878,-34.89523005,-56.07871419,Luciana Giuria,+598 98 656 628,2026-09-15 13:52:00,+598 98 656 628 vaciado de 10 a 18 ,1,Vaciado,1,2.0 chico,2026-09-16 13:59:00,Gestión creada automáticamente,Miguel Larrosa & Alejandra Díaz-252,SDE 4150,Géminis,1,16:33,Cerrado,0,1,giuria.luciana@gmail.com
 156687,E,ISLA DE LAS GAVIOTAS,Edificios,2,RBLA REPUBLICA DE CHILE,4525,-34.89649713,-56.11262288,LAZARO CABALLERO,26139122,2026-09-22 08:57:00,+598 99 274 146 vaciado de 8 a 17 ,2,Vaciado,2,2.0 grande,2026-09-23 08:35:00,2 G,Zulma Soca-22,,Géminis,2,11:11,Cerrado,136,76,
-157139,E,EDIFICIO SAVIGNY,Edificios,1,AV ITALIA,3902,-34.88704964,-56.12766813,DIEGO GALLO,093987184,2026-09-28 06:00:00,+598 94 621 687,1,Vaciado,2,1.0 grande,2026-09-30 08:22:00,2G,Zulma Soca-22,,,1,,Asignado,353,60,
-157192,E,molinos de la union,Otros,1,JOSE DE ECHEGARAY,2324,-34.87488541,-56.13211495,ROSSANA TARDUÑA,94193910,2026-09-29 09:58:00,"+598 98 879 468
-DE 07:00 a 09:00",1,Vaciado,1,2.0 grande,2026-09-30 06:55:00,"Gestión creada automáticamente
-1 grande",Zulma Soca-22,,,1,,Asignado,0,20,rossanatarduna@hotmail.es
-157099,E,VERDENIA,Edificios,1,ANTONIO BACCINI,7122,-34.87287006,-56.05339537,GASPAR VELAZQUEZ / SANTIAGO SANCHEZ,094 684 006 / 099 616 613,2026-09-28 08:34:00,"+598 94 684 006 
-",1,Vaciado,1,2.0 grande,,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,0,
-157136,E,AV SAN CARLOS DE BOLIVAR 6313,Casa particular,1,AV SAN CARLOS DE BOLIVAR,6313,-34.88588759,-56.06875246,Héctor Bergaló,091301513,2026-09-28 13:00:00,+598 91 301 513,1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,0,h.bergalo@gmail.com
-157097,E,Cooperativa Playa Honda,Cooperativas,4,ALBERTO ZUM FELDE,1571,-34.88978772,-56.09197376,ALFREDO ORTIZ,096584307,2026-09-28 08:32:00,+598 98 970 970 ,4,Vaciado,4,2.0 grande,2026-09-30 09:02:00,4g,Victoria Rodríguez-21,SDE 8454,,4,,Asignado,780,46,
-157100,E,STELLAMARE,Edificios,2,RBLA REPUBLICA DE CHILE,4417,-34.89690283,-56.11656175,RICHARD GOMEZ,099 186 804 / 094 421 790,2026-09-28 08:32:00,"+598 97 916 036 
-
-Lunes a viernes de 9-12hs",1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,0,0,
-157104,E,EDIFICIO FIGARI,Edificios,3,RBLA REPUBLICA DE CHILE,4645,-34.89555814,-56.10804824,HECTOR GUERRERO,2613 8402,2026-09-28 09:00:00,+598 95 080 065 ,1,Vaciado,3,1.0 grande,2026-09-30 07:09:00,3g,Dahiana-10,SDJ 5095,,1,,Asignado,0,30,
 157184,E,LUNAS DE MALVIN,Edificios,6,AV ESTANISLAO LOPEZ,4737,-34.88801885,-56.10693457,WALTER BARREIRO,095 822 552 / 2614 4285,2026-09-29 08:53:00,"+598 95 822 552
-",6,Vaciado,5,1.0 grande,2026-09-30 07:45:00,5g,Dahiana-10,SDJ 5095,,6,,Asignado,1074,156,
+",6,Vaciado,5,1.0 grande,2026-09-30 07:45:00,5g,Dahiana-10,SDJ 5095,Géminis,5,9:22,Cerrado,1074,156,
+157104,E,EDIFICIO FIGARI,Edificios,3,RBLA REPUBLICA DE CHILE,4645,-34.89555814,-56.10804824,HECTOR GUERRERO,2613 8402,2026-09-28 09:00:00,+598 95 080 065 ,1,Vaciado,3,1.0 grande,2026-09-30 07:09:00,3g,Dahiana-10,SDJ 5095,Géminis,3,9:22,Cerrado,0,30,
+157097,E,Cooperativa Playa Honda,Cooperativas,4,ALBERTO ZUM FELDE,1571,-34.88978772,-56.09197376,ALFREDO ORTIZ,096584307,2026-09-28 08:32:00,+598 98 970 970 ,4,Vaciado,4,2.0 grande,2026-09-30 09:02:00,4g,Victoria Rodríguez-21,SDE 8454,Géminis,4,9:39,Cerrado,780,46,
 154805,CH,EDIFICIO CARACA,Edificios,1,AV GRAL RIVERA,3674,-34.89967125,-56.13388937,José Luis Carlomagno,99 646 744,2026-08-28 12:46:00,"REAGENDADO
 VACIADO +598 92 001 065
 VIERNES DE 08:00 A 10:00",1,Vaciado,0,2.0 chico,2026-08-29 08:21:00,NO SALE NADIE,Sandra Delgado & Carlos Dorado-1019,SDE 3657,,0,,Cerrado,4029,19,magdalenamerico@gmail.com
@@ -10943,6 +10767,15 @@ Temprano en la mañana",1,Vaciado,1,2.0 chico,2026-09-24 07:15:00,Gestión cread
 apto 2 ",1,Vaciado,1,2.0 grande,2026-09-24 14:56:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Durán,1,17:37,Cerrado,0,10,Adriana.sosacorrea@gmail.com
 156846,D,COVISIMA 2005,Cooperativas,2,AV GRAL FLORES esq. BV JOSE BATLLE Y ORDOÑEZ,3486,-34.86265946,-56.16830391,Ana Bilhere ,098.505.821,2026-09-23 18:00:00,"VACIADO. 59898505821
 DESPUES DE LAS 14HS ",2,Vaciado,2,2.0 chico,2026-09-24 16:17:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Durán,2,17:37,Cerrado,0,50,
+157135,E,EDMUNDO BIANCHI 2527,Casa particular,1,EDMUNDO BIANCHI,2527,-34.86891348,-56.06285193,DORA GASO,94153136,2026-09-28 13:09:00,"+598 94 624 283 
+luego de las 10",1,Vaciado,1,2.0 chico,2026-09-30 11:06:00,Gestión creada automáticamente,Zulma Soca-22,,Géminis,1,12:48,Cerrado,0,1,
+156885,E,Concepción del Uruguay 1688,Casa particular,1,RBLA CONCEPCION DEL URUGUAY,1688,-34.88951936,-56.10611742,Inés Vidal,098711402,2026-09-24 09:30:00,solicita que le devuelvan el bolsón de tamaño chico tiene el grande y no le sirve,1,Vaciado,1,2.0 chico,2026-09-30 15:11:00,"Gestión creada automáticamente
+Solo solicito un bolson ",EMPRESA ISMAEL & LOURDES-036,SDC 8463,,0,,Cerrado,0,1,ividalcutinella@gmail.com
+157074,E,MILENIUM,Edificios,2,RBLA REPUBLICA DE CHILE,4667,-34.89555119,-56.10726682,GERMAN ARTIGAS,2613 9418,2026-09-28 00:00:00,"Despues de las 14hs
+
++598 92 595 777",1,Vaciado,2,2.0 chico,2026-09-30 13:39:00,2g,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,2,16:24,Cerrado,145,61,
+156845,E,ADOLFO PEDRALBES 2405,Casa particular,1,ADOLFO PEDRALBES,2405,-34.87328615,-56.11335458,Valeria Paz,+598 91 695 778,2026-09-23 16:08:00,"+598 91 695 778 vaciado despues de las 18hs  
+REINGRESADO ",1,Vaciado,1,Entrega,2026-09-30 16:42:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Burgues,1,17:40,Cerrado,0,1,Valeriapcorreia@gmail.com
 150436,D,COVICO 2,Cooperativas,3,VALLADOLID esq. RAFAEL EGUREN,3757,-34.86480473,-56.15960293,ADRIANA CUSATI,099700207,2026-07-02 11:00:00,"VACIADO 
 +598 99 700 207",1,Vaciado,3,2.0 chico,2026-07-09 07:23:00,"2x2.0G
 1x2.0CH",Zulma Soca-22,,Burgues,3,12:48,Cerrado,0,3,adricusati@hotmail.com
@@ -11289,6 +11122,17 @@ DESDE LAS 7 HASTA LAS 18HS",2,Vaciado,2,2.0 chico,2026-09-24 07:23:00,"1 G
 luego del mediodia",1,Vaciado,1,2.0 chico,2026-09-24 13:58:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Durán,1,17:37,Cerrado,0,1,
 156727,C,Complejo habitacional Aguada de propiedad horizontal,Edificios,1,CUAREIM,2131,-34.89082522,-56.19193207,Florencia Oleaurre,094485555,2026-09-22 13:26:00,"59894485555 vaciado apto 008
 De 14:30 a 16:00",1,Vaciado,1,Entrega,2026-09-24 15:44:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Durán,1,17:37,Cerrado,0,1,Naitoleaurre@gmail.com
+157139,E,EDIFICIO SAVIGNY,Edificios,1,AV ITALIA,3902,-34.88704964,-56.12766813,DIEGO GALLO,093987184,2026-09-28 06:00:00,+598 94 621 687,1,Vaciado,2,1.0 grande,2026-09-30 08:22:00,2G,Zulma Soca-22,,Géminis,2,12:48,Cerrado,353,60,
+157095,E,1,Casa particular,1,LOS ARCES,7672,-34.87290437,-56.04140893,Carina Goñi,094440785,2026-09-28 09:00:00,"+598 94 440 785
+de 10  a  18hs",1,Vaciado,1,2.0 chico,2026-09-30 11:25:00,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,Géminis,1,13:00,Cerrado,0,1,carinagoni@hotmail.com
+157202,E,West Park,Edificios,1,AV ITALIA,6467,-34.87797571,-56.06934564,Pablo Berhau,97300883,2026-09-29 11:19:00,"+598 97 300 883
+De Lunes a Viernes.
+Horario de 09 a 17 hs.",1,Vaciado,0,2.0 grande,2026-09-30 00:00:00,Gestión creada automáticamente,Limpio-099,,,0,0,Cerrado,0,0,
+157205,E,Cooperativa Portuarios,Cooperativas,2,AV ESC LEDO ARROYO TORRES,5614,-34.88718468,-56.08591205,Alfredo Decia,099 282 188 // 26017276 ó 098882353,2026-09-29 12:00:00,+598 98 680 627,1,Vaciado,2,2.0 grande,2026-09-30 10:32:00,1g 1ch,Mauricio Olivera-232,SDE 6597,Géminis,2,13:00,Cerrado,0,28,
+157161,E,Edificio MALENA,Edificios,4,RBLA CONCEPCION DEL URUGUAY,1449,-34.89481356,-56.10654157,Mariela López Luquez ,094293306,2026-09-28 15:51:00,"APTO 302
+094731886 ",1,Vaciado,1,2.0 chico,2026-09-30 14:18:00,1 g,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,1,16:24,Cerrado,0,16,
+157182,E,SIN NOMBRE 117,Edificios,2,RBLA REPUBLICA DE CHILE,4455,-34.89697214,-56.11569416,JULIA ALONSO,26130963,2026-09-29 08:35:00,"+598 98 182 265
+DE 08:00 a 16:00",1,Vaciado,1,1.0 grande,2026-09-30 13:22:00,1 ch,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,1,16:24,Cerrado,127,40,
 151043,CH,ALBO PARK,Edificios,2,AV DR MANUEL ALBO,2730,-34.89038904,-56.15944530,GABRIEL LUCAS,92882965,2026-07-10 08:36:00,"+598 92 882 965 VACIADO 
 Viernes: de 08:30 a 12:00 y de 12:30 a 16:30 Sábado de 08:00 a 12:00",1,Vaciado,3,1.0 grande,2026-07-11 10:14:00,Gestión creada automáticamente,Veronica y Alejandro-202,SDC 6831,Ex-Cofeca,3,12:52,Cerrado,984,40,
 152263,D,Pedro A. Macció Nº56,Centros Educativos,2,MANUEL MELENDEZ,4410,-34.84817432,-56.16183579,xxx,95 369 714,2026-07-27 08:37:00,"Escuela 56 
@@ -11484,6 +11328,28 @@ DESPUES DE LAS 13HS",1,Vaciado,1,2.0 chico,2026-09-24 13:00:00,Gestión creada a
 156606,C,FELIPE CONTUCCI 3870,Casa particular,1,FELIPE CONTUCCI,3870,-34.85850924,-56.17713425,Santiago Castro ,099568598,2026-09-21 10:51:00,"vaciado - a partir de las 16hs
 
 +598 99 568 598",1,Vaciado,1,2.0 chico,2026-09-24 17:00:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Durán,1,17:37,Cerrado,0,1,sncastro1994@gmail.com
+157099,E,VERDENIA,Edificios,1,ANTONIO BACCINI,7122,-34.87287006,-56.05339537,GASPAR VELAZQUEZ / SANTIAGO SANCHEZ,094 684 006 / 099 616 613,2026-09-28 08:34:00,"+598 94 684 006 
+",1,Vaciado,4,2.0 grande,2026-09-30 08:07:00,2g 2ch,Mauricio Olivera-232,SDE 6597,Géminis,1,10:10,Cerrado,0,0,
+157098,E,Residencial Malvin.,Edificios,1,RBLA O´HIGGINS,4727,-34.89582429,-56.10513884,Sr. Diego Colman,093949235,2026-09-28 08:41:00,"+598 92 486 979 
+de 8 a 15:30
+",1,Vaciado,1,2.0 chico,2026-09-30 09:50:00,1 g,Zulma Soca-22,,Géminis,1,12:48,Cerrado,0,1,
+156781,E,WINANTS,Otros,1,LANCASTERIANA,2381,-34.87301282,-56.06659531,EMILIO ,99920551,2026-09-23 10:11:00,"REAGENDADO
+VACIADO +598 99 708 094
+DESPUES DE LAS 10HS",1,Vaciado,1,2.0 chico,2026-09-30 11:11:00,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,Géminis,1,13:00,Cerrado,0,1,
+157205,E,Cooperativa Portuarios,Cooperativas,2,AV ESC LEDO ARROYO TORRES,5614,-34.88718468,-56.08591205,Alfredo Decia,099 282 188 // 26017276 ó 098882353,2026-09-29 12:00:00,+598 98 680 627,1,Vaciado,0,2.0 grande,2026-09-30 00:00:00,Gestión creada automáticamente,Limpio-099,,,0,0,Cerrado,0,28,
+157100,E,STELLAMARE,Edificios,2,RBLA REPUBLICA DE CHILE,4417,-34.89690283,-56.11656175,RICHARD GOMEZ,099 186 804 / 094 421 790,2026-09-28 08:32:00,"+598 97 916 036 
+
+Lunes a viernes de 9-12hs",1,Vaciado,0,2.0 chico,2026-09-30 00:00:00,,Limpio-099,,,0,0,Cerrado,0,0,
+157100,E,STELLAMARE,Edificios,2,RBLA REPUBLICA DE CHILE,4417,-34.89690283,-56.11656175,RICHARD GOMEZ,099 186 804 / 094 421 790,2026-09-28 08:32:00,"+598 97 916 036 
+
+Lunes a viernes de 9-12hs",1,Vaciado,2,2.0 chico,2026-09-30 10:50:00,1g 1ch,Victoria Rodríguez-21,SDE 8454,Géminis,2,12:53,Cerrado,0,0,
+157083,E,Edificio Horizonte aire,Edificios,2,ALEJANDRO FLEMING,1634,-34.88959100,-56.09380382,Andrea Martinol,93991809,2026-09-28 09:07:00,"+598 99 331 865 apto 2105
+de 12:30 a 15:30 ",1,Vaciado,1,2.0 chico,2026-09-30 13:07:00,1 g,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Burgues,1,16:24,Cerrado,0,40,andymar1127@gmail.com
+157115,E,COVIC,Edificios,2,COMERCIO,2173,-34.88224492,-56.13586010,CECILIA GONZÁLEZ,099216366,2026-09-28 10:19:00,"+598 99 216 366 De 13hs a 22hs
+Entrada por Juan de Dios Peza 2174, portón del estacionamiento ",2,Vaciado,2,2.0 grande,2026-09-30 15:09:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Burgues,1,17:40,Cerrado,0,28,colygq84@gmail.com
+157151,E,AZARA 3612,Casa particular,1,AZARA,3612,-34.88188647,-56.13719919,Virginia Sejber. ,095164687,2026-09-28 15:28:00,"+598 95 164 687 
+13a18hs",1,Vaciado,1,2.0 chico,2026-09-30 14:52:00,1ch,Jorge Muller-230,SDB 8218,Burgues,1,17:40,Cerrado,0,0,
+157240,F,COOP MESA 1,Cooperativas,5,CNO FELIPE CARDOSO  y Calle 1  (Calle 3 y Pasaje A),,-34.86994293,-56.10897423,Francisco Amorena,099 020 257 // 099 179 926,2026-09-29 22:00:00,vaciado fijo,5,Vaciado,5,2.0 grande,2026-09-30 13:04:00,4g 1ch,Jorge Muller-230,SDB 8218,Burgues,5,17:40,Cerrado,0,420,fabianartigas@outlook.com
 151125,CH,Edificio Villa Toscana,Edificios,1,MANUEL V PAGOLA,3154,-34.90731215,-56.14711177,Andres Lopez,29167630,2026-07-11 10:26:00,,1,Vaciado,1,2.0 grande,2026-07-11 15:58:00,Gestión creada automáticamente,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Ex-Cofeca,1,16:42,Cerrado,0,0,
 152070,D,Liceo 41,Centros Educativos,1,LEON PEREZ esq. GRANADEROS,3800,-34.85316553,-56.17274576,Sebastian Rodriguez Perez,098669524 // +598 93 422 642,2026-07-23 14:55:00,,1,Vaciado,2,1.0 grande,2026-07-30 08:48:00,"1 grande 
 1 chico",Victoria Rodríguez-21,SDE 8454,Burgues,2,09:06,Cerrado,0,1,liceo41ces@gmail.com
@@ -11640,6 +11506,14 @@ REAGENDADO",1,Vaciado,2,2.0 chico,2026-09-24 09:39:00,1g y 1ch ,Sandra Delgado &
 Entre 09:00 y 11:00",1,Vaciado,1,2.0 chico,2026-09-24 10:19:00,Gestión creada automáticamente,Zulma Soca-22,,Durán,1,11:57,Cerrado,0,1,
 156765,C,OCTAVIO LAPIDO 1138,Casa particular,1,OCTAVIO LAPIDO,1138,-34.86900046,-56.20004581,Gerardo Benitez,099609544,2026-09-23 07:49:00,"+598 98 820 397
 primera hora en la mañana",1,Vaciado,1,2.0 chico,2026-09-24 07:34:00,Gestión creada automáticamente,Zulma Soca-22,,Durán,1,11:57,Cerrado,0,1,
+157229,C,COVIFAME,Cooperativas,1,JOSE L TERRA,2282,-34.88564435,-56.18328227,Camila Mandl,099756978,2026-09-29 19:46:00,"Apto 25
+En lo posible en el horario de la mañana",1,Vaciado,1,2.0 chico,2026-10-01 09:48:00,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,1,
+157277,C,SIN NOMBRE 164,Edificios,1,CARLOS SOLE,3205,-34.87170361,-56.19933198,Federico Chiappe,099 594 749,2026-09-30 11:59:00,+598 99 594 749,1,Vaciado,0,2.0 chico,2026-10-01 07:57:00,no atendio ,Mauricio Olivera-232,SDE 6597,,0,0,Cerrado,0,4,
+156877,C,CHIAVARI 2934,Casa particular,1,CHIAVARI,2934,-34.87676378,-56.16142820,Beatriz Ferrer,091035132,2026-09-24 09:22:00,"VACIADO +598 91 035 132
+Antes de las 9h",1,Vaciado,1,2.0 chico,2026-10-01 07:36:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Burgues,1,9:02,Cerrado,0,1,trizferrer@gmail.com
+157183,C,GRAFICOS I,Edificios,2,AV  DR. LUIS ALBERTO DE HERRERA,2765,-34.87891680,-56.15562650,LILIAN GONZALEZ,094770378,2026-09-29 08:54:00,"+598 94 770 378
+AP 401, 101 203 , 304
+DE 6 a 10",2,Vaciado,3,1.0 grande,2026-10-01 07:27:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Burgues,3,9:02,Cerrado,455,39,
 150736,B,DR PABLO DE MARIA 973,Casa particular,1,DR PABLO DE MARIA,973,-34.91131381,-56.17048626,Federica Caviglia ,099898983,2026-07-06 21:00:00,"99 115 155
 Cualquier horario",1,Vaciado,0,2.0 chico,2026-07-13 07:42:00,"no sale nadie, se reagenda ",Mauricio Olivera-232,SDE 6597,,0,,Cerrado,0,1,
 151084,F,PRIMER COMPLEJO HABITACIONAL UNION,Cooperativas,4,20 DE FEBRERO,2460,-34.86936062,-56.13098875,HUGO ALLIO ,099 552 660,2026-07-10 14:16:00,+598 95 893 150 vaciado ,2,Vaciado,2,1.0 grande,2026-07-13 07:17:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Géminis,2,08:28,Cerrado,907,84,hugoallio@hotmail.com
@@ -11820,6 +11694,9 @@ REAGENDADO",1,Vaciado,1,2.0 chico,2026-09-24 09:11:00,Gestión creada automátic
 17:00 a 19:00
 
 59891231086",1,Vaciado,1,2.0 chico,2026-09-24 14:16:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Durán,1,17:37,Cerrado,0,1,Sofiagorgae@gmail.com
+157160,C,AREQUITA 2164,Casa particular,1,AREQUITA,2164,-34.88582576,-56.18988063,Gabriela Chiapparro,099 978 369,2026-09-28 16:41:00,"+598 99 978 369
+ 7:00 a 8:30 ",1,Vaciado,1,2.0 chico,2026-10-01 09:35:00,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,1,
+157241,C,ING EDUARDO CANSTATT esq. JOSE NICOLAS OXILIA 2922,Casa particular,1,ING EDUARDO CANSTATT esq. JOSE NICOLAS OXILIA,2922,-34.87623726,-56.16252850,Ana Mariño,+598 94 982 318,2026-09-30 10:17:00,. Solicitud creada a partir del reclamo: 4023564.,1,Vaciado,0,2.0 chico,2026-10-01 07:48:00,no atendio ,Victoria Rodríguez-21,SDE 8454,,0,0,Cerrado,0,1,Anlimapa85@gmail.com
 151057,F,BV APARICIO SARAVIA 2666,Casa particular,1,BV APARICIO SARAVIA,2666,-34.83100745,-56.12852544,Eber Cardozo,097412241,2026-07-10 10:24:00,+598 97 412 241 ,1,Vaciado,1,2.0 chico,2026-07-13 08:18:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Géminis,1,08:28,Cerrado,0,1,ebercardozo2@gmail.com
 151143,B,Edificio Nervi,Edificios,1,CEBOLLATI,1586,-34.91339531,-56.18035430,Gladys Castro,098 974265   097203409,2026-07-11 09:20:00,"de 9 a 11:30  y de 12:40 a 14. Por favor no venir de 11:30 a 12:40. 
 598 94 739 019",1,Vaciado,2,2.0 chico,2026-07-13 09:23:00,1.0g y 2.0ch,Mauricio Olivera-232,SDE 6597,La Paloma,2,09:59,Cerrado,0,44,gladys@anhec.com.uy
@@ -12008,6 +11885,11 @@ Sábado de 16 a 21
 156826,CH,JUAN BENITO BLANCO 1053,Casa particular,2,JUAN BENITO BLANCO,1053,-34.91221092,-56.14760656,Carla Angelero,099180474,2026-09-23 13:56:00,"+598 97 501 591
 10 a 18 viernes",2,Vaciado,2,2.0 chico,2026-09-25 13:10:00,"1 G
 1 CH",Alexis Barbosa-1021,SDB 9603,Géminis,2,17:40,Cerrado,0,1,carlaangelero@gmail.com
+157316,C,VILARDEBO 1478,Casa particular,1,VILARDEBO 1478 ,1478,-34.87631306,-56.18751782,antonio mariano laguna,+598 97 385 203,2026-09-30 10:36:00,"Apto 12
+De mañana ",1,Vaciado,1,2.0 grande,2026-10-01 09:22:00,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,1,notienegmail@gmail.com
+156880,D,PURIFICACION 3663,Casa particular,1,PURIFICACION,3663,-34.87257955,-56.14602912,Sheila Rojas,091031981,2026-09-24 09:25:00,"59891031981
+apto 4
+reagendado ",1,Vaciado,0,2.0 chico,2026-10-01 08:06:00,no atendio ,Victoria Rodríguez-21,SDE 8454,,0,0,Cerrado,0,1,
 150673,F,Complejo Parque Guaraní,Cooperativas,1,ÑAQUIÑA,3072,-34.85928935,-56.12064392,Lourdes Santos,096 466 171,2026-07-06 10:15:00,+598 96 466 171  Complejo de viviendas Parque Guaraní En horario de la mañana,1,Vaciado,0,2.0 chico,2026-07-13 07:35:00,"No sale nadie, se reagenda",Victoria Rodríguez-21,SDE 8454,,0,,Cerrado,0,1,pamesanta310@hotmail.com
 151107,B,RECONQUISTA 338,Edificios,2,RECONQUISTA,338,-34.91032430,-56.20741597,Daniel Melo Portero ,097 886 352 ,2026-07-10 18:39:00,"+598 97 886 352
 horario de 0700 a 1100 hs y de 1600 a 2000 hs",1,Vaciado,2,2.0 chico,2026-07-13 07:16:00,Gestión creada automáticamente,Iver Frachinetti-067,SCJ 6160,Géminis,2,09:26,Cerrado,0,1,danimel504@gmail.com
@@ -12200,6 +12082,9 @@ viernes 13 a 21",2,Vaciado,1,1.0 grande,2026-09-25 13:51:00,,Alexis Barbosa-1021
 156651,CH,EDIFICIO FIDIAS,Edificios,1,JOSE ELLAURI,490,-34.92168461,-56.15780089,RUBEN DARIO,094 145 243,2026-09-21 15:47:00,"vaciado - a partir de 14 hs
 +598 94 145 243
 ",1,Vaciado,1,1.0 grande,2026-09-25 15:22:00,,Alexis Barbosa-1021,SDB 9603,Géminis,1,17:40,Cerrado,559,9,rubenhoaguy@hotmail.com
+157217,C,CRISTAL,Edificios,1,AV AGRACIADA,2893,-34.87752436,-56.19713957,MARIA DIAZ,099694974,2026-09-29 13:43:00,"+598 96 595 279
+DE 6 a 14",1,Vaciado,2,1.0 grande,2026-10-01 09:02:00,1g y 1ch ,Mauricio Olivera-232,SDE 6597,,1,,Asignado,1009,23,
+157239,D,Direccion Nacional Guardia Republicana,Otros,4,AV JOSE PEDRO VARELA esq. MADRESELVA,,-34.86514647,-56.15432184,Freddy Ojeda Romero,+598 95 731 211,2026-09-30 08:54:00,. Solicitud creada a partir del reclamo: 4023386.,1,Vaciado,5,Entrega,2026-10-01 08:30:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Burgues,5,9:02,Cerrado,0,1,freddy.ojeda@minterior.gub.uy
 151144,F,COOPERATIVA JUANA DE AMERICA,Cooperativas,10,PSJE 12 6196 esq. CONT CICERON,6196,-34.83090370,-56.11431698,MIRTHA / ADMINISTRACION,098060482 / 25147243,2026-07-11 09:22:00,"lunes a viernes de 07.30 a 15.30hs.
 +598 92 085 972",3,Vaciado,4,2.0 grande,2026-07-13 08:06:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,Géminis,4,08:28,Cerrado,0,399,
 151153,B,Cooperativa cubo del sur,Cooperativas,2,CANELONES,757,-34.90925664,-56.19980898,Valeria Morra,094991707,2026-07-12 16:02:00,"59898506486
@@ -12376,6 +12261,11 @@ apto 702 ",1,Vaciado,2,1.0 grande,2026-09-25 09:12:00,"1 G
 156921,CH,Lar Mesoiro,Edificios,2,BV GRAL ARTIGAS,266,-34.92405799,-56.16152690,Elena Martirena,099604602,2026-09-24 12:50:00,vaciado - +598 93 497 462,2,Vaciado,1,2.0 chico,2026-09-25 16:22:00,,Gerardo Albano & Brian Albano-253,SCR 5297,Géminis,1,18:50,Cerrado,0,19,emartirenacal@gmail.com
 156942,CH,SUNRISE,Edificios,4,ROQUE GRASERAS,640,-34.92017736,-56.15225766,GUILLERMO SUHR,95144025,2026-09-24 17:53:00,"Horario: 14 a 22h. sábado de 8 a 12h, Gracias.",4,Vaciado,4,2.0 grande,2026-09-25 16:00:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Géminis,2,18:50,Cerrado,2275,56,
 156940,CH,EDIFICIO PALMAR,Edificios,1,BV GRAL ARTIGAS,1496,-34.90105378,-56.16407943,TIAGO ELIZALDE,+598 96 891 711,2026-09-24 17:21:00,De lunes a viernes de 9:30 a 17:00 y sábados de 9 y 30  a 13 horas,1,Vaciado,1,1.0 grande,2026-09-25 12:10:00,Gestión creada automáticamente,Alexis Barbosa-1021,SDB 9603,Géminis,1,17:40,Cerrado,931,0,
+157268,D,IBIROCAHY 3907,Casa particular,1,IBIROCAHY,3907,-34.85038120,-56.18210286,Javier Ugolini,22154615,2026-09-30 06:21:00,"vaciar y En esta oportunidad podrían dejarme un Bolsón más grande
++598 96 594 172",1,Vaciado,1,2.0 chico,2026-10-01 09:20:00,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,0,1,
+157262,C,SIN NOMBRE 127,Edificios,2,HERVIDERO,2811,-34.87790515,-56.19999541,LAURA SORIA,095 026 678,2026-09-30 10:16:00,+598 95 189 135,2,Vaciado,2,2.0 chico,2026-10-01 08:22:00,1g y 1ch ,Mauricio Olivera-232,SDE 6597,,2,,Asignado,897,40,
+157072,C, Palas Atenea,Cooperativas,1,ESPINILLO,1386,-34.87038888,-56.19189284,Geraldine Sanjurjo,094797020,2026-09-27 20:24:00,"DE MAÑANA  94 797 020
+ Apartamentos de referencia 403, 402, 302, 101, 601, 301, 603",1,Vaciado,2,2.0 chico,2026-10-01 07:38:00,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,20,gesan@montevideo.com.uy
 156514,CH,EDIFICIO ORION,Edificios,2,PEDRO F BERRO,606,-34.91998169,-56.15427866,Sylvia Arias ,+598 94 826 673,2026-09-19 10:14:00,"REAGENDADO
 +598 93 305 315
 VIERNES DE 09:00 A 14:00",2,Vaciado,2,2.0 chico,2026-09-25 10:16:00,"1G
@@ -12549,6 +12439,11 @@ en la mañana",2,Vaciado,4,1.0 grande,2026-09-25 09:54:00,"2 G
 156650,CH,EDIFICIO CAVIA,Edificios,1,LUIS B CAVIA,2717,-34.90878944,-56.15640281,Federica Caviglia ,099898983,2026-09-21 15:06:00,"+598 99 110 136 - vaciado 
 
 De 13 a 17 horas!!",1,Vaciado,1,2.0 chico,2026-09-25 13:40:00,,Alexis Barbosa-1021,SDB 9603,Géminis,1,17:40,Cerrado,0,1,fede19587@gmail.com
+156856,C,CARAGUATA 2143,Casa particular,1,CARAGUATA,2143,-34.87673272,-56.16979962,Fernanda Fornos ,099947202,2026-09-24 07:23:00,"REAGENDADO
+VACIADO +598 99 947 202",1,Vaciado,0,2.0 chico,2026-10-01 08:10:00,no atendio ,Dahiana-10,SDJ 5095,,0,0,Cerrado,0,1,
+157196,C,Cooperativa ,Cooperativas,1,AV COSTANERA FELIPE CARAPE,4421,-34.85485504,-56.19318687,Elizabeth Díaz,094096813,2026-09-29 10:24:00,"+598 94 096 813
+ANTES DE LAS 09:00
+SIN TIMBRE",1,Vaciado,1,2.0 chico,2026-10-01 08:49:00,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,0,elivero1977@gmail.com
 155793,C,IBIROCAHY 3537,Casa particular,1,IBIROCAHY,3537,-34.85664899,-56.18572623,Lucia Pereira ,091346656,2026-09-09 14:00:00,de tarde ,1,Vaciado,1,2.0 chico,2026-09-10 16:23:00,Gestión creada automáticamente,Gerardo Albano & Brian Albano-253,SCR 5297,Ex-Cofeca,1,18:56,Cerrado,0,1,
 150744,A,PERU 1734,Casa particular,1,PERU,1734,-34.87864179,-56.25115170,Leonardo Carlini,091926758,2026-07-07 07:59:00,"VACIADO
 En la mañana
@@ -13046,6 +12941,14 @@ viernes todo el dia
 sabado hasta las 10 ",1,Vaciado,1,2.0 chico,2026-09-25 17:00:00,,Gerardo Albano & Brian Albano-253,SCR 5297,Géminis,1,18:50,Cerrado,621,17,arielraggio@gmail.com
 156851,CH,26 DE MARZO 3161,Casa particular,1,26 DE MARZO,3161,-34.90717968,-56.14525313,Susana Peruzzo,99630530,2026-09-23 22:03:00,"VACIADO. +598 99 630 530
  preferiblemente el viernes a la tarde",1,Vaciado,1,2.0 chico,2026-09-25 14:20:00,,Alexis Barbosa-1021,SDB 9603,Géminis,1,17:40,Cerrado,0,1,speruzzo@gmail.com
+157313,C,PEDRO VIDAL 2109,Casa particular,1,PEDRO VIDAL,2109,-34.87428604,-56.16479669,Germán,099602402,2026-09-30 15:16:00,+598 99 602 402,1,Vaciado,1,2.0 chico,2026-10-01 07:39:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,1,,Asignado,0,1,
+157178,C,sin nombre 156,Otros,2,QUIJOTE,3039,-34.87014084,-56.16631362,-,98 239 245,2026-09-29 07:52:00,"DE 08:00 a 10:00
+Quijote 3039 /303",2,Vaciado,2,2.0 grande,2026-10-01 09:06:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,2,,Asignado,0,1,
+157014,C,Casa particular,Casa particular,1,FLORENCIO ESCARDO,1358,-34.85952785,-56.19294241,Santiago Martínez,59896416146,2026-09-25 19:42:00,VACIADO DE MAÑANA 59896416146,1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,0,1,mi2is@yahoo.com
+157256,C,BV GRAL ARTIGAS,Casa particular,1,BV GRAL ARTIGAS esq. DR JUAN CAMPISTEGUY,3085 BIS,-34.86991915,-56.16891809,Paola Cerruti,098679161,2026-09-30 09:21:00,en la mañana a partir de las 9am,1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,0,1,cerruti.paola@gmail.com
+157294,C,IBIA VI,Edificios,2,AV  DR. LUIS ALBERTO DE HERRERA,3210,-34.87145959,-56.16333568,Gonzalo Secco,+598 97 474 618,2026-09-30 18:43:00,9 a 13 hrs,2,Vaciado,2,2.0 chico,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,2,,Asignado,32100531,54,
+157088,D,ESTRELLA POLAR 6179,Casa particular,1,ESTRELLA POLAR,6179,-34.78607423,-56.13273218,Sonia Mesones,095761386,2026-09-28 13:10:00,"+598 97 589 961
+entre las 9.30 y las 11.30",1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,0,1,gabcande21@gmail.com
 150738,A,merendero maracanito,Otros,1,PRIMERA AL NORTE (BARRIO MARACANA) 079A esq. CALLE DE LA VIA,1,-34.84996063,-56.26315425,", Dorys Gutierrez",097628859,2026-07-07 07:29:00,"+598 94 599 540
 reagendado x 2
 a partir de 8:30 ",1,Vaciado,0,2.0 chico,2026-07-14 08:44:00,no salio ,Dahiana-10,SDJ 5095,,0,0,Cerrado,1,1,gutierrezdorys3@gmail.com
@@ -13244,6 +13147,12 @@ DE 09:00 A 12:30 - DE 16:00 A 20:00",1,Vaciado,1,1.0 grande,2026-09-18 16:50:00,
 Sabados 08 a 11
 
 +598 92 509 786",1,Vaciado,1,1.0 grande,2026-09-25 12:30:00,Gestión creada automáticamente,Alexis Barbosa-1021,SDB 9603,Géminis,1,17:40,Cerrado,1101,22,
+157153,C,DR GUSTAVO GALLINAL 2258 esq. BV GRAL ARTIGAS 2258,Casa particular,1,DR GUSTAVO GALLINAL 2258 esq. BV GRAL ARTIGAS,2258,-34.87296374,-56.16744019,Emilio Valle Lisboa,099 945 844,2026-09-28 15:43:00,"+598 99 449 097 
+ANTES DEL MEDIODIA
+",1,Vaciado,1,2.0 grande,2026-10-01 07:55:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,1,,Asignado,0,1,
+157260,C,BENITO JUAREZ 3406,Casa particular,1,BENITO JUAREZ,3406 BIS,-34.86794087,-56.16624719,Cecilia Cladera,94077569,2026-09-30 10:06:00," antes de las 10
++598 94 077 569
+apto 1",1,Vaciado,1,2.0 chico,2026-10-01 09:21:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,1,,Asignado,0,1,cecicladera@gmail.com
 151205,D,GRANJA CON PORTON BLANCO DE HIERRO,Casa particular,1,CNO LA CABRA,3945,-34.76343354,-56.13153443,Raquel Perdomo,+598 93 769 502,2026-07-13 10:42:00,"+598 93 769 503
 EN LA MAÑANA",1,Vaciado,0,2.0 chico,2026-07-14 07:32:00,no atenduio ,Zulma Soca-22,,,0,0,Cerrado,0,1,
 151257,A,RODOLFO RINCON 457,Casa particular,1,RODOLFO RINCON,457 - 90,-34.84976568,-56.23418425,Anahí Negrín,23091091,2026-07-08 16:56:00,"por la tarde +598 97 930 312
@@ -13398,6 +13307,7 @@ LUEGO DE LAS 10:00",1,Vaciado,1,2.0 chico,2026-09-18 15:47:00,Gestión creada au
 156860,CH,Torre Ellauri,Edificios,1,JUAN MARIA PEREZ,2693,-34.91701725,-56.15487341,Laura Nozar,099 890 998,2026-09-24 07:50:00,vaciado - +598 96 397 747,1,Vaciado,1,2.0 chico,2026-09-25 17:00:00,,VOLUMINOSO 6 - SA-1038,,Géminis,1,18.55,Cerrado,0,1,laura.nozar@gmail.com
 156981,CH,edificio ,Edificios,1,JOSE ELLAURI,597,-34.91998950,-56.15668927,Maria Carolina Bisio ,099572658,2026-09-25 11:38:00,+598 99 747 306,1,Vaciado,1,2.0 chico,2026-09-25 16:33:00,,Gerardo Albano & Brian Albano-253,SCR 5297,Géminis,1,18:50,Cerrado,0,1,
 156528,CH,Bulevar Artigas 804,Casa particular,1,BV GRAL ARTIGAS,804,-34.91388152,-56.16264209,Paula Barla,099519455,2026-09-19 15:58:00,apto 101,1,Vaciado,1,2.0 chico,2026-09-25 17:13:00,,VOLUMINOSO 6 - SA-1038,,,0,,Cerrado,0,1,paulibarla@hotmail.com
+157265,C,DR GUSTAVO GALLINAL 2095,Casa particular,1,DR GUSTAVO GALLINAL,2095,-34.87307188,-56.17138668,Miriam Vargas,099184923,2026-09-30 10:20:00,apto 2,1,Vaciado,1,2.0 chico,2026-10-01 08:19:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,1,,Asignado,0,0,
 150799,G,Jardín Nº286,Centros Educativos,6,YEGROS,2041,-34.80135689,-56.22910633,Teresita (hasta Julio)  ,23209396,2026-07-07 14:00:00,"RETIRO DE BOLSONES VACIOS
 59894592380
 No quieren mas porque no tienen espacio",6,Retiro,6,2.0 chico,2026-07-14 10:19:00,,Victoria Rodríguez-21,SDE 8454,,0,0,Cerrado,0,0,
@@ -13606,6 +13516,20 @@ apto 202
 11:30 a 14:30",1,Vaciado,0,2.0 chico,2026-09-26 12:53:00,Gestión creada automáticamente - no atiende,VOLUMINOSO 3 - SA-1035,,,0,,Cerrado,778,21,
 156848,CH,Edificio Bage ,Edificios,1,AV BRASIL,3079,-34.91341560,-56.14980622,María pou,095720153,2026-09-23 21:00:00,"Viernes de 13-17 o de 17:30-20:30
 Sábados después de las 17",1,Vaciado,1,2.0 chico,2026-09-26 17:44:00,,EMPRESA ISMAEL & LOURDES-036,SDC 8463,Ex-Cofeca,1,18:56,Cerrado,0,20,mechupou@hotmail.com
+157064,C,COOPERATIVA DEL NAVIO-  MARTIN FIERRO 2597,Cooperativas,2,MARTIN FIERRO,2597,-34.88092717,-56.16292415,LUCIANA BARRIENTOS,098491775,2026-09-27 14:27:00,vaciado - +598 98 048 228,2,Vaciado,1,2.0 grande,2026-10-01 07:22:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,2,,Asignado,164,28,barrientos.luciana@gmail.com
+156989,C,FRANCISCO DEL PUERTO 3893,Casa particular,1,FRANCISCO DEL PUERTO,3893,-34.85548192,-56.19805490,JUAN CARLOS FACCIA,23362392,2026-09-25 11:22:00,"+598 98 970 122
+9 a 12",1,Vaciado,2,2.0 chico,2026-10-01 09:43:00,Gestión creada automáticamente,Dahiana-10,SDJ 5095,,1,,Asignado,0,1,
+157001,C,EMILIO RAÑA 2442,Casa particular,1,EMILIO RAÑA,2442,-34.88430909,-56.16481682,Rosana Gatto,099384024,2026-09-25 16:00:00,entre las 8 y 9:30 ,1,Vaciado,0,2.0 chico,2026-10-01 08:49:00,no atendio ,Dahiana-10,SDJ 5095,,0,0,Cerrado,0,1,gattoaguirreros@gmail.com
+157179,D,CNO CARLOS A LOPEZ,Casa particular,1,CNO CARLOS A LOPEZ,5118,-34.80839985,-56.16056889,Pilar Moreira,094765714,2026-09-29 08:11:00,"+598 94 765 714
+DE 10 a 12",1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,0,1,moreiramariapilar18@gmail.com
+157206,C,HOSPITAL ESPAÑOL,Otros,1,AV GRAL GARIBALDI,1729,-34.87536321,-56.18167469,Veronica Gimenez ,099643134,2026-09-29 12:01:00,"+598 99 768 835
+ANTES DE 12:30",1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,0,1,veronica.gimenez@asse.com.uy
+157271,C,BULEVARD ,Edificios,1,BV GRAL ARTIGAS,3820,-34.87095519,-56.18664379,"cambio el referente, era julio ",099 225 595,2026-09-30 11:31:00, jueves de 9 a 13 hs,1,Vaciado,1,2.0 grande,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,1,,Asignado,867,23,
+157279,C,GRAND BOULEVARD,Edificios,6,BV GRAL ARTIGAS,2260,-34.88600134,-56.16570928,LUIS ALBERTO FLORES    Shirley Gutiérrez	,98283113   098657823,2026-09-30 12:23:00,"RETIRO por calle Garibaldi nro 2490 en horario de 08 a 13hs, tenemos personal para su atencion. FAVOR ANUNCIARSE POR BOULEVARD ARTIGAS 2260.PORTERIA 
++598 96 432 415",6,Vaciado,6,1.0 grande,,Gestión creada automáticamente,Victoria Rodríguez-21,SDE 8454,,6,,Asignado,1008,0,
+157286,C,EVEREST,Edificios,1,AV  DR. LUIS ALBERTO DE HERRERA,3869,-34.86295432,-56.17975041,ANDRES CARMONA,091389143,2026-09-30 08:09:00,08:30 a 16:30,1,Vaciado,1,1.0 grande,,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,459,20,
+157081,C,Cooperativa de viviendas Coduu,Cooperativas,1,PESTALOZZI,4073,-34.85900190,-56.18433162,~Luján Camino,+598 99 133 345,2026-09-28 08:33:00,"+598 99 133 345 
+de 10 a 16 ",1,Vaciado,1,2.0 grande,,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,1,marianacnogueira@gmail.com
 151218,A,CNO ANAYA 2526,Casa particular,1,CNO ANAYA,2526,-34.82025336,-56.31100805,Yonatan Medina,095917988,2026-07-13 00:00:00,"095917988
 en la tarde",1,Vaciado,1,2.0 chico,2026-07-14 16:41:00,Gestión creada automáticamente,Jorge Muller-230,SDB 8218,Durán,1,18:19,Cerrado,0,1,
 151071,G, Centro Salesiano Sambartolo,Otros,1,MERCURIO,3380,-34.76353024,-56.21576435,Belén Pagliano,098553584,2026-07-10 13:00:00,"+598 98 553 584
@@ -13811,178 +13735,187 @@ Edificio con tres entradas",2,Vaciado,2,2.0 grande,2026-09-26 13:57:00,Gestión 
 Sábados después de las 17",1,Vaciado,0,2.0 chico,2026-09-26 16:16:00,fuimos fuera de horario,VOLUMINOSO 3 - SA-1035,,,0,,Cerrado,0,20,mechupou@hotmail.com
 156998,CH,Edificios,Edificios,2,GUAYAQUI,3251,-34.90956331,-56.14876088,MARIA RODRIGUEZ,98 714 060,2026-09-25 15:00:00,horario de portería sabado de hr 15:00 a hr 19:00 ,2,Vaciado,2,2.0 chico,2026-09-26 16:16:00,,VOLUMINOSO 3 - SA-1035,,Ex-Cofeca,2,16:59,Cerrado,0,28,alisbafa@gmail.com
 156638,CH,apartamento,Edificios,3,BV GRAL ARTIGAS,1296,-34.90486337,-56.16364265,Natalia Scanzerra,095861188,2026-09-21 14:39:00,vaciado - +598 96 894 049,3,Vaciado,2,2.0 chico,2026-09-26 15:57:00,,VOLUMINOSO 3 - SA-1035,,Ex-Cofeca,2,16:59,Cerrado,0,1,mnfernandez@joymvd.com.uy
-157083,E,Edificio Horizonte aire,Edificios,2,ALEJANDRO FLEMING,1634,-34.88959100,-56.09380382,Andrea Martinol,93991809,2026-09-28 09:07:00,"+598 99 331 865 apto 2105
-de 12:30 a 15:30 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,40,andymar1127@gmail.com
-156877,C,CHIAVARI 2934,Casa particular,1,CHIAVARI,2934,-34.87676378,-56.16142820,Beatriz Ferrer,091035132,2026-09-24 09:22:00,"REAGENDADO
-VACIADO +598 91 035 132",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,trizferrer@gmail.com
+156914,C,SAN FRUCTUOSO 1231,Casa particular,2,SAN FRUCTUOSO,1231,-34.88001642,-56.19284071,Nelida Adriana Alvarez Moraes,092486997,2026-09-24 12:22:00,"vaciado - De 10 a 15 hs
+
++598 92 486 997",2,Vaciado,2,2.0 chico,,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,2,,Asignado,0,1,
+157118,C,COLORADO 1845,Casa particular,1,COLORADO,1845,-34.87745003,-56.17906681,Janet Bocija,99503387,2026-09-28 10:59:00,+598 99 503 387 a partir de las 10hs,1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,1,jbocija@gmail.com
+156863,C,REGIMIENTO 9 1894,Casa particular,1,AV GRAL SAN MARTIN,3261,-34.86559794,-56.18029735,Sandra Aguirre,98913859,2026-09-24 08:45:00,"REAGENDADO
+VACIADO +598 98 913 859
+DE 09:00 A 12:00",1,Vaciado,1,2.0 chico,,Gestión creada automáticamente,Mauricio Olivera-232,SDE 6597,,1,,Asignado,0,1,sandra161108@gmail.com
+157244,CH,EDIFICIO ALFA,Edificios,1,RBLA MAHATMA GANDHI,161,-34.92728424,-56.15841239,MIGUEL CARDONE,094949269,2026-09-30 13:39:00,". Solicitud creada a partir del reclamo: 4024006.
+De lunes a sábado de 10 a 1630.",1,,,1.0 grande,,,-,,,,,Nuevo,85,9,
 157185,CH,Casa particular,Casa particular,1,AV RAMON ANADOR,3338,-34.89600858,-56.14474147,Ximena Pere,098419344,2026-09-29 09:21:00,"59898419344
 Primeras horas de la mañana",1,,,2.0 grande,,,-,,,,,Nuevo,0,1,xpere74@gmail.com
-157151,E,AZARA 3612,Casa particular,1,AZARA,3612,-34.88188647,-56.13719919,Virginia Sejber. ,095164687,2026-09-28 15:28:00,"+598 95 164 687 
-13a18hs",1,,,2.0 chico,,,-,,,,,Nuevo,0,0,
-157088,D,ESTRELLA POLAR 6179,Casa particular,1,ESTRELLA POLAR,6179,-34.78607423,-56.13273218,Sonia Mesones,095761386,2026-09-28 13:10:00,"+598 97 589 961
-entre las 9.30 y las 11.30",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,gabcande21@gmail.com
+157261,B,PLAZA CAGANCHA 1145,Edificios,1,PLAZA CAGANCHA,1145,-34.90534293,-56.19172037,Agustina Silva ,095363898,2026-09-30 10:08:00,"+598 93 795 287
+piso 6
+Horario de 11am a 6pm",1,,,2.0 grande,,,-,,,,,Nuevo,49914020,1,
+157304,D,Policlínica Giraldez,Dependencias de la IM,1,FAROS,6294,-34.78431238,-56.13332761,"""Martha Arenas  Vanessa Rodríguez""",Int.8456 / 22226201,2026-09-30 13:28:00, horario es de lunes a viernes de 0700a 1730 ,1,,,Contenedor,,,-,,,,,Nuevo,0,0,
+157291,CH,YARKON,Edificios,1,JUAN BENITO BLANCO,990,-34.91344049,-56.14858168,ISMAEL ROBAINA,2929 0249,2026-09-30 20:29:00,"09 hs a 15hs // VACIADO 
+
+598 96 147 608
+",1,,,1.0 grande,,,-,,,,,Nuevo,73,9,
 157024,CH,Bulevar Artigas 804,Casa particular,1,BV GRAL ARTIGAS,804,-34.91388152,-56.16264209,Paula Barla,099519455,2026-09-26 14:47:00,ap 101 reagendado x2,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,paulibarla@hotmail.com
 157219,CH,SANTIAGO GADEA 3257,Casa particular,1,SANTIAGO GADEA,3257,-34.89351103,-56.14787388,Julieta Gutiérrez ,098366692,2026-09-29 14:00:00,"+598 98 366 692
 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,0,julietagutierrezrod@gmail.com
 157187,CH,EDIFICIO KIOTO,Edificios,1,JAIME ZUDAÑEZ,2760,-34.91644108,-56.15288338,Maria Croci,094107761,2026-09-29 09:27:00,"+598 92 542 588
 de 08:00 a 13:30
 Sabados de 08:00 a 11:30",1,,,2.0 grande,,,-,,,,,Nuevo,0,1,
-156856,C,CARAGUATA 2143,Casa particular,1,CARAGUATA,2143,-34.87673272,-56.16979962,Fernanda Fornos ,099947202,2026-09-24 07:23:00,"REAGENDADO
-VACIADO +598 99 947 202",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
-157074,E,MILENIUM,Edificios,2,RBLA REPUBLICA DE CHILE,4667,-34.89555119,-56.10726682,GERMAN ARTIGAS,2613 9418,2026-09-28 00:00:00,"Despues de las 14hs
-
-+598 92 595 777",1,,,2.0 chico,,,-,,,,,Nuevo,145,61,
 157163,F,COLMENAR 6584,Casa particular,1,COLMENAR,6584,-34.82620406,-56.10720887,Miguel Leal,099517568,2026-09-28 14:31:00,"59899517568
 Despues de 15 00 horas
 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
 157186,G,LORENZO CALLEROS 504,Casa particular,1,LORENZO CALLEROS,504,-34.84339581,-56.22359245,Sofía morales ,093415898,2026-09-29 09:32:00,REAGEANDADO ,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
-157019,CH,PICASSO,Edificios,2,PEDRO F BERRO,1087,-34.91191584,-56.15079851,CARLOS MONTERO,094724159,2026-09-26 08:12:00,"+598 91 814 236 vaciado
-viernes de 7 a 14
-sabado de 7 a 10:30
+157019,CH,PICASSO,Edificios,2,PEDRO F BERRO,1087,-34.91191584,-56.15079851,CARLOS MONTERO,094724159,2026-09-26 08:12:00,"vaciado - +598 91 814 236
+VIERNES de 7 a 14
+SABADO de 7 a 10:30
 REAGENDADO",2,,,1.0 grande,,,-,,,,,Nuevo,758,37,
-157231,CH,IL FORTINO,Edificios,1,MANUEL V PAGOLA,3335,-34.90964679,-56.14461432,LUIS CHAGAS,095 713 478,2026-09-29 20:25:00,,1,,,1.0 grande,,,-,,,,,Nuevo,870,18,
+157231,CH,IL FORTINO,Edificios,1,MANUEL V PAGOLA,3335,-34.90964679,-56.14461432,LUIS CHAGAS,095 713 478,2026-09-29 20:25:00,Sabado de 9 a 12,1,,,1.0 grande,,,-,,,,,Nuevo,870,18,
 157112,B,Edificio Augustus,Edificios,1,MERCEDES,1466,-34.90346570,-56.18501138,María del Carmen Comesaña,098 899 719,2026-09-28 10:16:00,"+598 97 992 648
 9a11 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,7,
-157064,C,COOPERATIVA DEL NAVIO-  MARTIN FIERRO 2597,Cooperativas,2,MARTIN FIERRO,2597,-34.88092717,-56.16292415,LUCIANA BARRIENTOS,098491775,2026-09-27 14:27:00,vaciado - +598 98 048 228,2,,,2.0 grande,,,-,,,,,Nuevo,164,28,barrientos.luciana@gmail.com
-157098,E,Residencial Malvin.,Edificios,1,RBLA O´HIGGINS,4727,-34.89582429,-56.10513884,Sr. Diego Colman,093949235,2026-09-28 08:41:00,"+598 92 486 979 
-de 8 a 15:30
-",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
-157229,C,COVIFAME,Cooperativas,1,JOSE L TERRA,2282,-34.88564435,-56.18328227,Camila Mandl,099756978,2026-09-29 19:46:00,"Apto 25
-En lo posible en el horario de la mañana",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
+157283,CH,SIN NOMBRE 65,Edificios,2,AV  DR. LUIS ALBERTO DE HERRERA,1503,-34.89901949,-56.14031434,ROCIO / ALAN,099 413 255 / 099 172 791,2026-09-30 12:33:00,+598 92 041 748,2,,,1.0 grande,,,-,,,,,Nuevo,1061,31,
+157317,A,CHINA 1766,Casa particular,1,CHINA,1766,-34.88055253,-56.25153439,Luis Sosa,59894700195,2026-09-30 11:22:00,"59894700195 // VACIADO / PASAR A LA MAÑANA MEDIODIA
+",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,Sosaluis877@gmail.com
+157303,CH,ELLAURI 1,Edificios,1,JOSE ELLAURI,479,-34.92170155,-56.15808758,PABLO BORGES,093 540 273,2026-09-30 17:08:00,"l horario de 07a 11hs viernes o sábado
++598 96 284 979",1,,,2.0 chico,,,-,,,,,Nuevo,656,18,
+157302,C,BOSQUES DEL PRADO,Edificios,2,AMARALES,3420,-34.86507023,-56.20054616,-,096851355,2026-09-30 13:25:00,"Pueden pasar desde 7am hasta 6pm..
++598 99 312 270",2,,,2.0 chico,,,-,,,,,Nuevo,2311,46,
+157272,CH,ECHEVARRIARZA 3312,Edificios,1,ECHEVARRIARZA,3312,-34.90867354,-56.14156039,Florencia Garat,099 630 903,2026-09-30 11:25:00,"Portería 24 hs.
++598 98 469 080",1,,,2.0 grande,,,-,,,,,Nuevo,0,1,
 157157,C,CARABELA 3535,Casa particular,1,CARABELA,3535,-34.85933585,-56.17967056,Jessica Kouymtchian ,095619114,2026-09-28 19:04:00,"+598 95 619 114
 
 pasar luego de las 9:30",1,,,2.0 grande,,,-,,,,,Nuevo,0,1,Jkouymtchian@hotmail.com.uy
-157197,E,EDIFICIO UNIÓN,Edificios,2,AGUSTINA CONTUCCI DE ORIBE,2538,-34.87909627,-56.14681743,ERIKA PEREIRAS / CLAUDIA (LIMPIADORA),095 501 985 / 97 172 520,2026-09-29 11:32:00,"+598 95 501 985
-ENTRE LAS 11:00 y las 14:00",2,,,1.0 grande,,,-,,,,,Nuevo,0,0,
+157299,CH,URIMARE,Edificios,1,AV DR FRANCISCO SOCA,1391,-34.90383040,-56.15590979,JOSE LUIS FARIA,092 709 836,2026-09-30 13:14:00,".lunes a viernes de 9 a 16.y sábado de 9 a 13 
++598 95 277 447",1,,,1.0 grande,,,-,,,,,Nuevo,510,32,
+157255,CH,BV ESPAÑA 2575,Casa particular,2,BV ESPAÑA,2575,-34.91238932,-56.15850394,Sebatián Correa,093 549 236,2026-09-30 09:15:00,De 7a 11  ,2,,,2.0 grande,,,-,,,,,Nuevo,0,1,
+157309,CH,COPINA COOPERATIVA,Cooperativas,1,CARACE,505,-34.92320700,-56.15323568,DIANA TRUJILLO,099207056  /    270102053,2026-09-30 17:11:00,Pueden pasar sábado a partir de las 11.00. ,1,,,2.0 chico,,,-,,,,,Nuevo,0,0,
 157172,C,Edificio,Desconocido,1,JUAN RODRIGUEZ CORREA,1384,-34.86752914,-56.19269170,DIEGO SANCHO ,099378470,2026-09-28 23:34:00,"598 99 318 470 - VACIADO
 NO ESPECIFICA HORARIO",1,,,Entrega,,,-,,,,,Nuevo,0,5,
 157128,CH,FRAGATA,Edificios,1,ARTURO PRAT,3751,-34.90377561,-56.13274909,PIREZ,99260309,2026-09-28 12:26:00,"+598 99 260 309
 vierners 9:30 a 14:30",1,,,2.0 chico,,,-,,,,,Nuevo,4032,0,
 156944,G,ALCIDES DE MARIA 607,Casa particular,1,ALCIDES DE MARIA,607,-34.83875674,-56.22636943,Florencia Sierra,094 540 591,2026-09-29 09:54:00,después de las 17 hs ,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,florencia.sierra2112@hotmail.com
-156989,C,FRANCISCO DEL PUERTO 3893,Casa particular,1,FRANCISCO DEL PUERTO,3893,-34.85548192,-56.19805490,JUAN CARLOS FACCIA,23362392,2026-09-25 11:22:00,"+598 98 970 122
-9 a 12",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
-157081,C,Cooperativa de viviendas Coduu,Cooperativas,1,PESTALOZZI,4073,-34.85900190,-56.18433162,~Luján Camino,+598 99 133 345,2026-09-28 08:33:00,"+598 99 133 345 
-de 10 a 16 ",1,,,2.0 grande,,,-,,,,,Nuevo,0,1,marianacnogueira@gmail.com
+157319,CH,SOL DE POCITOS,Edificios,2,MIGUEL BARREIRO,3244,-34.90909881,-56.14682557,AARON TRINIDAD,93949910,2026-09-30 21:32:00,lunes miércoles y viernes de 8 a 12,2,,,1.0 grande,,,-,,,,,Nuevo,1089,19,
 156871,D,Liceo Nº64 - PARMA 3026,Centros Educativos,1,PARMA,3026,-34.86779354,-56.15282016,Sergio Murtfeldt,098778837,2026-09-24 09:09:00,"REAGENDADO
 +598 98 778 837
 DE 08:00 A 18:00",1,,,Entrega,,,-,,,,,Nuevo,0,1,direccionliceo64@gmail.com
+157247,E,Edificio Crystal View,Edificios,1,RBLA O´HIGGINS,4715,-34.89577576,-56.10538598,Representante legal del Edificio: Brenda Taube - Portero del Edificio: José Pastorino,2908 2407 / 26148836 // 93 772 944 // 098144121,2026-09-30 05:10:00,+598 93 772 944,1,,,2.0 chico,,,-,,,,,Nuevo,0,25,administracion@estudiolt.com
 157120,CH,PTE GRAL OSCAR DIEGO GESTIDO 2856,Edificios,1,PTE GRAL OSCAR DIEGO GESTIDO,2856,-34.90599341,-56.15237987,Javier Lindiman,099527006,2026-09-28 11:08:00,"+598 99 527 006
 Viernes 10a18hs",1,,,2.0 grande,,,-,,,,,Nuevo,0,0,fito.lindiman@gmail.com
+157245,E,Concepción del Uruguay 1688,Casa particular,1,RBLA CONCEPCION DEL URUGUAY,1688,-34.88951936,-56.10611742,Inés Vidal,098711402,2026-09-24 09:29:00,solicita que le devuelvan el bolsón de tamaño chico tiene el grande y no le sirve,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,ividalcutinella@gmail.com
 157080,B,ITAU,Edificios,1,CONSTITUYENTE,1556,-34.90598127,-56.18211371,Leticia Piñeyro,098921832,2026-09-28 11:42:00,"VACIADO +598 91 049 309
 DE 10:00 A 12:00
 REAGENADDO",1,,,2.0 chico,,,-,,,,,Nuevo,0,30,l.pineyrovelo@gmail.com
 157222,A,JOSE MARMOL 1116,Casa particular,1,JOSE MARMOL,1116,-34.86772802,-56.24149940,Rafael Cardozo,099577314,2026-09-29 17:40:00,"59898498102 a partir de las 15:00
 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,0,
-157115,E,COVIC,Edificios,2,COMERCIO,2173,-34.88224492,-56.13586010,CECILIA GONZÁLEZ,099216366,2026-09-28 10:19:00,"+598 99 216 366 De 13hs a 22hs
-Entrada por Juan de Dios Peza 2174, portón del estacionamiento ",2,,,2.0 grande,,,-,,,,,Nuevo,0,28,colygq84@gmail.com
+157253,CH,Edificio Marus,Edificios,1,JAIME ZUDAÑEZ,2833,-34.91657959,-56.15160289,Maria Cristina Islas,099247118,2026-09-30 08:32:00,"de 9 a 11 am
++598 94 550 269",1,,,2.0 grande,,,-,,,,,Nuevo,0,20,
+157280,CH,NEXUS RIVERA,Edificios,2,AV GRAL RIVERA,3417,-34.90172601,-56.14058311,Humberto Fontora,091381775,2026-09-30 08:36:00, lunes a viernes de 9 a 16hs y  sábados de 9 a 12hs,2,,,2.0 chico,,,-,,,,,Nuevo,0,1,fontorahumberto@gmail.com
 157230,CH,Edificio plaza real,Edificios,1,JUAN BENITO BLANCO,811,-34.91670293,-56.15027536,Rosina Reguero,099389323,2026-09-29 19:57:00,en el horario de 9 a 11,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
-157039,CH,EDIFICIO VISTA INFINITA,Edificios,3,26 DE MARZO,3393,-34.90621524,-56.13972024,CARIL DA SILVA,091 235 860,2026-09-26 09:03:00,+598 91 210 170,3,,,1.0 grande,,,-,,,,,Nuevo,585,34,
+157039,CH,EDIFICIO VISTA INFINITA,Edificios,3,26 DE MARZO,3393,-34.90621524,-56.13972024,CARIL DA SILVA,091 235 860,2026-09-26 09:03:00,"+598 91 210 170
+Viernes de 14 a 20 y sábado de 10 a 18",3,,,1.0 grande,,,-,,,,,Nuevo,585,34,
 157033,CH,MAVERIC,Edificios,1,RBLA REPUBLICA DEL PERU,825,-34.91648303,-56.14921499,YUSDIEL GONZALEZ,92047680,2026-09-26 05:45:00,+598 96 169 384,1,,,2.0 grande,,,-,,,,,Nuevo,2259,44,
 157200,CH,CIUDAD JARDIN,Edificios,1,AV BRASIL,2528,-34.90739293,-56.15936564,JOSE NAVAS,092 085 085 ,2026-09-29 10:37:00,"+598 92 085 085
  lunes a viernes de 07 a 15 hrs",1,,,1.0 grande,,,-,,,,,Nuevo,411,68,
 157193,G,CASA PARTICULAR,Casa particular,1,CROACIA,4379,-34.84065718,-56.20261750,Ana Laura Gómez,094674186,2026-09-29 11:10:00,ENTREGA BOLSON se le había dejado uno roto y lo devolvió ,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,gomezcedres@gmail.com
 157035,CH,TORRE ESPAÑA,Edificios,1,LUIS FRANZINI,1005,-34.91251412,-56.15915387,Magdalena Fernandez,99049071,2026-09-26 08:16:00,"Lunes a viernes de 8:00 a 12:00 y de 12:30 a 15:00 +598 94 941 234
 ",1,,,2.0 grande,,,-,,,,,Nuevo,4082,30,
+157312,B,CERRITO 740,Casa particular,2,CERRITO,740,-34.90347973,-56.20119917,Noemí Alfonso,095 022 180,2026-09-30 15:43:00,"+598 95 066 998
+Horario para retiro de 11 a 18hs
+Apto 202",2,,,Entrega,,,-,,,,,Nuevo,0,2,alfonson606@gmail.com
 157061,CH,Edificio Sophia,Edificios,1,JOSE L OSORIO,1221,-34.90641716,-56.14242943,Mauro Melani,99100525,2026-09-27 12:34:00,vaciado - +598 99 980 308,1,,,2.0 chico,,,-,,,,,Nuevo,0,16,mauromelani@gmail.com
-156806,E,DR FRANCISCO SIMON 2350,Casa particular,1,DR FRANCISCO SIMON,2350,-34.88472256,-56.14905769,Cecilia Cleffi ,099177775,2026-09-23 11:23:00,"+598 99 177 775
-en la tarde
-",1,,,Entrega,,,-,,,,,Nuevo,0,1,cecil5639@gmail.com
-156781,E,WINANTS,Otros,1,LANCASTERIANA,2381,-34.87301282,-56.06659531,EMILIO ,99920551,2026-09-23 10:11:00,"REAGENDADO
-VACIADO +598 99 708 094
-DESPUES DE LAS 10HS",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
-157135,E,EDMUNDO BIANCHI 2527,Casa particular,1,EDMUNDO BIANCHI,2527,-34.86891348,-56.06285193,DORA GASO,94153136,2026-09-28 13:09:00,"+598 94 624 283 
-luego de las 10",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
+157308,CH,Edificios ,Edificios,1,JOAQUIN NUÑEZ,2769,-34.92025857,-56.16064582,Alvaro Miños,099169904,2026-09-30 13:53:00,"lu a vie de 8hs a 17h
+sab de 8 a 12hs",1,,,1.0 grande,,,-,,,,,Nuevo,0,1,
 157110,CH,SIN NOMBRE 62,Edificios,1,21 DE SETIEMBRE,2898,-34.91940038,-56.15435139,OLGA SORIA,097 402 999,2026-09-28 10:00:00,"+598 97 994 474 
 10 a 12hs",1,,,1.0 grande,,,-,,,,,Nuevo,474,12,
 157170,CH,BALTASAR VARGAS 1179,Edificios,1,BALTASAR VARGAS,1179,-34.90768784,-56.15710001,Julia Helena Romei,099 204 024,2026-09-28 22:37:00,"VACIADO - EN LA MAÑANA 
 59899204024",1,,,2.0 grande,,,-,,,,,Nuevo,0,12,Jhromei@yahoo.com
 157107,CH,EDIFICIO BEL PLACE,Edificios,2,BV ESPAÑA,2406,-34.91131291,-56.16258779,CARLOS SANTA CRUZ,097316915 / 094 710 076,2026-09-28 09:41:00,"+598 94 710 076 
 de 8 a 12",2,,,1.0 grande,,,-,,,,,Nuevo,440,29,
-157182,E,SIN NOMBRE 117,Edificios,2,RBLA REPUBLICA DE CHILE,4455,-34.89697214,-56.11569416,JULIA ALONSO,26130963,2026-09-29 08:35:00,"+598 98 182 265
-DE 08:00 a 16:00",1,,,1.0 grande,,,-,,,,,Nuevo,127,40,
 157220,CH,CHILOE,Edificios,1,JUAN BENITO BLANCO,643,-34.92023793,-56.15146361,EMILIANO NAVAJAS,099639146,2026-09-29 14:51:00,"+598 97 039 751
 ",1,,,1.0 grande,,,-,,,,,Nuevo,17,18,
-157225,E,NOSTRUM,Edificios,2,EREVAN,1770,-34.88703272,-56.11206849,JUAN CARLOS SILVA,097018081,2026-09-29 15:09:00,horario de 13 a 21hs ,2,,,2.0 grande,,,-,,,,,Nuevo,0,143,
-157095,E,1,Casa particular,1,LOS ARCES,7672,-34.87290437,-56.04140893,Carina Goñi,094440785,2026-09-28 09:00:00,"+598 94 440 785
-de 10  a  18hs",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,carinagoni@hotmail.com
 157025,CH,AV BRASIL 2597,Edificios,1,AV BRASIL,2597,-34.90766076,-56.15775574,David Rodriguez, 94 238 960 / 099583239,2026-09-26 14:11:00,"VACIADO 094 238 960
 Viernes después de las 13h y sábado entre 8 y 12h",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
+157297,B,Cooperativa PEREZ CASTELLANO 1544,Cooperativas,3,PEREZ CASTELLANO,1544,-34.90607466,-56.21118536,Soledad Patiño,099009858,2026-09-30 18:40:00,Por favor tocar timbres porque puede ser que justo uno de los aptos esté sin nadie para recibirlos,3,,,2.0 chico,,,-,,,,,Nuevo,0,0,
 157108,CH,ON,Edificios,1,26 DE MARZO,3271,-34.90693595,-56.14320314,LUIS TUYA,094 970 563,2026-09-28 09:46:00,"+598 99 970 563
 9a13 y 14a17",1,,,1.0 grande,,,-,,,,,Nuevo,614,50,
-157181,E,ISLA DE LAS GAVIOTAS,Edificios,2,RBLA REPUBLICA DE CHILE,4525,-34.89649713,-56.11262288,LAZARO CABALLERO,26139122,2026-09-29 08:35:00,"+598 99 274 146
-horario de 08.00 a 17.00hs",2,,,2.0 grande,,,-,,,,,Nuevo,136,76,
 157155,CH,Edificio Fiorella,Edificios,1,ALEJANDRO CHUCARRO,1061,-34.91207295,-56.14886441,Evelyn Strada,098397200,2026-09-28 15:51:00,"+598 98 397 200
 portería 24hs",1,,,2.0 chico,,,-,,,,,Nuevo,0,20,
 157030,CH,EDIFICIO CABO FORMENTOR Y CAP FERRAT,Edificios,2,RBLA REPUBLICA DEL PERU,959,-34.91431572,-56.14852920,Carlos Cros,93993414,2026-09-26 12:07:00,59898894624,2,,,1.0 grande,,,-,,,,,Nuevo,0,29,
-157159,E,Sin nombre,Otros,1,ENRIQUE CHIANCONE,4669,-34.87587062,-56.11625144,Tania Luján,095661019 / 25259274 ,2026-09-28 17:07:00,"+598 95 661 019
-Entre las 10 y  las 15h",1,,,2.0 chico,,,-,,,,,Nuevo,0,3,taniaylujan@gmail.com
-157118,C,COLORADO 1845,Casa particular,1,COLORADO,1845,-34.87745003,-56.17906681,Janet Bocija,99503387,2026-09-28 10:59:00,+598 99 503 387 a partir de las 10hs,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,jbocija@gmail.com
+157323,E,LIVERPOOL 1629,Casa particular,1,LIVERPOOL,1629,-34.88911204,-56.07875630,Martin Angulo,092041540,2026-09-30 22:04:00,"VACIADO // 598 92 041 540
+
+HORARIO:  12:30 a 19:30",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,martin.angulo.nin@gmail.com
+157254,CH,edificio bohaz,Edificios,4,26 DE MARZO,1365,-34.90765673,-56.14614393,o,091 558 777,2026-09-30 08:56:00,"VIERNES de 9 a 15 30
+091 558 777",4,,,2.0 grande,,,-,,,,,Nuevo,0,1,
 157121,CH,EDIFICIO MANDALAY,Edificios,1,26 DE MARZO,3339,-34.90653995,-56.14127923,RAQUEL FAGUNDEZ,096 063 581,2026-09-28 11:06:00,"+598 98 112 218 
 en la mañana",1,,,2.0 grande,,,-,,,,,Nuevo,583,40,
-157160,C,AREQUITA 2164,Casa particular,1,AREQUITA,2164,-34.88582576,-56.18988063,Gabriela Chiapparro,099 978 369,2026-09-28 16:41:00,"+598 99 978 369
- 7:00 a 8:30 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
-157183,C,GRAFICOS I,Edificios,2,AV  DR. LUIS ALBERTO DE HERRERA,2765,-34.87891680,-56.15562650,LILIAN GONZALEZ,094770378,2026-09-29 08:54:00,"+598 94 770 378
-AP 401, 101 203 , 304
-DE 6 a 10",2,,,1.0 grande,,,-,,,,,Nuevo,455,39,
+157243,G,LUIS LASAGNA 6476,Casa particular,1,LUIS LASAGNA,6476,-34.79447561,-56.25295126,Natalia Garcia,095800979,2026-09-30 13:35:26,. Solicitud creada a partir del reclamo: 4024123.,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
 157086,B,AV LIB BRIG GRAL LAVALLEJA 1770,Casa particular,1,AV LIB BRIG GRAL LAVALLEJA,1770,-34.89782453,-56.19027900,Mikaela Olivera,099571334,2026-09-28 10:20:00,"+598 95 571 903
 horario 10 a 18hs",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,mikaela1706.mo@gmail.com
-157217,C,CRISTAL,Edificios,1,AV AGRACIADA,2893,-34.87752436,-56.19713957,MARIA DIAZ,099694974,2026-09-29 13:43:00,"+598 96 595 279
-DE 6 a 14",1,,,1.0 grande,,,-,,,,,Nuevo,1009,23,
-156885,E,Concepción del Uruguay 1688,Casa particular,1,RBLA CONCEPCION DEL URUGUAY,1688,-34.88951936,-56.10611742,Inés Vidal,098711402,2026-09-24 09:30:00,solicita que le devuelvan el bolsón de tamaño chico tiene el grande y no le sirve,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,ividalcutinella@gmail.com
+157281,CH,EDIFICIO CABO,Edificios,1,AV BRASIL,2807,-34.90910454,-56.15333256,Marcelo,93482922,2026-09-30 12:25:00,lunes a viernes de 12 a 19 hs sábado de 9 a 11,1,,,1.0 grande,,,-,,,,,Nuevo,743,26,
 157175,G,PASTOR 1083,Casa particular,1,PASTOR,1083,-34.83698427,-56.20742392,Walter brun,099491661,2026-09-29 07:51:00,"REAGENADADO 
 L a V 9:00 a 17:00",1,,,1.0 grande,,,-,,,,,Nuevo,1,1,
-157162,E,LOS FONTANES,Edificios,1,AMSTERDAM,1449,-34.89507348,-56.11319843,José Ignacio Fascioli,"099254217, 26131183",2026-09-28 17:28:00,"59897680665
-DE 12:30 A 20:00",1,,,1.0 grande,,,-,,,,,Nuevo,0,37,joseignacio@fascioliadministraciones.com.uy
+157236,E,casa del vecino zum felde ,Cooperativas,1,AV GRAL RIVERA esq. ALBERTO ZUM FELDE,1555,-34.89072947,-56.09144000,casa del vecino ,099707079,2026-09-30 07:26:00,"+598 92 680 596
+REAGENDADO",1,,,2.0 chico,,,-,,,,,Nuevo,55465254,1,
 157020,CH,BRIG GRAL DIEGO LAMAS 1350,Cooperativas,1,BRIG GRAL DIEGO LAMAS,1350,-34.90446857,-56.15258920,Fiorella Di Fede,099247858,2026-09-26 08:49:00,REAGENDADO VACIADO - +598 99 247 858 APTO 302 HASTA LAS 12:00,1,,,2.0 grande,,,-,,,,,Nuevo,0,1,fiorelladifede@gmail.com
-157196,C,Cooperativa ,Cooperativas,1,AV COSTANERA FELIPE CARAPE,4421,-34.85485504,-56.19318687,Elizabeth Díaz,094096813,2026-09-29 10:24:00,"+598 94 096 813
-ANTES DE LAS 09:00
-SIN TIMBRE",1,,,2.0 chico,,,-,,,,,Nuevo,0,0,elivero1977@gmail.com
 157216,CH,VALDO MARINA,Edificios,2,ALEJANDRO CHUCARRO,1277,-34.90957029,-56.14549794,GABRIELA PEREZ,099610561 / 098053480,2026-09-29 13:40:00,"+598 98 053 480
 DESPUES DE LAS 15",1,,,2.0 grande,,,-,,,,,Nuevo,1,20,
+157267,CH,PINAMAR,Edificios,1,SOLANO GARCIA,2425,-34.92195156,-56.16072773,LEONARDO PEIRAN,095 926 248,2026-09-30 10:25:00,"horario de 11 a 20 hrs
++598 99 090 592",1,,,1.0 grande,,,-,,,,,Nuevo,718,28,
 157117,CH,TORRE DEL ESCULTOR,Edificios,1,CARLOS BERG,2475,-34.91355417,-56.15960741,CRISTINA VIANCHI,2711 1311,2026-09-28 10:51:00,"+598 92 426 914 
 de 9 a 16 ",1,,,2.0 grande,,,-,,,,,Nuevo,886,31,
+157264,CH,NAUTILUS,Edificios,1,FRANCISCO A VIDAL,603,-34.92161702,-56.15090893,Valentina,096 394 343,2026-09-30 10:16:00,"+598 95 801 270
+ horario de 9 de la mañana asta las 12",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
+157293,CH,Edificio Leonglay,Edificios,1,LEYENDA PATRIA,2948,-34.92124011,-56.15578866,Cecilia Faget,92 434 545,2026-09-30 13:03:00,L a V de 13 a 21. Sábados 10 a 18,1,,,2.0 grande,,,-,,,,,Nuevo,0,1,cecilia.fagetbrunner@gmail.com
 157167,B,apartamento,Otros,1,25 DE MAYO,635,-34.90493400,-56.20302080,Giannina Cesar,095013119,2026-09-28 17:25:00,"VACIADO - de 9 a 17 hs
 +598 95 013 119
 REINGRESADO
 ",1,,,2.0 grande,,,-,,,,,Nuevo,0,1,g-ncf@hotmail.com
+157259,CH,MAR CARIBE,Edificios,1,FELIX BUXAREO,1116,-34.90874083,-56.14310056,MARTIN NUÑEZ,95429782,2026-09-30 09:57:00,"Horario de retiro de 08 a 12 y de 14 a 16 hs
++598 97 879 322",1,,,1.0 grande,,,-,,,,,Nuevo,955,18,
 157038,CH,EDIFICIO EL VARADERO,Edificios,2,RBLA ARMENIA,3809,-34.90395781,-56.13130381,HECTOR CLINFF,094 075 643,2026-09-26 09:01:00,+598 94 075 643 ,2,,,1.0 grande,,,-,,,,,Nuevo,1187,21,
+157301,CH,RIVA DEL GARDA,Edificios,1,AV BRASIL,2385,-34.90618195,-56.16232694,DANIEL MENDIETA,098 191 816,2026-09-30 13:57:00,Portería de 8 a 20 hs,1,,,1.0 grande,,,-,,,,,Nuevo,418,19,
+157274,CH,Casa,Casa particular,1,GUAYAQUI,3019,-34.90688440,-56.15162529,Carla Kaphammel,59895448128,2026-09-30 11:32:00," viernes de 9 a 16
++598 95 448 128",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,Ckaphammel@gmail.com
+157295,D,JOSE RAMIREZ 3026,Casa particular,1,JOSE RAMIREZ,3026,-34.82865856,-56.14243926,Nelida Amaro,094 473  841,2026-09-30 13:07:00," liceo 64
+ de 8 a 18
+",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
 157177,CH,Edificio Finisterre,Edificios,1,RBLA REPUBLICA DEL PERU,875,-34.91578105,-56.14906133,Jorge Viera,095438561,2026-09-29 07:48:00,,1,,,2.0 grande,,,-,,,,,Nuevo,0,36,
+157275,F,Intercambiador Belloni,Dependencias de la IM,2,AV 8 DE OCTUBRE,4849,-34.85582533,-56.13226261,Alexandra cabrera,091788059,2026-09-30 11:38:00,"En el horario de 08 a 10:30
+
+local 01",2,,,2.0 chico,,,-,,,,,Nuevo,0,20,
 157102,B,VISTA SARMIENTO,Edificios,1,AV SARMIENTO,2281,-34.91474891,-56.16443630,ACARBO LUDMILA ,098 566 334 ,2026-09-28 08:33:00,"+598 99 298 899 
 9 a 16:30hs",1,,,1.0 grande,,,-,,,,,Nuevo,744,24,
+157311,CH,IGUAZÚ,Edificios,1,26 DE MARZO,1137,-34.91031405,-56.15021467,GRISELL SWOBODA,095005825,2026-09-30 13:53:00,"+598 94 531 335
+Después de las 14",1,,,2.0 grande,,,-,,,,,Nuevo,637,24,
 157144,CH,Edificio AMIENS,Edificios,1,ALEJANDRO CHUCARRO,1165,-34.91084126,-56.14738174,Rebeca Wainsztein,+598 98 223 735,2026-09-28 15:00:00,"+598 98 223 735
 viernes de 8 a 10 y30 hras",1,,,2.0 chico,,,-,,,,,Nuevo,0,8,rwainsztein@gmail.com
-157161,E,Edificio MALENA,Edificios,4,RBLA CONCEPCION DEL URUGUAY,1449,-34.89481356,-56.10654157,Mariela López Luquez ,094293306,2026-09-28 15:51:00,"APTO 302
-094731886 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,16,
+157296,CH,DR MANUEL QUINTELA 3264,Casa particular,1,DR MANUEL QUINTELA,3264,-34.89108962,-56.14819950,Hugo Bielli,098563700,2026-09-30 18:44:00,Reponer bolsa rota y vaciar ,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,hbielli@adinet.com.uy
+157250,B,RECONQUISTA 338,Edificios,2,RECONQUISTA,338,-34.91032430,-56.20741597,Daniel Melo Portero ,097 886 352 ,2026-09-30 08:15:00,"El horario de 0800 a 1100 hs y de 1600 a 20:00 horas
+ tocar timbre en aptos 001  ,  002  o  201",2,,,2.0 chico,,,-,,,,,Nuevo,0,1,danimel504@gmail.com
 157176,A,AV ALFREDO MORENO (VENDITTO) 6519,Casa particular,1,AV ALFREDO MORENO (VENDITTO),6519,-34.83878402,-56.27261658,Marta Rodríguez,59896066651,2026-09-29 08:00:00,1 2.0G 59896066651 reagendado ,1,,,Entrega,,,-,,,,,Nuevo,0,1,
-156845,E,ADOLFO PEDRALBES 2405,Casa particular,1,ADOLFO PEDRALBES,2405,-34.87328615,-56.11335458,Valeria Paz,+598 91 695 778,2026-09-23 16:08:00,"+598 91 695 778 vaciado despues de las 18hs  
-REINGRESADO ",1,,,Entrega,,,-,,,,,Nuevo,0,1,Valeriapcorreia@gmail.com
+157284,E,DR RAUL E BAETGHEN 2336,Casa particular,1,DR RAUL E BAETGHEN,2336,-34.87396236,-56.05435136,Cecilia Velazco,099 646 799,2026-09-30 12:35:00,"+598 99 646 799
+En la mañana ",1,,,1.0 grande,,,-,,,,,Nuevo,0,1,cevel2005@gmail.com
 157131,CH,Edificio,Edificios,1,MALDONADO,2424,-34.90763370,-56.16149725,Leandro Dominguez,099235711,2026-09-28 12:51:00,"+598 99 235 711 
 luego de 10hs",1,,,1.0 grande,,,-,,,,,Nuevo,1,1,leandrodzp@gmail.com
 157036,CH,EDIFICIO PUERTA DEL SOL,Edificios,2,JUAN BENITO BLANCO,715,-34.91862453,-56.15092173,VICTOR BONILLA,097 233 085,2026-09-26 08:29:00,lunes a viernes de 9.30am a 16.30hrs y sábados de 9 a 12hrs horas gracias,2,,,1.0 grande,,,-,,,,,Nuevo,899,39,
-157202,E,West Park,Edificios,1,AV ITALIA,6467,-34.87797571,-56.06934564,Pablo Berhau,97300883,2026-09-29 11:19:00,"+598 97 300 883
-De Lunes a Viernes.
-Horario de 09 a 17 hs.",1,,,2.0 grande,,,-,,,,,Nuevo,0,0,
 157221,G,TAMBORES 4890,Casa particular,2,TAMBORES,4890,-34.84372011,-56.22341076,Silvia De León,094644969,2026-09-29 17:22:00,a partir de las 16 hs +598 94 644 969 a partir de las 16 hs,2,,,2.0 chico,,,-,,,,,Nuevo,0,2,
+157322,A,LOS NOGALES 2808 esq. JUAN DE HERRERA ,Casa particular,1,LOS NOGALES 2808 esq. JUAN DE HERRERA,,-34.85145544,-56.27934118,Sandra Beatriz Sánchez ,091963060,2026-09-30 14:47:00,VACIADO // 598 91 963 060,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,bettysanchez1971@gmail.com
 157173,A,ESTADOS UNIDOS 1907,Casa particular,1,ESTADOS UNIDOS,1907,-34.87663099,-56.25554462,Sandra Gonzalez ,09924773,2026-09-29 07:28:00, 99 249 773 reagendado ,1,,,2.0 chico,,,-,,,,,Nuevo,1,1,
 157042,C,Areas Verdes,Dependencias de la IM,1,LUCAS J OBES,819,-34.86238139,-56.21020043,Darwin Pizzorno,8344,2026-09-26 10:18:00,+598 96 781 100,1,,,2.0 chico,,,-,,,,,Nuevo,0,0,areasverdes@imm.gub.uy
-157140,E,PUERTO DEL MAR,Edificios,1,RBLA REPUBLICA DE CHILE,4451,-34.89695168,-56.11581230,EDUARDO KARACKOSIAN,099415022,2026-09-28 14:00:00,"+598 99 415 022
-
-en cualquier horario, portería 24hs",1,,,1.0 grande,,,-,,,,,Nuevo,125,49,
+157315,CH,EDIFICIO RIAZOR ,Edificios,2,JOSE ELLAURI,990,-34.91234998,-56.15345944,Juan Viera,099417597,2026-09-30 10:29:00,"VIERNES DE 06 A 10 Y DE 11 A 14 HS. DÍA SÁBADO DE 06 A 10 Y DE 11 A 14 HS
+59894037896
+",2,,,1.0 grande,,,-,,,,,Nuevo,0,0,empresaibicuy@yahoo.com.ar
 157101,CH,Honfleur ,Edificios,1,RAMON MASINI,3281,-34.91061062,-56.14943246,Martín Casal // Teresa Piñeyro, 097 159 010 // 095 400 166,2026-09-28 08:41:00,"+598 98 828 209
 9 a 15hs",1,,,2.0 chico,,,-,,,,,Nuevo,0,32,
 157180,CH,Edificio bretagne,Edificios,1,JOSE ELLAURI,686,-34.91834638,-56.15553110,Mariela guedes,098103533,2026-09-29 08:32:00,"+598 98 103 533
 L a V 08:00 a 12:00",1,,,2.0 grande,,,-,,,,,Nuevo,0,17,Maiacha@hotmail.com
 157078,B,EJIDO 1209,Edificios,1,EJIDO,1209,-34.90811253,-56.18669612,Hilde Hansz,094 458 642,2026-09-28 09:09:00,apto 707 8 am - reagendado x2 +598 99 859 129,1,,,2.0 chico,,,-,,,,,Nuevo,1,1,hhansz@adinet.com.uy
-157018,E,MONES ROSES 6064,Casa particular,1,MONES ROSES,6064,-34.88621207,-56.07686776,Sofia Esposito,Sofia 095 220 537 //  Rosanna Padilla 094575325,2026-09-25 22:40:00,VACIADO 095220537  11 a 14,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,sisof21@hotmail.com
 157052,CH,EDIFICIO AV. DEL PARQUE,Edificios,1,21 DE SETIEMBRE,2462,-34.91356825,-56.16218184,JOSÉ LOPEZ,092823477,2026-09-27 07:07:00,"vaciado - antes de las 12:00
 
 59891899761",1,,,1.0 grande,,,-,,,,,Nuevo,326,29,
 157212,A,liceo san francisco de asis,Otros,1,VITORIA,67,-34.85176756,-56.22835252,leticia lain,095038462,2026-09-29 13:03:00,"+598 95 038 462
 lunes a viernes de 8 a 16hs. ",1,,,2.0 chico,,,-,,,,,Nuevo,0,0,
-156790,E,AZUL,Edificios,1,AV COLOMBES,1305,-34.89675272,-56.11446272,PORTERIA,097 546 076,2026-09-23 10:08:00,"+598 97 446 503
-10 a 17",1,,,1.0 grande,,,-,,,,,Nuevo,822,26,
-157056,E,SANTIAGO NIEVAS 2184,Casa particular,1,SANTIAGO NIEVAS,2184,-34.88504858,-56.14336929,Eduardo Olivera,098550091,2026-09-27 11:17:00,"vaciado - por la tarde 
-+598 99 685 964",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,eolivera1974@gmail.com
+157305,C,MARIANO SOLER 3236,Edificios,1,MARIANO SOLER,3236,-34.86568236,-56.18318725,Carolina Fernández ,098863710,2026-09-30 17:48:00,"Despues de las 17
+Apto 1
+",1,,,Entrega,,,-,,,,,Nuevo,0,1,
 157046,CH,Edificio Puerto Verde,Edificios,2,RBLA ARMENIA,3837,-34.90397410,-56.13108730,Edificio Puerto Verde,094215501,2026-09-26 11:57:00,+598 93 448 998 ,2,,,2.0 grande,,,-,,,,,Nuevo,0,24,bbover@promocionesyservicios.com.uy
 157210,G,FERNANDO MENCK 5621,Casa particular,1,FERNANDO MENCK,5621,-34.79238343,-56.22348662,Madelaine Casco ,099 709 964,2026-09-29 12:00:00,"59899709964
 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
@@ -13992,116 +13925,122 @@ apto 202
 157124,CH,BERRO,Edificios,1,PEDRO F BERRO,1096,-34.91162795,-56.15005533,WALDEMAR KLEIST,099687161,2026-09-28 13:22:00,"Viernes 10:00 a 13:00
 Sábado 8:00 a 11:30
 +598 92 138 694",1,,,1.0 grande,,,-,,,,,Nuevo,32,17,waldemar.kleist@gmail.com
-157053,E,RBLA CONCEPCION DEL URUGUAY 1562,Casa particular,1,RBLA CONCEPCION DEL URUGUAY,1562,-34.89205613,-56.10620131,Jacqueline del Río,094832234,2026-09-27 10:00:00,"vaciado _ entre 12 y 15 hs
-+598 94 832 234",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
-157014,C,Casa particular,Casa particular,1,FLORENCIO ESCARDO,1358,-34.85952785,-56.19294241,Santiago Martínez,59896416146,2026-09-25 19:42:00,VACIADO DE MAÑANA 59896416146,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,mi2is@yahoo.com
-156880,D,PURIFICACION 3663,Casa particular,1,PURIFICACION,3663,-34.87257955,-56.14602912,Sheila Rojas,091031981,2026-09-24 09:25:00,"59891031981
-apto 4
-reagendado ",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
+157238,E,PLUTARCO 3918,Casa particular,1,PLUTARCO,3918,-34.89114918,-56.12978146,Estela Bermudez,098 911 115,2026-09-30 08:12:00,"098 911 115
+REAGENDADO",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
+157276,CH,Edificio Bage ,Edificios,1,AV BRASIL,3079,-34.91341560,-56.14980622,María pou,095720153,2026-09-30 11:38:00,"Viernes de 13-17 o de 17:30-20:30
+Sábados después de las 17",1,,,2.0 chico,,,-,,,,,Nuevo,0,20,mechupou@hotmail.com
 157214,CH,PLACE VENDOME,Edificios,2,SILVESTRE BLANCO,2385,-34.90439163,-56.16203454,ROSANNA FALGALDE / JOSE GENTILE(PORTERO),099 207 327 / 099 659 611,2026-09-29 13:15:00,"+598 98 681 064
 Viernes de 13 a 21 hs",1,,,1.0 grande,,,-,,,,,Nuevo,764,46,rossanafagalde@gmail.com
 157106,CH,SIN NOMBRE 92,Edificios,1,FELIX BUXAREO,1140,-34.90860951,-56.14320408,THERESE VAN,27073714,2026-09-28 09:44:00,"+598 95 751 164 
 8 a 12hs",1,,,2.0 chico,,,-,,,,,Nuevo,957,12,
 157143,CH,VA´AOSTA,Edificios,3,JUAN MARIA PEREZ,2880,-34.91794067,-56.15112151,CARLOS DIAZ 	,97550823,2026-09-28 14:22:00,"+598 93 870 827
 14 a 22hs",2,,,1.0 grande,,,-,,,,,Nuevo,1130,36,
-156754,E,PRIAMO 1554,Casa particular,1,PRIAMO,1554,-34.89038753,-56.08163368,Victoria Suárez,098699476,2026-09-23 07:38:00,"REAGENDADO
-VACIADO +598 98 699 476
-ANTES DE LAS 16HS",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,victoria-suarez@live.com
+157278,CH,EDIFICIO PORT BANUS,Edificios,2,JUAN DE LEON,3499,-34.90942795,-56.13582031,JESÚS LEOTADO,2628 9314,2026-09-30 12:17:00," horarios de la mañana
++598 99 475 415",2,,,1.0 grande,,,-,,,,,Nuevo,0,0,
 157034,CH,EDIFICIO TORRE AZALEA,Edificios,2,21 DE SETIEMBRE,2993,-34.91966190,-56.15247134,ALCIBIADES GAVILAN GONZALEZ,094 809 736,2026-09-26 06:35:00,+598 94 809 736,2,,,1.0 grande,,,-,,,,,Nuevo,484,38,
-157203,E,SAN REMO,Edificios,2,RBLA REPUBLICA DE CHILE,4407,-34.89700328,-56.11750504,EDUARDO AMARAL,091281498,2026-09-29 11:35:00,"+598 99 555 294
-de 08 a 17",2,,,2.0 chico,,,-,,,,,Nuevo,120,24,
+157258,CH,EMBAJADOR,Edificios,1,JOSE ELLAURI,967 BIS,-34.91275575,-56.15362927,FLORENCIA PARBORELL,2707 5450,2026-09-30 09:44:00,"  portero. las  24  horas
++598 94 911 276",1,,,2.0 chico,,,-,,,,,Nuevo,662,60,
 157228,CH,MURCIA 1625,Casa particular,1,MURCIA,1625,-34.89772703,-56.14592812,Agustina Trindade,094063665,2026-09-29 19:02:00,Viernes 8-12,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,agustina.trindade@gmail.com
-157141,E,COLUMBIA,Edificios,1,AV ITALIA,4891,-34.88566607,-56.10290388,0,099 090 571 (ESTA ES LA PERSONA QUE PIDE POR WPP),2026-09-28 14:00:00,"+598 94 241 920 
- 13.30 a 16.30",1,,,1.0 grande,,,-,,,,,Nuevo,195,30,
 157201,CH,ARAMAYA,Edificios,2,FELIX BUXAREO,1295,-34.90525599,-56.14441521,LETHIZIA SOFIA,99939430,2026-09-29 10:46:00,"+598 99 939 430
 de 08:00 a 11:00",2,,,1.0 grande,,,-,,,,,Nuevo,0,24,
+157266,CH,EDIFICIO LA LOBA,Edificios,1,AV 8 DE OCTUBRE,2487,-34.89285175,-56.16331199,xxxxxx,097976588,2026-09-30 10:25:00,"+598 97 976 588
+VIERNES. de 8 a 12horas",1,,,2.0 grande,,,-,,,,,Nuevo,429,29,
 157224,CH,BRIG GRAL DIEGO LAMAS 1553,Casa particular,1,BRIG GRAL DIEGO LAMAS,1553,-34.89960992,-56.15340257,Fiorella Adinolfi ,097570818,2026-09-29 19:26:00,"solicita que le entregue un bolsón sano y nuevo 
 +598 97 570 804 
 HASTA LAS 18:00 HS 
 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,fifievtc@gmail.com
-157178,C,sin nombre 156,Otros,2,QUIJOTE,3039,-34.87014084,-56.16631362,-,98 239 245,2026-09-29 07:52:00,"DE 08:00 a 10:00
-Quijote 3039 /303",2,,,2.0 grande,,,-,,,,,Nuevo,0,1,
+157246,E,DR FRANCISCO SIMON 2350,Casa particular,1,DR FRANCISCO SIMON,2350,-34.88472256,-56.14905769,Cecilia Cleffi ,099177775,2026-09-30 15:41:00,"+598 99 177 775
+en la tarde
+Reagendado",1,,,Entrega,,,-,,,,,Nuevo,0,1,cecil5639@gmail.com
 157041,CH,Edificio Corrientes,Edificios,2,PEDRO F BERRO,785,-34.91660345,-56.15334706,Milka Llambias,097252959 / +598 94 505 413,2026-09-26 09:50:00,+598 94 505 413 viernes de 7 a 11 y d 13y 30 a 17y 30 sábados de 8 a 12 hs ,2,,,2.0 grande,,,-,,,,,Nuevo,0,23,
 157166,B,Salubridad Publica,Dependencias de la IM,1,EDUARDO VICTOR HAEDO,2046,-34.89832097,-56.17298238,Hugo Rousserie,Int.7141 - 40 099406893,2026-09-28 16:38:00,"+598 98 965 667
 10 a 16
 REINGRESADO
 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,0,
-156914,C,SAN FRUCTUOSO 1231,Casa particular,2,SAN FRUCTUOSO,1231,-34.88001642,-56.19284071,Nelida Adriana Alvarez Moraes,092486997,2026-09-24 12:22:00,"vaciado - De 10 a 15 hs
-
-+598 92 486 997",2,,,2.0 chico,,,-,,,,,Nuevo,0,1,
+157257,CH,EDIFICIO PAZ GRANDE,Edificios,3,AV 8 DE OCTUBRE,2830,-34.88662829,-56.15768841,JORGE AZAMBUJA,98401138,2026-09-30 09:28:00,Viernes de 10 a 17 hs y sabado de 10 a 13 hs,3,,,2.0 grande,,,-,,,,,Nuevo,431,50,
+157263,CH,Edificio 01 Parque Battle,Edificios,1,RAMON ORTIZ,2903,-34.88812789,-56.15297883,Federico Machado,099591662,2026-09-30 10:15:00,"+598 97 312 420
+ de 9:00 a 15 :00",1,,,2.0 grande,,,-,,,,,Nuevo,0,70,fedemach@gmail.com
 157215,CH,EDIFICIO MEDITERRANEO,Edificios,4,JUAN BENITO BLANCO,747,-34.91811642,-56.15074753,CARLOS SILVA,094242272,2026-09-29 13:31:00,"+598 94 242 272
 lunes a sabado de 6 a 13 30",2,,,2.0 grande,,,-,,,,,Nuevo,0,24,
 157113,CH,Edificio Melez,Edificios,1,GUAYAQUI,3226,-34.90933536,-56.14947787,Sylvia Fernandez,092 223 226,2026-09-28 10:19:00,"+598 92 223 226
 9:30 a 12:30",1,,,2.0 chico,,,-,,,,,Nuevo,0,26,
+157269,C,COPU,Edificios,1,INGAVI,2663,-34.87855868,-56.16390900,MARIO SAGNALLI,091294893,2026-09-30 10:27:00,"+598 91 294 893
+En la tarde siempre hay gente en la cooperativa",1,,,1.0 grande,,,-,,,,,Nuevo,760,12,sangmario1@gmail.com
 157190,CH,ALEJANDRO CHUCARRO 1030,Edificios,2,ALEJANDRO CHUCARRO,1030,-34.91287301,-56.14942811,Lui do santos,59898184930,2026-09-29 09:33:00,"+598 98 184 930
 08:00 a 15:00
 Sabados 08:00 a 11:00",1,,,2.0 grande,,,-,,,,,Nuevo,0,8,
-157179,D,CNO CARLOS A LOPEZ,Casa particular,1,CNO CARLOS A LOPEZ,5118,-34.80839985,-56.16056889,Pilar Moreira,094765714,2026-09-29 08:11:00,"+598 94 765 714
-DE 10 a 12",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,moreiramariapilar18@gmail.com
 157211,C,ARROYO GRANDE 2715,Casa particular,1,ARROYO GRANDE,2715,-34.87655851,-56.18987429,Julio Cabrera,099267048,2026-09-29 13:12:00,"59899267048
 DSP DEL MEDIODIA ",1,,,2.0 grande,,,-,,,,,Nuevo,0,0,jotacek@gmail.com
+157321,E,sin nombre 127,Otros,1,DR ALFREDO VASQUEZ ACEVEDO,7059,-34.87287053,-56.06324121,SEBASTIÁN ALMEIDA,99028764,2026-09-30 21:31:00,VACIADO DE BOLSON /// 59899728764,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
 157040,CH,Edificio Marina de Biarritz II,Edificios,1,FRANCISCO SOLANO ANTUÑA,2734,-34.91832041,-56.15424698,Cecilia Galain,099640082,2026-09-26 09:48:00,+598 95 989 471,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,cgalain@gmail.com
+157318,G,CASA PARTICULAR,Casa particular,1,VERAGUAS,1721,-34.79804402,-56.25336606,PAULA GERVASINI,099190959,2026-09-30 17:29:00,,1,,,Entrega,,,-,,,,,Nuevo,0,1,paulagervasini@gmail.com
 157026,CH,JOSE ELLAURI 888,Casa particular,1,JOSE ELLAURI,888,-34.91451291,-56.15339259,Luciana Carro Lupo,098888111,2026-09-26 14:10:00,"REAGENDADO
 VACIADO +598 98 888 111",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,lucita1085@hotmail.com
-156807,E,AGUSTIN ABREU 2347,Casa particular,1,AGUSTIN ABREU,2345,-34.88324256,-56.14785313,Sylvia Núñez,99076052,2026-09-23 11:34:00,"REAGENDADO
-VACIADO +598 99 076 052 
-DE 11:00 A 14:00",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,sylvianu@adinet.com.uy
+157287,G,Taller de intendencia de Montevideo,Dependencias de la IM,3,CORNEILLE,4217,-34.84392794,-56.19686026,Valentina Alvarez,095346303 ,2026-09-30 12:54:00,"+598 98 957 440
+Horario de atención 08 a 15 hs ",3,,,1.0 grande,,,-,,,,,Nuevo,0,0,Maria.valentina.alvarez@imm.gub.uy
+157249,CH,LEBLON,Edificios,2,RAMON MASINI,3339,-34.91144591,-56.14861893,MAICHEL REY,94176628,2026-09-30 06:56:00,+598 94 176 628  ,2,,,1.0 grande,,,-,,,,,Nuevo,1087,36,
 157208,CH,ARAUCHO 1,Edificios,1,FRANCISCO ARAUCHO,1162,-34.90848925,-56.16241854,MARCOS LORENZELLI,99997683/27067025,2026-09-29 12:24:00,"LU a VIE 08:30 a 12:30 - 16:30 a 20:00
 SAB 08:30 a 12:30",1,,,1.0 grande,,,-,,,,,Nuevo,2274,22,
-157209,E,AGRIGENTO 2427,Casa particular,1,AGRIGENTO,2427,-34.87427556,-56.08780039,Andrea Rodríguez,094527480,2026-09-29 12:35:00,"+598 94 527 480
-DESPUES DE LAS 14:00",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
+157252,CH,Edificio Golf Towers,Edificios,3,BV GRAL ARTIGAS,70,-34.92755857,-56.16116259,Jorge Rengifo,092800014,2026-09-30 08:28:00,"+598 92 889 292
+L a V 0800 a 1600
+Sabados de 0900 a 1300",3,,,1.0 grande,,,-,,,,,Nuevo,0,1,Edificiogolftowers@gmail.com
 157021,CH,Edificio CORONEL ALEGRE 1158,Edificios,1,CORONEL ALEGRE,1158,-34.90823860,-56.15559103,Orlando Cruz,098270900,2026-09-26 09:32:00,"REAGENDADO 
 VACIADO - entre 8 00 y 12 00 +598 98 270 900",1,,,2.0 grande,,,-,,,,,Nuevo,0,0,porteriaedificioabella@gmail.com
-157072,C, Palas Atenea,Cooperativas,1,ESPINILLO,1386,-34.87038888,-56.19189284,Geraldine Sanjurjo,094797020,2026-09-27 20:24:00,"DE MAÑANA 
-94 797 020
-
- Apartamentos de referencia 
-403
-402
-302
-101
-601
-301
-603",1,,,2.0 chico,,,-,,,,,Nuevo,0,20,gesan@montevideo.com.uy
 157134,D,INSTITUCION SOCIAL: CASA DE LA MUJER UNIÓN,Centros Sociales y Deportivos,1,ING JOSE SERRATO,2636,-34.87380452,-56.14169442,Silvia Carracedo,094751082,2026-09-28 13:00:00,"+598 97 455 842 
 10 a 16 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,administracion@casadelamujer.org.uy
+157248,D,JOSE ARAUS 4260,Casa particular,1,JOSE ARAUS,4260,-34.77785405,-56.13439408,Silvana ferraz,099734500,2026-09-30 08:06:00,después del medio día,1,,,2.0 grande,,,-,,,,,Nuevo,0,0,
 157079,B,Casa particular,Casa particular,1,DR LAURO MULLER,2011,-34.91256355,-56.17104798,Luciana Martínez,099879593,2026-09-28 07:35:00,"59899879593
 REAGENDADO
 ",1,,,Entrega,,,-,,,,,Nuevo,0,0,lucianamartinezr@gmail.com
 157213,C,JARDINES DE BUSCHENTAL,Cooperativas,2,LUCAS J OBES,1126,-34.86511754,-56.19941543,SOFIA REICHEL,091 431 883,2026-09-29 13:10:00,"+598 99 716 729
 Entre las 10 am y las 18hs",2,,,1.0 grande,,,-,,,,,Nuevo,854,34,anasofiareichel@hotmail.com
+157307,B,FRENTE AMPLIO,Otros,2,COLONIA,1367,-34.90451809,-56.18669932,ALEJANDRO QUINTINO,2902 6666,2026-09-30 15:45:00,,2,,,1.0 grande,,,-,,,,,Nuevo,0,0,
 157125,CH,Castell del Rey - AV SARMIENTO 2530,Edificios,1,AV SARMIENTO,2530,-34.91453573,-56.15814688,Adelaida Pittaluga,098 874 900,2026-09-28 10:00:00,"+598 92 018 718 
  viernes de 12a 15 hs",1,,,Entrega,,,-,,,,,Nuevo,0,1,adepitta@gmail.com
+157273,CH,BLUMENAU,Edificios,3,MIGUEL BARREIRO,3175,-34.90806230,-56.14759555,BLANCA RODRIGUEZ,99253765,2026-09-30 11:32:00,"+598 99 253 765
+ horario de 9 a 11",3,,,1.0 grande,,,-,,,,,Nuevo,1092,21,
+157270,CH,EDIFICIO ARCADIA,Edificios,1,RBLA REPUBLICA DEL PERU,1421,-34.90968828,-56.13957004,LUIS ARAUJO,98398015,2026-09-30 10:52:00,+598 96 284 411,1,,,1.0 grande,,,-,,,,,Nuevo,2252,24,
 157168,B,EDIFICIO NANTIE,Edificios,1,CANELONES,1922,-34.90756441,-56.17396097,-,098915882,2026-09-28 19:14:00,"14 horas a 18  hs
 REINGRESADO
 ",1,,,2.0 chico,,,-,,,,,Nuevo,281,40,
 157093,CH,CONSTELATION,Edificios,1,FRANCISCO SOLANO ANTUÑA,2749,-34.91821800,-56.15399512,Alexandra Isola,099129807,2026-09-28 09:00:00,"+598 94 120 874
 viernes 7 a 14:30
 sabado 8 a 11:30",1,,,2.0 grande,,,-,,,,,Nuevo,1,16,Alexandraisola@hotmail.com
-157109,E,COOPERATIVA SXXI,Cooperativas,1,MARCO AURELIO,3862,-34.89415140,-56.12759970,GABRIELA DUARTE,099 944 269,2026-09-28 09:45:00,"+598 95 768 243
-8:30a17hs
-",1,,,2.0 grande,,,-,,,,,Nuevo,936,34,
 157226,CH,BAYONA LA REAL,Edificios,1,SANTIAGO GADEA,3220,-34.89374694,-56.14798040,CAMILA ACOSTA,24816487,2026-09-29 15:32:00,Preferiblemente entre las 13 y las 20hs. ,1,,,1.0 grande,,,-,,,,,Nuevo,1049,31,
+157288,CH,AV  DR. LUIS ALBERTO DE HERRERA 980,Casa particular,1,AV  DR. LUIS ALBERTO DE HERRERA,980,-34.91029797,-56.13506068,Marcela Miranda,099633910,2026-09-30 12:55:00,"+598 98 287 105
+Horario de lunes a sábados de 8 30 a 13 horas",1,,,Entrega,,,-,,,,,Nuevo,0,1,
+157324,CH,Los Álamos,Edificios,1,LUIS LAMAS,3225,-34.90613188,-56.14459876,Tabare Forcellati,+598 99 730 058,2026-09-30 22:46:00,"VACIADO // 598 99 730 058
+
+HORARIO:  Horario lunes a sábado de 10:00 a 17:00",1,,,2.0 grande,,,-,,,,,Nuevo,0,21,tabaref@gmail.com
+157310,CH,MOROKAU,Edificios,2,JUAN BENITO BLANCO,825,-34.91647915,-56.15020504,LUÍS SALAVERRÍA,2711 2330,2026-09-30 14:25:00,,2,,,2.0 grande,,,-,,,,,Nuevo,20,58,
 157023,CH,CAP VIDELA 3023,Casa particular,1,CAP VIDELA,3023,-34.90058573,-56.15073910,Alfredo Taullard,099535828,2026-09-26 10:41:00,"REAGENDADO
 VACIADO +598 99 535 828
 ",1,,,2.0 chico,,,-,,,,,Nuevo,0,0,ataullard@gmail.com
+157306,CH,BV JUAN BENITO BLANCO 3270,Edificios,2,BV JUAN BENITO BLANCO,3270,-34.90882422,-56.14232044,Jorge Ferreira ,096329619,2026-09-30 13:41:00,"Desdé las 14 h a 18h 
+",2,,,2.0 grande,,,-,,,,,Nuevo,0,2,
+157320,CH,OMEGA,Edificios,1,PEDRO F BERRO,1273,-34.90947027,-56.14712127,ARIEL COITIÑO,094641053,2026-09-30 21:36:00,"aptos . 902/ 802/801/601/402
+El mejor horario sería entre las 09:00 y las 12:00",1,,,2.0 grande,,,-,,,,,Nuevo,629,20,
 157223,A,MARIO R PEREZ 51,Casa particular,3,MARIO R PEREZ,51,-34.82523383,-56.31746171,Nicolás Guffanti,094821056,2026-09-22 15:29:00,,3,,,2.0 chico,,,-,,,,,Nuevo,445666998,1,
+157251,CH,Zudañez ll,Edificios,1,JAIME ZUDAÑEZ,2815,-34.91652499,-56.15184943,Perla Alonso,27108158,2026-09-30 08:22:00,"De 8 a 18
++598 96 788 128",1,,,2.0 chico,,,-,,,,,Nuevo,0,10,Perlaclara1931@gmail.com
 157089,F,Liceo Nº 77,Centros Educativos,2,CAMPILLOS,3660,-34.82231566,-56.10851842,Betina Dora-Directora,"2 5123966- 2 5123968, 094586548",2026-09-28 06:51:00,"+598 92 428 714
 de 7 a 19hs",1,,,2.0 chico,,,-,,,,,Nuevo,0,0,liceo77pr@gmail.com
+157290,E,COVIR,Edificios,2,ALICIA GOYENA,1885,-34.88865673,-56.13246344,ALVARO MARTINEZ,099835645,2026-09-30 12:36:00,,2,,,1.0 grande,,,-,,,,,Nuevo,531,34,
+157242,CH,Edificio Fiorella,Edificios,1,ALEJANDRO CHUCARRO,1061,-34.91207295,-56.14886441,Evelyn Strada,098397200,2026-09-30 13:15:00,De 08:00 a 12:00,2,,,2.0 chico,,,-,,,,,Nuevo,0,20,
 157045,CH,PUNTACARRETAS,Edificios,1,SOLANO GARCIA,2430,-34.92202765,-56.16095490,Jorge Camargo,091089204,2026-09-26 11:28:00,Sábados de 9 a 12.30hs,1,,,1.0 grande,,,-,,,,,Nuevo,925,20,
+157300,CH,ELECTRA,Edificios,1,JOSE ELLAURI,809,-34.91576888,-56.15426740,MIGUEL ANGEL CAÑE,096436432,2026-09-30 14:05:00,de 14 a 20 horas,1,,,2.0 grande,,,-,,,,,Nuevo,657,14,
 157232,CH,Edificio Caravelle,Edificios,1,JOSE ELLAURI,697,-34.91810086,-56.15559873,Luis Martinez,094955036,2026-09-29 21:12:00,14hs a 21hs,1,,,2.0 grande,,,-,,,,,Nuevo,0,16,
+157298,CH,BIZANCIO,Edificios,2,EDUARDO MAC EACHEN,1420,-34.90250714,-56.14987335,ADRIANA CAPO,99363477,2026-09-30 18:09:00,Dia  viernes xq los sábados  no hay quien entregue el bolsón,2,,,2.0 grande,,,-,,,,,Nuevo,2300,30,
 157147,CH,Edificio ,Edificios,1,AV MCAL ESTIGARRIBIA,858,-34.91551067,-56.16217547,Carlos Rosasco,099628130,2026-09-28 12:50:00,"+598 99 626 249
 Horario: alrededor del mediodía.
 Tocar timbre en cualquier apartamento.
 ",1,,,2.0 grande,,,-,,,,,Nuevo,0,1,carlos.rosasco@gmai.com
-157206,C,HOSPITAL ESPAÑOL,Otros,1,AV GRAL GARIBALDI,1729,-34.87536321,-56.18167469,Veronica Gimenez ,099643134,2026-09-29 12:01:00,"+598 99 768 835
-ANTES DE 12:30",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,veronica.gimenez@asse.com.uy
-157153,C,DR GUSTAVO GALLINAL 2258 esq. BV GRAL ARTIGAS 2258,Casa particular,1,DR GUSTAVO GALLINAL 2258 esq. BV GRAL ARTIGAS,2258,-34.87296374,-56.16744019,Emilio Valle Lisboa,099 945 844,2026-09-28 15:43:00,"+598 99 449 097 
-ANTES DEL MEDIODIA
-",1,,,2.0 grande,,,-,,,,,Nuevo,0,1,
+157289,CH,AV DR ALFREDO NAVARRO 3078,Casa particular,1,AV DR ALFREDO NAVARRO,3078,-34.89414630,-56.15034827,Santiago Mancebo,097256124,2026-09-30 21:00:00,Pasar el viernes,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,sanmangal@gmail.com
 156881,D,CARLOS CROCKER 2846,Casa particular,1,CARLOS CROCKER,2846,-34.87433346,-56.15023944,María del Carmen González,091053614,2026-09-24 09:39:00,"REAGENDADO
 VACIADO +598 91 053 614
 DE 12:30 A 15:30",1,,,2.0 grande,,,-,,,,,Nuevo,0,1,
+157292,CH,edificio firo,Edificios,2,PARVA DOMUS,2388,-34.92590517,-56.16042622,cristina Camacho,98 921 371,2026-09-30 08:38:00,,2,,,2.0 chico,,,-,,,,,Nuevo,0,1,
+157285,CH,JOSE ELLAURI 754,Casa particular,1,JOSE ELLAURI,754,-34.91685907,-56.15468415,Arturo González,096300880,2026-09-30 12:47:00,sábado de 8 a 11 am,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
 157085,CH,VERONE,Edificios,1,RAMON MASINI,3304,-34.91113927,-56.14916097,VIRGINIA CICATIELLO,099281525,2026-09-28 09:14:00,"+598 94 353 569 
 9 a 11:30hs",1,,,1.0 grande,,,-,,,,,Nuevo,672,22,
 156858,C,Edificio DR MARTIN C MARTINEZ 3325,Edificios,1,DR MARTIN C MARTINEZ,3325,-34.86804797,-56.17551805,Maite Ibarburu,59899036731,2026-09-24 07:41:00,"REAGENDADO
@@ -14110,16 +14049,17 @@ VACIADO +598 99 036 731
 ",1,,,2.0 grande,,,-,,,,,Nuevo,1,1,
 157199,CH,FLORENCIO VARELA 3660,Casa particular,1,FLORENCIO VARELA,3658,-34.88965369,-56.13897845,Amelia Cardozo,24873120,2026-09-29 10:32:00,"+598 99 282 334
 SABADO LUEGO DEL MEDIODIA ",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,ameliac@vera.com.uy
-157001,C,EMILIO RAÑA 2442,Casa particular,1,EMILIO RAÑA,2442,-34.88430909,-56.16481682,Rosana Gatto,099384024,2026-09-25 16:00:00,entre las 8 y 9:30 ,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,gattoaguirreros@gmail.com
 157145,C,SAN FELIPE Y SANTIAGO,Edificios,2,LUCAS J OBES,1079,-34.86437886,-56.20133254,Maria Del Carmen Penela,+598 95 675 706,2026-09-28 15:00:00,"+598 95 675 706
 8a17hs",2,,,2.0 grande,,,-,,,,,Nuevo,0,31,
 157037,CH,Fontana Di trevi,Edificios,1,RBLA REPUBLICA DEL PERU,1361,-34.90932046,-56.14212439,Miguel,27066018,2026-09-26 08:41:00,+598 95 734 580 24hrs,1,,,2.0 chico,,,-,,,,,Nuevo,0,11,
 157029,CH,MALDONADO 2428,Casa particular,1,MALDONADO,2428,-34.90762643,-56.16139638,María Fernanda De Gregorio,099213049,2026-09-26 10:58:00,,1,,,2.0 chico,,,-,,,,,Nuevo,0,1,ferdeg@hotmail.com
 157090,B,DR PABLO DE MARIA 973,Casa particular,1,DR PABLO DE MARIA,973,-34.91131381,-56.17048626,Federica Caviglia ,099898983,2026-09-28 00:00:00,"+598 99 115 155  
 cualquier horario",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,
-156863,C,REGIMIENTO 9 1894,Casa particular,1,AV GRAL SAN MARTIN,3261,-34.86559794,-56.18029735,Sandra Aguirre,98913859,2026-09-24 08:45:00,"REAGENDADO
-VACIADO +598 98 913 859
-DE 09:00 A 12:00",1,,,2.0 chico,,,-,,,,,Nuevo,0,1,sandra161108@gmail.com
+157314,CH,Edificio Regen Park,Edificios,3,ROQUE GRASERAS,626 / 630,-34.92049185,-56.15236593,Gustavo (comision),098 262 685,2026-09-30 10:15:00,"VACIADO 
+Vienes de 8 a 18hs. Sábados de 8 a 13hs
+
++598 99 000 964",3,,,2.0 chico,,,-,,,,,Nuevo,0,1,
+157282,CH,AV DR FRANCISCO SOCA 1301,Edificios,1,AV DR FRANCISCO SOCA,1301,-34.90594559,-56.15499513,Pablo Balestrini,099977071,2026-09-30 12:26:00, viernes de 08:00 a 16:00 o el sábado de 08:00 a 12:00,1,,,2.0 grande,,,-,,,,,Nuevo,0,1,pablocesar1967@gmail.com
 156570,G,COVIMA,Cooperativas,1,DR ALBERTO ZUBIRIA,931,-34.84746555,-56.19646011,MONICA,94 325 282,2026-09-21 07:46:00,"vaciado - de 7 a 10
 timbre salón comunal
 +598 94 325 282",1,Vaciado,1,Contenedor,,Gestión creada automáticamente,-,,,,,Asignado,1,20,
