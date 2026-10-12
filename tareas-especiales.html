@@ -354,15 +354,18 @@ function historyTime(c,index){return readTimeCell(c[index])}
 function parseHistoryDay(table,date){
  const columns=Object.fromEntries((table.cols||[]).map((col,index)=>[normalized(col.label||"").replace(/[^A-Z0-9]/g,""),index]));
  if(!["DIAS","TIPODETAREAS","BLOQUEINFO","MUNICIPIO","TAREA","TRANSPORTISTA","ESTADO","HORAINICIO","HORAFINAL"].every(key=>Number.isInteger(columns[key])))throw new Error("Hoja ausente o formato diferente");
- let shift="",operator="",type="",group="",municipality="";const records=[];
+ let shift="",operator="",type="",group="",municipality="",task="";const records=[];
  for(const row of table.rows||[]){
   const c=row.c||[],first=cv(c,columns.DIAS),info=cv(c,columns.BLOQUEINFO);
-  if(/^(MATUTINO|VESPERTINO|NOCTURNO)$/i.test(first)){shift=first.toUpperCase();operator="";type="";group="";municipality="";continue}
-  if(info&&info!==group){group=info;operator="";type="";municipality=""}
+  if(/^(MATUTINO|VESPERTINO|NOCTURNO)$/i.test(first)){shift=first.toUpperCase();operator="";type="";group="";municipality="";task="";continue}
+  if(info){group=info;operator="";type="";municipality="";task=""}
   if(cv(c,columns.MUNICIPIO))municipality=cv(c,columns.MUNICIPIO);
   if(cv(c,columns.TRANSPORTISTA))operator=cv(c,columns.TRANSPORTISTA);
   if(cv(c,columns.TIPODETAREAS))type=cv(c,columns.TIPODETAREAS);
-  const task=cv(c,columns.TAREA);if(!task)continue;
+  if(cv(c,columns.TAREA))task=cv(c,columns.TAREA);
+  // Una tarea combinada tiene una fila por transportista. Solo se hereda
+  // su identificación; estado y horarios siempre se leen de la fila propia.
+  if(!task||(!cv(c,columns.TAREA)&&!["TRANSPORTISTA","ESTADO","HORAINICIO","HORAFINAL"].some(key=>cv(c,columns[key]))))continue;
   records.push({date,shift,type,task,operator,municipality,state:cv(c,columns.ESTADO),start:historyTime(c,columns.HORAINICIO),end:historyTime(c,columns.HORAFINAL)});
  }
  return records;
