@@ -1,158 +1,464 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard COM</title><link rel="icon" type="image/png" href="assets/logo-ciemsa.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard COM</title>
+<link rel="icon" type="image/png" href="assets/logo-ciemsa.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dashboard-common.css?v=20260922-27">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}:root{--bg:#f5f6f8;--s:#fff;--s2:#f8fafc;--tx:#172033;--mu:#667085;--ln:#e4e8ef;--p:#4f46e5;--ps:#eef2ff;--g:#16845b;--a:#b6690e;--r:#c43232;--b:#1769aa}body{font-family:Inter,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:14px}.hide{display:none!important}.top{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#0f172a 0%,#16213e 55%,#1b3f74 100%);box-shadow:0 4px 12px rgba(0,0,0,.3)}.topin{min-height:64px;padding:10px 24px;display:flex;align-items:center;gap:12px}.top-back{color:#c7d5ea;font-size:12px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0}.top-back:hover{color:#fff}.top-back svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2}.brand{display:flex;align-items:center;gap:10px;min-width:230px}.mark{width:34px;height:34px;border-radius:9px;background:var(--p);color:#fff;display:grid;place-items:center;font-weight:800;flex-shrink:0}.brand h1{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:16px;font-weight:800;letter-spacing:-.01em;color:#fff}.brand p,.muted{font-size:11px;color:#c7d5ea}.tabs{display:flex;gap:3px;background:rgba(255,255,255,.08);padding:3px;border:1px solid rgba(255,255,255,.15);border-radius:8px}.tab{border:0;background:transparent;color:#c7d5ea;padding:7px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:650}.tab.on{background:var(--s);color:var(--tx);box-shadow:0 1px 3px #10182812}.actions{margin-left:auto;display:flex;align-items:center;gap:10px}.btn{height:34px;border:1px solid var(--ln);background:var(--s);color:var(--tx);padding:0 13px;border-radius:8px;font-size:12px;font-weight:650;cursor:pointer}.btn.primary{background:var(--p);border-color:var(--p);color:#fff}.btn:disabled{opacity:.5;cursor:wait}.actions .btn{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:#fff}.actions .btn:hover{background:rgba(255,255,255,.18)}.actions .btn.primary{background:var(--p);border-color:var(--p)}.status{max-width:1440px;margin:auto;padding:8px 24px;font-size:12px;color:var(--mu)}.status.err{color:var(--r);background:#fff1f1}.status:empty{display:none}.main{max-width:1440px;margin:auto;padding:22px 24px 40px}.view{display:none}.view.on{display:block}.head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px}.head h2{font-size:21px}.head p{font-size:12px;color:var(--mu);margin-top:4px}.navweek{display:flex;gap:8px}.arr{width:34px;height:34px;border:1px solid var(--ln);background:var(--s);border-radius:8px;cursor:pointer;font-size:18px}.days{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:10px;margin-bottom:22px}.day{border:1px solid var(--ln);background:var(--s);padding:14px;border-radius:10px;text-align:left;cursor:pointer;min-height:132px;box-shadow:0 1px 3px #10182812}.day:hover{transform:translateY(-1px)}.day.on{border-color:var(--p);box-shadow:0 0 0 2px var(--ps)}.dname{font-weight:750;text-transform:uppercase;font-size:12px}.day.today .dname:after{content:"HOY";font-size:9px;color:var(--p);background:var(--ps);padding:2px 6px;border-radius:20px;margin-left:6px}.date{font-size:11px;color:var(--mu);margin:3px 0 13px}.ntask{font-size:24px;font-weight:750}.ntask span{font-size:10px;color:var(--mu);font-weight:500;text-transform:uppercase}.res{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.chip{background:var(--s2);border:1px solid var(--ln);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:650}.moto{color:var(--b)}.truck{color:var(--a)}.detail{background:var(--s);border:1px solid var(--ln);border-radius:12px;overflow:hidden;box-shadow:0 1px 3px #10182812}.dhead{padding:18px 20px;border-bottom:1px solid var(--ln);display:flex;justify-content:space-between;gap:14px}.dhead h3{font-size:18px}.dhead p{font-size:12px;color:var(--mu);margin-top:4px}.metrics{display:flex;gap:8px;flex-wrap:wrap}.metric{min-width:96px;padding:8px 10px;background:var(--s);border:1px solid var(--ln);border-radius:8px}.metric b{font-size:18px}.metric span{display:block;font-size:9px;color:var(--mu);text-transform:uppercase}.dbody{padding:0 20px 18px}.shift{margin-top:18px}.stitle{display:flex;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);padding-bottom:8px;border-bottom:1px solid var(--ln)}.stitle span{margin-left:auto}.task{display:grid;grid-template-columns:78px minmax(250px,1.7fr) 125px 145px 125px 115px;gap:12px;align-items:center;padding:12px 2px;border-bottom:1px solid #eef1f5}.time{font:700 12px Consolas;color:var(--p)}.tname{font-weight:650;line-height:1.35}.tsub{font-size:11px;color:var(--mu);margin-top:3px}.cell{font-size:12px}.label{display:none;font-size:9px;text-transform:uppercase;color:var(--mu)}.state{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700}.state:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}.done{color:var(--g)}.pending{color:var(--a)}.bad{color:var(--r)}.progress{color:var(--b)}.empty{padding:34px;text-align:center;color:var(--mu)}.daytools{display:flex;align-items:center;gap:8px;margin-top:10px}.daytools label{font-size:10px;font-weight:700;text-transform:uppercase;color:var(--mu)}.daytools select{height:32px;border:1px solid var(--ln);border-radius:7px;padding:0 28px 0 9px;background:#fff;color:var(--tx);font-size:12px}.typebar{display:flex;gap:8px;flex-wrap:wrap;padding:14px 20px;background:var(--s2);border-bottom:1px solid var(--ln)}.typefilter{border:1px solid var(--ln);background:#fff;color:var(--mu);border-radius:999px;padding:7px 11px;font-size:11px;font-weight:700;cursor:pointer}.typefilter.on{background:var(--p);border-color:var(--p);color:#fff}.type-section{margin-top:18px;border:1px solid var(--ln);border-radius:10px;overflow:hidden}.type-head{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--s2);border-left:4px solid var(--p);font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}.type-head span{margin-left:auto;color:var(--mu);font-weight:650}.type-section .task{padding-left:13px;padding-right:13px}.type-section .task:last-child{border-bottom:0}.setup{background:#fff7e6;border:1px solid #f1d49d;color:#74430a;padding:12px 14px;border-radius:9px;margin-bottom:14px;font-size:12px}.filters{background:var(--s);border:1px solid var(--ln);border-radius:10px;padding:14px;display:grid;grid-template-columns:repeat(5,minmax(150px,1fr));gap:10px;align-items:end;margin-bottom:12px}.field label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--mu);margin-bottom:5px}.field input,.field select{width:100%;height:35px;border:1px solid var(--ln);border-radius:7px;padding:0 9px;background:#fff;color:var(--tx);font-size:12px}.field select:disabled{background:#f2f4f7;color:#98a2b3;cursor:not-allowed}.hbar{display:flex;align-items:center;gap:12px;margin-bottom:10px}.count{margin-left:auto;color:var(--mu);font-size:12px}.history-help{margin:-2px 0 12px;color:var(--mu);font-size:11px}.history-help.ready{color:var(--g)}.history-summary{display:grid;grid-template-columns:repeat(3,minmax(120px,1fr));gap:10px;margin-bottom:12px}.hstat{background:var(--s);border:1px solid var(--ln);border-radius:10px;padding:12px 14px}.hstat b{display:block;font-size:20px}.hstat span{display:block;margin-top:2px;color:var(--mu);font-size:10px;text-transform:uppercase}.tablehint{display:none;color:var(--mu);font-size:11px;text-align:center;margin:0 0 8px}.wrap{position:relative;background:var(--s);border:1px solid var(--ln);border-radius:10px;overflow:auto}.history-loading{position:absolute;inset:0;z-index:5;min-height:180px;background:#fffffff2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;font-weight:700;color:var(--tx)}.spinner{width:34px;height:34px;border:4px solid var(--ps);border-top-color:var(--p);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.pagination{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px}.pagination .btn{min-width:92px}.pageinfo{font-size:12px;color:var(--mu);min-width:110px;text-align:center}table{width:100%;border-collapse:collapse;min-width:1050px}th{position:sticky;top:0;background:var(--s2);text-align:left;padding:10px 12px;border-bottom:1px solid var(--ln);font-size:10px;text-transform:uppercase;color:var(--mu)}td{padding:10px 12px;border-bottom:1px solid #eef1f5;font-size:12px;vertical-align:top}.obs{max-width:240px;color:var(--mu)}.macro-panel{margin-bottom:18px;background:var(--s);border:1px solid var(--ln);border-radius:12px;padding:16px 18px;box-shadow:0 1px 3px #1018280d}.macro-title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}.macro-title h3{font-size:15px}.macro-title p{font-size:11px;color:var(--mu);margin-top:3px}.macro-period{font-size:10px;color:var(--mu);background:var(--s2);border:1px solid var(--ln);border-radius:999px;padding:5px 8px;white-space:nowrap}.macro-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}.macro-kpi{background:var(--s);border:1px solid var(--ln);border-radius:9px;padding:11px 12px}.macro-kpi b{display:block;font-size:19px}.macro-kpi span{display:block;margin-top:2px;font-size:9px;color:var(--mu);text-transform:uppercase}.macro-breakdown{border-top:1px solid var(--ln);padding-top:12px}.macro-breakdown h4{font-size:11px;text-transform:uppercase;color:var(--mu);margin-bottom:9px}.macro-row{display:grid;grid-template-columns:minmax(180px,1fr) minmax(120px,2fr) 72px;gap:10px;align-items:center;margin:7px 0}.macro-label{font-size:11px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.macro-track{height:8px;background:#edf0f5;border-radius:999px;overflow:hidden}.macro-fill{height:100%;background:linear-gradient(90deg,var(--p),#818cf8);border-radius:999px}.macro-value{text-align:right;font-size:11px;font-weight:700}.macro-loading{min-height:105px;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--mu);font-size:12px}
-@media(max-width:1100px){.days{grid-template-columns:repeat(4,1fr)}.task{grid-template-columns:70px minmax(220px,1fr) 120px 130px}.optional{display:none}.filters{grid-template-columns:repeat(3,1fr)}}@media(max-width:700px){.topin{padding:10px 14px;flex-wrap:wrap}.top-back{display:none}.brand{min-width:0}.tabs{order:3;width:100%}.tab{flex:1}.updated{display:none}.main{padding:16px 12px}.days{grid-template-columns:repeat(2,1fr)}.head{align-items:start}.task{grid-template-columns:60px 1fr}.cell{grid-column:2}.label{display:block}.optional{display:block}.filters{grid-template-columns:1fr}.history-summary{grid-template-columns:repeat(2,1fr)}.macro-kpis{grid-template-columns:repeat(2,1fr)}.macro-row{grid-template-columns:1fr 70px}.macro-track{grid-column:1/-1;grid-row:2}.macro-value{grid-column:2;grid-row:1}.macro-title{flex-direction:column}.tablehint{display:block}.dhead{flex-direction:column}}@media print{.top,.status,.days,.head,.filters,.hbar .btn,.setup{display:none!important}.main{padding:0;max-width:none}.detail,.wrap{border:0;box-shadow:none}.task{break-inside:avoid}th{position:static}}
-</style><link rel="stylesheet" href="assets/dashboard-common.css?v=20260922-27"></head><body class="page-tareas">
-<header class="top"><div class="topin"><a class="com-back-link" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Volver al menú principal</a><div class="brand"><div class="mark" aria-hidden="true">📝</div><div><h1>Dashboard Tareas Especiales</h1></div></div><nav class="tabs"><button class="tab on" data-view="week">Semana</button><button class="tab" data-view="history">Histórico operativo</button></nav><div class="actions"><button class="btn" id="refresh">Actualizar</button></div></div></header>
-<div class="com-loading-view" id="initialLoading" role="status" aria-live="polite"><div class="com-loading-content"><span class="com-spinner" id="initialSpinner" aria-hidden="true"></span><div class="com-loading-message" id="initialLoadingMessage">Cargando información</div><div class="com-loading-actions" id="initialLoadingActions" hidden><button class="com-retry-button" id="retryInitial" type="button">Reintentar</button></div></div></div><div class="status" id="status"></div><main class="main" id="mainContent" hidden>
-<section class="view on" id="view-week"><div class="head"><div><h2>Recursos de la semana</h2><p>Elegí un día para abrir la jornada completa.</p></div><div class="navweek"><button class="arr" id="prev">‹</button><button class="btn" id="thisweek">Esta semana</button><button class="arr" id="next">›</button></div></div><section class="macro-panel" aria-labelledby="macroHeading"><div class="macro-title"><div><h3 id="macroHeading">Indicadores del servicio</h3><p>Promedios por jornada con horarios válidos de los últimos 90 días.</p></div><span class="macro-period" id="macroPeriod">Cargando…</span></div><div id="macroContent" class="macro-loading"><span class="spinner"></span><span>Calculando indicadores…</span></div></section><div class="days" id="days"></div><section class="detail" id="detail"><div class="empty">Seleccioná un día.</div></section></section>
-<section class="view" id="view-history"><div class="head"><div><h2>Histórico operativo</h2><p>Consultá una tarea a través del tiempo o reconstruí una jornada.</p></div></div><div class="filters"><div class="field"><label>Buscar</label><input id="fq" type="search" placeholder="Dirección, texto u observación…"></div><div class="field"><label>Tipo de tarea</label><select id="ftype"><option value="">Todos</option></select></div><div class="field"><label>Tarea específica</label><select id="ftask"><option value="">Todas</option></select></div><div class="field"><label>Desde</label><input id="ffrom" type="date"></div><div class="field"><label>Hasta</label><input id="fto" type="date"></div><div class="field"><label>Estado</label><select id="fstatus"><option value="">Todos</option></select></div><div class="field"><label>Municipio</label><select id="fmuni"><option value="">Todos</option></select></div><div class="field"><label>Asignado</label><select id="fassigned"><option value="">Todos</option></select></div><div class="field"><label>Recurso</label><select id="fresource"><option value="">Todos</option></select></div><div class="field"><label>Turno</label><select id="fshift"><option value="">Todos</option></select></div><div class="field"><label>Observaciones</label><select id="fobs"><option value="">Todas</option><option value="yes">Con observaciones</option><option value="no">Sin observaciones</option></select></div><button class="btn" id="clear">Limpiar filtros</button></div><p class="com-range-error" id="tareas-range-error" role="alert">La fecha Desde no puede ser posterior a Hasta.</p><div class="hbar"><button class="btn primary" id="loadh">Consultar período</button><span class="count" id="hcount" aria-live="polite"></span></div><p class="history-help" id="hhelp">Elegí las fechas y presioná “Consultar período” para habilitar los filtros.</p><div class="history-summary hide" id="hsummary"><div class="hstat"><b id="hsHours">—</b><span>Horas registradas</span></div><div class="hstat"><b id="hsDone">0</b><span>Realizadas</span></div><div class="hstat"><b id="hsTime">—</b><span>Duración promedio por registro</span></div></div><div class="tablehint">Deslizá horizontalmente para ver todas las columnas.</div><div class="wrap"><div class="history-loading hide" id="hloading"><span class="spinner"></span><span id="hloadingText">Cargando histórico…</span></div><table><thead><tr><th>Fecha</th><th>Turno</th><th>Hora</th><th>Municipio</th><th>Tipo</th><th>Tarea</th><th>Recurso</th><th>Asignado</th><th>Estado</th><th>Inicio</th><th>Final</th><th>Duración</th><th>Observaciones</th></tr></thead><tbody id="hbody"><tr><td colspan="13" class="empty">Elegí un período y presioná “Consultar período”.</td></tr></tbody></table></div><div class="pagination hide" id="hpagination"><button class="btn" id="hprev">Anterior</button><span class="pageinfo" id="hpageinfo"></span><button class="btn" id="hnext">Siguiente</button></div></section>
-</main><script>
-const PLAN_SHEET_ID="1MgxpmNHlQTaGs_w49SRTJrIo-CYWP2JPxjvx4AgSlAc",FORMATO_GID="570585719",HISTORY_SHEET_ID="19AzGmWCn-USIRmkW-iJJMotNgnDlqIjBBxXNKMSHXZ8",HISTORY_SHEET="BD_Historial";
-const DAYS=["LUNES","MARTES","MIÉRCOLES","JUEVES","VIERNES","SÁBADO","DOMINGO"],SHORT=["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
-let plan=[],selected="",woff=0,hist=[],hpage=1,macroHist=[],macroFrom="",macroTo="",macroLoadingPromise=null;const HISTORY_PAGE_SIZE=25, HISTORY_WORKERS=4, DATA_FILTER_IDS=["fq","ftype","ftask","fstatus","fmuni","fassigned","fresource","fshift","fobs"];
-const $=id=>document.getElementById(id),esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const TAREAS_SESSION_KEY="com.tareas-especiales.filters";
-function cleanImportedText(v){return String(v??"").replace(/https?:\/\/\S+/gi,"").replace(/\s*[|·–—-]\s*$/g,"").replace(/\s{2,}/g," ").trim()}
-function saveTareasState(){const active=document.querySelector('.tab.on')?.dataset.view||'week';sessionStorage.setItem(TAREAS_SESSION_KEY,JSON.stringify({view:active,woff,selected,filters:Object.fromEntries(['fq','ftype','ftask','ffrom','fto','fstatus','fmuni','fassigned','fresource','fshift','fobs'].map(id=>[id,$(id).value]))}))}
-function readTareasState(){try{return JSON.parse(sessionStorage.getItem(TAREAS_SESSION_KEY)||'null')}catch(_){sessionStorage.removeItem(TAREAS_SESSION_KEY);return null}}
-function ymd(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}function pdate(s){let[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d,12)}function add(d,n){let x=new Date(d);x.setDate(x.getDate()+n);return x}function monday(d){let x=new Date(d);x.setHours(12,0,0,0);x.setDate(x.getDate()-((x.getDay()+6)%7));return x}function dlab(d){return d.toLocaleDateString("es-UY",{day:"2-digit",month:"2-digit"})}function fullDate(s){return pdate(s).toLocaleDateString("es-UY",{day:"2-digit",month:"2-digit",year:"numeric"})}function sname(d){return`${d.getDate()}/${d.getMonth()+1}`}function status(t,e=false){$("status").textContent=t;$("status").className="status"+(e?" err":"")}
-// GViz exige que el callback esté dentro de tqx; esta variante lo construye explícitamente.
-function gtable(o){return new Promise((ok,no)=>{const cb=`_gv${Date.now()}${Math.floor(Math.random()*1e6)}`,script=document.createElement("script"),tm=setTimeout(()=>end(new Error("La fuente demoró más de lo esperado")),60000);function end(e,v){clearTimeout(tm);delete window[cb];script.remove();e?no(e):ok(v)}window[cb]=r=>r?.status==="ok"?end(null,r.table):end(new Error(r?.errors?.[0]?.detailed_message||"Hoja no disponible"));script.onerror=()=>end(new Error("No se pudo cargar la hoja"));const target=o.gid?`gid=${o.gid}`:`sheet=${encodeURIComponent(o.sheet)}`,id=o.id||PLAN_SHEET_ID,q=o.tq||"select *";script.src=`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=responseHandler:${cb}&${target}&tq=${encodeURIComponent(q)}`;document.head.appendChild(script)})}
-function cv(c,i){return c?.[i]?.v==null?"":c[i].v}
-function dateCell(c,i){let x=c?.[i];if(!x)return"";if(x.f&&/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(x.f)){let[d,m,y]=x.f.split("/");return`${y}-${m.padStart(2,"0")}-${d.padStart(2,"0")}`}let z=String(x.v||"").match(/Date\((\d+),(\d+),(\d+)/);return z?`${z[1]}-${String(+z[2]+1).padStart(2,"0")}-${String(z[3]).padStart(2,"0")}`:""}function tm(c,i){let v=cv(c,i);if(typeof v==="string"){let m=v.match(/Date\(\d+,\d+,\d+,(\d+),(\d+)/);if(m)return`${m[1].padStart(2,"0")}:${m[2].padStart(2,"0")}`}return String(v)}
-function parsePlan(t){return(t.rows||[]).map(r=>{let c=r.c||[];return{days:String(cv(c,0)),time:tm(c,1),muni:String(cv(c,2)).trim(),resource:String(cv(c,3)).trim(),task:cleanImportedText(cv(c,4)),message:cleanImportedText(cv(c,5))}}).filter(x=>x.days&&x.task)}
-function parseRes(v){let moto=[...String(v).matchAll(/(\d+)\s*Motocarro/gi)].reduce((a,m)=>a+ +m[1],0),truck=[...String(v).matchAll(/(\d+)\s*Cami[oó]n/gi)].reduce((a,m)=>a+ +m[1],0);return{moto,truck}}function totals(rows){return rows.reduce((a,x)=>{let r=parseRes(x.resourceCount===undefined?x.resource:x.resourceCount);a.moto+=r.moto;a.truck+=r.truck;return a},{moto:0,truck:0})}function forday(day){return plan.filter(x=>x.days.toUpperCase().split(",").map(s=>s.trim()).includes(day))}function dates(){let s=add(monday(new Date),woff*7);return DAYS.map((_,i)=>add(s,i))}
-async function loadPlan(){let loading=$("initialLoading"),spinner=$("initialSpinner"),message=$("initialLoadingMessage"),actions=$("initialLoadingActions");$("refresh").disabled=true;loading.hidden=false;$("mainContent").hidden=true;spinner.hidden=false;actions.hidden=true;message.className="com-loading-message";message.textContent="Cargando información";status("");try{plan=parsePlan(await gtable({gid:FORMATO_GID}));renderWeek();loading.hidden=true;$("mainContent").hidden=false;status(`${plan.length} tareas planificadas disponibles`)}catch(e){console.error("No se pudo cargar Tareas Especiales:",e);spinner.hidden=true;message.className="com-loading-message com-loading-error";message.textContent="No se pudo cargar la información.";actions.hidden=false}finally{$("refresh").disabled=false}}
-function renderWeek(){let ds=dates(),today=ymd(new Date);$("days").innerHTML=DAYS.map((day,i)=>{let rows=forday(day),r=totals(rows),key=ymd(ds[i]);return`<button class="day${selected===key?" on":""}${key===today?" today":""}" data-date="${key}" data-day="${day}"><div class="dname">${SHORT[i]}</div><div class="date">${dlab(ds[i])}</div><div class="ntask">${rows.length} <span>tareas</span></div><div class="res"><span class="chip moto">${r.moto} motocarros</span><span class="chip truck">${r.truck} camiones</span></div></button>`}).join("");document.querySelectorAll(".day").forEach(b=>b.onclick=()=>openDay(b.dataset.date,b.dataset.day));if(!selected){let i=woff===0?(new Date().getDay()+6)%7:0;openDay(ymd(ds[i]),DAYS[i])}}
-function dur(a,b){if(!/^\d{1,2}:\d{2}$/.test(a)||!/^\d{1,2}:\d{2}$/.test(b))return"";let[ah,am]=a.split(":").map(Number),[bh,bm]=b.split(":").map(Number),n=bh*60+bm-ah*60-am;if(n<0)n+=1440;return`${Math.floor(n/60)} h ${n%60} min`}
-function dailyHeaderKey(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().replace(/[^A-Z0-9]/g,"")}
-function parseDaily(t,date){
- const columns=Object.fromEntries((t.cols||[]).map((col,index)=>[dailyHeaderKey(col.label),index]));
- const currentFormat=Number.isInteger(columns.TAREA)&&Number.isInteger(columns.TRANSPORTISTA)&&Number.isInteger(columns.ESTADO);
- let shift=String(t.cols?.[0]?.label||"").match(/MATUTINO|VESPERTINO|NOCTURNO/i)?.[0]||"Jornada";
- return(t.rows||[]).map(row=>{
-  const cells=row.c||[],first=String(cv(cells,0)).trim();
-  const task=cleanImportedText(cv(cells,currentFormat?columns.TAREA:3));
-  if(!task&&/MATUTINO|VESPERTINO|NOCTURNO/i.test(first)){shift=first.match(/MATUTINO|VESPERTINO|NOCTURNO/i)[0];return null}
-  if(!task)return null;
-  if(currentFormat){
-   const start=tm(cells,columns.HORAINICIO),end=tm(cells,columns.HORAFINAL);
-   const block=cleanImportedText(cv(cells,columns.BLOQUEINFO));
-   const planned=block.match(/(?:COMIENZO|INICIO)\s*:?\s*(\d{1,2}:\d{2})/i)?.[1]||"";
-   const detail=cleanImportedText(cv(cells,columns.DETALLETAREA));
-   return{date,source:"daily-current",shift,category:cleanCategory(cv(cells,columns.TIPODETAREAS)),
-    time:start||planned,muni:String(cv(cells,columns.MUNICIPIO)).trim(),resource:"Transportista",
-    task,message:"",assigned:String(cv(cells,columns.TRANSPORTISTA)).trim(),
-    state:String(cv(cells,columns.ESTADO)).trim(),start,end,obs:detail==="-"?"":detail,duration:dur(start,end)};
-  }
-  const start=tm(cells,7),end=tm(cells,8);
-  return{date,shift,time:tm(cells,0),muni:String(cv(cells,1)).trim(),resource:String(cv(cells,2)).trim(),
-   task,message:cleanImportedText(cv(cells,4)),assigned:String(cv(cells,5)).trim(),
-   state:String(cv(cells,6)).trim(),start,end,obs:cleanImportedText(cv(cells,9)),duration:dur(start,end)};
- }).filter(Boolean);
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:#0f2444;font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-size:15px;line-height:1.5}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{margin:0}
+.page-tareas .main{padding-top:30px;padding-bottom:48px}
+.page-tareas h2.sec{display:flex;align-items:baseline;gap:12px;margin:0 0 14px;padding:0 0 10px;border-bottom:1px solid #0f2444;color:var(--com-text);font-size:22px;font-weight:700;line-height:1.2;letter-spacing:-.02em}
+h2.sec .n{display:inline-flex;flex:none;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:#0f2444;color:#fff;font-size:15px;font-weight:800;transform:translateY(-3px)}
+.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+.day{min-width:0;border:1px solid #e4e8ef;background:#fff;padding:16px;border-radius:12px;box-shadow:0 1px 3px rgba(16,24,40,.08),0 1px 2px rgba(16,24,40,.04)}
+.dname{margin:0 0 14px;font-size:13px;font-weight:800}
+.planning-count{display:flex;align-items:baseline;gap:7px;margin:3px 0;font-size:12px;color:#64748b;line-height:1.35}
+.planning-count b{min-width:27px;font-size:23px;font-weight:800;color:#0f2444}
+.res{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:12px}
+.chip{background:#f8fafc;border:1px solid #e4e8ef;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;white-space:nowrap}
+.moto{color:#006bc5}.truck{color:#b6690e}
+.map-card{margin-top:16px;padding:15px 18px 18px;border:1px solid #e4e8ef;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.08),0 1px 2px rgba(16,24,40,.04)}
+#planningMap{height:480px;overflow:hidden;border:1px solid #e4e8ef;border-radius:9px;background:#eef1f4}
+.map-error{display:flex;height:100%;align-items:center;justify-content:center;padding:24px;color:#64748b;text-align:center}
+.maplibregl-map{font-family:"Plus Jakarta Sans",system-ui,sans-serif}
+.service-section{margin-top:30px}
+.service-card{padding:18px;border:1px solid #e4e8ef;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.08),0 1px 2px rgba(16,24,40,.04)}
+.service-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.task-breakdowns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.task-breakdowns .category-row{grid-template-columns:minmax(0,1fr) 64px;gap:8px}
+.task-breakdowns .category-track{grid-column:1/-1;grid-row:2}
+.task-breakdowns .category-value{grid-column:2;grid-row:1}
+@media(max-width:480px){.task-breakdowns{grid-template-columns:1fr}}
+.service-kpi{padding:16px;border:1px solid #e4e8ef;border-radius:10px}
+.service-value{display:block;font-size:28px;font-weight:800;line-height:1.2;color:#0f2444}
+.service-label{display:block;margin-top:8px;font-size:12px;color:#64748b;font-weight:700}
+.service-breakdown{margin-top:18px;padding-top:18px;border-top:1px solid #e4e8ef}
+.service-breakdown h3{margin:0 0 16px;font-size:13px;font-weight:800;color:#64748b}
+.service-details{height:520px;margin-top:18px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#c4ccd7 transparent;padding-right:8px}
+.service-details .service-breakdown:first-child{margin-top:0}
+.service-details:focus-visible{outline:2px solid #64748b;outline-offset:3px}
+.service-details::-webkit-scrollbar{width:6px}
+.service-details::-webkit-scrollbar-thumb{background:#c4ccd7;border-radius:6px}
+.category-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(60px,1fr) 74px;align-items:center;gap:12px;margin:14px 0}
+.category-name{font-size:12px;font-weight:700;overflow-wrap:anywhere}
+#serviceTasks .category-name{white-space:pre-line}
+.category-track{height:9px;background:#edf1f6;border-radius:999px}
+.category-fill{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#1769aa,#5896cd)}
+.service-period{margin:0 0 14px;color:#64748b;font-size:12px}
+.service-period:empty{display:none}
+.service-warning{display:block;margin-top:5px;color:#b6690e}
+.category-value{text-align:right;font-size:12px;font-weight:700;color:#64748b;white-space:nowrap}
+.history-section{margin-top:30px}
+.history-filters{display:grid;grid-template-columns:minmax(218px,2fr) repeat(5,minmax(95px,1fr)) auto auto;gap:8px;align-items:end}
+.history-field{min-width:0}
+.history-field label,.history-range-label{display:block;margin-bottom:6px;color:#64748b;font-size:11px;font-weight:700}
+.history-dates{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.history-field select,.history-field input{width:100%;min-width:0;height:38px;padding:0 9px;border:1px solid #e4e8ef;border-radius:8px;background:#fff;color:#0f2444;font:inherit;font-size:12px}
+.history-field :disabled{background:#f8fafc;color:#94a3b8}
+.history-actions{display:contents}
+.history-actions .history-button{height:38px;padding:0 10px;font-size:11px;white-space:nowrap}
+.history-button{padding:9px 14px;border:1px solid #e4e8ef;border-radius:8px;background:#fff;color:#0f2444;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.history-button.primary{background:#0f2444;border-color:#0f2444;color:#fff}
+.history-button:disabled{opacity:.5;cursor:default}
+.history-count{align-self:center;margin-top:22px;color:#64748b;font-size:11px;white-space:nowrap}
+.history-message{margin:14px 0;color:#64748b;font-size:12px}
+.history-message:empty{display:none}
+.history-message.error{color:#b42318}
+.history-results{margin-top:16px;overflow:auto;border:1px solid #e4e8ef;border-radius:10px}
+.history-results table{width:100%;min-width:900px;border-collapse:collapse}
+.history-results th{padding:12px;background:#f8fafc;color:#64748b;font-size:11px;text-align:center;vertical-align:middle;white-space:nowrap}
+.history-sort{display:inline-flex;align-items:center;justify-content:center;width:100%;gap:7px;padding:0;border:0;background:transparent;color:inherit;font:inherit;font-weight:700;text-align:center;cursor:pointer}
+.sort-arrow{display:inline-flex;flex-direction:column;gap:3px;width:8px;flex:none;font-size:0}
+.sort-arrow::before,.sort-arrow::after{content:"";width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent}
+.sort-arrow::before{border-bottom:4px solid #b5becb}
+.sort-arrow::after{border-top:4px solid #b5becb}
+.history-results th[aria-sort="ascending"] .sort-arrow::before{border-bottom-color:#0f2444}
+.history-results th[aria-sort="descending"] .sort-arrow::after{border-top-color:#0f2444}
+.page-tareas .history-results table th,.page-tareas .history-results table td{text-align:center;vertical-align:middle}
+.history-results td{padding:12px;border-top:1px solid #e4e8ef;font-size:12px}
+.history-results td:nth-child(4){white-space:pre-line}
+.history-results .history-empty{padding:28px;text-align:center;color:#64748b}
+.history-pagination{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:16px;font-size:12px;color:#64748b}
+.history-pagination[hidden]{display:none}
+@media(max-width:1100px){.history-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.history-field.range{grid-column:1/-1}.history-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;grid-column:1/-1}.history-count{margin-top:0}}
+@media(max-width:600px){.history-filters{grid-template-columns:1fr}}
+@media(max-width:700px){.service-columns{grid-template-columns:1fr}}
+@media(max-width:420px){.category-row{grid-template-columns:minmax(0,1fr) 74px;gap:8px}.category-track{grid-column:1/-1;grid-row:2}.category-value{grid-column:2;grid-row:1}}
+@media(max-width:950px){.days{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:600px){.days{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){#planningMap{height:390px}}
+</style>
+</head>
+<body class="page-tareas">
+<header class="top"><div class="topin">
+<a class="com-back-link" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Volver al menú principal</a>
+<div class="brand"><div class="mark" aria-hidden="true">📝</div><div><h1>Dashboard Tareas Especiales</h1></div></div>
+</div></header>
+<div class="com-loading-view" id="initialLoading" role="status" aria-live="polite"><div class="com-loading-content"><span class="com-spinner" id="initialSpinner" aria-hidden="true"></span><div class="com-loading-message" id="initialLoadingMessage">Cargando información</div><div class="com-loading-actions" id="initialLoadingActions" hidden><button class="com-retry-button" id="retryInitial" type="button">Reintentar</button></div></div></div>
+<main class="main" id="mainContent" hidden>
+<section aria-labelledby="planningHeading"><h2 class="sec" id="planningHeading"><span class="n">1</span>Tareas planificadas</h2><div class="days" id="days"></div>
+<div class="map-card"><div id="planningMap" role="region" aria-label="Mapa de tareas planificadas"></div></div>
+</section>
+<section class="service-section" aria-labelledby="serviceHeading">
+<h2 class="sec" id="serviceHeading"><span class="n">2</span>Indicadores de servicio</h2>
+<p class="service-period" id="servicePeriod" role="status" aria-live="polite">Cargando información</p>
+<div class="service-columns">
+<div class="service-card">
+<div class="service-kpi"><span class="service-value" id="serviceTaskValue">—</span><span class="service-label">Promedio de tiempo por día en Tareas</span></div>
+<div class="task-breakdowns">
+<div class="service-details" tabindex="0" role="region" aria-label="Promedios por tipo de tarea">
+<div class="service-breakdown"><h3>Promedio por tipo de tarea</h3><div id="serviceCategories"></div></div>
+</div>
+<div class="service-details" tabindex="0" role="region" aria-label="Promedios por tarea">
+<div class="service-breakdown"><h3 id="serviceTasksHeading">Promedio por tarea</h3><div id="serviceTasks"></div></div>
+</div>
+</div>
+</div>
+<div class="service-card">
+<div class="service-kpi"><span class="service-value" id="serviceNeighborhoodValue">—</span><span class="service-label">Promedio de tiempo por día en Barrios</span></div>
+<div class="service-details" tabindex="0" role="region" aria-label="Promedios por barrio"><div class="service-breakdown"><div id="serviceNeighborhoods"></div></div></div>
+</div>
+</div>
+</section>
+<section class="history-section" aria-labelledby="historyHeading">
+<h2 class="sec" id="historyHeading"><span class="n">3</span>Buscador histórico</h2>
+<div class="service-card">
+<form id="historyForm">
+<div class="history-filters">
+<div class="history-field range"><div class="history-dates"><div><label for="historyFrom">Desde</label><input id="historyFrom" type="date" required min="2026-10-09"></div><div><label for="historyTo">Hasta</label><input id="historyTo" type="date" required min="2026-10-09"></div></div></div>
+<div class="history-field"><label for="historyMunicipality">Municipio</label><select id="historyMunicipality"><option value="">Todos</option></select></div>
+<div class="history-field"><label for="historyShift">Turno</label><select id="historyShift"><option value="">Todos</option></select></div>
+<div class="history-field"><label for="historyType">Tipo de tarea</label><select id="historyType"><option value="">Todos</option></select></div>
+<div class="history-field"><label for="historyTask">Tarea - Barrio</label><select id="historyTask"><option value="">Todas</option></select></div>
+<div class="history-field"><label for="historyOperator">Transportista</label><select id="historyOperator"><option value="">Todos</option></select></div>
+<div class="history-actions"><span class="history-count" id="historyCount" aria-live="polite"></span><button class="history-button" id="historyClear" type="button">Limpiar filtros</button></div>
+</div>
+</form>
+<p class="history-message" id="historyMessage" role="status" aria-live="polite"></p>
+<div class="history-results"><table><thead><tr>
+<th aria-sort="descending"><button class="history-sort" type="button" data-sort="date" aria-label="Ordenar por fecha">Fecha<span class="sort-arrow" aria-hidden="true">↓</span></button></th>
+<th aria-sort="none"><button class="history-sort" type="button" data-sort="shift" aria-label="Ordenar por turno">Turno<span class="sort-arrow" aria-hidden="true">↕</span></button></th>
+<th aria-sort="none"><button class="history-sort" type="button" data-sort="type" aria-label="Ordenar por tipo de tarea">Tipo de tarea<span class="sort-arrow" aria-hidden="true">↕</span></button></th>
+<th aria-sort="none"><button class="history-sort" type="button" data-sort="task" aria-label="Ordenar por tarea o barrio">Tarea - Barrio<span class="sort-arrow" aria-hidden="true">↕</span></button></th>
+<th aria-sort="none"><button class="history-sort" type="button" data-sort="operator" aria-label="Ordenar por transportista">Transportista<span class="sort-arrow" aria-hidden="true">↕</span></button></th>
+<th aria-sort="none"><button class="history-sort" type="button" data-sort="state" aria-label="Ordenar por estado">Estado<span class="sort-arrow" aria-hidden="true">↕</span></button></th>
+<th aria-sort="none"><button class="history-sort" type="button" data-sort="start" aria-label="Ordenar por inicio">Inicio<span class="sort-arrow" aria-hidden="true">↕</span></button></th>
+<th aria-sort="none"><button class="history-sort" type="button" data-sort="end" aria-label="Ordenar por final">Final<span class="sort-arrow" aria-hidden="true">↕</span></button></th>
+</tr></thead><tbody id="historyBody"><tr><td colspan="8" class="history-empty">Elegí un período para consultar.</td></tr></tbody></table></div>
+<div class="history-pagination" id="historyPagination" hidden><button class="history-button" id="historyPrev" type="button">Anterior</button><span id="historyPage"></span><button class="history-button" id="historyNext" type="button">Siguiente</button></div>
+</div>
+</section>
+</main>
+<script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script>
+<script>
+const PLAN_SHEET_ID="1MgxpmNHlQTaGs_w49SRTJrIo-CYWP2JPxjvx4AgSlAc";
+const DAYS=["LUNES","MARTES","MIÉRCOLES","JUEVES","VIERNES","SÁBADO","DOMINGO"];
+const $=id=>document.getElementById(id);
+let plan=[];
+let planningMap=null;
+function renderPlanningMap(){
+ const element=$("planningMap");
+ if(planningMap){planningMap.resize();return}
+ try{
+  if(typeof maplibregl==="undefined")throw new Error("No se cargó la biblioteca del mapa");
+  planningMap=new maplibregl.Map({container:element,
+   style:{version:8,sources:{"planning-base":{type:"raster",
+    tiles:["https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"],
+    tileSize:256,maxzoom:16,attribution:"Esri, HERE, Garmin, © OpenStreetMap contributors"}},
+    layers:[{id:"planning-base",type:"raster",source:"planning-base"}]},
+   center:[-56.19,-34.84],zoom:10.5,attributionControl:false});
+ }catch(error){console.error("No se pudo cargar el mapa:",error);
+  element.innerHTML='<div class="map-error">No se pudo cargar el mapa. Revisá la conexión a internet y recargá la página.</div>'}
 }
-function cleanCategory(v){let s=String(v||"").trim().replace(/\s+/g," ");if(!/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(s))return"";let k=s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase();const aliases={"PLANIFICACION DEL DIA":"PLANIFICACIÓN DEL DÍA","PLANIFICACION SALIR ADELANTE":"PLANIFICACIÓN SALIR ADELANTE","RECOLECCION DE ACOPIOS Y RECICLABLES":"RECOLECCIÓN DE ACOPIOS Y RECICLABLES"};return aliases[k]||s}function cleanAssigned(v){return String(v||"").trim().replace(/^ERROR:\s*/i,"").trim()}function displayAssigned(x){return cleanAssigned(x.assignedNormalized)||cleanAssigned(x.assigned)}function displayResource(x){let v=String(x.resourceType||"").trim();return !v||/^ERROR$/i.test(v)?String(x.resource||"").trim():v}
-function parseHistory(t){return(t.rows||[]).map(r=>{let c=r.c||[],start=tm(c,10),end=tm(c,11),assigned=String(cv(c,8)).trim();return{date:dateCell(c,0),shift:String(cv(c,1)).trim(),category:cleanCategory(cv(c,2)),time:tm(c,3),muni:String(cv(c,4)).trim(),resource:String(cv(c,5)).trim(),task:cleanImportedText(cv(c,6)),message:cleanImportedText(cv(c,7)),assigned,state:String(cv(c,9)).trim(),start,end,obs:cleanImportedText(cv(c,12)),assignedNormalized:cleanAssigned(cv(c,13))||cleanAssigned(assigned),resourceType:String(cv(c,14)).trim(),duration:dur(start,end)}}).filter(x=>x.date&&x.task)}
-async function historyForDay(date){let q=`select A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S where A = date '${date}'`;return parseHistory(await gtable({id:HISTORY_SHEET_ID,sheet:HISTORY_SHEET,tq:q}))}
-async function dayData(date){let yesterday=ymd(add(new Date,-1));if(date<=yesterday)return historyForDay(date);try{return parseDaily(await gtable({sheet:sname(pdate(date))}),date)}catch{return[]}}function stateClass(s){let x=String(s).toUpperCase();return x.includes("REALIZ")?"done":x.includes("CURSO")?"progress":x.includes("NO SE")||x.includes("CANCEL")||x.includes("POSP")?"bad":"pending"}
-let currentDayRows=[],currentDayMeta={};
-async function openDay(date,day){selected=date;document.querySelectorAll(".day").forEach(b=>b.classList.toggle("on",b.dataset.date===date));$("detail").innerHTML='<div class="empty"><span class="com-inline-loading"><span class="com-spinner" aria-hidden="true"></span><span>Cargando jornada…</span></span></div>';try{let rows=await dayData(date),fallback=!rows.length;if(fallback)rows=forday(day).map(x=>({...x,date,shift:"Planificación",assigned:"",state:"Planificada",start:"",end:"",obs:"",duration:""}));currentDayRows=rows.map((x,i)=>({...x,_order:i}));currentDayMeta={date,day,fallback};renderDayDetail("time")}catch(e){console.error("No se pudo cargar la jornada:",e);$("detail").innerHTML='<div class="empty">No se pudo cargar la jornada.<br><button class="btn" id="retryDay" type="button" style="margin-top:12px">Reintentar</button></div>';$("retryDay").onclick=()=>openDay(date,day)}}
-function timeValue(v){let m=/^(\d{1,2}):(\d{2})$/.exec(String(v||""));return m?+m[1]*60 + +m[2]:9999}
-function orderDay(rows,mode){return [...rows].sort((a,b)=>{if(mode==="sheet")return a._order-b._order;if(mode==="muni")return String(a.muni).localeCompare(String(b.muni),"es",{numeric:true})||timeValue(a.time)-timeValue(b.time)||a._order-b._order;return timeValue(a.time)-timeValue(b.time)||String(a.muni).localeCompare(String(b.muni),"es",{numeric:true})||a._order-b._order})}
-function normTask(v){return String(v||"").normalize("NFKC").replace(/\s+/g,"").toLocaleLowerCase("es")}function taskType(x){if(cleanCategory(x.category))return cleanCategory(x.category);let v=`${x.task} ${x.message||""}`.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase();if(v.includes("ACOPIO"))return "LEVANTE DE ACOPIOS";if(v.includes("PAPELER"))return "VACIADO DE PAPELERAS";if(/CONTENEDOR|RECORRIDO|AVENIDA|RAMBLA|BULEVAR|(^|\s)AV(\s|\.|$)|(^|\s)BV(\s|\.|$)/.test(v))return "AVENIDAS Y CONTENEDORES";if(/LIMPIEZA|PLAZA|PARQUE|ENTORNO|ESPACIO/.test(v))return "LIMPIEZA DE ESPACIOS PÚBLICOS";return "OPERATIVOS TERRITORIALES"}
-function countTransportistas(rows){return new Set(rows.map(displayAssigned).map(name=>name.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ").trim().toLocaleLowerCase("es")).filter(name=>name&&name!=="-")).size}
-function renderDayDetail(mode="time",type=""){let {date,day,fallback}=currentDayMeta,rows=currentDayRows,r=totals(rows),currentSheet=rows.some(x=>x.source==="daily-current"),done=rows.filter(x=>stateClass(x.state)==="done").length,types=rows.reduce((a,x)=>{let k=taskType(x);(a[k]??=[]).push(x);return a},{}),shown=type?{[type]:types[type]||[]}:types,typeButtons=Object.entries(types).sort((a,b)=>b[1].length-a[1].length);$("detail").innerHTML=`<div class="dhead"><div><h3>${esc(day[0]+day.slice(1).toLowerCase())} ${dlab(pdate(date))}</h3><p>${fallback?"Planificación semanal · sin hoja de ejecución":"Ejecución de la hoja diaria"}</p><div class="daytools"><label for="dayorder">Ordenar por</label><select id="dayorder"><option value="time">Horario</option><option value="muni">Municipio</option></select><button class="btn" id="day-history" type="button">Ver en histórico</button></div></div><div class="metrics"><div class="metric"><b>${rows.length}</b><span>Tareas</span></div><div class="metric"><b>${done}</b><span>Realizadas</span></div>${currentSheet?`<div class="metric"><b>${countTransportistas(rows)}</b><span>Transportistas asignados</span></div>`:`<div class="metric"><b>${r.moto}</b><span>Motocarros</span></div><div class="metric"><b>${r.truck}</b><span>Camiones</span></div>`}</div></div><div class="typebar"><button class="typefilter${!type?" on":""}" data-type="">Todas · ${rows.length}</button>${typeButtons.map(([k,list])=>`<button class="typefilter${type===k?" on":""}" data-type="${esc(k)}">${esc(k)} · ${list.length}</button>`).join("")}</div><div class="dbody">${Object.entries(shown).map(([g,list])=>{let gr=totals(list),gd=list.filter(x=>stateClass(x.state)==="done").length;return `<section class="type-section"><div class="type-head">${esc(g)}<span>${list.length} tareas · ${gd} realizadas · ${currentSheet?countTransportistas(list)+" transportistas":gr.moto+" motocarros · "+gr.truck+" camiones"}</span></div>${orderDay(list,mode).map(taskHtml).join("")}</section>`}).join("")}</div>`;$("dayorder").value=mode;$("dayorder").onchange=e=>renderDayDetail(e.target.value,type);$("day-history").onclick=()=>openHistoryFromWeek(date,type);document.querySelectorAll(".typefilter").forEach(b=>b.onclick=()=>renderDayDetail(mode,b.dataset.type))}
-function taskHtml(x){return`<article class="task"><div class="time">${esc(x.time||"—")}</div><div><div class="tname">${esc(x.task)}</div><div class="tsub">Municipio ${esc(x.muni||"—")}${x.obs?` · ${esc(x.obs)}`:""}</div></div><div class="cell"><span class="label">Recurso</span>${esc(displayResource(x)||"—")}</div><div class="cell"><span class="label">Asignado</span>${esc(displayAssigned(x)||"Sin asignar")}</div><div class="cell optional"><span class="label">Ejecución</span>${esc(x.start||"—")}${x.end?`–${esc(x.end)}`:""}</div><div class="cell optional"><span class="label">Estado</span><span class="state ${stateClass(x.state)}">${esc(x.state||"Pendiente")}</span></div></article>`}
-function showTareasView(view){document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.view===view;x.classList.toggle("on",on);x.setAttribute("aria-selected",String(on))});document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id===`view-${view}`));saveTareasState()}
-function validateTareasRange(){const a=$("ffrom"),b=$("fto"),invalid=Boolean(a.value&&b.value&&a.value>b.value);b.min=a.value||"";b.setCustomValidity(invalid?"La fecha Desde no puede ser posterior a Hasta.":"");a.setAttribute("aria-invalid",String(invalid));b.setAttribute("aria-invalid",String(invalid));$("tareas-range-error").classList.toggle("show",invalid);$("loadh").disabled=invalid;return !invalid}
-async function openHistoryFromWeek(date,type=""){if(date>ymd(add(new Date,-1)))return status("El histórico está disponible hasta el día de ayer.",true);showTareasView("history");$("ffrom").value=date;$("fto").value=date;validateTareasRange();invalidateHistory();await loadHist();if(type&&[...$("ftype").options].some(o=>o.value===type)){$("ftype").value=type;taskOptions();renderHist()}saveTareasState()}
-function restoreHistoryFilterValues(state){if(!state?.filters)return;["fq","ftype","ftask","fstatus","fmuni","fassigned","fresource","fshift","fobs"].forEach(id=>{const el=$(id),value=state.filters[id]||"";if(el.tagName!=="SELECT"||[...el.options].some(o=>o.value===value))el.value=value});taskOptions();renderHist();saveTareasState()}
-function range(a,b){if(a>b)throw Error("La fecha Desde no puede ser posterior a Hasta");let out=[];for(let d=pdate(a),e=pdate(b);d<=e;d=add(d,1)){out.push(new Date(d));if(out.length>90)throw Error("El período máximo de consulta es de 90 días")};return out}
-function setHistoryFiltersEnabled(enabled){[...DATA_FILTER_IDS,"clear"].forEach(id=>$(id).disabled=!enabled)}
-async function loadCategoryCatalog(){try{let t=await gtable({id:HISTORY_SHEET_ID,sheet:HISTORY_SHEET,tq:"select D,count(H) where H is not null group by D order by D"}),categories=(t.rows||[]).map(r=>cleanCategory(cv(r.c||[],0))).filter(Boolean);opt("ftype",categories)}catch{}}
-function vehicleCount(x,kind){let s=String(x.resource||x.resourceType||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(),word=kind==="moto"?"motocarro":"camion";if(!s.includes(word))return 0;let re=new RegExp("(\\d+)\\s*"+word,"g"),m,total=0;while((m=re.exec(s)))total+=Number(m[1]);return total||1}
-function validDurationMinutes(x){let n=durationMinutes(x);return n!==null&&n>0&&n<=16*60?n:null}
-function normalizeOperatorName(x){return displayAssigned(x).normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ").trim().toLocaleLowerCase("es")}
-function summarizeMotocarroHours(valid){
- const operatorDays=new Map(),recordedDays=new Set();
- valid.forEach(({x,min},index)=>{
-  if(!vehicleCount(x,"moto"))return;
-  const startParts=String(x.start).split(":").map(Number),start=startParts[0]*60+startParts[1];
-  const operator=normalizeOperatorName(x),key=x.date+"|"+(operator||"registro-"+index);
-  if(!operatorDays.has(key))operatorDays.set(key,[]);
-  operatorDays.get(key).push({start,end:start+min,type:taskType(x),order:index});
-  recordedDays.add(x.date);
- });
- let totalMinutes=0;const categoryMinutes={};
- for(const intervals of operatorDays.values()){
-  const boundaries=[...new Set(intervals.flatMap(item=>[item.start,item.end]))].sort((a,b)=>a-b);
-  for(let i=1;i<boundaries.length;i++){
-   const from=boundaries[i-1],to=boundaries[i];
-   const active=intervals.filter(item=>item.start<to&&item.end>from);
-   if(!active.length)continue;
-   // Si dos tareas del mismo operario se superponen, se atribuye el tramo a la última iniciada.
-   active.sort((a,b)=>b.start-a.start||b.order-a.order);
-   const minutes=to-from,type=active[0].type;
-   totalMinutes+=minutes;categoryMinutes[type]=(categoryMinutes[type]||0)+minutes;
-  }
+function gtable(sheet="FORMATO",range=""){return new Promise((resolve,reject)=>{
+ const callback="_plan"+Date.now()+Math.floor(Math.random()*1e6),script=document.createElement("script");
+ const timeout=setTimeout(()=>finish(new Error("La fuente demoró más de lo esperado")),60000);
+ function finish(error,table){clearTimeout(timeout);delete window[callback];script.remove();error?reject(error):resolve(table)}
+ window[callback]=response=>response?.status==="ok"?finish(null,response.table):finish(new Error("No se pudo leer "+sheet));
+ script.onerror=()=>finish(new Error("No se pudo cargar la hoja"));
+ script.src="https://docs.google.com/spreadsheets/d/"+PLAN_SHEET_ID+"/gviz/tq?sheet="+encodeURIComponent(sheet)+"&headers="+(range?0:1)+(range?"&range="+encodeURIComponent(range):"")+"&tqx=responseHandler:"+callback+"&tq=select%20*";
+ document.head.appendChild(script);
+})}
+function cv(c,i){return String(c?.[i]?.v??"").trim()}
+function normalized(value){return value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase()}
+function parsePlan(table){
+ const rows=[];let shift="",days="",group=null;
+ for(const row of table.rows||[]){
+  const c=row.c||[],first=cv(c,0),info=cv(c,2);
+  if(/^(MATUTINO|VESPERTINO|NOCTURNO)$/i.test(first)){shift=first.toUpperCase();days="";group=null;continue}
+  if(first)days=first;
+  const match=info.match(/^(BLOQUE|BARRIO)\s+(\d+)\b/i);
+  if(match)group={id:shift+"|"+match[1].toUpperCase()+"|"+match[2],kind:match[1].toUpperCase(),info,truck:false};
+  // TRANSPORTISTA puede estar combinado: la asignación pertenece al grupo entero.
+  // VCV es el identificador del camión actualmente indicado en FORMATO.
+  if(group&&/\b(?:CAMION|VCV)\b/.test(normalized(cv(c,7))))group.truck=true;
+  // Una fila vacía de TAREA es continuación de una celda combinada, no otra tarea.
+  if(cv(c,4)&&days&&group)rows.push({days,group,type:normalized(cv(c,1)),category:cv(c,1),task:cv(c,4)});
  }
- return{totalMinutes,categoryMinutes,days:recordedDays.size};
+ if(!rows.length)throw new Error("FORMATO no contiene una planificación reconocible");
+ return rows;
 }
-function renderMacros(rows,from,to){
- const done=rows.filter(x=>stateClass(x.state)==="done");
- const valid=done.map(x=>({x,min:validDurationMinutes(x)})).filter(v=>v.min!==null);
- const daysWithTime=new Set(valid.map(v=>v.x.date)),days=daysWithTime.size;
- const moto=summarizeMotocarroHours(valid);
- const truckMinutes=valid.reduce((sum,v)=>sum+v.min*vehicleCount(v.x,"truck"),0);
- const doneOnDataDays=done.filter(x=>daysWithTime.has(x.date)).length;
- const categoryRows=Object.entries(moto.categoryMinutes).sort((a,b)=>b[1]-a[1]);
- const max=Math.max(...categoryRows.map(x=>x[1]),1);
- const display=n=>n.toLocaleString("es-UY",{maximumFractionDigits:1});
- $("macroPeriod").textContent=fullDate(from)+" – "+fullDate(to)+" · "+days+" días con horarios válidos";
- $("macroContent").className="";
- $("macroContent").innerHTML=
-  '<div class="macro-kpis">'+
-   '<div class="macro-kpi"><b>'+(days?display(moto.totalMinutes/60/days):"—")+' h</b><span>Horas de motocarros registradas / día</span></div>'+
-   '<div class="macro-kpi"><b>'+(days?display(truckMinutes/60/days):"—")+' h</b><span>Horas-camión / día</span></div>'+
-   '<div class="macro-kpi"><b>'+(days?display(doneOnDataDays/days):"—")+'</b><span>Registros realizados / día</span></div>'+
-  '</div><div class="macro-breakdown"><h4>Horas de motocarros registradas por día, por tipo de tarea</h4>'+
-   (categoryRows.map(([type,minutes])=>
-    '<div class="macro-row"><span class="macro-label" title="'+esc(type)+'">'+esc(type)+'</span>'+
-    '<span class="macro-track"><span class="macro-fill" style="display:block;width:'+Math.max(2,minutes/max*100)+'%"></span></span>'+
-    '<span class="macro-value">'+display(minutes/60/days)+' h/día</span></div>'
-   ).join("")||'<div class="empty">No hay duraciones válidas para el período.</div>')+
-  '</div>';
+function parseRes(value){
+ const text=normalized(value);
+ return{moto:[...text.matchAll(/(\d+)\s*MOTOCARRO/g)].reduce((sum,m)=>sum+Number(m[1]),0),
+ truck:[...text.matchAll(/(\d+)\s*CAMION/g)].reduce((sum,m)=>sum+Number(m[1]),0)};
 }
-async function loadMacros(){let to=ymd(add(new Date,-1)),from=ymd(add(pdate(to),-89));macroFrom=from;macroTo=to;try{let q=`select A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S where A >= date '${from}' and A <= date '${to}'`;macroHist=parseHistory(await gtable({id:HISTORY_SHEET_ID,sheet:HISTORY_SHEET,tq:q}));renderMacros(macroHist,from,to);opt("ftype",macroHist.map(taskType));return macroHist}catch(e){$("macroPeriod").textContent="No disponible";$("macroContent").className="empty";$("macroContent").textContent="No se pudieron calcular los indicadores. "+e.message;return[]}}
-function historyLoading(on,text="Cargando histórico…"){$("hloading").classList.toggle("hide",!on);$("hloadingText").textContent=text;$("loadh").disabled=on}
-async function loadHist(){let a=$("ffrom").value,b=$("fto").value;if(!a||!b)return status("Elegí las fechas Desde y Hasta",true);if(!validateTareasRange())return;try{range(a,b)}catch(e){return status(e.message,true)}hpage=1;hist=[];setHistoryFiltersEnabled(false);historyLoading(true,"Consultando el período…");status("");$("hhelp").textContent="Cargando el período seleccionado…";$("hhelp").classList.remove("ready");$("hcount").textContent="";$("hsummary").classList.add("hide");$("hpagination").classList.add("hide");$("hbody").innerHTML='<tr><td colspan="13" class="empty">Preparando resultados…</td></tr>';let started=Date.now();try{if(macroLoadingPromise&&a>=macroFrom&&b<=macroTo)await macroLoadingPromise;if(macroHist.length&&a>=macroFrom&&b<=macroTo){hist=macroHist.filter(x=>x.date>=a&&x.date<=b)}else{let q=`select A,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S where A >= date '${a}' and A <= date '${b}'`;hist=parseHistory(await gtable({id:HISTORY_SHEET_ID,sheet:HISTORY_SHEET,tq:q}))}options();setHistoryFiltersEnabled(true);renderHist();saveTareasState();$("hhelp").textContent="Período cargado. Ahora podés combinar cualquiera de los filtros.";$("hhelp").classList.add("ready");let remaining=350-(Date.now()-started);if(remaining>0)await new Promise(resolve=>setTimeout(resolve,remaining));status("")}catch(e){hist=[];$("hbody").innerHTML=`<tr><td colspan="13" class="empty">No se pudo cargar el período. ${esc(e.message)}</td></tr>`;status(`Error: ${e.message}`,true);$("hhelp").textContent="No se pudo cargar el período. Revisá las fechas e intentá nuevamente.";$("hhelp").classList.remove("ready")}finally{historyLoading(false)}}function opt(id,vals){let e=$(id),v=e.value;e.innerHTML='<option value="">Todos</option>'+[...new Set(vals.filter(Boolean))].sort().map(x=>`<option>${esc(x)}</option>`).join("");e.value=v}function taskOptions(){let e=$("ftask"),v=e.value,type=$("ftype").value,groups=hist.reduce((a,x)=>{let k=taskType(x);if(type&&k!==type)return a;(a[k]??=new Set).add(x.task);return a},{});e.innerHTML='<option value="">Todas</option>'+Object.entries(groups).sort().map(([g,set])=>`<optgroup label="${esc(g)}">${[...set].filter(Boolean).sort().map(x=>`<option>${esc(x)}</option>`).join("")}</optgroup>`).join("");e.value=[...e.options].some(x=>x.value===v)?v:""}function options(){setHistoryFiltersEnabled(true);opt("ftype",hist.map(taskType));taskOptions();opt("fstatus",hist.map(x=>x.state));opt("fmuni",hist.map(x=>x.muni));opt("fassigned",hist.map(displayAssigned));opt("fresource",hist.map(displayResource));opt("fshift",hist.map(x=>x.shift))}function filtered(){let q=$("fq").value.trim().toLowerCase(),y=$("ftype").value,k=$("ftask").value,s=$("fstatus").value,m=$("fmuni").value,a=$("fassigned").value,r=$("fresource").value,t=$("fshift").value,o=$("fobs").value;return hist.filter(x=>(!y||taskType(x)===y)&&(!k||normTask(x.task)===normTask(k))&&(!q||`${x.task} ${x.message} ${x.obs}`.toLowerCase().includes(q))&&(!s||x.state===s)&&(!m||x.muni===m)&&(!a||displayAssigned(x)===a)&&(!r||displayResource(x)===r)&&(!t||x.shift===t)&&(!o||(o==="yes"?!!String(x.obs).trim():!String(x.obs).trim())))}
-function durationMinutes(x){if(!/^\d{1,2}:\d{2}$/.test(x.start)||!/^\d{1,2}:\d{2}$/.test(x.end))return null;let[a,b]=x.start.split(":").map(Number),[c,d]=x.end.split(":").map(Number),n=c*60+d-a*60-b;return n<0?n+1440:n}
-function formatMinutes(minutes){return(Math.floor(minutes/60)?Math.floor(minutes/60)+" h ":"")+(minutes%60)+" min"}
-function renderHistorySummary(rows){
- const done=rows.filter(x=>stateClass(x.state)==="done");
- const minutes=done.map(validDurationMinutes).filter(value=>value!==null);
- const total=minutes.reduce((sum,value)=>sum+value,0);
- const average=minutes.length?Math.round(total/minutes.length):null;
- $("hsummary").classList.remove("hide");
- $("hsHours").textContent=minutes.length?formatMinutes(total):"—";
- $("hsDone").textContent=done.length.toLocaleString("es-UY");
- $("hsTime").textContent=average===null?"—":formatMinutes(average);
+function summarizePlanning(day){
+ const rows=plan.filter(row=>row.days.split(",").some(d=>normalized(d.trim())===normalized(day)));
+ const groups=new Map(rows.map(row=>[row.group.id,row.group]));
+ let blocks=0,moto=0,truck=0;
+ for(const group of groups.values()){
+  if(group.kind==="BLOQUE"){blocks++;if(group.truck)truck++;else moto++}
+  else{const resources=parseRes(group.info);moto+=resources.moto;truck+=resources.truck}
+ }
+ // El tipo de la columna B clasifica la actividad; el grupo solo asocia recursos.
+ const isNeighborhood=row=>row.group.kind==="BARRIO"&&/^BARRIOS?$/.test(row.type);
+ const neighborhoods=rows.filter(isNeighborhood).length;
+ return{blocks,tasks:rows.length-neighborhoods,neighborhoods,moto,truck};
 }
-function applyHistFilters(){hpage=1;renderHist();saveTareasState()}
-function renderHist(){let rows=filtered();renderHistorySummary(rows);let pages=Math.max(1,Math.ceil(rows.length/HISTORY_PAGE_SIZE));hpage=Math.min(hpage,pages);let visible=rows.slice((hpage-1)*HISTORY_PAGE_SIZE,hpage*HISTORY_PAGE_SIZE);$("hcount").textContent=`${rows.length} de ${hist.length} registros`;$("hbody").innerHTML=visible.length?visible.map(x=>`<tr><td>${esc(fullDate(x.date))}</td><td>${esc(x.shift||"—")}</td><td>${esc(x.time||"—")}</td><td>${esc(x.muni||"—")}</td><td>${esc(taskType(x))}</td><td><b>${esc(x.task)}</b></td><td>${esc(displayResource(x)||"—")}</td><td>${esc(displayAssigned(x)||"—")}</td><td><span class="state ${stateClass(x.state)}">${esc(x.state||"—")}</span></td><td>${esc(x.start||"—")}</td><td>${esc(x.end||"—")}</td><td>${esc(x.duration||"—")}</td><td class="obs">${esc(x.obs||"")}</td></tr>`).join(""):'<tr><td colspan="13" class="empty">No hay resultados para los filtros seleccionados.</td></tr>';$("hpagination").classList.toggle("hide",rows.length<=HISTORY_PAGE_SIZE);$("hpageinfo").textContent=`Página ${hpage} de ${pages}`;$("hprev").disabled=hpage<=1;$("hnext").disabled=hpage>=pages}
-function changeHistPage(step){hpage+=step;renderHist();document.getElementById("view-history").scrollIntoView({behavior:"smooth",block:"start"})}
-function invalidateHistory(){hist=[];hpage=1;setHistoryFiltersEnabled(false);$("hcount").textContent="";$("hsummary").classList.add("hide");$("hpagination").classList.add("hide");$("hbody").innerHTML='<tr><td colspan="13" class="empty">Elegí el período y presioná “Consultar período”.</td></tr>';$("hhelp").textContent="Período modificado. Presioná “Consultar período” para habilitar los filtros.";$("hhelp").classList.remove("ready")}
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id===`view-${b.dataset.view}`))});$("refresh").onclick=loadPlan;$("retryInitial").onclick=loadPlan;$("prev").onclick=()=>{woff--;selected="";renderWeek();saveTareasState()};$("next").onclick=()=>{woff++;selected="";renderWeek();saveTareasState()};$("thisweek").onclick=()=>{woff=0;selected="";renderWeek();saveTareasState()};$("loadh").onclick=loadHist;$("ftype").onchange=()=>{taskOptions();applyHistFilters()};["fq","ftask","fstatus","fmuni","fassigned","fresource","fshift","fobs"].forEach(id=>$(id).oninput=applyHistFilters);$("clear").onclick=()=>{["fq","ftype","ftask","fstatus","fmuni","fassigned","fresource","fshift","fobs"].forEach(id=>$(id).value="");applyHistFilters()};$("hprev").onclick=()=>changeHistPage(-1);$("hnext").onclick=()=>changeHistPage(1);let yesterday=add(new Date,-1),maxHistory=ymd(yesterday);$("ffrom").max=maxHistory;$("fto").max=maxHistory;$("ffrom").value=ymd(add(yesterday,-6));$("fto").value=maxHistory;const restoredTareas=readTareasState();if(restoredTareas){woff=Number(restoredTareas.woff)||0;selected=restoredTareas.selected||"";if(restoredTareas.filters?.ffrom)$("ffrom").value=restoredTareas.filters.ffrom;if(restoredTareas.filters?.fto)$("fto").value=restoredTareas.filters.fto}["ffrom","fto"].forEach(id=>$(id).onchange=()=>{validateTareasRange();invalidateHistory();saveTareasState()});document.querySelector(".tabs").addEventListener("click",()=>setTimeout(saveTareasState,0));validateTareasRange();setHistoryFiltersEnabled(false);macroLoadingPromise=loadMacros();loadPlan();if(restoredTareas?.view==="history"){showTareasView("history");loadHist().then(()=>restoreHistoryFilterValues(restoredTareas))}else showTareasView("week");
-</script><script>
-const tareasTabs=[...document.querySelectorAll('.tabs .tab')];
-document.querySelector('.tabs').setAttribute('role','tablist');
-document.querySelector('.tabs').setAttribute('aria-label','Vistas de Tareas Especiales');
-tareasTabs.forEach(tab=>{tab.setAttribute('role','tab');tab.setAttribute('aria-selected',String(tab.classList.contains('on')))});
-document.querySelector('.tabs').addEventListener('click',event=>{if(!event.target.classList.contains('tab'))return;tareasTabs.forEach(tab=>tab.setAttribute('aria-selected',String(tab===event.target)))});
-$('prev').setAttribute('aria-label','Semana anterior');$('prev').classList.add('com-icon-button');
-$('next').setAttribute('aria-label','Semana siguiente');$('next').classList.add('com-icon-button');
-const tareasLabels={fq:'Buscar',ftype:'Tipo de tarea',ftask:'Tarea específica',ffrom:'Fecha desde',fto:'Fecha hasta',fstatus:'Estado',fmuni:'Municipio',fassigned:'Asignado',fresource:'Recurso',fshift:'Turno',fobs:'Observaciones'};
-Object.entries(tareasLabels).forEach(([id,label])=>$(id).setAttribute('aria-label',label));
-</script></body></html>
+function renderWeek(){
+ $("days").innerHTML=DAYS.map(day=>{
+  const r=summarizePlanning(day);
+  return '<article class="day" aria-label="'+day+'"><h3 class="dname">'+day+'</h3>'+
+   '<div class="planning-count"><b>'+r.tasks+'</b><span>Tareas</span></div>'+
+   '<div class="planning-count"><b>'+r.neighborhoods+'</b><span>Barrios</span></div>'+
+   '<div class="res"><span class="chip moto">'+r.moto+' '+(r.moto===1?'motocarro':'motocarros')+'</span>'+
+   '<span class="chip truck">'+r.truck+' '+(r.truck===1?'camión':'camiones')+'</span></div></article>';
+ }).join("");
+}
+function formatDailyMinutes(minutes){
+ if(minutes===null||minutes===undefined||!Number.isFinite(minutes)||minutes<0)return "— h/día";
+ return minutes<60?Math.round(minutes)+" min/día":Math.round(minutes/60)+" h/día";
+}
+function renderServicePreview(){
+ // Solo se muestran los nombres de FORMATO; no se calculan horas ni porcentajes.
+ const isNeighborhood=row=>row.group.kind==="BARRIO"&&/^BARRIOS?$/.test(row.type);
+ const categories=[...new Set(plan.filter(row=>!isNeighborhood(row)).map(row=>row.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"es"));
+ const tasks=[...new Set(plan.filter(row=>!isNeighborhood(row)).map(row=>row.task.trim()))].sort((a,b)=>a.localeCompare(b,"es"));
+ const neighborhoods=[...new Set(plan.filter(isNeighborhood).map(row=>row.task.replace(/\s+/g," ").trim()))].sort((a,b)=>a.localeCompare(b,"es"));
+ const escape=text=>text.replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+ const renderRows=labels=>labels.map(label=>'<div class="category-row"><span class="category-name">'+escape(label)+'</span><span class="category-track" aria-hidden="true"></span><span class="category-value">'+formatDailyMinutes(null)+'</span></div>').join("");
+ $("serviceCategories").innerHTML=renderRows(categories);
+ $("serviceTasks").innerHTML=renderRows(tasks);
+ $("serviceNeighborhoods").innerHTML=renderRows(neighborhoods);
+}
+const HISTORY_START="2026-10-09",HISTORY_FILTERS=["historyShift","historyType","historyTask","historyOperator","historyMunicipality"];
+let historyRows=[],historyPage=1,historyBusy=false,historyRequest=0,historyDateTimer;
+let historySort={field:"date",direction:-1};
+const escapeHistory=text=>String(text??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+function dateKey(date){return date.getFullYear()+"-"+String(date.getMonth()+1).padStart(2,"0")+"-"+String(date.getDate()).padStart(2,"0")}
+function lastClosedDate(){
+ const parts=Object.fromEntries(new Intl.DateTimeFormat("en-US",{timeZone:"America/Montevideo",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date()).map(part=>[part.type,part.value]));
+ const date=new Date(Date.UTC(Number(parts.year),Number(parts.month)-1,Number(parts.day)-1));return date.toISOString().slice(0,10);
+}
+const dailyTables=new Map();
+async function recoverDailyTimes(table,sheet){
+ const column=label=>table.cols.findIndex(col=>normalized(col.label||"").replace(/[^A-Z0-9]/g,"")===label);
+ const state=column("ESTADO"),start=column("HORAINICIO"),end=column("HORAFINAL");
+ if(state<0||start<0||end<0)return table;
+ const pending=(table.rows||[]).map((row,index)=>({row,index})).filter(({row})=>/^REALIZAD[AO]S?$/.test(normalized(cv(row.c,state)))&&(!row.c[start]||row.c[start].v===null||!row.c[end]||row.c[end].v===null));
+ let index=0;
+ async function worker(){while(index<pending.length){const item=pending[index++];
+  // Una fila aislada no pierde los números minoritarios por inferencia de tipo.
+  // Se mantienen los índices originales, incluidos huecos por celdas combinadas.
+  const raw=await gtable(sheet,"J"+(item.index+2)+":K"+(item.index+2));
+  if(raw.cols?.[0]?.id!=="J"||raw.cols?.[1]?.id!=="K")throw new Error("No se pudieron verificar los horarios originales");
+  const values=raw.rows?.[0]?.c||[];
+  if(item.row.c[start]?.v==null&&values[0]?.v!=null)item.row.c[start]=values[0];
+  if(item.row.c[end]?.v==null&&values[1]?.v!=null)item.row.c[end]=values[1];
+ }}
+ await Promise.all(Array.from({length:Math.min(3,pending.length)},worker));return table;
+}
+function dailyTable(date){
+ if(!dailyTables.has(date)){const parts=date.split("-"),sheet=Number(parts[2])+"/"+Number(parts[1]);dailyTables.set(date,gtable(sheet).then(table=>recoverDailyTimes(table,sheet)).catch(error=>{dailyTables.delete(date);throw error}))}
+ return dailyTables.get(date);
+}
+function parseServiceDay(table,date){
+ const columns=Object.fromEntries((table.cols||[]).map((col,index)=>[normalized(col.label||"").replace(/[^A-Z0-9]/g,""),index]));
+ if(!["DIAS","TIPODETAREAS","BLOQUEINFO","TAREA","TRANSPORTISTA","ESTADO","HORAINICIO","HORAFINAL"].every(key=>Number.isInteger(columns[key])))throw new Error("Hoja ausente o formato diferente");
+ const records=[];let task="",type="",operator="",shift="";
+ const minutes=value=>{const match=value.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);return match&&Number(match[1])<24&&Number(match[2])<60&&Number(match[3]||0)<60?Number(match[1])*60+Number(match[2])+Number(match[3]||0)/60:null};
+ for(let index=0;index<(table.rows||[]).length;index++){
+  const c=table.rows[index].c||[],first=cv(c,columns.DIAS);
+  if(/^(MATUTINO|VESPERTINO|NOCTURNO)$/i.test(first)){shift=first;task="";type="";operator="";continue}
+  if(cv(c,columns.BLOQUEINFO)){task="";type="";operator=""}
+  if(cv(c,columns.TIPODETAREAS))type=cv(c,columns.TIPODETAREAS);
+  if(cv(c,columns.TAREA))task=cv(c,columns.TAREA);
+  if(cv(c,columns.TRANSPORTISTA))operator=cv(c,columns.TRANSPORTISTA);
+  // Las filas inferiores de una tarea combinada son otros transportistas.
+  // Los horarios nunca se heredan: cada registro aporta su propio tiempo.
+  if(!task||(!cv(c,columns.TAREA)&&!["TRANSPORTISTA","ESTADO","HORAINICIO","HORAFINAL"].some(key=>cv(c,columns[key]))))continue;
+  const timeValue=key=>readTimeCell(c[columns[key]],true);
+  const state=cv(c,columns.ESTADO),start=timeValue("HORAINICIO"),end=timeValue("HORAFINAL");
+  const from=minutes(start),to=minutes(end),duration=from===null||to===null?null:(to-from+1440)%1440;
+  records.push({date,row:index+2,shift,type,task,operator,state,start,end,minutes:duration,realized:/^REALIZAD[AO]S?$/.test(normalized(state))});
+ }
+ return records;
+}
+function summarizeService(records,days){
+ const result={tasks:0,neighborhoods:0,validTasks:0,validNeighborhoods:0,missing:[],categories:new Map(),taskNames:new Map(),neighborhoodNames:new Map(),days};
+ const add=(map,label,value)=>{const key=normalized(label.replace(/\s+/g," ").trim());if(!map.has(key))map.set(key,{label,minutes:0,valid:0});const entry=map.get(key);if(value!==null){entry.minutes+=value;entry.valid++}};
+ for(const row of records){
+  if(!row.realized)continue;
+  const neighborhood=/^BARRIOS?$/.test(normalized(row.type));
+  if(neighborhood)add(result.neighborhoodNames,row.task,row.minutes);
+  else{add(result.categories,row.type,row.minutes);add(result.taskNames,row.task,row.minutes)}
+  if(row.minutes===null){result.missing.push(row);continue}
+  if(neighborhood){result.neighborhoods+=row.minutes;result.validNeighborhoods++}
+  else{result.tasks+=row.minutes;result.validTasks++}
+ }
+ return result;
+}
+function renderServiceData(summary){
+ $("serviceTaskValue").textContent=formatDailyMinutes(summary.validTasks&&summary.days?summary.tasks/summary.days:null);
+ $("serviceNeighborhoodValue").textContent=formatDailyMinutes(summary.validNeighborhoods&&summary.days?summary.neighborhoods/summary.days:null);
+ const renderRows=map=>{
+  const entries=[...map.values()].sort((a,b)=>Boolean(b.valid)-Boolean(a.valid)||b.minutes-a.minutes||a.label.localeCompare(b.label,"es")),maximum=Math.max(0,...entries.map(entry=>entry.minutes));
+  return entries.map(entry=>'<div class="category-row"><span class="category-name">'+escapeHistory(entry.label)+'</span><span class="category-track" aria-hidden="true"><span class="category-fill" style="width:'+(maximum?entry.minutes/maximum*100:0)+'%"></span></span><span class="category-value">'+formatDailyMinutes(entry.valid&&summary.days?entry.minutes/summary.days:null)+'</span></div>').join("")||'<p class="service-period">Sin registros realizados en el período.</p>';
+ };
+ $("serviceCategories").innerHTML=renderRows(summary.categories);$("serviceTasks").innerHTML=renderRows(summary.taskNames);$("serviceNeighborhoods").innerHTML=renderRows(summary.neighborhoodNames);
+}
+async function loadService(){
+ const lastClosed=lastClosedDate(),dates=[],results=[],missing=[];let index=0,loaded=0;
+ if(lastClosed<HISTORY_START){$("servicePeriod").textContent="Todavía no hay jornadas cerradas desde el 09/10/2026.";return}
+ for(let date=new Date(HISTORY_START+"T12:00:00");dateKey(date)<=lastClosed;date.setDate(date.getDate()+1))dates.push(dateKey(date));
+ async function worker(){while(index<dates.length){const current=index++,date=dates[current];try{const rows=parseServiceDay(await dailyTable(date),date);if(!rows.length)throw new Error("Sin registros");results[current]=rows;loaded++}catch{results[current]=[];missing.push(historyDateLabel(date))}}}
+ await Promise.all(Array.from({length:Math.min(3,dates.length)},worker));
+ const summary=summarizeService(results.flat(),loaded);renderServiceData(summary);
+ $("servicePeriod").textContent="";
+ const warnings=[];
+ if(summary.missing.length)warnings.push(summary.missing.length+" registros realizados sin horarios completos o válidos, excluidos del cálculo.");
+ if(missing.length)warnings.push("Sin datos disponibles para: "+missing.join(", ")+".");
+ if(warnings.length)$("servicePeriod").insertAdjacentHTML("beforeend",'<span class="service-warning">'+escapeHistory(warnings.join(" "))+'</span>');
+}
+function historyDateLabel(date){return date.split("-").reverse().join("/")}
+function readTimeCell(cell,seconds=false){
+ if(!cell||cell.v===null||cell.v===undefined)return "";
+ const value=String(cell.v).trim(),date=value.match(/^Date\(\d+,\d+,\d+,(\d+),(\d+)(?:,(\d+))?\)$/);
+ const text=date?null:value.match(/^(\d{1,2})([:.,])(\d{1,2})(?::(\d{2}))?$/);
+ if(!date&&!text)return value;
+ const hour=Number(date?date[1]:text[1]),minute=Number(date?date[2]:text[2]===":"?text[3]:text[3].padEnd(2,"0")),second=Number(date?date[3]||0:text[4]||0);
+ if(hour>23||minute>59||second>59)return value;
+ return String(hour).padStart(2,"0")+":"+String(minute).padStart(2,"0")+(seconds?":"+String(second).padStart(2,"0"):"");
+}
+function historyTime(c,index){return readTimeCell(c[index])}
+function parseHistoryDay(table,date){
+ const columns=Object.fromEntries((table.cols||[]).map((col,index)=>[normalized(col.label||"").replace(/[^A-Z0-9]/g,""),index]));
+ if(!["DIAS","TIPODETAREAS","BLOQUEINFO","MUNICIPIO","TAREA","TRANSPORTISTA","ESTADO","HORAINICIO","HORAFINAL"].every(key=>Number.isInteger(columns[key])))throw new Error("Hoja ausente o formato diferente");
+ let shift="",operator="",type="",group="",municipality="";const records=[];
+ for(const row of table.rows||[]){
+  const c=row.c||[],first=cv(c,columns.DIAS),info=cv(c,columns.BLOQUEINFO);
+  if(/^(MATUTINO|VESPERTINO|NOCTURNO)$/i.test(first)){shift=first.toUpperCase();operator="";type="";group="";municipality="";continue}
+  if(info&&info!==group){group=info;operator="";type="";municipality=""}
+  if(cv(c,columns.MUNICIPIO))municipality=cv(c,columns.MUNICIPIO);
+  if(cv(c,columns.TRANSPORTISTA))operator=cv(c,columns.TRANSPORTISTA);
+  if(cv(c,columns.TIPODETAREAS))type=cv(c,columns.TIPODETAREAS);
+  const task=cv(c,columns.TAREA);if(!task)continue;
+  records.push({date,shift,type,task,operator,municipality,state:cv(c,columns.ESTADO),start:historyTime(c,columns.HORAINICIO),end:historyTime(c,columns.HORAFINAL)});
+ }
+ return records;
+}
+function historyMessage(text,error=false){$("historyMessage").textContent=text;$("historyMessage").className="history-message"+(error?" error":"")}
+function historyOptions(id,values){
+ const element=$(id),selected=element.value,all=id==="historyTask"?"Todas":"Todos";
+ const unique=[...new Set(values.filter(Boolean))].sort((a,b)=>a.localeCompare(b,"es"));
+ element.innerHTML='<option value="">'+all+'</option>'+unique.map(value=>'<option value="'+escapeHistory(value)+'">'+escapeHistory(value)+'</option>').join("");
+ element.value=unique.includes(selected)?selected:"";
+}
+function updateHistoryCascade(selections){
+ const fields=["shift","type","task","operator","municipality"];
+ const active=selections||HISTORY_FILTERS.map(id=>$(id).value);
+ // Cada lista considera todos los filtros menos el propio, sin un orden fijo.
+ HISTORY_FILTERS.forEach((id,index)=>{
+  const selected=active[index];
+  const available=historyRows.filter(row=>active.every((value,other)=>other===index||!value||row[fields[other]]===value));
+  historyOptions(id,available.map(row=>row[fields[index]]));
+  if([...$(id).options].some(option=>option.value===selected))$(id).value=selected;
+ });
+ // Un nuevo período puede invalidar selecciones; reconstruimos las listas sin ellas.
+ if(HISTORY_FILTERS.some((id,index)=>$(id).value!==active[index]))updateHistoryCascade();
+}
+function filteredHistory(){return historyRows.filter(row=>(!$("historyShift").value||row.shift===$("historyShift").value)&&(!$("historyType").value||row.type===$("historyType").value)&&(!$("historyTask").value||row.task===$("historyTask").value)&&(!$("historyOperator").value||row.operator===$("historyOperator").value)&&(!$("historyMunicipality").value||row.municipality===$("historyMunicipality").value))}
+function compareHistoryRows(a,b){
+ const {field,direction}=historySort,left=a[field]||"",right=b[field]||"";
+ if(!left||!right)return left? -1:right?1:0;
+ if(field==="start"||field==="end"){
+  const minutes=value=>{const match=value.match(/^(\d{1,2}):(\d{2})/);return match?Number(match[1])*60+Number(match[2]):null};
+  const x=minutes(left),y=minutes(right);
+  if(x!==null&&y!==null)return(x-y)*direction;
+ }
+ return left.localeCompare(right,"es",{numeric:true,sensitivity:"base"})*direction;
+}
+function renderHistory(){
+ const rows=filteredHistory().sort(compareHistoryRows),pages=Math.max(1,Math.ceil(rows.length/25));historyPage=Math.min(historyPage,pages);
+ document.querySelectorAll(".history-sort").forEach(button=>{const active=button.dataset.sort===historySort.field;
+  button.parentElement.setAttribute("aria-sort",active?(historySort.direction===1?"ascending":"descending"):"none");
+ });
+ $("historyCount").textContent=rows.length+(rows.length===1?" registro":" registros");
+ $("historyBody").innerHTML=rows.slice((historyPage-1)*25,historyPage*25).map(row=>'<tr>'+[historyDateLabel(row.date),row.shift,row.type,row.task,row.operator||"Sin asignar",row.state||"—",row.start||"—",row.end||"—"].map(value=>'<td>'+escapeHistory(value)+'</td>').join("")+'</tr>').join("")||'<tr><td colspan="8" class="history-empty">No hay resultados para estos filtros.</td></tr>';
+ $("historyPagination").hidden=rows.length<=25;$("historyPage").textContent="Página "+historyPage+" de "+pages;
+ $("historyPrev").disabled=historyPage<=1;$("historyNext").disabled=historyPage>=pages;
+}
+function invalidateHistory(){
+ historyRows=[];historyPage=1;$("historyCount").textContent="";$("historyPagination").hidden=true;
+ HISTORY_FILTERS.forEach(id=>historyOptions(id,[]));
+ $("historyBody").innerHTML='<tr><td colspan="8" class="history-empty">Elegí un período para consultar.</td></tr>';
+}
+async function loadHistory(){
+ const request=++historyRequest,selections=HISTORY_FILTERS.map(id=>$(id).value);
+ const from=$("historyFrom").value,to=$("historyTo").value,lastClosed=lastClosedDate();
+ if(lastClosed<HISTORY_START){historyBusy=false;invalidateHistory();historyMessage("Todavía no hay jornadas cerradas desde el 09/10/2026.");return}
+ if(!from||!to||from<HISTORY_START||from>to||to>lastClosed){historyBusy=false;invalidateHistory();historyMessage("Elegí un rango desde el 09/10/2026 hasta el día de ayer, con Desde anterior o igual a Hasta.",true);return}
+ const dates=[];for(let date=new Date(from+"T12:00:00");dateKey(date)<=to;date.setDate(date.getDate()+1)){dates.push(dateKey(date));if(dates.length>90){historyBusy=false;invalidateHistory();historyMessage("Consultá hasta 90 días por vez.",true);return}}
+ historyBusy=true;invalidateHistory();historyMessage("");
+ $("historyBody").innerHTML='<tr><td colspan="8" class="history-empty"><span class="com-inline-loading"><span class="com-spinner" aria-hidden="true"></span><span>Cargando información</span></span></td></tr>';
+ const results=new Array(dates.length),missing=[];let index=0,completed=0;
+ async function worker(){while(index<dates.length&&request===historyRequest){const current=index++,date=dates[current];try{results[current]=parseHistoryDay(await dailyTable(date),date)}catch{results[current]=[];missing.push(historyDateLabel(date))}completed++;}}
+ try{
+  await Promise.all(Array.from({length:Math.min(3,dates.length)},worker));if(request!==historyRequest)return;
+  historyRows=results.flat().sort((a,b)=>b.date.localeCompare(a.date));updateHistoryCascade(selections);renderHistory();
+  historyMessage(missing.length?"Sin datos disponibles o sin el formato esperado para: "+missing.join(", ")+". Los resultados incluyen solamente las hojas cargadas.":"",Boolean(missing.length));
+ }finally{if(request===historyRequest)historyBusy=false}
+}
+function setupHistory(){
+ const lastClosed=lastClosedDate(),available=lastClosed>=HISTORY_START;
+ $("historyFrom").value=available?lastClosed:HISTORY_START;$("historyTo").value=available?lastClosed:"";
+ $("historyFrom").max=lastClosed;$("historyTo").max=lastClosed;
+ $("historyFrom").disabled=!available;$("historyTo").disabled=!available;
+ $("historyForm").onsubmit=event=>event.preventDefault();
+ document.querySelectorAll(".history-sort").forEach(button=>button.onclick=()=>{
+  historySort={field:button.dataset.sort,direction:historySort.field===button.dataset.sort?-historySort.direction:1};historyPage=1;renderHistory();
+ });
+ HISTORY_FILTERS.forEach(id=>$(id).onchange=()=>{updateHistoryCascade();historyPage=1;renderHistory()});
+ $("historyClear").onclick=()=>{HISTORY_FILTERS.forEach(id=>$(id).value="");updateHistoryCascade();historyPage=1;renderHistory()};
+ ["historyFrom","historyTo"].forEach(id=>$(id).onchange=()=>{clearTimeout(historyDateTimer);historyDateTimer=setTimeout(loadHistory,200)});
+ $("historyPrev").onclick=()=>{historyPage--;renderHistory()};$("historyNext").onclick=()=>{historyPage++;renderHistory()};
+}
+async function loadPlan(){
+ $("initialLoading").hidden=false;$("mainContent").hidden=true;$("initialSpinner").hidden=false;
+ $("initialLoadingActions").hidden=true;$("initialLoadingMessage").className="com-loading-message";
+ $("initialLoadingMessage").textContent="Cargando información";
+ try{
+  const [table]=await Promise.all([gtable(),loadHistory(),loadService()]);
+  plan=parsePlan(table);renderWeek();
+  $("initialLoading").hidden=true;$("mainContent").hidden=false;renderPlanningMap();
+ }
+ catch(error){console.error("No se pudo cargar el dashboard:",error);$("initialSpinner").hidden=true;
+  $("initialLoadingMessage").className="com-loading-message com-loading-error";
+  $("initialLoadingMessage").textContent="No se pudo cargar la información.";$("initialLoadingActions").hidden=false}
+}
+$("retryInitial").onclick=loadPlan;
+setupHistory();
+loadPlan();
+</script>
+</body>
+</html>
