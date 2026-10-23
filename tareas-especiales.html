@@ -49,6 +49,7 @@ h2.sec .n{display:inline-flex;flex:none;align-items:center;justify-content:cente
 .category-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(60px,1fr) 74px;align-items:center;gap:12px;margin:14px 0}
 .category-name{font-size:12px;font-weight:700;overflow-wrap:anywhere}
 #serviceTasks .category-name{white-space:pre-line}
+#serviceTasks .category-row{grid-template-columns:minmax(0,1fr) 88px}
 .category-track{height:9px;background:#edf1f6;border-radius:999px}
 .category-fill{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#1769aa,#5896cd)}
 .service-period{margin:0 0 14px;color:#64748b;font-size:12px}
@@ -227,6 +228,11 @@ function formatDailyMinutes(minutes){
  if(minutes===null||minutes===undefined||!Number.isFinite(minutes)||minutes<0)return "— h/día";
  return minutes<60?Math.round(minutes)+" min/día":Math.round(minutes/60)+" h/día";
 }
+function formatDurationMinutes(minutes){
+ if(minutes===null||minutes===undefined||!Number.isFinite(minutes)||minutes<0)return "—";
+ const total=Math.round(minutes),hours=Math.floor(total/60),remainder=total%60;
+ return hours?hours+" h"+(remainder?" "+remainder+" min":""):total+" min";
+}
 function renderServicePreview(){
  // Solo se muestran los nombres de FORMATO; no se calculan horas ni porcentajes.
  const isNeighborhood=row=>row.group.kind==="BARRIO"&&/^BARRIOS?$/.test(row.type);
@@ -294,12 +300,19 @@ function parseServiceDay(table,date){
 }
 function summarizeService(records,days){
  const result={tasks:0,neighborhoods:0,validTasks:0,validNeighborhoods:0,missing:[],categories:new Map(),taskNames:new Map(),neighborhoodNames:new Map(),days};
- const add=(map,label,value)=>{const key=normalized(label.replace(/\s+/g," ").trim());if(!map.has(key))map.set(key,{label,minutes:0,valid:0});const entry=map.get(key);if(value!==null){entry.minutes+=value;entry.valid++}};
+ const add=(map,label,value,date=null)=>{
+  const key=normalized(label.replace(/\s+/g," ").trim());if(!map.has(key))map.set(key,{label,minutes:0,valid:0});
+  const entry=map.get(key);if(value!==null){entry.minutes+=value;entry.valid++;
+   if(date){if(!entry.attendanceDates)entry.attendanceDates=new Set();entry.attendanceDates.add(date)}
+  }
+ };
  for(const row of records){
   if(!row.realized)continue;
   const neighborhood=/^BARRIOS?$/.test(normalized(row.type));
-  if(neighborhood)add(result.neighborhoodNames,row.task,row.minutes);
-  else{add(result.categories,row.type,row.minutes);add(result.taskNames,row.task,row.minutes)}
+  // Cada fecha cuenta una sola vez, aunque participen varios transportistas
+  // o turnos. Se suma el tiempo de todos los registros válidos de ese día.
+  if(neighborhood)add(result.neighborhoodNames,row.task,row.minutes,row.date);
+  else{add(result.categories,row.type,row.minutes);add(result.taskNames,row.task,row.minutes,row.date)}
   if(row.minutes===null){result.missing.push(row);continue}
   if(neighborhood){result.neighborhoods+=row.minutes;result.validNeighborhoods++}
   else{result.tasks+=row.minutes;result.validTasks++}
@@ -309,11 +322,16 @@ function summarizeService(records,days){
 function renderServiceData(summary){
  $("serviceTaskValue").textContent=formatDailyMinutes(summary.validTasks&&summary.days?summary.tasks/summary.days:null);
  $("serviceNeighborhoodValue").textContent=formatDailyMinutes(summary.validNeighborhoods&&summary.days?summary.neighborhoods/summary.days:null);
- const renderRows=map=>{
-  const entries=[...map.values()].sort((a,b)=>Boolean(b.valid)-Boolean(a.valid)||b.minutes-a.minutes||a.label.localeCompare(b.label,"es")),maximum=Math.max(0,...entries.map(entry=>entry.minutes));
-  return entries.map(entry=>'<div class="category-row"><span class="category-name">'+escapeHistory(entry.label)+'</span><span class="category-track" aria-hidden="true"><span class="category-fill" style="width:'+(maximum?entry.minutes/maximum*100:0)+'%"></span></span><span class="category-value">'+formatDailyMinutes(entry.valid&&summary.days?entry.minutes/summary.days:null)+'</span></div>').join("")||'<p class="service-period">Sin registros realizados en el período.</p>';
+ const renderRows=(map,mode="daily",format=formatDailyMinutes)=>{
+  const entries=[...map.values()].map(entry=>{
+   const denominator=mode==="attendance"?entry.attendanceDates?.size:summary.days;
+   return {...entry,average:entry.valid&&denominator?entry.minutes/denominator:null};
+  });
+  entries.sort((a,b)=>Number(b.average!==null)-Number(a.average!==null)||(b.average??0)-(a.average??0)||a.label.localeCompare(b.label,"es"));
+  const maximum=Math.max(0,...entries.map(entry=>entry.average??0));
+  return entries.map(entry=>'<div class="category-row"><span class="category-name">'+escapeHistory(entry.label)+'</span><span class="category-track" aria-hidden="true"><span class="category-fill" style="width:'+(maximum?(entry.average??0)/maximum*100:0)+'%"></span></span><span class="category-value">'+format(entry.average)+'</span></div>').join("")||'<p class="service-period">Sin registros realizados en el período.</p>';
  };
- $("serviceCategories").innerHTML=renderRows(summary.categories);$("serviceTasks").innerHTML=renderRows(summary.taskNames);$("serviceNeighborhoods").innerHTML=renderRows(summary.neighborhoodNames);
+ $("serviceCategories").innerHTML=renderRows(summary.categories);$("serviceTasks").innerHTML=renderRows(summary.taskNames,"attendance",formatDurationMinutes);$("serviceNeighborhoods").innerHTML=renderRows(summary.neighborhoodNames,"attendance");
 }
 async function loadService(){
  const lastClosed=lastClosedDate(),dates=[],results=[],missing=[];let index=0,loaded=0;
