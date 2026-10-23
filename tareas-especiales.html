@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/dashboard-common.css?v=20260922-27">
-<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#f5f6f8;color:#0f2444;font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-size:15px;line-height:1.5}
@@ -27,9 +26,8 @@ h2.sec .n{display:inline-flex;flex:none;align-items:center;justify-content:cente
 .chip{background:#f8fafc;border:1px solid #e4e8ef;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;white-space:nowrap}
 .moto{color:#006bc5}.truck{color:#b6690e}
 .map-card{margin-top:16px;padding:15px 18px 18px;border:1px solid #e4e8ef;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.08),0 1px 2px rgba(16,24,40,.04)}
-#planningMap{height:480px;overflow:hidden;border:1px solid #e4e8ef;border-radius:9px;background:#eef1f4}
-.map-error{display:flex;height:100%;align-items:center;justify-content:center;padding:24px;color:#64748b;text-align:center}
-.maplibregl-map{font-family:"Plus Jakarta Sans",system-ui,sans-serif}
+#planningMap{height:560px;overflow:hidden;border:1px solid #e4e8ef;border-radius:9px;background:#eef1f4}
+#planningMapFrame{display:block;width:100%;height:100%;border:0}
 .service-section{margin-top:30px}
 .service-card{padding:18px;border:1px solid #e4e8ef;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.08),0 1px 2px rgba(16,24,40,.04)}
 .service-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
@@ -95,7 +93,7 @@ h2.sec .n{display:inline-flex;flex:none;align-items:center;justify-content:cente
 @media(max-width:420px){.category-row{grid-template-columns:minmax(0,1fr) 74px;gap:8px}.category-track{grid-column:1/-1;grid-row:2}.category-value{grid-column:2;grid-row:1}}
 @media(max-width:950px){.days{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:600px){.days{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:700px){#planningMap{height:390px}}
+@media(max-width:800px){#planningMap{height:760px}}
 </style>
 </head>
 <body class="page-tareas">
@@ -106,7 +104,7 @@ h2.sec .n{display:inline-flex;flex:none;align-items:center;justify-content:cente
 <div class="com-loading-view" id="initialLoading" role="status" aria-live="polite"><div class="com-loading-content"><span class="com-spinner" id="initialSpinner" aria-hidden="true"></span><div class="com-loading-message" id="initialLoadingMessage">Cargando información</div><div class="com-loading-actions" id="initialLoadingActions" hidden><button class="com-retry-button" id="retryInitial" type="button">Reintentar</button></div></div></div>
 <main class="main" id="mainContent" hidden>
 <section aria-labelledby="planningHeading"><h2 class="sec" id="planningHeading"><span class="n">1</span>Tareas planificadas</h2><div class="days" id="days"></div>
-<div class="map-card"><div id="planningMap" role="region" aria-label="Mapa de tareas planificadas"></div></div>
+<div class="map-card"><div id="planningMap" role="region" aria-label="Mapa de tareas planificadas"><iframe id="planningMapFrame" title="Mapa de tareas planificadas" data-src="assets/mapa-tareas.html" allow="fullscreen" allowfullscreen></iframe></div></div>
 </section>
 <section class="service-section" aria-labelledby="serviceHeading">
 <h2 class="sec" id="serviceHeading"><span class="n">2</span>Indicadores de servicio</h2>
@@ -158,26 +156,16 @@ h2.sec .n{display:inline-flex;flex:none;align-items:center;justify-content:cente
 </div>
 </section>
 </main>
-<script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script>
 <script>
 const PLAN_SHEET_ID="1MgxpmNHlQTaGs_w49SRTJrIo-CYWP2JPxjvx4AgSlAc";
 const DAYS=["LUNES","MARTES","MIÉRCOLES","JUEVES","VIERNES","SÁBADO","DOMINGO"];
 const $=id=>document.getElementById(id);
 let plan=[];
-let planningMap=null;
 function renderPlanningMap(){
- const element=$("planningMap");
- if(planningMap){planningMap.resize();return}
- try{
-  if(typeof maplibregl==="undefined")throw new Error("No se cargó la biblioteca del mapa");
-  planningMap=new maplibregl.Map({container:element,
-   style:{version:8,sources:{"planning-base":{type:"raster",
-    tiles:["https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"],
-    tileSize:256,maxzoom:16,attribution:"Esri, HERE, Garmin, © OpenStreetMap contributors"}},
-    layers:[{id:"planning-base",type:"raster",source:"planning-base"}]},
-   center:[-56.19,-34.84],zoom:10.5,attributionControl:false});
- }catch(error){console.error("No se pudo cargar el mapa:",error);
-  element.innerHTML='<div class="map-error">No se pudo cargar el mapa. Revisá la conexión a internet y recargá la página.</div>'}
+ // El mapa mantiene sus filtros y estilos aislados del resto del dashboard.
+ // Se inicia cuando su recuadro ya es visible, para calcular bien el encuadre.
+ const frame=$("planningMapFrame");
+ if(!frame.getAttribute("src"))frame.src=frame.dataset.src;
 }
 function gtable(sheet="FORMATO",range=""){return new Promise((resolve,reject)=>{
  const callback="_plan"+Date.now()+Math.floor(Math.random()*1e6),script=document.createElement("script");
