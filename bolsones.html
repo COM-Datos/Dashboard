@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="description" content="Dashboard de Bolsones del Centro Operativo de Montevideo">
+  <title>Dashboard COM</title>
+  <link rel="icon" type="image/png" href="assets/logo-ciemsa.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
+
+  <style>
+    :root {
+      --bg: #f4f5f7;
+      --surface: #ffffff;
+      --ink: #111827;
+      --navy: #0f2444;
+      --blue: #2563eb;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --green: #22c55e;
+      --green-dark: #15803d;
+      --orange: #f97316;
+      --red: #b42318;
+      --shadow: 0 1px 3px rgba(16, 24, 40, .08), 0 1px 2px rgba(16, 24, 40, .04);
+      --radius: 12px;
+      --gap-sec: 38px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    /* Encabezado principal */
+    .topbar {
+      background: linear-gradient(100deg, #0b1a33 0%, #132c52 55%, #1b3f74 100%);
+      color: #fff;
+      padding: 20px 0 26px;
+    }
+
+    .topbar .inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 2px;
+      border-radius: 6px;
+      color: #c7d5ea;
+      font-size: 14.5px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .back:hover {
+      color: #fff;
+    }
+
+    .back svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .titlerow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .titlerow .ico {
+      color: var(--green);
+      font-family: "Segoe UI Symbol", sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .3));
+    }
+
+    .titlerow h1 {
+      margin: 0;
+      font-size: 31px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    /* Secciones del dashboard */
+    section {
+      margin-top: var(--gap-sec);
+    }
+
+    h2.sec {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--navy);
+      color: var(--navy);
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -.025em;
+    }
+
+    h2.sec .n {
+      display: inline-flex;
+      flex: none;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      transform: translateY(-3px);
+    }
+
+    /* Promedio de atención por municipio */
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .atencion {
+      padding: 15px 18px 18px;
+    }
+
+    .at-label {
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .at-grid {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--line);
+    }
+
+    .at-item {
+      min-height: 104px;
+      padding: 11px 8px 12px;
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .at-item b {
+      display: block;
+      color: var(--navy);
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .at-item .d {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .at-item .v {
+      display: block;
+      font-size: 25px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.15;
+    }
+
+    /* Cumplimiento de la próxima intervención */
+    .cumplimiento {
+      margin-top: 16px;
+      padding: 8px 18px;
+    }
+
+    .cumplimiento[hidden] {
+      display: none;
+    }
+
+    .cum-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--line);
+    }
+
+    .cum-grid[hidden] {
+      display: none;
+    }
+
+    .cum-item {
+      min-height: 88px;
+      padding: 9px 18px;
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .cum-label {
+      display: block;
+      min-height: 32px;
+      color: var(--navy);
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .cum-val {
+      display: block;
+      margin-top: 2px;
+      font-size: 28px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      letter-spacing: -.035em;
+      line-height: 1.15;
+    }
+
+    .cum-item.ok .cum-val {
+      color: var(--green-dark);
+    }
+
+    .cum-item.pending .cum-val {
+      color: var(--blue);
+    }
+
+    .cum-item.late .cum-val {
+      color: var(--orange);
+    }
+
+    /* Mapa de calor anual */
+    .heatmap-card {
+      margin-top: 16px;
+      padding: 15px 18px 18px;
+    }
+
+    .heatmap-head {
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .heatmap-head .at-label {
+      margin: 0 0 11px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .07em;
+    }
+
+    .heatmap-controls {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 5px 7px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .heatmap-controls .field {
+      gap: 2px;
+    }
+
+    .heatmap-controls .field label {
+      font-size: 9px;
+    }
+
+    .heatmap-controls select {
+      min-width: 124px;
+      min-height: 29px;
+      padding: 4px 7px;
+      font-size: 12.5px;
+    }
+
+    .intensity-field {
+      min-width: 150px;
+    }
+
+    .intensity-row {
+      display: flex;
+      height: 29px;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .intensity-row span {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    #mapa-intensidad {
+      width: 110px;
+      accent-color: var(--navy);
+      cursor: pointer;
+    }
+
+    #mapa-calor {
+      height: 480px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #eef1f4;
+    }
+
+    .mapa-error {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .maplibregl-map {
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    .actual-resumen {
+      padding: 14px 16px;
+    }
+
+    .actual-scroll {
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .actual-tabla {
+      display: grid;
+      gap: 0;
+      min-width: 1000px;
+      overflow: hidden;
+      border-radius: 9px;
+      background: var(--surface);
+    }
+
+    .actual-fila {
+      display: grid;
+      grid-template-columns: 184px repeat(8, minmax(100px, 1fr));
+      gap: 0;
+      background: var(--surface);
+    }
+
+    .actual-celda {
+      min-width: 0;
+      min-height: 58px;
+      padding: 8px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .actual-encabezado .actual-celda {
+      display: flex;
+      min-height: 55px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-top: 1px solid var(--line);
+    }
+
+    .actual-esquina {
+      border: 0 !important;
+      background: var(--surface);
+    }
+
+    .actual-encabezado .actual-celda:nth-child(2),
+    .actual-fila:not(.actual-encabezado) .actual-celda:first-child {
+      border-left: 1px solid var(--line);
+    }
+
+    #actual-pendientes-grid .actual-celda:first-child {
+      border-top: 1px solid var(--line);
+    }
+
+    .actual-encabezado .actual-celda:nth-child(2),
+    #actual-pendientes-grid .actual-celda:first-child {
+      border-top-left-radius: 9px;
+    }
+
+    .actual-encabezado .actual-celda:last-child {
+      border-top-right-radius: 9px;
+    }
+
+    #actual-atrasadas-grid .actual-celda:first-child {
+      border-bottom-left-radius: 9px;
+    }
+
+    #actual-atrasadas-grid .actual-celda:last-child {
+      border-bottom-right-radius: 9px;
+    }
+
+    .actual-numero {
+      display: grid;
+      place-items: center;
+    }
+
+    .actual-total {
+      display: grid;
+      place-content: center;
+      place-items: center;
+      padding: 8px 10px;
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .actual-total span {
+      max-width: 164px;
+      margin: 0 auto 2px;
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .actual-muni {
+      display: block;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .actual-dia {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .actual-celda b {
+      display: block;
+      color: var(--navy);
+      font-size: 20px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .loader {
+      display: flex;
+      justify-content: center;
+      padding: 30px 0;
+    }
+
+    .loader[hidden] {
+      display: none;
+    }
+
+    .spin {
+      width: 34px;
+      height: 34px;
+      border: 3px solid #dbe3f0;
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: girar .8s linear infinite;
+    }
+
+    @keyframes girar {
+      to { transform: rotate(360deg); }
+    }
+
+    .datasrc {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 14px;
+      padding: 10px 14px;
+      border: 1px solid #f6cfcb;
+      border-radius: 9px;
+      background: #fdeceb;
+      color: var(--red);
+      font-size: 12.5px;
+    }
+
+    .datasrc.show {
+      display: flex;
+    }
+
+    .datasrc button {
+      flex: none;
+      padding: 7px 11px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--navy);
+      color: #fff;
+      cursor: pointer;
+      font: 600 12.5px/1.2 inherit;
+    }
+
+    /* Filtros del período de análisis */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 16px 22px;
+      padding: 18px 20px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+
+    input[type="date"],
+    select {
+      min-width: 160px;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font: 500 15px/1.2 inherit;
+    }
+
+    input[type="date"]:hover,
+    select:hover {
+      border-color: #9ca3af;
+    }
+
+    input[type="date"]:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    .nested { margin-left: 0; padding-left: 0; }
+    .nested > section { margin-top: var(--gap-sec); }
+
+    h3.sub {
+      display: flex;
+      align-items: baseline;
+      gap: 9px;
+      margin: 0 0 12px;
+      color: #374151;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+    }
+
+    h3.sub .n {
+      display: inline-flex;
+      flex: none;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      height: 22px;
+      padding: 0 6px;
+      border-radius: 6px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      transform: translateY(-2px);
+    }
+
+    .kpis { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; }
+    .kpi {
+      flex: 0 1 auto;
+      min-width: 180px;
+      padding: 14px 18px 15px;
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--blue);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .kpi.total-solicitudes { border-top-color: #2563eb; }
+    .kpi.total-servicios { border-top-color: #d98f75; }
+    .kpi.total-bolsones,
+    .kpi.total-plantas { border-top-color: var(--navy); }
+    .kpi.total-camiones { border-top-color: #0d9488; }
+    .kpi.promedio { border-top-color: #9ca3af; }
+    .kpi.purple { border-top-color: #7c3aed; }
+    .kpi.lilac { border-top-color: #c4b5fd; }
+    .kpi.planta-usina { border-top-color: #f4c84a; }
+    .kpi.planta-geminis { border-top-color: #f39a4a; }
+    .kpi.planta-paloma { border-top-color: #16a6b6; }
+    .kpi.planta-duran { border-top-color: #7bc47f; }
+    .kpi.planta-burgues { border-top-color: #9b7bd6; }
+    .plantas-kpis {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+    .plantas-kpis .kpi {
+      min-width: 0;
+      padding: 12px 14px 13px;
+    }
+    .plantas-kpis .k-val {
+      font-size: 25px;
+    }
+    .k-label {
+      display: block;
+      color: var(--muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .k-val {
+      display: block;
+      font-size: 32px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.2;
+    }
+    .k-extra {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .chartbox { position: relative; padding: 16px 18px 8px; }
+    .chartbox svg { display: block; width: 100%; height: auto; }
+    .axis { fill: var(--muted); font-size: 12.5px; font-weight: 500; }
+    .axis.dia { font-size: 11.5px; }
+    .axis.libre { fill: #a3aab5; }
+    .grid-l { stroke: #eef0f3; stroke-width: 1; }
+    .zero { stroke: #d7dbe0; stroke-width: 1; }
+    .dom-stub { fill: #d3d8df; }
+    .bar-d { transition: opacity .12s; }
+    .slot:hover .bar-d { opacity: .72; }
+    .prom-line {
+      stroke: var(--navy);
+      stroke-width: 1.6;
+      stroke-dasharray: 6 3.5;
+      opacity: .7;
+      transition: opacity .1s;
+    }
+    .prom-hit { stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+    .prom:hover .prom-line { stroke-width: 2.2; opacity: 1; }
+    .empty { padding: 36px 8px; color: var(--muted); text-align: center; }
+
+    .tip {
+      position: absolute;
+      z-index: 5;
+      padding: 7px 12px 8px;
+      border-radius: 9px;
+      background: var(--navy);
+      box-shadow: 0 6px 18px rgba(16, 24, 40, .22);
+      color: #fff;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, calc(-100% - 9px));
+      transition: opacity .1s;
+      white-space: nowrap;
+    }
+    .tip.on { opacity: 1; }
+    .tip .d {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .01em;
+      opacity: .72;
+    }
+    .tip .sw {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-right: 6px;
+      border-radius: 2px;
+      vertical-align: baseline;
+    }
+    .tip .v {
+      display: block;
+      font-size: 21px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.25;
+    }
+    .tip::after {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -6px;
+      border: 6px solid transparent;
+      border-top-color: var(--navy);
+      content: "";
+    }
+
+    @media (max-width: 860px) {
+      .at-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .plantas-kpis {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+    }
+
+    @media (max-width: 470px) {
+      .at-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cum-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cum-item {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .wrap,
+      .topbar .inner {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .titlerow h1 {
+        font-size: 24px;
+      }
+
+      h2.sec {
+        font-size: 24px;
+      }
+
+      .datasrc {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .kpi { flex: 1 1 45%; min-width: 0; padding: 12px 14px; }
+      .k-val { font-size: 26px; }
+      .plantas-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .plantas-kpis .k-val { font-size: 23px; }
+      .actual-resumen { padding: 10px; }
+      #mapa-calor { height: 390px; }
+      .heatmap-controls { width: 100%; }
+      .heatmap-controls .field { flex: 1 1 145px; }
+      .heatmap-controls select,
+      .intensity-field { width: 100%; min-width: 0; }
+      #mapa-intensidad { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .spin {
+        animation-duration: 2.4s;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/dashboard-common.css?v=20260922-27">
+</head>
+
+<body class="page-bolsones">
+  <header class="topbar">
+    <div class="inner">
+      <!-- Ajustar el destino cuando esté definido el índice general del sitio. -->
+      <a class="com-back-link" href="index.html" aria-label="Volver al menú principal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Volver al menú principal
+      </a>
+
+      <div class="titlerow">
+        <span class="ico" aria-hidden="true">♻</span>
+        <h1>Dashboard Bolsones</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section aria-labelledby="titulo-datos-generales">
+      <div class="com-section-heading">
+        <h2 class="sec" id="titulo-datos-generales">
+          <span class="n" aria-hidden="true">1</span>
+          <span>Datos generales</span>
+        </h2>
+        <p class="com-available-period" id="datos-periodo">Período disponible: —</p>
+      </div>
+
+      <div class="card cumplimiento" id="cumplimiento">
+        <div class="loader com-loading-view" id="loader" role="status" aria-live="polite">
+          <div class="com-loading-content">
+            <span class="com-spinner" aria-hidden="true"></span>
+            <span class="com-loading-message">Cargando información</span>
+          </div>
+        </div>
+        <div class="cum-grid" id="cum-grid" aria-live="polite" hidden>
+          <div class="cum-item ok" id="cum-siguiente">
+            <span class="cum-label">Solicitudes atendidas en la intervención siguiente</span>
+            <span class="cum-val" id="pct-siguiente">–</span>
+          </div>
+          <div class="cum-item late" id="cum-atraso">
+            <span class="cum-label">Solicitudes atendidas con atraso</span>
+            <span class="cum-val" id="pct-atraso">–</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card heatmap-card">
+        <div class="heatmap-head">
+          <p class="at-label">MAPA DE CALOR</p>
+          <div class="heatmap-controls">
+            <div class="field">
+              <label for="mapa-muni">Municipio</label>
+              <select id="mapa-muni" aria-label="Municipio del mapa de calor"></select>
+            </div>
+            <div class="field intensity-field">
+              <label for="mapa-intensidad">Intensidad</label>
+              <div class="intensity-row">
+                <span>Baja</span>
+                <input type="range" id="mapa-intensidad" min="0.2" max="4" step="0.1" value="0.6" autocomplete="off" aria-label="Intensidad del mapa de calor">
+                <span>Alta</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mapa-calor" role="img" aria-label="Mapa de calor de solicitudes resueltas en 2026"></div>
+      </div>
+
+      <div class="datasrc" id="datasrc" role="alert"></div>
+    </section>
+
+    <section aria-labelledby="titulo-situacion-actual">
+      <h2 class="sec" id="titulo-situacion-actual">
+        <span class="n" aria-hidden="true">2</span>
+        <span>Situación actual</span>
+      </h2>
+
+      <div class="card actual-resumen" aria-live="polite">
+        <div class="actual-scroll">
+          <div class="actual-tabla">
+            <div class="actual-fila actual-encabezado" id="actual-encabezados-grid"></div>
+            <div class="actual-fila" id="actual-pendientes-grid"></div>
+            <div class="actual-fila atrasadas" id="actual-atrasadas-grid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-periodo-analisis">
+      <h2 class="sec" id="titulo-periodo-analisis">
+        <span class="n" aria-hidden="true">3</span>
+        <span>Seleccionar rango de fechas</span>
+      </h2>
+
+      <div class="card filters" role="group" aria-label="Período de análisis">
+        <div class="field">
+          <label for="f-desde">Desde</label>
+          <input type="date" id="f-desde">
+        </div>
+        <div class="field">
+          <label for="f-hasta">Hasta</label>
+          <input type="date" id="f-hasta">
+        </div>
+        <div class="field">
+          <label for="f-muni">Municipio</label>
+          <select id="f-muni" aria-label="Municipio"></select>
+        </div>
+      </div>
+
+      <div class="nested">
+        <section aria-labelledby="titulo-solicitudes-ingresadas">
+          <h3 class="sub" id="titulo-solicitudes-ingresadas">
+            <span class="n" aria-hidden="true">3.1</span>
+            <span>Solicitudes ingresadas</span>
+          </h3>
+
+          <div class="kpis">
+            <div class="kpi total-solicitudes">
+              <span class="k-label">Total</span>
+              <span class="k-val" id="k-solicitudes-total">–</span>
+            </div>
+            <div class="kpi promedio">
+              <span class="k-label">Promedio día</span>
+              <span class="k-val" id="k-solicitudes-promedio">–</span>
+            </div>
+          </div>
+
+          <div class="card chartbox">
+            <div id="grafico-solicitudes"></div>
+            <div class="tip" id="tip-solicitudes" role="tooltip"></div>
+          </div>
+        </section>
+
+        <section aria-labelledby="titulo-servicios-realizados">
+          <h3 class="sub" id="titulo-servicios-realizados">
+            <span class="n" aria-hidden="true">3.2</span>
+            <span>Solicitudes realizadas</span>
+          </h3>
+
+          <div class="kpis">
+            <div class="kpi total-servicios">
+              <span class="k-label">Total</span>
+              <span class="k-val" id="k-servicios-total">–</span>
+            </div>
+            <div class="kpi promedio">
+              <span class="k-label">Promedio día</span>
+              <span class="k-val" id="k-servicios-promedio">–</span>
+            </div>
+          </div>
+
+          <div class="card chartbox">
+            <div id="grafico-servicios"></div>
+            <div class="tip" id="tip-servicios" role="tooltip"></div>
+          </div>
+        </section>
+
+        <section aria-labelledby="titulo-bolsones-realizados">
+          <h3 class="sub" id="titulo-bolsones-realizados">
+            <span class="n" aria-hidden="true">3.3</span>
+            <span>Bolsones realizados</span>
+          </h3>
+
+          <div class="kpis">
+            <div class="kpi total-bolsones">
+              <span class="k-label">Total</span>
+              <span class="k-val" id="k-bolsones-total">–</span>
+              <span class="k-extra">100%</span>
+            </div>
+            <div class="kpi purple">
+              <span class="k-label">Bolsones grandes</span>
+              <span class="k-val" id="k-bolsones-grandes">–</span>
+              <span class="k-extra" id="k-bolsones-grandes-pct">–</span>
+            </div>
+            <div class="kpi lilac">
+              <span class="k-label">Bolsones chicos</span>
+              <span class="k-val" id="k-bolsones-chicos">–</span>
+              <span class="k-extra" id="k-bolsones-chicos-pct">–</span>
+            </div>
+            <div class="kpi promedio">
+              <span class="k-label">Promedio día</span>
+              <span class="k-val" id="k-bolsones-promedio">–</span>
+            </div>
+          </div>
+
+          <div class="card chartbox">
+            <div id="grafico-bolsones"></div>
+            <div class="tip" id="tip-bolsones" role="tooltip"></div>
+          </div>
+        </section>
+
+        <section aria-labelledby="titulo-camiones-utilizados">
+          <h3 class="sub" id="titulo-camiones-utilizados">
+            <span class="n" aria-hidden="true">3.4</span>
+            <span>Camiones utilizados</span>
+          </h3>
+
+          <div class="kpis">
+            <div class="kpi total-camiones">
+              <span class="k-label">Total turnos</span>
+              <span class="k-val" id="k-camiones-total">–</span>
+            </div>
+            <div class="kpi promedio">
+              <span class="k-label">Promedio día</span>
+              <span class="k-val" id="k-camiones-promedio">–</span>
+            </div>
+          </div>
+
+          <div class="card chartbox">
+            <div id="grafico-camiones"></div>
+            <div class="tip" id="tip-camiones" role="tooltip"></div>
+          </div>
+        </section>
+
+        <section aria-labelledby="titulo-plantas-descarga">
+          <h3 class="sub" id="titulo-plantas-descarga">
+            <span class="n" aria-hidden="true">3.5</span>
+            <span>Plantas de descarga</span>
+          </h3>
+
+          <div class="kpis plantas-kpis">
+            <div class="kpi total-plantas">
+              <span class="k-label">Total kg</span>
+              <span class="k-val" id="k-plantas-total">–</span>
+              <span class="k-extra">100%</span>
+            </div>
+            <div class="kpi planta-usina" data-planta="usina">
+              <span class="k-label">Usina 5 bis</span>
+              <span class="k-val" id="k-planta-usina">–</span>
+              <span class="k-extra" id="k-planta-usina-pct">–</span>
+            </div>
+            <div class="kpi planta-geminis" data-planta="geminis">
+              <span class="k-label">Géminis</span>
+              <span class="k-val" id="k-planta-geminis">–</span>
+              <span class="k-extra" id="k-planta-geminis-pct">–</span>
+            </div>
+            <div class="kpi planta-paloma" data-planta="paloma">
+              <span class="k-label">La Paloma</span>
+              <span class="k-val" id="k-planta-paloma">–</span>
+              <span class="k-extra" id="k-planta-paloma-pct">–</span>
+            </div>
+            <div class="kpi planta-duran" data-planta="duran">
+              <span class="k-label">Durán</span>
+              <span class="k-val" id="k-planta-duran">–</span>
+              <span class="k-extra" id="k-planta-duran-pct">–</span>
+            </div>
+            <div class="kpi planta-burgues" data-planta="burgues">
+              <span class="k-label">Burgues</span>
+              <span class="k-val" id="k-planta-burgues">–</span>
+              <span class="k-extra" id="k-planta-burgues-pct">–</span>
+            </div>
+            <div class="kpi promedio" id="kpi-plantas-promedio">
+              <span class="k-label">Promedio día</span>
+              <span class="k-val" id="k-plantas-promedio">–</span>
+            </div>
+          </div>
+
+          <div class="card chartbox">
+            <div id="grafico-plantas"></div>
+            <div class="tip" id="tip-plantas" role="tooltip"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <input type="file" id="picker" accept=".csv,text/csv" hidden>
+
+  <script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script>
+  <script src="assets/bases.js"></script>
+  <script>
+    const CONFIG = {
+      anio: 2026,
+      colorSolicitudes: "#2563eb",
+      colorServicios: "#d98f75",
+      colorBolsones: "#7c3aed",
+      colorBolsonesChicos: "#c4b5fd",
+      colorCamion: "#0d9488",
+      colorMotocarro: "#7dd3fc",
+      plantas: [
+        { key: "usina", nombre: "Usina 5 bis", color: "#f4c84a" },
+        { key: "geminis", nombre: "Géminis", color: "#f39a4a" },
+        { key: "paloma", nombre: "La Paloma", color: "#16a6b6" },
+        { key: "duran", nombre: "Durán", color: "#7bc47f" },
+        { key: "burgues", nombre: "Burgues", color: "#9b7bd6" }
+      ],
+      feriados: ["01-01", "05-01", "07-18", "08-25", "12-25"],
+      noEsServicio: [
+        "Agenda - Cancelado-9999",
+        "Agenda - No confirmó fecha-094",
+        "Repetido-000",
+        "En proceso-093",
+        "Derivado-095",
+        "Pendiente-097",
+        "-",
+        ""
+      ],
+      noEsServicioClaves: ["SALIR ADELANTE", "LIMPIO"],
+      camiones: [
+        "LANZANI",
+        "ISMAEL",
+        "FRACHINETTI",
+        "MICHAEL RODRIGUEZ",
+        "VERONICA Y ALEJANDRO",
+        "ZULMA",
+        "MULLER",
+        "VICTORIA RODRIGUEZ",
+        "MAURICIO OLIVERA",
+        "DAHIANA",
+        "SANDRA DELGADO",
+        "ZAICOVICH",
+        "TERESA MARTINES",
+        "ALEXIS BARBOSA",
+        "GERARDO ALBANO",
+        "MIGUEL LARROSA",
+        "VOLUMINOSO",
+        "EQUIPO PARQUES"
+      ],
+      /* getUTCDay(): domingo 0, lunes 1, ... sábado 6.
+         CH trabaja viernes y sábado como una sola intervención; el sábado es
+         la fecha límite para medir si la solicitud fue atendida a tiempo. */
+      diasIntervencion: {
+        A: [2],
+        B: [1],
+        C: [4],
+        CH: [6],
+        D: [4],
+        E: [3],
+        F: [1],
+        G: [2]
+      },
+      municipiosActual: [
+        { key: "B", dia: "Lunes" },
+        { key: "F", dia: "Lunes" },
+        { key: "A", dia: "Martes" },
+        { key: "G", dia: "Martes" },
+        { key: "E", dia: "Miércoles" },
+        { key: "C", dia: "Jueves" },
+        { key: "D", dia: "Jueves" },
+        { key: "CH", dia: "Viernes y Sábado" }
+      ]
+    };
+
+    const $ = selector => document.querySelector(selector);
+    const FORMATO_NUMERO = new Intl.NumberFormat("es-UY");
+    const MESES_CORTOS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "set", "oct", "nov", "dic"];
+    let REGISTROS = [];
+    let MAPA_CALOR = null;
+    let MAPA_LISTO = false;
+    let MAPA_PENDIENTE = null;
+
+    function esc(valor) {
+      return String(valor).replace(/[&<>\"]/g, caracter => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;"
+      }[caracter]));
+    }
+
+    /* Lector CSV compatible con comillas, comas y saltos de línea internos. */
+    function parseCSVFilas(texto) {
+      if (texto.charCodeAt(0) === 0xFEFF) texto = texto.slice(1);
+      const filas = [];
+      let campo = "";
+      let fila = [];
+      let enComillas = false;
+
+      for (let i = 0; i < texto.length; i++) {
+        const caracter = texto[i];
+
+        if (enComillas) {
+          if (caracter === "\"") {
+            if (texto[i + 1] === "\"") {
+              campo += "\"";
+              i++;
+            } else {
+              enComillas = false;
+            }
+          } else {
+            campo += caracter;
+          }
+          continue;
+        }
+
+        if (caracter === "\"") {
+          enComillas = true;
+        } else if (caracter === ",") {
+          fila.push(campo);
+          campo = "";
+        } else if (caracter === "\n") {
+          fila.push(campo);
+          filas.push(fila);
+          fila = [];
+          campo = "";
+        } else if (caracter !== "\r") {
+          campo += caracter;
+        }
+      }
+
+      if (campo !== "" || fila.length) {
+        fila.push(campo);
+        filas.push(fila);
+      }
+
+      return filas;
+    }
+
+    function parseCSV(texto) {
+      const filas = parseCSVFilas(texto);
+      if (!filas.length) return [];
+      const encabezados = filas[0].map(valor => valor.trim());
+
+      return filas.slice(1)
+        .filter(fila => fila.length > 1)
+        .map(fila => {
+          const registro = {};
+          encabezados.forEach((encabezado, indice) => {
+            registro[encabezado] = (fila[indice] ?? "").trim();
+          });
+          return registro;
+        });
+    }
+
+    /* Convierte "2026-04-17 14:00:00" sin depender de la zona horaria. */
+    function fechaNormalizada(valor) {
+      const coincidencia = /^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2})(?::(\d{2}))?)?$/.exec((valor || "").trim());
+      if (!coincidencia) return null;
+
+      const anio = Number(coincidencia[1]);
+      const mes = Number(coincidencia[2]) - 1;
+      const diaMes = Number(coincidencia[3]);
+      const dia = Date.UTC(anio, mes, diaMes);
+      const tiempo = Date.UTC(
+        anio,
+        mes,
+        diaMes,
+        Number(coincidencia[4] || 0),
+        Number(coincidencia[5] || 0),
+        Number(coincidencia[6] || 0)
+      );
+
+      return Number.isNaN(tiempo) ? null : { anio, tiempo, dia };
+    }
+
+    function periodoDisponible(registros) {
+      let desde = null;
+      let hasta = null;
+
+      registros.forEach(registro => {
+        const fecha = fechaNormalizada(registro.fecha_de_solicitud);
+        if (!fecha) return;
+        if (desde === null || fecha.dia < desde) desde = fecha.dia;
+        if (hasta === null || fecha.dia > hasta) hasta = fecha.dia;
+      });
+
+      if (desde === null || hasta === null) return null;
+      const formato = tiempo => {
+        const fecha = new Date(tiempo);
+        return String(fecha.getUTCDate()).padStart(2, "0") + "/"
+          + String(fecha.getUTCMonth() + 1).padStart(2, "0") + "/"
+          + fecha.getUTCFullYear();
+      };
+      return { desde: formato(desde), hasta: formato(hasta) };
+    }
+
+    function fechaResolucion(registro) {
+      const explicita = registro.fecha_resuelto
+        || registro.fecha_de_resuelto
+        || registro["Fecha resuelto"]
+        || registro["Fecha de resuelto"];
+      if (explicita) return fechaNormalizada(explicita);
+
+      /* La base actual no incluye fecha_resuelto. En ella, una solicitud
+         cerrada queda fechada mediante fecha_de_gestion. */
+      const estado = normalizarTexto(registro.estado).trim();
+      if (estado !== "CERRADO" && estado !== "RESUELTO") return null;
+      return fechaNormalizada(registro.fecha_de_gestion);
+    }
+
+    function puntosMapaCalor(municipio) {
+      const solicitudes = new Map();
+
+      REGISTROS.forEach((registro, indice) => {
+        const fecha = fechaResolucion(registro);
+        if (!fecha || fecha.anio !== CONFIG.anio) return;
+
+        const muni = (registro.municipio || "").trim();
+        if (municipio !== "todos" && muni !== municipio) return;
+
+        const latitud = Number(String(registro.latitud || "").replace(",", "."));
+        const longitud = Number(String(registro.longitud || "").replace(",", "."));
+        if (!Number.isFinite(latitud) || !Number.isFinite(longitud)) return;
+        if (latitud < -90 || latitud > 90 || longitud < -180 || longitud > 180) return;
+
+        const id = (registro.id_solicitud || "").trim();
+        const clave = id || `fila-${indice}`;
+        if (!solicitudes.has(clave)) solicitudes.set(clave, [latitud, longitud, 1]);
+      });
+
+      return [...solicitudes.values()];
+    }
+
+    function datosGeoJSON(puntos) {
+      return {
+        type: "FeatureCollection",
+        features: puntos.map(punto => ({
+          type: "Feature",
+          properties: {},
+          geometry: { type: "Point", coordinates: [punto[1], punto[0]] }
+        }))
+      };
+    }
+
+    function prepararEstiloMapa() {
+      const capas = MAPA_CALOR.getStyle().layers || [];
+      capas.forEach(capa => {
+        if (capa.type === "symbol") {
+          MAPA_CALOR.setLayoutProperty(capa.id, "visibility", "none");
+          return;
+        }
+
+        if (capa.type === "line" && /road|street|highway|motorway|trunk|transport|bridge|tunnel/i.test(capa.id)) {
+          try {
+            MAPA_CALOR.setPaintProperty(capa.id, "line-color", "#4b5563");
+            MAPA_CALOR.setPaintProperty(capa.id, "line-opacity", .82);
+          } catch (_) {
+            /* Algunas capas usan patrones y conservan su estilo original. */
+          }
+        }
+      });
+
+      MAPA_CALOR.addSource("solicitudes-resueltas", {
+        type: "geojson",
+        data: datosGeoJSON([])
+      });
+      MAPA_CALOR.addLayer({
+        id: "calor-solicitudes",
+        type: "heatmap",
+        source: "solicitudes-resueltas",
+        maxzoom: 15,
+        paint: {
+          "heatmap-weight": 1,
+          "heatmap-intensity": .03,
+          "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 9, 12, 13, 22],
+          "heatmap-opacity": .82,
+          "heatmap-color": [
+            "interpolate", ["linear"], ["heatmap-density"],
+            0, "rgba(96,165,250,0)",
+            .12, "#60a5fa",
+            .34, "#22d3ee",
+            .56, "#34d399",
+            .76, "#facc15",
+            .92, "#fb923c",
+            1, "#dc2626"
+          ]
+        }
+      });
+    }
+
+    function actualizarMapaCalor({ puntos, intensidad, municipio, opciones }) {
+      MAPA_CALOR.getSource("solicitudes-resueltas").setData(datosGeoJSON(puntos));
+      MAPA_CALOR.setPaintProperty("calor-solicitudes", "heatmap-intensity", .01 + intensidad * .02);
+
+      if (opciones.ajustarVista !== false) {
+        if (municipio === "todos") {
+          MAPA_CALOR.jumpTo({ center: [-56.19, -34.84], zoom: 10.5 });
+        } else if (puntos.length) {
+          const limites = new maplibregl.LngLatBounds();
+          puntos.forEach(punto => limites.extend([punto[1], punto[0]]));
+          MAPA_CALOR.fitBounds(limites, { padding: 18, maxZoom: 13, duration: 0 });
+        }
+      }
+
+      requestAnimationFrame(() => MAPA_CALOR.resize());
+    }
+
+    function renderMapaCalor(opciones = {}) {
+      const elemento = $("#mapa-calor");
+      const municipio = $("#mapa-muni").value || "todos";
+      const puntos = puntosMapaCalor(municipio);
+      const intensidad = Number($("#mapa-intensidad").value) || 1;
+      MAPA_PENDIENTE = { puntos, intensidad, municipio, opciones };
+
+      if (typeof maplibregl === "undefined") {
+        elemento.innerHTML = '<div class="mapa-error">No se pudo cargar el mapa. Revisá la conexión a internet y recargá la página.</div>';
+        return;
+      }
+
+      if (!MAPA_CALOR) {
+        MAPA_CALOR = new maplibregl.Map({
+          container: elemento,
+          style: {
+            version: 8,
+            sources: {
+              "agenda-base": {
+                type: "raster",
+                tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"],
+                tileSize: 256,
+                maxzoom: 16
+              }
+            },
+            layers: [{ id: "agenda-base", type: "raster", source: "agenda-base" }]
+          },
+          center: [-56.19, -34.84],
+          zoom: 10.5,
+          attributionControl: false
+        });
+        MAPA_CALOR.on("load", () => {
+          prepararEstiloMapa();
+          MAPA_LISTO = true;
+          if (MAPA_PENDIENTE) actualizarMapaCalor(MAPA_PENDIENTE);
+        });
+        return;
+      }
+
+      if (MAPA_LISTO) actualizarMapaCalor(MAPA_PENDIENTE);
+    }
+
+    /* Devuelve la primera fecha de intervención posterior al día en que entró
+       la solicitud. Una atención anterior a ese límite también cuenta a tiempo. */
+    function proximaIntervencion(solicitud, municipio) {
+      const diasPermitidos = CONFIG.diasIntervencion[municipio];
+      if (!diasPermitidos) return null;
+
+      let dia = solicitud.dia + 86400000;
+      while (!diasPermitidos.includes(new Date(dia).getUTCDay())) {
+        dia += 86400000;
+      }
+      return dia;
+    }
+
+    function cumplimientoIntervencion(registros) {
+      const porSolicitud = new Map();
+
+      registros.forEach((registro, indice) => {
+        const municipio = (registro.municipio || "").trim();
+        const solicitud = fechaNormalizada(registro.fecha_de_solicitud);
+        const gestion = fechaNormalizada(registro.fecha_de_gestion);
+
+        if (!CONFIG.diasIntervencion[municipio] || !solicitud || !gestion) return;
+        if (gestion.anio !== CONFIG.anio || gestion.tiempo < solicitud.tiempo) return;
+
+        const id = (registro.id_solicitud || "").trim();
+        const clave = id || `fila-${indice}`;
+        const anterior = porSolicitud.get(clave);
+
+        /* Si una solicitud aparece varias veces, se toma su primera gestión. */
+        if (!anterior || gestion.tiempo < anterior.gestion.tiempo) {
+          porSolicitud.set(clave, { municipio, solicitud, gestion });
+        }
+      });
+
+      let siguiente = 0;
+      let atraso = 0;
+
+      for (const caso of porSolicitud.values()) {
+        const limite = proximaIntervencion(caso.solicitud, caso.municipio);
+        if (limite === null) continue;
+        if (caso.gestion.dia <= limite) siguiente++;
+        else atraso++;
+      }
+
+      return { siguiente, atraso, total: siguiente + atraso };
+    }
+
+    function situacionActual(registros) {
+      const pendientes = new Map();
+      const porMunicipio = Object.fromEntries(CONFIG.municipiosActual.map(municipio => [
+        municipio.key,
+        { pendientes: 0, atrasadas: 0 }
+      ]));
+
+      registros.forEach((registro, indice) => {
+        if (normalizarTexto(registro.estado).trim() !== "NUEVO") return;
+        const id = (registro.id_solicitud || "").trim();
+        const clave = id || `fila-${indice}`;
+        if (!pendientes.has(clave)) pendientes.set(clave, registro);
+      });
+
+      const ahora = new Date();
+      const hoy = Date.UTC(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());
+      let atrasadas = 0;
+
+      pendientes.forEach(registro => {
+        const municipio = (registro.municipio || "").trim();
+        if (porMunicipio[municipio]) porMunicipio[municipio].pendientes++;
+        const solicitud = fechaNormalizada(registro.fecha_de_solicitud);
+        if (!solicitud || !CONFIG.diasIntervencion[municipio]) return;
+        const limite = proximaIntervencion(solicitud, municipio);
+        if (limite !== null && limite < hoy) {
+          atrasadas++;
+          if (porMunicipio[municipio]) porMunicipio[municipio].atrasadas++;
+        }
+      });
+
+      return { pendientes: pendientes.size, atrasadas, porMunicipio };
+    }
+
+    function renderSituacionActual(registros) {
+      const actual = situacionActual(registros);
+      const encabezadosMunicipio = CONFIG.municipiosActual.map(municipio => (
+        `<div class="actual-celda"><span class="actual-muni">${esc(municipio.key)}</span>`
+        + `<span class="actual-dia">${esc(municipio.dia)}</span></div>`
+      )).join("");
+      const celdasMunicipio = tipo => CONFIG.municipiosActual.map(municipio => {
+        const valor = actual.porMunicipio[municipio.key][tipo];
+        return `<div class="actual-celda actual-numero"><b>${numero(valor)}</b></div>`;
+      }).join("");
+
+      $("#actual-encabezados-grid").innerHTML = `<div class="actual-celda actual-esquina" aria-hidden="true"></div>`
+        + encabezadosMunicipio;
+      $("#actual-pendientes-grid").innerHTML = `<div class="actual-celda actual-total">`
+        + `<span>Solicitudes ingresadas por atender</span><b>${numero(actual.pendientes)}</b></div>`
+        + celdasMunicipio("pendientes");
+      $("#actual-atrasadas-grid").innerHTML = `<div class="actual-celda actual-total">`
+        + `<span>DE LAS CUALES ATRASADAS</span><b>${numero(actual.atrasadas)}</b></div>`
+        + celdasMunicipio("atrasadas");
+    }
+
+    function porcentaje(valor) {
+      return valor.toLocaleString("es-UY", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }) + "%";
+    }
+
+    function numero(valor) {
+      return FORMATO_NUMERO.format(valor);
+    }
+
+    function iso(fecha) {
+      return fecha.getFullYear() + "-"
+        + String(fecha.getMonth() + 1).padStart(2, "0") + "-"
+        + String(fecha.getDate()).padStart(2, "0");
+    }
+
+    /* El período inicial abarca los últimos 30 días completos y termina ayer. */
+    function rangoInicial(dias) {
+      const hasta = new Date();
+      hasta.setDate(hasta.getDate() - 1);
+      const desde = new Date(hasta);
+      desde.setDate(desde.getDate() - (dias - 1));
+
+      $("#f-desde").value = iso(desde);
+      $("#f-hasta").value = iso(hasta);
+      $("#f-desde").max = iso(hasta);
+      $("#f-hasta").max = iso(hasta);
+    }
+
+    function esFeriado(fecha) {
+      return CONFIG.feriados.includes(fecha.slice(5)) || CONFIG.feriados.includes(fecha);
+    }
+
+    function diasDelRango(desde, hasta) {
+      const dias = [];
+      const indice = new Map();
+      const inicio = new Date(desde + "T12:00:00");
+      const fin = new Date(hasta + "T12:00:00");
+
+      if (Number.isNaN(inicio.getTime()) || Number.isNaN(fin.getTime()) || inicio > fin) {
+        return { dias, indice };
+      }
+
+      for (let cursor = new Date(inicio); cursor <= fin; cursor.setDate(cursor.getDate() + 1)) {
+        const fecha = iso(cursor);
+        const domingo = cursor.getDay() === 0;
+        const feriado = esFeriado(fecha);
+        indice.set(fecha, dias.length);
+        dias.push({
+          fecha,
+          mes: cursor.getMonth(),
+          dia: cursor.getDate(),
+          dow: cursor.getDay(),
+          domingo,
+          feriado,
+          sinServicio: domingo || feriado,
+          total: 0
+        });
+      }
+
+      return { dias, indice };
+    }
+
+    function solicitudesPorDia(desde, hasta, municipio) {
+      const { dias, indice } = diasDelRango(desde, hasta);
+      const solicitudesVistas = new Set();
+
+      REGISTROS.forEach((registro, posicion) => {
+        const fecha = (registro.fecha_de_solicitud || "").slice(0, 10);
+        if (!indice.has(fecha)) return;
+        if (municipio !== "todos" && (registro.municipio || "").trim() !== municipio) return;
+
+        const id = (registro.id_solicitud || "").trim();
+        const clave = id || `fila-${posicion}`;
+        if (solicitudesVistas.has(clave)) return;
+
+        solicitudesVistas.add(clave);
+        dias[indice.get(fecha)].total++;
+      });
+
+      return dias;
+    }
+
+    function serviciosPorDia(desde, hasta, municipio) {
+      const { dias, indice } = diasDelRango(desde, hasta);
+      const primeraGestion = new Map();
+
+      REGISTROS.forEach((registro, posicion) => {
+        const gestion = fechaNormalizada(registro.fecha_de_gestion);
+        if (!gestion) return;
+
+        const id = (registro.id_solicitud || "").trim();
+        const clave = id || `fila-${posicion}`;
+        const anterior = primeraGestion.get(clave);
+        if (!anterior || gestion.tiempo < anterior.gestion.tiempo) {
+          primeraGestion.set(clave, {
+            gestion,
+            fecha: (registro.fecha_de_gestion || "").slice(0, 10),
+            municipio: (registro.municipio || "").trim()
+          });
+        }
+      });
+
+      primeraGestion.forEach(servicio => {
+        if (!indice.has(servicio.fecha)) return;
+        if (municipio !== "todos" && servicio.municipio !== municipio) return;
+        dias[indice.get(servicio.fecha)].total++;
+      });
+
+      return dias;
+    }
+
+    function cantidadTransportada(registro) {
+      const texto = String(registro.cantidad_transportada || "").trim().replace(",", ".");
+      if (!texto) return null;
+      const cantidad = Number(texto);
+      return Number.isFinite(cantidad) && cantidad >= 0 ? cantidad : null;
+    }
+
+    function categoriaBolson(tipo) {
+      const normalizado = normalizarTexto(tipo).trim();
+      if (normalizado === "2.0 CHICO") return "chico";
+      if (["1.0 GRANDE", "2.0 GRANDE", "CONTENEDOR"].includes(normalizado)) return "grande";
+      return null;
+    }
+
+    function bolsonesPorDia(desde, hasta, municipio) {
+      const { dias, indice } = diasDelRango(desde, hasta);
+      const ultimaGestion = new Map();
+
+      REGISTROS.forEach((registro, posicion) => {
+        const gestion = fechaNormalizada(registro.fecha_de_gestion);
+        const cantidad = cantidadTransportada(registro);
+        if (!gestion || cantidad === null) return;
+
+        const id = (registro.id_solicitud || "").trim();
+        const clave = id || `fila-${posicion}`;
+        const anterior = ultimaGestion.get(clave);
+        if (!anterior || gestion.tiempo > anterior.gestion.tiempo) {
+          ultimaGestion.set(clave, {
+            gestion,
+            fecha: (registro.fecha_de_gestion || "").slice(0, 10),
+            municipio: (registro.municipio || "").trim(),
+            cantidad,
+            categoria: categoriaBolson(registro.tipo_de_bolsones)
+          });
+        }
+      });
+
+      ultimaGestion.forEach(servicio => {
+        if (!indice.has(servicio.fecha)) return;
+        if (municipio !== "todos" && servicio.municipio !== municipio) return;
+        if (!servicio.categoria) return;
+        const dia = dias[indice.get(servicio.fecha)];
+        dia[servicio.categoria] = (dia[servicio.categoria] || 0) + servicio.cantidad;
+        dia.total += servicio.cantidad;
+      });
+
+      return dias;
+    }
+
+    function normalizarTexto(valor) {
+      return String(valor || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase();
+    }
+
+    function esServicioTransportista(registro) {
+      const transportista = (registro.transportista || "").trim();
+      if (CONFIG.noEsServicio.includes(transportista)) return false;
+      const normalizado = normalizarTexto(transportista);
+      return !CONFIG.noEsServicioClaves.some(clave => normalizado.includes(clave));
+    }
+
+    function esCamion(transportista) {
+      const normalizado = normalizarTexto(transportista);
+      return CONFIG.camiones.some(clave => normalizado.includes(clave));
+    }
+
+    function turnosPorDia(desde, hasta, municipio) {
+      const { dias, indice } = diasDelRango(desde, hasta);
+      const turnosVistos = new Set();
+
+      REGISTROS.forEach(registro => {
+        const fecha = (registro.fecha_de_gestion || "").slice(0, 10);
+        if (!indice.has(fecha)) return;
+        if (municipio !== "todos" && (registro.municipio || "").trim() !== municipio) return;
+        if (!esServicioTransportista(registro)) return;
+
+        const transportista = (registro.transportista || "").trim();
+        const clave = `${fecha}|${normalizarTexto(transportista)}`;
+        if (turnosVistos.has(clave)) return;
+        turnosVistos.add(clave);
+
+        const dia = dias[indice.get(fecha)];
+        const tipo = esCamion(transportista) ? "camion" : "motocarro";
+        dia[tipo] = (dia[tipo] || 0) + 1;
+      });
+
+      return dias;
+    }
+
+    function pesoPorBolson(tipo) {
+      const categoria = categoriaBolson(tipo);
+      if (categoria === "chico") return 23;
+      if (categoria === "grande") return 37;
+      return null;
+    }
+
+    function clavePlanta(planta) {
+      const normalizada = normalizarTexto(planta).trim();
+      if (normalizada === "EX-COFECA" || normalizada === "USINA 5 BIS") return "usina";
+      if (normalizada === "GEMINIS") return "geminis";
+      if (normalizada === "LA PALOMA") return "paloma";
+      if (normalizada === "DURAN") return "duran";
+      if (normalizada === "BURGUES") return "burgues";
+      return null;
+    }
+
+    function kilosPorPlantaYDia(desde, hasta, municipio) {
+      const { dias, indice } = diasDelRango(desde, hasta);
+
+      REGISTROS.forEach(registro => {
+        const fecha = (registro.fecha_de_gestion || "").slice(0, 10);
+        if (!indice.has(fecha)) return;
+        if (municipio !== "todos" && (registro.municipio || "").trim() !== municipio) return;
+
+        const cantidad = cantidadTransportada(registro);
+        const peso = pesoPorBolson(registro.tipo_de_bolsones);
+        const planta = clavePlanta(registro.planta);
+        if (cantidad === null || peso === null || !planta) return;
+
+        const dia = dias[indice.get(fecha)];
+        dia[planta] = (dia[planta] || 0) + cantidad * peso;
+      });
+
+      return dias;
+    }
+
+    function pasoAgradable(maximo) {
+      const bruto = maximo / 5;
+      const magnitud = Math.pow(10, Math.floor(Math.log10(bruto)));
+      const paso = [1, 2, 2.5, 5, 10]
+        .map(multiplicador => multiplicador * magnitud)
+        .find(valor => valor >= bruto) || magnitud * 10;
+      return Math.max(1, Math.round(paso));
+    }
+
+    function ubicarTooltip(evento, tooltip, caja) {
+      const rectCaja = caja.getBoundingClientRect();
+      const medio = tooltip.offsetWidth / 2 + 4;
+      tooltip.style.left = Math.min(Math.max(evento.clientX - rectCaja.left, medio), rectCaja.width - medio) + "px";
+      tooltip.style.top = (evento.clientY - rectCaja.top) + "px";
+      tooltip.classList.add("on");
+    }
+
+    function graficoBarrasDiarias(elemento, tooltip, dias, promedio, opciones = {}) {
+      const color = opciones.color || CONFIG.colorSolicitudes;
+      const etiqueta = opciones.etiqueta || "Solicitudes ingresadas";
+      const marcarDiasSinServicio = opciones.marcarDiasSinServicio === true;
+      const series = opciones.series || [{ key: "total", label: etiqueta, color }];
+      const totalDelDia = dia => series.reduce((suma, serie) => suma + (dia[serie.key] || 0), 0);
+      tooltip.classList.remove("on");
+
+      if (!dias.length) {
+        elemento.innerHTML = '<p class="empty">No hay datos en el período elegido. Probá ampliar las fechas.</p>';
+        return;
+      }
+
+      const maximo = Math.max(0, ...dias.map(totalDelDia));
+      if (!maximo) {
+        elemento.innerHTML = `<p class="empty">Sin ${esc(etiqueta.toLocaleLowerCase("es-UY"))} en el período elegido.</p>`;
+        return;
+      }
+
+      const ancho = 1000;
+      const alto = 320;
+      const margenIzq = 54;
+      const margenDer = 8;
+      const margenSup = 12;
+      const margenInf = 62;
+      const anchoInterior = ancho - margenIzq - margenDer;
+      const altoInterior = alto - margenSup - margenInf;
+      const objetivo = maximo * 1.12;
+      const pasoEje = pasoAgradable(objetivo);
+      const techo = Math.ceil(objetivo / pasoEje) * pasoEje;
+      const y = valor => margenSup + altoInterior - (valor / techo) * altoInterior;
+      const espacio = anchoInterior / dias.length;
+      const anchoBarra = Math.min(34, espacio * .68);
+      let contenido = "";
+
+      for (let valor = 0; valor <= techo; valor += pasoEje) {
+        contenido += `<line class="${valor === 0 ? "zero" : "grid-l"}" x1="${margenIzq}" y1="${y(valor).toFixed(1)}" x2="${ancho - margenDer}" y2="${y(valor).toFixed(1)}"/>`
+          + `<text class="axis" x="${margenIzq - 9}" y="${(y(valor) + 4).toFixed(1)}" text-anchor="end">${numero(valor)}</text>`;
+      }
+
+      const saltoRotulo = Math.max(1, Math.ceil(14 / espacio));
+      dias.forEach((dia, indice) => {
+        const centro = margenIzq + espacio * indice + espacio / 2;
+        let barra = "";
+        let acumulado = 0;
+        series.forEach(serie => {
+          const valor = dia[serie.key] || 0;
+          if (valor <= 0) return;
+          const alturaBarra = (valor / techo) * altoInterior;
+          barra += `<rect class="bar-d" x="${(centro - anchoBarra / 2).toFixed(1)}" y="${y(acumulado + valor).toFixed(1)}" width="${anchoBarra.toFixed(1)}" height="${Math.max(2, alturaBarra).toFixed(1)}" fill="${serie.color}" rx="2"/>`;
+          acumulado += valor;
+        });
+        if (!barra && marcarDiasSinServicio && dia.sinServicio) {
+          barra = `<rect class="dom-stub" x="${(centro - anchoBarra / 2).toFixed(1)}" y="${(y(0) - 5).toFixed(1)}" width="${anchoBarra.toFixed(1)}" height="5" rx="2"/>`;
+        }
+
+        contenido += `<g class="slot" data-i="${indice}">${barra}`
+          + `<rect class="hit" x="${(margenIzq + espacio * indice).toFixed(1)}" y="${margenSup}" width="${espacio.toFixed(1)}" height="${altoInterior}" fill="transparent"/></g>`;
+
+        if (indice % saltoRotulo === 0) {
+          const rotulo = marcarDiasSinServicio
+            ? (dia.domingo ? "dom" : dia.feriado ? "feriado" : `${dia.dia} ${MESES_CORTOS[dia.mes]}`)
+            : `${dia.dia} ${MESES_CORTOS[dia.mes]}`;
+          const claseLibre = marcarDiasSinServicio && dia.sinServicio ? " libre" : "";
+          contenido += `<text class="axis dia${claseLibre}" text-anchor="end" dominant-baseline="middle" transform="translate(${centro.toFixed(1)},${alto - margenInf + 12}) rotate(-90)">${rotulo}</text>`;
+        }
+      });
+
+      if (promedio > 0 && promedio <= techo) {
+        const yPromedio = y(promedio).toFixed(1);
+        contenido += `<g class="prom" data-txt="${esc(numero(Math.round(promedio)))}">`
+          + `<line class="prom-line" x1="${margenIzq}" y1="${yPromedio}" x2="${ancho - margenDer}" y2="${yPromedio}"/>`
+          + `<line class="prom-hit" x1="${margenIzq}" y1="${yPromedio}" x2="${ancho - margenDer}" y2="${yPromedio}"/></g>`;
+      }
+
+      elemento.innerHTML = `<svg viewBox="0 0 ${ancho} ${alto}" role="img" aria-label="${esc(etiqueta)} por día">${contenido}</svg>`;
+      const svg = elemento.querySelector("svg");
+      const caja = elemento.closest(".chartbox");
+
+      svg.addEventListener("mousemove", evento => {
+        const lineaPromedio = evento.target.closest(".prom");
+        if (lineaPromedio) {
+          tooltip.innerHTML = `<span class="d">Promedio</span><span class="v">${esc(lineaPromedio.dataset.txt)}</span>`;
+          ubicarTooltip(evento, tooltip, caja);
+          return;
+        }
+
+        const columna = evento.target.closest(".slot");
+        if (!columna) {
+          tooltip.classList.remove("on");
+          return;
+        }
+
+        const dia = dias[Number(columna.dataset.i)];
+        const totalDia = totalDelDia(dia);
+        const fecha = new Date(dia.fecha + "T12:00:00");
+        const textoFecha = fecha.toLocaleDateString("es-UY", {
+          weekday: "long",
+          day: "numeric",
+          month: "long"
+        });
+        const seriesConDatos = series.filter(serie => (dia[serie.key] || 0) > 0);
+        const desglose = seriesConDatos.length > 1
+          ? seriesConDatos.map(serie => `<span class="d"><i class="sw" style="background:${serie.color}"></i>${esc(serie.label)}: ${numero(dia[serie.key])}</span>`).join("")
+          : "";
+        tooltip.innerHTML = `<span class="d">${esc(textoFecha)}</span><span class="v">${numero(totalDia)}</span>`
+          + desglose
+          + (dia.sinServicio && !totalDia && opciones.textoSinServicio
+            ? `<span class="d">${esc(opciones.textoSinServicio)}</span>`
+            : "");
+
+        const zona = columna.querySelector(".hit").getBoundingClientRect();
+        const barra = columna.querySelector(".bar-d");
+        const arriba = (barra || columna.querySelector(".hit")).getBoundingClientRect();
+        const rectCaja = caja.getBoundingClientRect();
+        const medio = tooltip.offsetWidth / 2 + 4;
+        tooltip.style.left = Math.min(Math.max(zona.left - rectCaja.left + zona.width / 2, medio), rectCaja.width - medio) + "px";
+        tooltip.style.top = ((barra ? arriba.top : zona.bottom) - rectCaja.top) + "px";
+        tooltip.classList.add("on");
+      });
+
+      svg.addEventListener("mouseleave", () => tooltip.classList.remove("on"));
+    }
+
+    function renderSolicitudes() {
+      const ayer = new Date();
+      ayer.setDate(ayer.getDate() - 1);
+      const hastaMaximo = iso(ayer);
+      if ($("#f-hasta").value > hastaMaximo) $("#f-hasta").value = hastaMaximo;
+      if ($("#f-desde").value > hastaMaximo) $("#f-desde").value = hastaMaximo;
+
+      const desde = $("#f-desde").value;
+      const hasta = $("#f-hasta").value;
+      const municipio = $("#f-muni").value;
+      if (!desde || !hasta) return;
+      if (desde > hasta) {
+        $("#f-hasta").value = desde;
+        return renderSolicitudes();
+      }
+
+      const dias = solicitudesPorDia(desde, hasta, municipio);
+      const total = dias.reduce((suma, dia) => suma + dia.total, 0);
+      const promedio = dias.length ? total / dias.length : 0;
+
+      $("#k-solicitudes-total").textContent = numero(total);
+      $("#k-solicitudes-promedio").textContent = numero(Math.round(promedio));
+      graficoBarrasDiarias($("#grafico-solicitudes"), $("#tip-solicitudes"), dias, promedio);
+    }
+
+    function renderServicios() {
+      const desde = $("#f-desde").value;
+      const hasta = $("#f-hasta").value;
+      const municipio = $("#f-muni").value;
+      if (!desde || !hasta || desde > hasta) return;
+
+      const dias = serviciosPorDia(desde, hasta, municipio);
+      const total = dias.reduce((suma, dia) => suma + dia.total, 0);
+      const promedio = dias.length ? total / dias.length : 0;
+
+      $("#k-servicios-total").textContent = numero(total);
+      $("#k-servicios-promedio").textContent = numero(Math.round(promedio));
+      graficoBarrasDiarias(
+        $("#grafico-servicios"),
+        $("#tip-servicios"),
+        dias,
+        promedio,
+        {
+          color: CONFIG.colorServicios,
+          etiqueta: "Servicios realizados",
+          marcarDiasSinServicio: true,
+          textoSinServicio: "No se realiza servicio"
+        }
+      );
+    }
+
+    function renderBolsones() {
+      const desde = $("#f-desde").value;
+      const hasta = $("#f-hasta").value;
+      const municipio = $("#f-muni").value;
+      if (!desde || !hasta || desde > hasta) return;
+
+      const dias = bolsonesPorDia(desde, hasta, municipio);
+      const grandes = dias.reduce((suma, dia) => suma + (dia.grande || 0), 0);
+      const chicos = dias.reduce((suma, dia) => suma + (dia.chico || 0), 0);
+      const total = grandes + chicos;
+      const promedio = dias.length ? total / dias.length : 0;
+      const pctGrandes = total ? Math.round((grandes / total) * 100) : 0;
+      const pctChicos = total ? 100 - pctGrandes : 0;
+
+      $("#k-bolsones-total").textContent = numero(total);
+      $("#k-bolsones-grandes").textContent = numero(grandes);
+      $("#k-bolsones-chicos").textContent = numero(chicos);
+      $("#k-bolsones-grandes-pct").textContent = numero(pctGrandes) + "%";
+      $("#k-bolsones-chicos-pct").textContent = numero(pctChicos) + "%";
+      $("#k-bolsones-promedio").textContent = numero(Math.round(promedio));
+      graficoBarrasDiarias(
+        $("#grafico-bolsones"),
+        $("#tip-bolsones"),
+        dias,
+        promedio,
+        {
+          color: CONFIG.colorBolsones,
+          etiqueta: "Bolsones realizados",
+          marcarDiasSinServicio: true,
+          textoSinServicio: "No se realiza servicio",
+          series: [
+            { key: "grande", label: "Grandes", color: CONFIG.colorBolsones },
+            { key: "chico", label: "Chicos", color: CONFIG.colorBolsonesChicos }
+          ]
+        }
+      );
+    }
+
+    function promedioTurnosCamion(total, dias, municipio) {
+      const jornadasMunicipio = municipio === "todos" ? null : CONFIG.diasIntervencion[municipio];
+      const jornadas = dias.filter(dia => {
+        if (dia.sinServicio) return false;
+        return !jornadasMunicipio || jornadasMunicipio.includes(dia.dow);
+      }).length;
+      return jornadas ? total / jornadas : 0;
+    }
+
+    function renderCamiones() {
+      const desde = $("#f-desde").value;
+      const hasta = $("#f-hasta").value;
+      const municipio = $("#f-muni").value;
+      if (!desde || !hasta || desde > hasta) return;
+
+      const dias = turnosPorDia(desde, hasta, municipio);
+      const totalCamiones = dias.reduce((suma, dia) => suma + (dia.camion || 0), 0);
+      const promedio = promedioTurnosCamion(totalCamiones, dias, municipio);
+
+      $("#k-camiones-total").textContent = numero(totalCamiones);
+      $("#k-camiones-promedio").textContent = numero(Math.round(promedio));
+      graficoBarrasDiarias(
+        $("#grafico-camiones"),
+        $("#tip-camiones"),
+        dias,
+        promedio,
+        {
+          etiqueta: "Camiones y motocarros utilizados",
+          marcarDiasSinServicio: true,
+          textoSinServicio: "No se realiza servicio",
+          series: [
+            { key: "camion", label: "Camión", color: CONFIG.colorCamion },
+            { key: "motocarro", label: "Motocarro", color: CONFIG.colorMotocarro }
+          ]
+        }
+      );
+    }
+
+    function renderPlantas() {
+      const desde = $("#f-desde").value;
+      const hasta = $("#f-hasta").value;
+      const municipio = $("#f-muni").value;
+      if (!desde || !hasta || desde > hasta) return;
+
+      const dias = kilosPorPlantaYDia(desde, hasta, municipio);
+      const totales = Object.fromEntries(CONFIG.plantas.map(planta => [
+        planta.key,
+        dias.reduce((suma, dia) => suma + (dia[planta.key] || 0), 0)
+      ]));
+      const total = CONFIG.plantas.reduce((suma, planta) => suma + totales[planta.key], 0);
+      const promedio = dias.length ? total / dias.length : 0;
+      const cuotas = CONFIG.plantas.map(planta => {
+        const exacto = total ? (totales[planta.key] / total) * 100 : 0;
+        return { key: planta.key, valor: Math.floor(exacto), resto: exacto % 1 };
+      });
+      let puntosRestantes = total ? 100 - cuotas.reduce((suma, cuota) => suma + cuota.valor, 0) : 0;
+      [...cuotas]
+        .sort((a, b) => b.resto - a.resto)
+        .slice(0, puntosRestantes)
+        .forEach(cuota => { cuota.valor += 1; });
+      const porcentajesPlantas = Object.fromEntries(cuotas.map(cuota => [cuota.key, cuota.valor]));
+
+      $("#k-plantas-total").textContent = numero(total);
+      $("#k-planta-usina").textContent = numero(totales.usina);
+      $("#k-planta-geminis").textContent = numero(totales.geminis);
+      $("#k-planta-paloma").textContent = numero(totales.paloma);
+      $("#k-planta-duran").textContent = numero(totales.duran);
+      $("#k-planta-burgues").textContent = numero(totales.burgues);
+      $("#k-planta-usina-pct").textContent = numero(porcentajesPlantas.usina) + "%";
+      $("#k-planta-geminis-pct").textContent = numero(porcentajesPlantas.geminis) + "%";
+      $("#k-planta-paloma-pct").textContent = numero(porcentajesPlantas.paloma) + "%";
+      $("#k-planta-duran-pct").textContent = numero(porcentajesPlantas.duran) + "%";
+      $("#k-planta-burgues-pct").textContent = numero(porcentajesPlantas.burgues) + "%";
+      $("#k-plantas-promedio").textContent = numero(Math.round(promedio));
+
+      const contenedorKpis = $(".plantas-kpis");
+      const tarjetaPromedio = $("#kpi-plantas-promedio");
+      CONFIG.plantas
+        .map((planta, indice) => ({ ...planta, indice }))
+        .sort((a, b) => totales[b.key] - totales[a.key] || a.indice - b.indice)
+        .forEach(planta => {
+          contenedorKpis.insertBefore(
+            contenedorKpis.querySelector(`[data-planta="${planta.key}"]`),
+            tarjetaPromedio
+          );
+        });
+
+      graficoBarrasDiarias(
+        $("#grafico-plantas"),
+        $("#tip-plantas"),
+        dias,
+        promedio,
+        {
+          etiqueta: "Kilos descargados",
+          marcarDiasSinServicio: true,
+          textoSinServicio: "No se realiza servicio",
+          series: CONFIG.plantas.map(planta => ({
+            key: planta.key,
+            label: planta.nombre,
+            color: planta.color
+          }))
+        }
+      );
+    }
+
+    function renderAnalisis() {
+      renderSolicitudes();
+      renderServicios();
+      renderBolsones();
+      renderCamiones();
+      renderPlantas();
+    }
+
+    function renderDatos(registros) {
+      REGISTROS = registros;
+      const periodo = periodoDisponible(registros);
+      $("#datos-periodo").textContent = periodo
+        ? `Período disponible: ${periodo.desde} al ${periodo.hasta}`
+        : "Período disponible: —";
+      const cumplimiento = cumplimientoIntervencion(registros);
+
+      if (cumplimiento.total > 0) {
+        /* El segundo valor se calcula como complemento del primero para que,
+           aun redondeados a enteros, la suma mostrada sea exactamente 100 %. */
+        const pctSiguiente = Math.round(cumplimiento.siguiente / cumplimiento.total * 100);
+        const pctAtraso = 100 - pctSiguiente;
+        $("#pct-siguiente").textContent = porcentaje(pctSiguiente);
+        $("#pct-atraso").textContent = porcentaje(pctAtraso);
+        $("#cumplimiento").hidden = false;
+        $("#cum-grid").hidden = false;
+      }
+
+      $("#loader").hidden = true;
+      $("#datasrc").className = "datasrc";
+      $("#datasrc").innerHTML = "";
+      renderSituacionActual(registros);
+      renderMapaCalor();
+      renderAnalisis();
+    }
+
+    function mostrarError(mensaje) {
+      $("#loader").hidden = true;
+      const aviso = $("#datasrc");
+      aviso.className = "datasrc show";
+      aviso.innerHTML = `<span><b>No se pudo cargar la base:</b> ${esc(mensaje)}. Si abriste el HTML con doble clic, elegí el CSV manualmente.</span>`
+        + `<button type="button" id="btn-pick">Elegir CSV…</button>`;
+      $("#btn-pick").addEventListener("click", () => $("#picker").click());
+    }
+
+    async function cargar() {
+      try {
+        // Base "bolsones" del repo com-mvd/bases (botón Actualizar de https://com-mvd.github.io/com/, 90 días)
+        renderDatos(await BasesCOM.filas("bolsones"));
+      } catch (error) {
+        mostrarError(error.message || String(error));
+      }
+    }
+
+    $("#picker").addEventListener("change", async evento => {
+      const archivo = evento.target.files[0];
+      if (!archivo) return;
+      renderDatos(parseCSV(await archivo.text()));
+    });
+
+    $("#f-muni").innerHTML = '<option value="todos">Todos</option>'
+      + Object.keys(CONFIG.diasIntervencion)
+        .map(municipio => `<option value="${municipio}">Municipio ${municipio}</option>`)
+        .join("");
+
+    $("#mapa-muni").innerHTML = '<option value="todos">Todos</option>'
+      + Object.keys(CONFIG.diasIntervencion)
+        .map(municipio => `<option value="${municipio}">Municipio ${municipio}</option>`)
+        .join("");
+    $("#mapa-intensidad").value = "0.6";
+    $("#mapa-muni").addEventListener("change", renderMapaCalor);
+    $("#mapa-intensidad").addEventListener("input", () => renderMapaCalor({ ajustarVista: false }));
+
+    ["#f-desde", "#f-hasta", "#f-muni"].forEach(selector => {
+      $(selector).addEventListener("change", renderAnalisis);
+    });
+
+    rangoInicial(30);
+
+    cargar();
+  </script>
+</body>
+</html>
